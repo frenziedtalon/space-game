@@ -1,0 +1,3 @@
+@Imports SpaceGame.Areas.HelpPage.ModelDescriptions
+@ModelType SimpleTypeModelDescription
+@Model.Documentation
