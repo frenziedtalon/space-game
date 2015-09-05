@@ -189,6 +189,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.vb" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.vb" />
     <Compile Include="Classes\BaseEntities\BaseGameEntity.vb" />
+    <Compile Include="Classes\BaseEntities\BaseCelestialObject.vb" />
+    <Compile Include="Classes\CelestialObjects\Star.vb" />
     <Compile Include="Classes\Messaging\MessageType.vb" />
     <Compile Include="Classes\Messaging\Telegram.vb" />
     <Compile Include="Global.asax.vb">
