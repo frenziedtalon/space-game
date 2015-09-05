@@ -32,6 +32,7 @@ Namespace Classes.BaseEntities
 
         Public Sub New()
             SetId()
+            EntityManager.Instance.RegisterEntity(Me)
         End Sub
 
         ''' <summary>
