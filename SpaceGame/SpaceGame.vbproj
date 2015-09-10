@@ -191,6 +191,7 @@
     <Compile Include="Classes\BaseEntities\BaseGameEntity.vb" />
     <Compile Include="Classes\BaseEntities\BaseCelestialObject.vb" />
     <Compile Include="Classes\BaseEntities\ICelestialObject.vb" />
+    <Compile Include="Classes\BaseEntities\IState.vb" />
     <Compile Include="Classes\CelestialObjects\Asteroid.vb" />
     <Compile Include="Classes\CelestialObjects\Moon.vb" />
     <Compile Include="Classes\CelestialObjects\Planet.vb" />
