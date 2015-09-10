@@ -7,7 +7,8 @@ Namespace Classes.CelestialObjects
 
         Private ReadOnly _surfaceTemperatureK As Integer
 
-        Public Sub New(surfaceTemperatureK As Integer)
+        Public Sub New(mass As Integer, surfaceTemperatureK As Integer)
+            MyBase.New(mass)
             _surfaceTemperatureK = surfaceTemperatureK
         End Sub
 

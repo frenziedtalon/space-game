@@ -5,6 +5,10 @@ Namespace Classes.CelestialObjects
     Public Class Moon
         Inherits BaseCelestialObject
 
+        Public Sub New(mass As Integer)
+            MyBase.New(mass)
+        End Sub
+
         Public Overrides Sub Update()
             Throw New NotImplementedException()
         End Sub
