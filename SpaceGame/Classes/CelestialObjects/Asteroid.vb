@@ -2,7 +2,7 @@
 Imports SpaceGame.Classes.Messaging
 
 Namespace Classes.CelestialObjects
-    Public Class Asteroids
+    Public Class Asteroid
         Inherits BaseCelestialObject
 
         Public Sub New(mass As Integer)
