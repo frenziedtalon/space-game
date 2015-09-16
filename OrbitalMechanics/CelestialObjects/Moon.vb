@@ -1,7 +1,5 @@
-﻿Imports Messaging
-Imports SpaceGame.Classes.BaseEntities
-
-Namespace Classes.CelestialObjects
+﻿
+Namespace CelestialObjects
     Public Class Moon
         Inherits BaseCelestialObject
 

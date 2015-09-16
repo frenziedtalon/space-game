@@ -1,4 +1,5 @@
-﻿Namespace Classes.BaseEntities
+﻿
+Namespace CelestialObjects
     Public Interface ICelestialObject
 
         ReadOnly Property Mass As Integer

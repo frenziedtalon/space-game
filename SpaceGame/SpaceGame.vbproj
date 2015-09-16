@@ -188,13 +188,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.vb" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.vb" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.vb" />
-    <Compile Include="Classes\BaseEntities\BaseCelestialObject.vb" />
-    <Compile Include="Classes\BaseEntities\ICelestialObject.vb" />
     <Compile Include="Classes\BaseEntities\IState.vb" />
-    <Compile Include="Classes\CelestialObjects\Asteroid.vb" />
-    <Compile Include="Classes\CelestialObjects\Moon.vb" />
-    <Compile Include="Classes\CelestialObjects\Planet.vb" />
-    <Compile Include="Classes\CelestialObjects\Star.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

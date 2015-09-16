@@ -1,7 +1,7 @@
 ﻿
 Imports Entities
 
-Namespace Classes.BaseEntities
+Namespace CelestialObjects
 
     Public MustInherit Class BaseCelestialObject
         Inherits BaseGameEntity
