@@ -1,4 +1,4 @@
-﻿Imports SpaceGame.Classes.Messaging
+﻿Imports Messaging
 
 Namespace Classes.BaseEntities
 

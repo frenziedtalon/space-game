@@ -188,7 +188,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.vb" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.vb" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.vb" />
-    <Compile Include="Classes\BaseEntities\BaseGameEntity.vb" />
     <Compile Include="Classes\BaseEntities\BaseCelestialObject.vb" />
     <Compile Include="Classes\BaseEntities\ICelestialObject.vb" />
     <Compile Include="Classes\BaseEntities\IState.vb" />
@@ -196,9 +195,6 @@
     <Compile Include="Classes\CelestialObjects\Moon.vb" />
     <Compile Include="Classes\CelestialObjects\Planet.vb" />
     <Compile Include="Classes\CelestialObjects\Star.vb" />
-    <Compile Include="Classes\EntityManager.vb" />
-    <Compile Include="Classes\Messaging\MessageType.vb" />
-    <Compile Include="Classes\Messaging\Telegram.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -293,7 +289,16 @@
     <Content Include="Views\Shared\Error.vbhtml" />
     <Content Include="Views\Shared\_Layout.vbhtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.vbproj">
+      <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messaging\Messaging.vbproj">
+      <Project>{1c0dda45-b79a-468a-95d9-08ed9ec3ec4f}</Project>
+      <Name>Messaging</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

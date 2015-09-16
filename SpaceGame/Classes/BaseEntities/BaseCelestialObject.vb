@@ -1,4 +1,5 @@
 ﻿
+Imports Entities
 
 Namespace Classes.BaseEntities
 

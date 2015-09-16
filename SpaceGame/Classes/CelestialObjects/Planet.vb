@@ -1,5 +1,5 @@
-﻿Imports SpaceGame.Classes.BaseEntities
-Imports SpaceGame.Classes.Messaging
+﻿Imports Messaging
+Imports SpaceGame.Classes.BaseEntities
 
 Namespace Classes.CelestialObjects
     Public Class Planet
