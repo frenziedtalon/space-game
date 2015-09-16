@@ -5,11 +5,11 @@ Namespace Classes.CelestialObjects
     Public Class Star
         Inherits BaseCelestialObject
 
-        Private ReadOnly _surfaceTemperatureK As Integer
+        Private ReadOnly _surfaceTemperature As Integer
 
-        Public Sub New(mass As Integer, surfaceTemperatureK As Integer)
+        Public Sub New(mass As Integer, surfaceTemperature As Integer)
             MyBase.New(mass)
-            _surfaceTemperatureK = surfaceTemperatureK
+            _surfaceTemperature = surfaceTemperature
         End Sub
 
         Public Overrides Sub Update()
@@ -25,7 +25,7 @@ Namespace Classes.CelestialObjects
 
         Public ReadOnly Property Classification() As StarClassification
             Get
-                Select Case SurfaceTemperatureK
+                Select Case SurfaceTemperature
                     Case >= 33000
                         Return StarClassification.O
                     Case >= 10500
@@ -44,9 +44,12 @@ Namespace Classes.CelestialObjects
             End Get
         End Property
 
-        Public ReadOnly Property SurfaceTemperatureK() As Integer
+        ''' <summary>
+        ''' Surface temperature of the star. Unit is Kelvins.
+        ''' </summary>
+        Public ReadOnly Property SurfaceTemperature() As Integer
             Get
-                Return _surfaceTemperatureK
+                Return _surfaceTemperature
             End Get
         End Property
     End Class
