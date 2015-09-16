@@ -27,7 +27,7 @@ Public MustInherit Class BaseGameEntity
     End Property
 
 
-    Public Sub New()
+    Protected Sub New()
         SetId()
         EntityManager.Instance.RegisterEntity(Me)
     End Sub

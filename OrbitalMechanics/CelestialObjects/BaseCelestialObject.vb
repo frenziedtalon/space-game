@@ -7,7 +7,7 @@ Namespace CelestialObjects
         Inherits BaseGameEntity
         Implements ICelestialObject
 
-        Public Sub New(name As String,
+        Protected Sub New(name As String,
                        mass As Integer)
 
             _name = name
