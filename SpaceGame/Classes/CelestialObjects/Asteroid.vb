@@ -5,8 +5,8 @@ Namespace Classes.CelestialObjects
     Public Class Asteroid
         Inherits BaseCelestialObject
 
-        Public Sub New(mass As Integer)
-            MyBase.New(mass)
+        Public Sub New(name As String, mass As Integer)
+            MyBase.New(name, mass)
         End Sub
 
         Public Overrides Sub Update()
