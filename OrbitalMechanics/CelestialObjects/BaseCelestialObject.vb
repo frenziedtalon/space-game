@@ -23,7 +23,7 @@ Namespace CelestialObjects
         End Property
 
         Private ReadOnly _name As String
-        Public ReadOnly Property Name As String
+        Public ReadOnly Property Name As String Implements ICelestialObject.Name
             Get
                 Return _name
             End Get
