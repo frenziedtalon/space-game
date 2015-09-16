@@ -41,6 +41,8 @@ Public MustInherit Class BaseGameEntity
     ''' <summary>
     ''' all subclasses can communicate using messages
     ''' </summary>
-    Public MustOverride Function HandleMessage(msg As Telegram) As Boolean
+    Public Overridable Function HandleMessage(msg As Telegram) As Boolean
+        Throw New NotImplementedException
+    End Function
 
 End Class

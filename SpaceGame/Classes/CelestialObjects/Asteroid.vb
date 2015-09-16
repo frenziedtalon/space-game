@@ -13,8 +13,5 @@ Namespace Classes.CelestialObjects
             Throw New NotImplementedException()
         End Sub
 
-        Public Overrides Function HandleMessage(msg As Telegram) As Boolean
-            Throw New NotImplementedException()
-        End Function
     End Class
 End Namespace
