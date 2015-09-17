@@ -59,7 +59,7 @@ Namespace CelestialObjects
             End Get
         End Property
 
-        Private _radius As Integer
+        Private ReadOnly _radius As Integer
         Public ReadOnly Property Radius As Integer Implements ISphere.Radius
             Get
                 Return _radius
