@@ -1,16 +1,24 @@
 ﻿
+Imports System.Windows.Media.Media3D
+
 Namespace CelestialObjects
     Public Class Star
         Inherits BaseCelestialObject
+        Implements ISphere
 
         Private ReadOnly _surfaceTemperature As Integer
 
         Public Sub New(name As String,
                        mass As Integer,
-                       surfaceTemperature As Integer)
+                       surfaceTemperature As Integer,
+                       texture As String,
+                       position As Point3D,
+                       motion As Vector3D,
+                       radius As Integer)
 
-            MyBase.New(name, mass)
+            MyBase.New(name, mass, texture, position, motion)
             _surfaceTemperature = surfaceTemperature
+            _radius = radius
         End Sub
 
         Public Overrides Sub Update()
@@ -48,6 +56,13 @@ Namespace CelestialObjects
         Public ReadOnly Property SurfaceTemperature() As Integer
             Get
                 Return _surfaceTemperature
+            End Get
+        End Property
+
+        Private _radius As Integer
+        Public ReadOnly Property Radius As Integer Implements ISphere.Radius
+            Get
+                Return _radius
             End Get
         End Property
     End Class

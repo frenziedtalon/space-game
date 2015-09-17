@@ -1,10 +1,17 @@
 ﻿
+Imports System.Windows.Media.Media3D
+
 Namespace CelestialObjects
     Public Class Moon
         Inherits BaseCelestialObject
 
-        Public Sub New(name As String, mass As Integer)
-            MyBase.New(name, mass)
+        Public Sub New(name As String,
+                       mass As Integer,
+                       texture As String,
+                       position As Point3D,
+                       motion As Vector3D)
+
+            MyBase.New(name, mass, texture, position, motion)
         End Sub
 
         Public Overrides Sub Update()
