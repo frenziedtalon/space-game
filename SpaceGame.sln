@@ -13,6 +13,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Entities", "Entities\Entiti
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Messaging", "Messaging\Messaging.vbproj", "{1C0DDA45-B79A-468A-95D9-08ED9EC3EC4F}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DemoForm", "DemoForm\DemoForm.vbproj", "{616DD271-CF8F-473C-80A4-2BB40AAA692A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1C0DDA45-B79A-468A-95D9-08ED9EC3EC4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C0DDA45-B79A-468A-95D9-08ED9EC3EC4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C0DDA45-B79A-468A-95D9-08ED9EC3EC4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{616DD271-CF8F-473C-80A4-2BB40AAA692A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{616DD271-CF8F-473C-80A4-2BB40AAA692A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{616DD271-CF8F-473C-80A4-2BB40AAA692A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{616DD271-CF8F-473C-80A4-2BB40AAA692A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
