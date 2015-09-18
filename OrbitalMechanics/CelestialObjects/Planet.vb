@@ -28,5 +28,16 @@ Namespace CelestialObjects
             End Get
         End Property
 
+        Public ReadOnly Property AxialTilt As Integer Implements ISphere.AxialTilt
+            Get
+                Throw New NotImplementedException()
+            End Get
+        End Property
+
+        Public ReadOnly Property RotationSpeed As Integer Implements ISphere.RotationSpeed
+            Get
+                Throw New NotImplementedException()
+            End Get
+        End Property
     End Class
 End Namespace
