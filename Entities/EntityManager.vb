@@ -7,7 +7,7 @@
 Public Class EntityManager
 
     Private Shared _instance As EntityManager
-    Private Shared ReadOnly EntityMap As New Hashtable
+    Private Shared ReadOnly EntityMap As New Dictionary(Of Guid, BaseGameEntity)
 
     Private Sub New()
         ' private so that we must use the Instance
