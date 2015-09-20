@@ -5,22 +5,10 @@
 ''' </summary>
 Public MustInherit Class BaseGameEntity
 
-    ' every entity has a unique identifying number
-    Private _id As Integer
+    ' every entity has a unique identifier
+    Private ReadOnly _id As Guid
 
-    ' this is the next valid ID. Each time a BaseGameEntity is instantiated this is incremented
-    Private _nextValidId As Integer = 0
-
-    Private _lock As Object
-
-    Private Sub SetId()
-        SyncLock _lock
-            _id = _nextValidId
-            _nextValidId += 1
-        End SyncLock
-    End Sub
-
-    Public ReadOnly Property Id As Integer
+    Public ReadOnly Property Id As Guid
         Get
             Return _id
         End Get
@@ -28,7 +16,7 @@ Public MustInherit Class BaseGameEntity
 
 
     Protected Sub New()
-        SetId()
+        _id = Guid.NewGuid()
         EntityManager.Instance.RegisterEntity(Me)
     End Sub
 

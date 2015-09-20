@@ -7,7 +7,12 @@
 Public Class EntityManager
 
     Private Shared _instance As EntityManager
-    Private Shared ReadOnly EntityMap As New Dictionary(Of Integer, BaseGameEntity)
+    Private Shared ReadOnly EntityMap As New Hashtable
+
+    Private Sub New()
+        ' private so that we must use the Instance
+    End Sub
+
 
     Public Shared ReadOnly Property Instance() As EntityManager
         Get
@@ -24,7 +29,7 @@ Public Class EntityManager
         End If
     End Sub
 
-    Public Function GetEntityFromId(id As Integer) As BaseGameEntity
+    Public Function GetEntityFromId(id As Guid) As BaseGameEntity
         If EntityMap.ContainsKey(id) Then
             Return EntityMap(id)
         End If
