@@ -224,6 +224,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Assets\Images\Moon\moon.jpg" />
+    <Content Include="Assets\Images\Planet\earth.jpg" />
+    <Content Include="Assets\Images\Planet\jupiter.jpg" />
+    <Content Include="Assets\Images\Planet\mars.jpg" />
+    <Content Include="Assets\Images\Planet\mercury.jpg" />
+    <Content Include="Assets\Images\Planet\neptune.jpg" />
+    <Content Include="Assets\Images\Planet\pluto.jpg" />
+    <Content Include="Assets\Images\Planet\sand.jpg" />
+    <Content Include="Assets\Images\Planet\saturn.jpg" />
+    <Content Include="Assets\Images\Planet\uranus.jpg" />
+    <Content Include="Assets\Images\Planet\venus.jpg" />
+    <Content Include="Assets\Images\Skybox\skybox_nx.jpg" />
+    <Content Include="Assets\Images\Skybox\skybox_ny.jpg" />
+    <Content Include="Assets\Images\Skybox\skybox_nz.jpg" />
+    <Content Include="Assets\Images\Skybox\skybox_px.jpg" />
+    <Content Include="Assets\Images\Skybox\skybox_py.jpg" />
+    <Content Include="Assets\Images\Skybox\skybox_pz.jpg" />
+    <Content Include="Assets\Images\Star\sun.jpg" />
     <Content Include="Assets\Spaceship\0.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
