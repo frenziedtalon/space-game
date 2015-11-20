@@ -11,10 +11,12 @@ Namespace CelestialObjects
                        texture As String,
                        position As Point3D,
                        motion As Vector3D,
-                       radius As Integer)
+                       radius As Integer,
+                       moons As List(Of Moon))
 
             MyBase.New(name, mass, texture, position, motion)
             _radius = radius
+            _moons = moons
         End Sub
 
         Public Overrides Sub Update()
@@ -37,6 +39,13 @@ Namespace CelestialObjects
         Public ReadOnly Property RotationSpeed As Integer Implements ISphere.RotationSpeed
             Get
                 Throw New NotImplementedException()
+            End Get
+        End Property
+
+        Private ReadOnly _moons As List(Of Moon)
+        Public ReadOnly Property Moons As List(Of Moon)
+            Get
+                Return _moons
             End Get
         End Property
     End Class
