@@ -77,6 +77,21 @@ Namespace CelestialObjects
                 Throw New NotImplementedException()
             End Get
         End Property
+
+        Public ReadOnly Property LightIntensity() As Integer
+            Get
+                Throw New NotImplementedException
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' Star light intensity fades gradually until becoming zero at this range
+        ''' </summary>
+        Public ReadOnly Property LightRange() As Integer
+            Get
+                Throw New NotImplementedException
+            End Get
+        End Property
     End Class
 
 
