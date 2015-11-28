@@ -38,6 +38,8 @@ Namespace CelestialObjects
         Public ReadOnly Property RotationSpeed As Integer Implements ISphere.RotationSpeed
             Get
                 Throw New NotImplementedException()
+            End Get
+        End Property
 
         Private _volume As Double = 0
 

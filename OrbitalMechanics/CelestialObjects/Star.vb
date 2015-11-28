@@ -91,6 +91,9 @@ Namespace CelestialObjects
         Public ReadOnly Property LightRange() As Integer
             Get
                 Throw New NotImplementedException
+            End Get
+        End Property
+
         Private _volume As Double = 0
 
         Public ReadOnly Property Volume As Double Implements I3DObject.Volume
