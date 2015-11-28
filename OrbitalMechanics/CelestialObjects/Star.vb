@@ -1,4 +1,5 @@
 ﻿
+Imports Core
 Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
@@ -90,6 +91,14 @@ Namespace CelestialObjects
         Public ReadOnly Property LightRange() As Integer
             Get
                 Throw New NotImplementedException
+        Private _volume As Double = 0
+
+        Public ReadOnly Property Volume As Double Implements I3DObject.Volume
+            Get
+                If Double.Equals(_volume, 0.0) AndAlso Radius > 0 Then
+                    _volume = Helpers.Shapes.ShapeHelper.VolumeOfASphere(Radius)
+                End If
+                Return _volume
             End Get
         End Property
 
