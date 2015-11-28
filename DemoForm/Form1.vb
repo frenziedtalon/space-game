@@ -25,9 +25,9 @@ Public Class MainForm
         ' create all the objects with their positions and speeds
         SolarSystem = New List(Of ICelestialObject)
 
-        Dim sol As New Star("Sol", 100000, 5000, "sol.jpg", New Point3D(0, 0, 0), New Vector3D(0, 0, 0), 100)
+        'Dim sol As New Star("Sol", 100000, 5000, "sol.jpg", New Point3D(0, 0, 0), New Vector3D(0, 0, 0), 100)
 
-        SolarSystem.Add(sol)
+        'SolarSystem.Add(sol)
 
 
 
