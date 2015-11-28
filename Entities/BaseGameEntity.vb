@@ -33,4 +33,13 @@ Public MustInherit Class BaseGameEntity
         Throw New NotImplementedException
     End Function
 
+    ''' <summary>
+    ''' Type of the entity
+    ''' </summary>
+    Public ReadOnly Property Type As String
+        Get
+            Return Me.GetType().ToString()
+        End Get
+    End Property
+
 End Class
