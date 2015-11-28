@@ -1,5 +1,6 @@
 ﻿Imports System.Text
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
+Imports OrbitalMechanics
 Imports SpaceGame.Controllers
 
 Namespace Controllers
@@ -12,11 +13,11 @@ Namespace Controllers
             Dim controller As New SceneApiController()
 
             'Act
-            Dim result As IEnumerable(Of String) = controller.GetSceneObjects()
+            Dim result As SolarSystem = controller.GetSceneObjects()
 
             'Assert
             Assert.IsNotNull(result)
-            Assert.AreNotEqual(0, result.Count())
+            Assert.AreNotEqual(0, result.Objects)
 
         End Sub
 

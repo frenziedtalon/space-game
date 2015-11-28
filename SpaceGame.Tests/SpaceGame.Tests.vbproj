@@ -124,6 +124,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.vbproj">
+      <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
+      <Name>OrbitalMechanics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpaceGame\SpaceGame.vbproj">
       <Project>{7128CFDE-D8E1-493B-8917-83E2CFF20706}</Project>
       <Name>SpaceGame</Name>

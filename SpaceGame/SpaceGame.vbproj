@@ -216,6 +216,7 @@
     </Compile>
     <Compile Include="Controllers\HomeController.vb" />
     <Compile Include="Controllers\ValuesController.vb" />
+    <Compile Include="Scenes\SolSystem.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -326,6 +327,10 @@
     <ProjectReference Include="..\Messaging\Messaging.vbproj">
       <Project>{1c0dda45-b79a-468a-95d9-08ed9ec3ec4f}</Project>
       <Name>Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.vbproj">
+      <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
+      <Name>OrbitalMechanics</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
