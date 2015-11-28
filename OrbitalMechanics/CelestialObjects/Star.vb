@@ -1,5 +1,5 @@
 ﻿
-Imports System.Windows.Media.Media3D
+Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
     Public Class Star
@@ -12,13 +12,13 @@ Namespace CelestialObjects
                        mass As Integer,
                        surfaceTemperature As Integer,
                        texture As String,
-                       position As Point3D,
-                       motion As Vector3D,
-                       radius As Integer)
+                       radius As Integer,
+                       orbit As Orbit)
 
-            MyBase.New(name, mass, texture, position, motion)
+            MyBase.New(name, mass, texture)
             _surfaceTemperature = surfaceTemperature
             _radius = radius
+            _orbit = orbit
         End Sub
 
         Public Overrides Sub Update()
@@ -92,6 +92,14 @@ Namespace CelestialObjects
                 Throw New NotImplementedException
             End Get
         End Property
+
+        Private ReadOnly _orbit As Orbit
+        Public ReadOnly Property Orbit As Orbit
+            Get
+                Return _orbit
+            End Get
+        End Property
+
     End Class
 
 

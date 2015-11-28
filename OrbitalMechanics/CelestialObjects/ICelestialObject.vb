@@ -1,6 +1,4 @@
 ﻿
-Imports System.Windows.Media.Media3D
-
 Namespace CelestialObjects
     Public Interface ICelestialObject
 
