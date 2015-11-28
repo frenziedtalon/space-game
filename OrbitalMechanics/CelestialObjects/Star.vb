@@ -1,5 +1,6 @@
 ﻿
 Imports Core
+Imports Newtonsoft.Json
 Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
@@ -79,6 +80,7 @@ Namespace CelestialObjects
             End Get
         End Property
 
+        <JsonIgnore>
         Public ReadOnly Property LightIntensity() As Integer
             Get
                 Throw New NotImplementedException
@@ -88,6 +90,7 @@ Namespace CelestialObjects
         ''' <summary>
         ''' Star light intensity fades gradually until becoming zero at this range
         ''' </summary>
+        <JsonIgnore()>
         Public ReadOnly Property LightRange() As Integer
             Get
                 Throw New NotImplementedException
