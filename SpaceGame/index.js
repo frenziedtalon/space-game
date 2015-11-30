@@ -24,19 +24,6 @@ var createScene = function () {
     camera.attachControl(canvas);
 
     // Create a skybox
-    var skybox = BABYLON.Mesh.CreateBox('Skybox', 5000, scene);
-    var skyboxMaterial = new BABYLON.StandardMaterial('skyboxMaterial', scene);
-    skyboxMaterial.backFaceCulling = false; // Render the inside of the skybox
-    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-    skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-
-    // Add textures to the skybox
-    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture('Assets/Images/Skybox/skybox', scene);
-    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-
-    skybox.infiniteDistance = true; // Have the skybox move with the camera so we can never move outside it
-    skybox.material = skyboxMaterial;
-
     var starPostition = BABYLON.Vector3.Zero();
     // Create a star
     var star = BABYLON.Mesh.CreateSphere('Sun', 16, 20, scene);
@@ -57,6 +44,7 @@ var createScene = function () {
     var starLight = new BABYLON.PointLight('starLight', starPostition, scene);
     starLight.intensity = 2;
     starLight.range = 380;
+    createSkybox();
 
     // Retrieve the objects to be rendered in the scene
     var sceneObjects = retrieveSceneObjects();
@@ -140,6 +128,21 @@ var createScene = function () {
             toggleDebugLayer();
         }
     });
+
+    function createSkybox() {
+        var skybox = BABYLON.Mesh.CreateBox('Skybox', 5000, scene);
+        var skyboxMaterial = new BABYLON.StandardMaterial('skyboxMaterial', scene);
+        skyboxMaterial.backFaceCulling = false; // Render the inside of the skybox
+        skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+        skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+
+        // Add textures to the skybox
+        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture('Assets/Images/Skybox/skybox', scene);
+        skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+
+        skybox.infiniteDistance = true; // Have the skybox move with the camera so we can never move outside it
+        skybox.material = skyboxMaterial;
+    }
 
     function toggleDebugLayer() {
         if (scene.debugLayer.isVisible()) {
