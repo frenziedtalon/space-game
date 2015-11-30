@@ -24,26 +24,6 @@ var createScene = function () {
     camera.attachControl(canvas);
 
     // Create a skybox
-    var starPostition = BABYLON.Vector3.Zero();
-    // Create a star
-    var star = BABYLON.Mesh.CreateSphere('Sun', 16, 20, scene);
-    star.position = starPostition;
-
-    // Create the material for the star, removing its reaction to other light sources
-    var starMaterial = new BABYLON.StandardMaterial('starMaterial', scene);
-    starMaterial.emissiveTexture = new BABYLON.Texture('Assets/Images/Star/sun.jpg', scene);
-    starMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-    starMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-    star.material = starMaterial;
-
-    star.info = {
-        selectable: true
-    };
-
-    // Create a light to make the star shine
-    var starLight = new BABYLON.PointLight('starLight', starPostition, scene);
-    starLight.intensity = 2;
-    starLight.range = 380;
     createSkybox();
 
     // Retrieve the objects to be rendered in the scene
@@ -340,5 +320,45 @@ var createScene = function () {
 
     }
 
+
+    function removeDiffuseColor(material) {
+        material.diffuseColor = zeroColor();
+        return material;
+    }
+
+    function removeSpecularColor(material) {
+        material.specularColor = zeroColor();
+        return material;
+    }
+
+    function zeroColor() {
+        return new BABYLON.Color3(0, 0, 0);
+    }
+
+
+    function renderStar(starInfo) {
+        debugger;
+        // Create a star
+        var starPostion = createPosition(starInfo.Orbit);
+        
+        var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, starInfo.Radius * 2, scene);
+        star.position = starPostion;
+
+        // Create the material for the star, removing its reaction to other light sources
+        var starMaterial = new BABYLON.StandardMaterial(starInfo.Name + 'Material', scene);
+        starMaterial.emissiveTexture = new BABYLON.Texture('Assets/Images/Star/' + starInfo.Texture, scene);
+        starMaterial = removeDiffuseColor(starMaterial);
+        starMaterial = removeSpecularColor(starMaterial);
+
+        star.material = starMaterial;
+
+        star.info = starInfo;
+
+        // Create a light to make the star shine
+        var starLight = new BABYLON.PointLight(starInfo.Name + 'Light', starPostition, scene);
+        starLight.intensity = 2;
+        starLight.range = 380;
+
+    }
 }
 
