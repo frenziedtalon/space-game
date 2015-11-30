@@ -17,7 +17,7 @@ Namespace Controllers
 
             'Assert
             Assert.IsNotNull(result)
-            Assert.AreNotEqual(0, result.Objects)
+            Assert.AreNotEqual(0, result.Objects.Count)
 
         End Sub
 
