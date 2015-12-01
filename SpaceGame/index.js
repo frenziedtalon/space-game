@@ -1,6 +1,7 @@
 ﻿///<reference path="scripts/babylon.max.js" />
 
 var createScene = function () {
+
     // Get the canvas element from our HTML below
     var canvas = document.getElementById("renderCanvas");
 
@@ -27,60 +28,7 @@ var createScene = function () {
     createSkybox();
 
     // Retrieve the objects to be rendered in the scene
-    var sceneObjects = retrieveSceneObjects();
-
-    if (sceneObjects != undefined) {
-        
-        // Render the planets
-        for (i = 0; i < sceneObjects.length; i++) {
-            var planet = BABYLON.Mesh.CreateSphere(sceneObjects[i].name, 16, sceneObjects[i].size, scene);
-            planet.info = sceneObjects[i]
-            planet.position = new BABYLON.Vector3(planet.info.orbit.radius, 0, 0);
-
-            // Create a material for the planet
-            var planetMaterial = new BABYLON.StandardMaterial(planet.info.name + 'Material', scene);
-            planetMaterial.diffuseTexture = new BABYLON.Texture('Assets/Images/Planet/' + planet.info.texture, scene);
-            planetMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-            planet.material = planetMaterial;
-
-            // Create any moons
-            if (planet.info.hasOwnProperty('moons') && planet.info.moons.length > 0) {
-                for (j = 0; j < planet.info.moons.length; j++) {
-                    var moon = BABYLON.Mesh.CreateSphere(planet.info.moons[j].name, planet.info.moons[j].size, scene);
-                    moon.position = new BABYLON.Vector3(planet.position.x + planet.info.moons[j].orbit.radius, planet.position.y, planet.position.z);
-
-                    // Create a material for the moon
-                    var moonMaterial = new BABYLON.StandardMaterial(planet.info.moons[j].name + 'Material', scene);
-                    moonMaterial.diffuseTexture = new BABYLON.Texture('Assets/Images/Moon/' + planet.info.moons[j].texture, scene);
-                    moonMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-                    moon.material = moonMaterial;
-                }
-            }
-        }
-
-        // Animate the planets / moons before rendering the scene
-        scene.beforeRender = function () {
-            for (i = 0; i < sceneObjects.length; i++) {
-                var planet = scene.getMeshByName(sceneObjects[i].name);
-                planet.position.x = planet.info.orbit.radius * Math.sin(planet.info.orbit.angle);
-                planet.position.y = 0;
-                planet.position.z = planet.info.orbit.radius * Math.cos(planet.info.orbit.angle);
-                planet.info.orbit.angle += planet.info.orbit.speed;
-
-                // Create any moons
-                if (planet.info.hasOwnProperty('moons') && planet.info.moons.length > 0) {
-                    for (j = 0; j < planet.info.moons.length; j++) {
-                        var moon = scene.getMeshByName(planet.info.moons[j].name)
-                        moon.position.x = planet.position.x + (planet.info.moons[j].orbit.radius * Math.sin(planet.info.moons[j].orbit.angle));
-                        moon.position.y = planet.position.y + 0;
-                        moon.position.z = planet.position.z + (planet.info.moons[j].orbit.radius * Math.cos(planet.info.moons[j].orbit.angle));
-                        planet.info.moons[j].orbit.angle += planet.info.moons[j].orbit.speed;
-                    }
-                }
-            }
-        };
-
-    }
+    retrieveSceneObjects();
 
     // Register a render loop to repeatedly render the scene
     engine.runRenderLoop(function () {
@@ -307,12 +255,11 @@ var createScene = function () {
         })
           .done(function (data) {
               // call succeeded
-                debugger;
-                return data;
+                renderSceneObjects(data.Objects);
             })
         .fail(function (data) {
-            // call failed
-                return [];
+                // call failed
+                displayError(data);
             })
         .always(function (data) {
             // happens after done/fail on every call
@@ -320,9 +267,41 @@ var createScene = function () {
 
     }
 
-
+    function displayError(data) {
+        //TODO: Display error details
+    
     }
 
+    function renderSceneObjects(objects) {
+        if (objects !== undefined) {
+            for (i = 0; i < objects.length; i++) {
+                renderSceneObject(objects[i]);
+            }
+        } else {
+            displayError('Scene objects undefined');
+        }
+    }
+
+    function renderSceneObject(item) {
+        if (item !== undefined) {
+            switch (item.Type) {
+                case 'OrbitalMechanics.CelestialObjects.Star':
+                    renderStar(item);
+                    break;
+                
+                case 'OrbitalMechanics.CelestialObjects.Planet':
+                    renderPlanet(item);
+                    break;
+
+                case 'OrbitalMechanics.CelestialObjects.Moon':
+                    renderMoon(item);
+                    break;
+
+                default:
+                    displayError('Unknown object type: ' + item.Type)
+                    break;
+            }
+        }
     }
 
     function zeroColor() {
