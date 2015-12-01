@@ -362,6 +362,11 @@ var createScene = function () {
     function renderMoon(moonInfo, parent) {
         var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, moonInfo.Radius * 2, scene);
 
+        if (parent !== undefined) {
+            // Positions applied are in addition to those of the parent
+            moon.parent = parent;
+        }
+
         moon.position = createPosition(moonInfo.Orbit.Position);
 
         // Create a material for the moon
