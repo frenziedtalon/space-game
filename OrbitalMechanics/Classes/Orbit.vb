@@ -45,7 +45,6 @@ Namespace Classes
 
         Private _position As Point3D
 
-        <JsonIgnore()>
         Public ReadOnly Property Position As Point3D
             Get
                 Return _position

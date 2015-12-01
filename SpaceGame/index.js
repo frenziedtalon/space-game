@@ -335,14 +335,19 @@ var createScene = function () {
         return new BABYLON.Color3(0, 0, 0);
     }
 
+    function createPosition(position) {
+        // string like "x,y,z"
+        var array = position.split(',')
+        return new BABYLON.Vector3(array[0], array[1], array[2]);
+    }
 
     function renderStar(starInfo) {
-        debugger;
+        
         // Create a star
-        var starPostion = createPosition(starInfo.Orbit);
+        var starPosition = createPosition(starInfo.Orbit.Position);
         
         var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, starInfo.Radius * 2, scene);
-        star.position = starPostion;
+        star.position = starPosition;
 
         // Create the material for the star, removing its reaction to other light sources
         var starMaterial = new BABYLON.StandardMaterial(starInfo.Name + 'Material', scene);
@@ -353,9 +358,9 @@ var createScene = function () {
         star.material = starMaterial;
 
         star.info = starInfo;
-
+      
         // Create a light to make the star shine
-        var starLight = new BABYLON.PointLight(starInfo.Name + 'Light', starPostition, scene);
+        var starLight = new BABYLON.PointLight(starInfo.Name + 'Light', starPosition, scene);
         starLight.intensity = 2;
         starLight.range = 380;
 

@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Media.Media3D
+﻿
+Imports System.Windows.Media.Media3D
 Imports OrbitalMechanics
 Imports OrbitalMechanics.CelestialObjects
 Imports OrbitalMechanics.Classes
@@ -19,6 +20,7 @@ Namespace Scenes
             Dim earth As New Planet("Earth", 1, "earth.jpg", 5, New Orbit(120, 0.0034, 0), moons)
 
             objects.Add(earth)
+
             Return New SolarSystem(objects)
         End Function
 
