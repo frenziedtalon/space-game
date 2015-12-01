@@ -373,12 +373,26 @@ var createScene = function () {
         planet.material = planetMaterial;
 
         // Create any moons
-        if (planetInfo.hasOwnProperty('moons') && planetInfo.moons.length > 0) {
-            for (j = 0; j < planet.info.moons.length; j++) {
-                debugger;
+        if (planetInfo.hasOwnProperty('Moons') && planetInfo.Moons.length > 0) {
+            for (j = 0; j < planetInfo.Moons.length; j++) {
+                renderMoon(planetInfo.Moons[j], planet);
             }
         }
     }
+
+    function renderMoon(moonInfo, parent) {
+        var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, moonInfo.Radius * 2, scene);
+
+        moon.position = createPosition(moonInfo.Orbit.Position);
+
+        // Create a material for the moon
+        var moonMaterial = new BABYLON.StandardMaterial(moonInfo.Name + 'Material', scene);
+        moonMaterial.diffuseTexture = new BABYLON.Texture('Assets/Images/Moon/' + moonInfo.Texture, scene);
+        moonMaterial.specularColor = zeroColor();
+        moon.material = moonMaterial;
+
+    }
+
 
 }
 
