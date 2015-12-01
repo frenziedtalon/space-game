@@ -359,5 +359,26 @@ var createScene = function () {
         starLight.range = 380;
 
     }
+
+    function renderPlanet(planetInfo) {
+
+        var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, planetInfo.Radius * 2, scene);
+        planet.info = planetInfo
+        planet.position = createPosition(planetInfo.Orbit.Position);
+
+        // Create a material for the planet
+        var planetMaterial = new BABYLON.StandardMaterial(planetInfo.Name + 'Material', scene);
+        planetMaterial.diffuseTexture = new BABYLON.Texture('Assets/Images/Planet/' + planetInfo.Texture, scene);
+        planetMaterial.specularColor = zeroColor();
+        planet.material = planetMaterial;
+
+        // Create any moons
+        if (planetInfo.hasOwnProperty('moons') && planetInfo.moons.length > 0) {
+            for (j = 0; j < planet.info.moons.length; j++) {
+                debugger;
+            }
+        }
+    }
+
 }
 
