@@ -321,14 +321,8 @@ var createScene = function () {
     }
 
 
-    function removeDiffuseColor(material) {
-        material.diffuseColor = zeroColor();
-        return material;
     }
 
-    function removeSpecularColor(material) {
-        material.specularColor = zeroColor();
-        return material;
     }
 
     function zeroColor() {
@@ -352,8 +346,8 @@ var createScene = function () {
         // Create the material for the star, removing its reaction to other light sources
         var starMaterial = new BABYLON.StandardMaterial(starInfo.Name + 'Material', scene);
         starMaterial.emissiveTexture = new BABYLON.Texture('Assets/Images/Star/' + starInfo.Texture, scene);
-        starMaterial = removeDiffuseColor(starMaterial);
-        starMaterial = removeSpecularColor(starMaterial);
+        starMaterial.specularColor = zeroColor();
+        starMaterial.diffuseColor = zeroColor();
 
         star.material = starMaterial;
 
