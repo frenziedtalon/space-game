@@ -57,7 +57,8 @@ Namespace Classes
         End Sub
 
         Private Sub SetInitialPosition()
-            _position = New Point3D(0, 0, 0)
+            ' TODO: Calculate properly including the angle
+            _position = New Point3D(_radius, 0, 0)
         End Sub
     End Class
 End Namespace
