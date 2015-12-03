@@ -45,14 +45,16 @@ var createScene = function () {
         // See if there's a mesh under the click
         var pickResult = scene.pick(evt.clientX, evt.clientY);
         // If there is a hit and we can select the object then set it as the camera target
-        if (pickResult.hit && (pickResult.pickedMesh.hasOwnProperty('info'))) {
-            camera.target = pickResult.pickedMesh;
-        };
+        debugger;
+        if (pickResult.hit && pickResult.pickedMesh.hasOwnProperty('info') && pickResult.pickedMesh.info.CameraTarget) {
+            scene.activeCamera.target = pickResult.pickedMesh.Position;
+        }
     });
 
     // Listen for key presses
     window.addEventListener("keypress", function (evt) {
         if (evt.keyCode === 32) {
+            // spacebar
             toggleDebugLayer();
         }
     });

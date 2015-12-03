@@ -42,4 +42,9 @@ Public MustInherit Class BaseGameEntity
         End Get
     End Property
 
+    ''' <summary>
+    ''' Whether the entity can be used as a camera target
+    ''' </summary>
+    Public Overridable Property CameraTarget As Boolean = True
+
 End Class
