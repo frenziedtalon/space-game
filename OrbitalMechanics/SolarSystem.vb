@@ -1,4 +1,5 @@
-﻿Imports OrbitalMechanics.CelestialObjects
+﻿Imports Newtonsoft.Json
+Imports OrbitalMechanics.CelestialObjects
 
 Public Class SolarSystem
     Private ReadOnly _objects As List(Of ICelestialObject)
@@ -13,12 +14,14 @@ Public Class SolarSystem
         End Get
     End Property
 
+    <JsonIgnore>
     Public ReadOnly Property Stars() As List(Of ICelestialObject)
         Get
             Return _objects.Where(Function(o) o.GetType() Is GetType(Star)).ToList()
         End Get
     End Property
 
+    <JsonIgnore()>
     Public ReadOnly Property Planets() As List(Of ICelestialObject)
         Get
             Return _objects.Where(Function(o) o.GetType() Is GetType(Planet)).ToList()
