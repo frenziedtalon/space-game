@@ -354,7 +354,7 @@ var createScene = function () {
         planet.material = planetMaterial;
 
         // Create any moons
-        if (planetInfo.hasOwnProperty('Moons') && planetInfo.Moons.length > 0) {
+        if (planetInfo.hasOwnProperty('Moons')) {
             for (j = 0; j < planetInfo.Moons.length; j++) {
                 renderMoon(planetInfo.Moons[j], planet);
             }
