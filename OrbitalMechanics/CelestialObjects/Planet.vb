@@ -12,7 +12,7 @@ Namespace CelestialObjects
                        texture As String,
                        radius As Integer,
                        orbit As Orbit,
-                       moons As List(Of Moon))
+                       Optional moons As List(Of Moon) = Nothing)
 
             MyBase.New(name, mass, texture)
             _radius = radius
@@ -49,6 +49,10 @@ Namespace CelestialObjects
                 Return _moons
             End Get
         End Property
+
+        Public Function ShouldSerializeMoons() As Boolean
+            Return Moons IsNot Nothing
+        End Function
 
         Private _volume As Double = 0
 
