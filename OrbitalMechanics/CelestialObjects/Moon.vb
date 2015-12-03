@@ -1,6 +1,5 @@
-﻿
-Imports System.Security
-Imports System.Windows.Media.Media3D
+﻿Imports Core
+Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
     Public Class Moon
@@ -10,16 +9,17 @@ Namespace CelestialObjects
         Public Sub New(name As String,
                        mass As Integer,
                        texture As String,
-                       position As Point3D,
-                       motion As Vector3D,
-                       radius as integer)
+                       radius As Integer,
+                       orbit As Orbit)
 
-            MyBase.New(name, mass, texture, position, motion)
+            MyBase.New(name, mass, texture)
             _radius = radius
+            _orbit = orbit
         End Sub
 
         Public Overrides Sub Update()
             Throw New NotImplementedException()
+            Orbit.Update()
         End Sub
 
         Private ReadOnly _radius As Integer
@@ -40,5 +40,24 @@ Namespace CelestialObjects
                 Throw New NotImplementedException()
             End Get
         End Property
+
+        Private _volume As Double = 0
+
+        Public ReadOnly Property Volume As Double Implements I3DObject.Volume
+            Get
+                If Double.Equals(_volume, 0.0) AndAlso Radius > 0 Then
+                    _volume = Helpers.Shapes.ShapeHelper.VolumeOfASphere(Radius)
+                End If
+                Return _volume
+            End Get
+        End Property
+
+        Private ReadOnly _orbit As Orbit
+        Public ReadOnly Property Orbit As Orbit
+            Get
+                Return _orbit
+            End Get
+        End Property
+
     End Class
 End Namespace
