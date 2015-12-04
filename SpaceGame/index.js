@@ -148,7 +148,7 @@ var createScene = function () {
     function createPosition(position) {
         // string like "x,y,z"
         var array = position.split(',')
-        return new BABYLON.Vector3(array[0], array[1], array[2]);
+        return new BABYLON.Vector3(parseInt(array[0]), parseInt(array[1]), parseInt(array[2]));
     }
 
     function renderStar(starInfo) {
