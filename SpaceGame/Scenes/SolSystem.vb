@@ -18,7 +18,7 @@ Namespace Scenes
             objects.Add(New Planet("Venus", 1, "venus.jpg", 4, New Orbit(80, 0.0036, 0)))
 
             Dim moons As New List(Of Moon)
-            moons.Add(New Moon("Moon", 1, "moon.jpg", 8, New Orbit(8, 0.002, 0)))
+            moons.Add(New Moon("Moon", 1, "moon.jpg", 1, New Orbit(8, 0.002, 0)))
 
             objects.Add(New Planet("Earth", 1, "earth.jpg", 5, New Orbit(120, 0.0034, 0), moons))
 
