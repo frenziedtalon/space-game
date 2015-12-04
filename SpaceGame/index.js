@@ -30,10 +30,6 @@ var createScene = function () {
     // Retrieve the objects to be rendered in the scene
     retrieveSceneObjects();
 
-    // Register a render loop to repeatedly render the scene
-    engine.runRenderLoop(function () {
-        scene.render();
-    });
 
     // Watch for browser/canvas resize events
     window.addEventListener("resize", function () {
@@ -114,6 +110,7 @@ var createScene = function () {
             for (i = 0; i < objects.length; i++) {
                 renderSceneObject(objects[i]);
             }
+            beginRenderLoop();
         } else {
             displayError('Scene objects undefined');
         }
