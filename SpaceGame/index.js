@@ -179,7 +179,7 @@ var createScene = function () {
     function renderPlanet(planetInfo) {
 
         var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, planetInfo.Radius * 2, scene);
-        planet.info = planetInfo
+        planet.info = planetInfo;
         planet.position = createPosition(planetInfo.Orbit.Position);
 
         // Create a material for the planet
@@ -203,6 +203,7 @@ var createScene = function () {
             // Positions applied are in addition to those of the parent
             moon.parent = parent;
         }
+        moon.info = moonInfo;
 
         moon.position = createPosition(moonInfo.Orbit.Position);
 
@@ -214,6 +215,13 @@ var createScene = function () {
 
     }
 
+    function beginRenderLoop() {
+        // Register a render loop to repeatedly render the scene
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+    }
 
+    
 }
 
