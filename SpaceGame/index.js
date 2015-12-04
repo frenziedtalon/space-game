@@ -22,7 +22,7 @@ var createScene = function () {
     scene.activeCamera = camera;
 
     // Let the user move the camera
-    camera.attachControl(canvas);
+    camera.attachControl(canvas, false);
 
     // Create a skybox
     createSkybox();
