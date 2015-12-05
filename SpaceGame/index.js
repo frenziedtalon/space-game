@@ -52,6 +52,10 @@ var createScene = function () {
             // spacebar
             toggleDebugLayer();
         }
+        else if (evt.keyCode === 97) {
+            // a
+            toggleAnimation();
+        }
     });
 
     function createSkybox() {
@@ -212,12 +216,39 @@ var createScene = function () {
     }
 
     function beginRenderLoop() {
+
+        scene.beforeRender = function () {
+            if (animateScene) {
+                animate();
+            }
+        }
+
         // Register a render loop to repeatedly render the scene
         engine.runRenderLoop(function () {
             scene.render();
         });
     }
 
-    
+    var animateScene = false;
+
+    function toggleAnimation() {
+        animateScene = !animateScene;
+    }
+
+    // Used in debugging, will not be required when turn based gameplay is implemented
+    function animate() {
+        var meshes = scene.meshes;
+        for (i = 0; i < meshes.length; i++) {
+            var mesh = meshes[i];
+            if (mesh.hasOwnProperty('info') && !(mesh.info.Orbit === undefined)
+                && !(mesh.info.Orbit.Speed === 0)) {
+                mesh.position.x = mesh.info.Orbit.Radius * Math.sin(mesh.info.Orbit.Angle);
+                mesh.position.y = 0;
+                mesh.position.z = mesh.info.Orbit.Radius * Math.cos(mesh.info.Orbit.Angle);
+                mesh.info.Orbit.Angle += mesh.info.Orbit.Speed;
+            }
+        }
+    }
+
 }
 
