@@ -22,7 +22,7 @@ var createScene = function () {
     scene.activeCamera = camera;
 
     // Let the user move the camera
-    camera.attachControl(canvas);
+    camera.attachControl(canvas, false);
 
     // Create a skybox
     createSkybox();
@@ -30,10 +30,6 @@ var createScene = function () {
     // Retrieve the objects to be rendered in the scene
     retrieveSceneObjects();
 
-    // Register a render loop to repeatedly render the scene
-    engine.runRenderLoop(function () {
-        scene.render();
-    });
 
     // Watch for browser/canvas resize events
     window.addEventListener("resize", function () {
@@ -45,9 +41,8 @@ var createScene = function () {
         // See if there's a mesh under the click
         var pickResult = scene.pick(evt.clientX, evt.clientY);
         // If there is a hit and we can select the object then set it as the camera target
-        debugger;
         if (pickResult.hit && pickResult.pickedMesh.hasOwnProperty('info') && pickResult.pickedMesh.info.CameraTarget) {
-            scene.activeCamera.target = pickResult.pickedMesh.Position;
+            scene.activeCamera.parent = pickResult.pickedMesh;
         }
     });
 
@@ -56,6 +51,10 @@ var createScene = function () {
         if (evt.keyCode === 32) {
             // spacebar
             toggleDebugLayer();
+        }
+        else if (evt.keyCode === 97) {
+            // a
+            toggleAnimation();
         }
     });
 
@@ -114,6 +113,7 @@ var createScene = function () {
             for (i = 0; i < objects.length; i++) {
                 renderSceneObject(objects[i]);
             }
+            beginRenderLoop();
         } else {
             displayError('Scene objects undefined');
         }
@@ -148,7 +148,7 @@ var createScene = function () {
     function createPosition(position) {
         // string like "x,y,z"
         var array = position.split(',')
-        return new BABYLON.Vector3(array[0], array[1], array[2]);
+        return new BABYLON.Vector3(parseInt(array[0]), parseInt(array[1]), parseInt(array[2]));
     }
 
     function renderStar(starInfo) {
@@ -179,7 +179,7 @@ var createScene = function () {
     function renderPlanet(planetInfo) {
 
         var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, planetInfo.Radius * 2, scene);
-        planet.info = planetInfo
+        planet.info = planetInfo;
         planet.position = createPosition(planetInfo.Orbit.Position);
 
         // Create a material for the planet
@@ -197,12 +197,13 @@ var createScene = function () {
     }
 
     function renderMoon(moonInfo, parent) {
-        var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, moonInfo.Radius * 2, scene);
+        var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, 16, moonInfo.Radius * 2, scene);
 
         if (parent !== undefined) {
             // Positions applied are in addition to those of the parent
             moon.parent = parent;
         }
+        moon.info = moonInfo;
 
         moon.position = createPosition(moonInfo.Orbit.Position);
 
@@ -214,6 +215,40 @@ var createScene = function () {
 
     }
 
+    function beginRenderLoop() {
+
+        scene.beforeRender = function () {
+            if (animateScene) {
+                animate();
+            }
+        }
+
+        // Register a render loop to repeatedly render the scene
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+    }
+
+    var animateScene = false;
+
+    function toggleAnimation() {
+        animateScene = !animateScene;
+    }
+
+    // Used in debugging, will not be required when turn based gameplay is implemented
+    function animate() {
+        var meshes = scene.meshes;
+        for (i = 0; i < meshes.length; i++) {
+            var mesh = meshes[i];
+            if (mesh.hasOwnProperty('info') && !(mesh.info.Orbit === undefined)
+                && !(mesh.info.Orbit.Speed === 0)) {
+                mesh.position.x = mesh.info.Orbit.Radius * Math.sin(mesh.info.Orbit.Angle);
+                mesh.position.y = 0;
+                mesh.position.z = mesh.info.Orbit.Radius * Math.cos(mesh.info.Orbit.Angle);
+                mesh.info.Orbit.Angle += mesh.info.Orbit.Speed;
+            }
+        }
+    }
 
 }
 
