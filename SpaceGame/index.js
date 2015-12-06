@@ -188,6 +188,9 @@ var createScene = function () {
         planetMaterial.specularColor = zeroColor();
         planet.material = planetMaterial;
 
+        // Draw planet's orbit
+        drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + 'Orbit')
+
         // Create any moons
         if (planetInfo.hasOwnProperty('Moons')) {
             for (j = 0; j < planetInfo.Moons.length; j++) {
@@ -248,6 +251,30 @@ var createScene = function () {
                 mesh.info.Orbit.Angle += mesh.info.Orbit.Speed;
             }
         }
+    }
+
+    function drawCircle(radius, meshName) {
+        
+        var tes = radius / 2; // number of path points, more is smoother
+        if (tes < 40) {
+            tes = 40;
+        } else if (tes > 200){
+            tes = 200
+        }
+        var pi2 = Math.PI * 2;
+        var step = pi2 / tes;
+        var path = [];
+        for (var i = 0; i < pi2; i += step) {
+            var x = radius * Math.sin(i);
+            var y = 0;
+            var z = radius * Math.cos(i);
+            path.push(new BABYLON.Vector3(x, y, z));
+        }
+        path.push(path[0]);
+
+        var circle = BABYLON.Mesh.CreateLines(meshName, path, scene);
+        circle.color = new BABYLON.Color3(0.54, 0.54, 0.54);
+
     }
 
 }
