@@ -15,7 +15,7 @@ var createScene = function () {
     // Create a camera
     var camera = new BABYLON.ArcRotateCamera('camera', 0, 0, 15, BABYLON.Vector3.Zero(), scene);
     camera.setPosition(new BABYLON.Vector3(-200, 200, 0));
-    camera.lowerRadiusLimit = 50;
+    camera.lowerRadiusLimit = 20;
     camera.upperRadiusLimit = 400;
 
     // Use the new camera
@@ -113,6 +113,7 @@ var createScene = function () {
             for (i = 0; i < objects.length; i++) {
                 renderSceneObject(objects[i]);
             }
+            createShadowGenerators();
             beginRenderLoop();
         } else {
             displayError('Scene objects undefined');
@@ -172,7 +173,9 @@ var createScene = function () {
         // Create a light to make the star shine
         var starLight = new BABYLON.PointLight(starInfo.Name + 'Light', starPosition, scene);
         starLight.intensity = 2;
-        starLight.range = 380;
+        starLight.range = 400;
+
+        lightSources.push(starLight);
 
     }
 
@@ -248,6 +251,32 @@ var createScene = function () {
                 mesh.info.Orbit.Angle += mesh.info.Orbit.Speed;
             }
         }
+    }
+
+    lightSources = [];
+
+    function createShadowGenerators(light) {
+        if (lightSources.length > 0) {
+            var meshes = scene.meshes;
+            for (i = 0; i < lightSources.length; i++) {
+                var light = lightSources[i];
+
+                // Create a shadow generator for each light source
+                var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+                //shadowGenerator.useVarianceShadowMap = true;
+
+                // Each mesh will be able to both cast a shadow and be in shadow
+                for (j = 0; j < meshes.length; j++) {
+                    var mesh = meshes[i];
+                    shadowGenerator.getShadowMap().renderList.push(mesh);
+                    mesh.receiveShadows = true;
+                }
+            }
+        }
+        
+
+        
+
     }
 
 }
