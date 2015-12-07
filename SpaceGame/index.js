@@ -13,16 +13,7 @@ var createScene = function () {
     scene.clearColor = new BABYLON.Color3(0, 0, 0); // Set background to black
 
     // Create a camera
-    var camera = new BABYLON.ArcRotateCamera('camera', 0, 0, 15, BABYLON.Vector3.Zero(), scene);
-    camera.setPosition(new BABYLON.Vector3(-200, 200, 0));
-    camera.lowerRadiusLimit = 50;
-    camera.upperRadiusLimit = 400;
-
-    // Use the new camera
-    scene.activeCamera = camera;
-
-    // Let the user move the camera
-    camera.attachControl(canvas, false);
+    createCamera();
 
     // Create a skybox
     createSkybox();
@@ -275,6 +266,23 @@ var createScene = function () {
         var circle = BABYLON.Mesh.CreateLines(meshName, path, scene);
         circle.color = new BABYLON.Color3(0.54, 0.54, 0.54);
 
+    }
+
+    function createCamera() {
+        createArcRotateCamera();
+    }
+
+    function createArcRotateCamera() {
+        var camera = new BABYLON.ArcRotateCamera('camera', 0, 0, 15, BABYLON.Vector3.Zero(), scene);
+        camera.setPosition(new BABYLON.Vector3(-200, 200, 0));
+        camera.lowerRadiusLimit = 50;
+        camera.upperRadiusLimit = 400;
+
+        // Use the new camera
+        scene.activeCamera = camera;
+
+        // Let the user move the camera
+        camera.attachControl(canvas, false);
     }
 
 }
