@@ -109,8 +109,8 @@ var createScene = function () {
     }
 
     function renderSceneObjects(objects) {
-        if (objects !== undefined) {
-            for (i = 0; i < objects.length; i++) {
+        if (objects !== undefined && objects !== null) {
+            for (var i = 0; i < objects.length; i++) {
                 renderSceneObject(objects[i]);
             }
             createShadowGenerators();
@@ -121,7 +121,7 @@ var createScene = function () {
     }
 
     function renderSceneObject(item) {
-        if (item !== undefined) {
+        if (item !== undefined && item !== null) {
             switch (item.Type) {
                 case 'OrbitalMechanics.CelestialObjects.Star':
                     renderStar(item);
@@ -136,7 +136,7 @@ var createScene = function () {
                     break;
 
                 default:
-                    displayError('Unknown object type: ' + item.Type)
+                    displayError('Unknown object type: ' + item.Type);
                     break;
             }
         }
@@ -148,7 +148,7 @@ var createScene = function () {
 
     function createPosition(position) {
         // string like "x,y,z"
-        var array = position.split(',')
+        var array = position.split(',');
         return new BABYLON.Vector3(parseInt(array[0]), parseInt(array[1]), parseInt(array[2]));
     }
 
@@ -193,7 +193,7 @@ var createScene = function () {
 
         // Create any moons
         if (planetInfo.hasOwnProperty('Moons')) {
-            for (j = 0; j < planetInfo.Moons.length; j++) {
+            for (var j = 0; j < planetInfo.Moons.length; j++) {
                 renderMoon(planetInfo.Moons[j], planet);
             }
         }
@@ -241,7 +241,7 @@ var createScene = function () {
     // Used in debugging, will not be required when turn based gameplay is implemented
     function animate() {
         var meshes = scene.meshes;
-        for (i = 0; i < meshes.length; i++) {
+        for (var i = 0; i < meshes.length; i++) {
             var mesh = meshes[i];
             if (mesh.hasOwnProperty('info') && !(mesh.info.Orbit === undefined)
                 && !(mesh.info.Orbit.Speed === 0)) {
