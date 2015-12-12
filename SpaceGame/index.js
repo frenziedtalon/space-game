@@ -27,6 +27,32 @@ var createScene = function () {
     // Create a skybox
     createSkybox();
 
+
+
+    // Create a list of lightsources to be used to generate shadows
+    var lightSources = [];
+    var shadowObjects = [];
+
+    //var testLight = new BABYLON.PointLight('TestLight', new BABYLON.Vector3(0,0,0), scene);
+    //testLight.intensity = 2;
+
+    //var container = BABYLON.Mesh.CreateSphere("sphere2", 16, 400, scene, false, BABYLON.Mesh.BACKSIDE);
+    //var containerMat = new BABYLON.StandardMaterial("mat", scene);
+    //container.material = containerMat;
+    //containerMat.diffuseTexture = new BABYLON.Texture("textures/amiga.jpg", scene);
+    //containerMat.diffuseTexture.uScale = 10.0;
+    //containerMat.diffuseTexture.vScale = 10.0;
+
+    // name, diameter, thickness, tessellation (highly detailed or not), scene, updatable
+    var torus = BABYLON.Mesh.CreateTorus("torus", 300, 20, 32, scene, false);
+
+    var torusMat = new BABYLON.StandardMaterial("mat", scene);
+    torus.material = torusMat;
+    torusMat.diffuseColor = BABYLON.Color3.Red();
+    torus.receiveShadows = true;
+
+    
+
     // Retrieve the objects to be rendered in the scene
     retrieveSceneObjects();
 
@@ -156,19 +182,19 @@ var createScene = function () {
         
         // Create a star
         var starPosition = createPosition(starInfo.Orbit.Position);
-        
-        var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, starInfo.Radius * 2, scene);
-        star.position = starPosition;
+        debugger;
+        //var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, starInfo.Radius * 2, scene);
+        //star.position = starPosition;
 
         // Create the material for the star, removing its reaction to other light sources
-        var starMaterial = new BABYLON.StandardMaterial(starInfo.Name + 'Material', scene);
-        starMaterial.emissiveTexture = new BABYLON.Texture('Assets/Images/Star/' + starInfo.Texture, scene);
-        starMaterial.specularColor = zeroColor();
-        starMaterial.diffuseColor = zeroColor();
+        //var starMaterial = new BABYLON.StandardMaterial(starInfo.Name + 'Material', scene);
+        //starMaterial.emissiveTexture = new BABYLON.Texture('Assets/Images/Star/' + starInfo.Texture, scene);
+        //starMaterial.specularColor = zeroColor();
+        //starMaterial.diffuseColor = zeroColor();
 
-        star.material = starMaterial;
+        //star.material = starMaterial;
 
-        star.info = starInfo;
+        //star.info = starInfo;
       
         // Create a light to make the star shine
         var starLight = new BABYLON.PointLight(starInfo.Name + 'Light', starPosition, scene);
@@ -190,7 +216,9 @@ var createScene = function () {
         planetMaterial.diffuseTexture = new BABYLON.Texture('Assets/Images/Planet/' + planetInfo.Texture, scene);
         planetMaterial.specularColor = zeroColor();
         planet.material = planetMaterial;
-
+        debugger;
+        shadowObjects.push(planet);
+        //camera.target = planet;
         // Create any moons
         if (planetInfo.hasOwnProperty('Moons')) {
             for (var j = 0; j < planetInfo.Moons.length; j++) {
@@ -215,8 +243,11 @@ var createScene = function () {
         moonMaterial.diffuseTexture = new BABYLON.Texture('Assets/Images/Moon/' + moonInfo.Texture, scene);
         moonMaterial.specularColor = zeroColor();
         moon.material = moonMaterial;
-
+        debugger;
+        shadowObjects.push(moon);
     }
+
+    var animateScene = true;
 
     function beginRenderLoop() {
 
@@ -231,8 +262,6 @@ var createScene = function () {
             scene.render();
         });
     }
-
-    var animateScene = false;
 
     function toggleAnimation() {
         animateScene = !animateScene;
@@ -253,30 +282,31 @@ var createScene = function () {
         }
     }
 
-    lightSources = [];
-
-    function createShadowGenerators(light) {
+    function createShadowGenerators() {
         if (lightSources.length > 0) {
-            var meshes = scene.meshes;
-            for (i = 0; i < lightSources.length; i++) {
+            // Create a shadow generator for each light source
+            for (var i = 0; i < lightSources.length; i++) {
                 var light = lightSources[i];
+                
+                //container.receiveShadows = true;
+                debugger;
+                for (var j = 0; j < shadowObjects.length; j++) {
 
-                // Create a shadow generator for each light source
-                var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
-                //shadowGenerator.useVarianceShadowMap = true;
+                    // make a new shadow generator for each mesh. 
+                    var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+                    shadowGenerator.setDarkness(0.2);
+                    shadowGenerator.usePoissonSampling = false;
 
-                // Each mesh will be able to both cast a shadow and be in shadow
-                for (j = 0; j < meshes.length; j++) {
-                    var mesh = meshes[i];
-                    shadowGenerator.getShadowMap().renderList.push(mesh);
-                    mesh.receiveShadows = true;
+                    // mesh can cast shadows using it's own shadowgenerator
+                    shadowGenerator.getShadowMap().renderList.push(shadowObjects[j]);
+                    shadowGenerator.receiveShadows = false;
+                    
+                    // all meshes can receive shadows
+                    shadowObjects[j].receiveShadows = true;
+
                 }
             }
         }
-        
-
-        
-
     }
 
 }
