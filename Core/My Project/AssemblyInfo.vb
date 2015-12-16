@@ -1,4 +1,4 @@
-﻿
+﻿Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("OrbitalMechanics")> 
+<Assembly: AssemblyTitle("Core")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("OrbitalMechanics")> 
+<Assembly: AssemblyProduct("Core")> 
 <Assembly: AssemblyCopyright("Copyright ©  2015")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("6ed3648d-779f-4144-b69e-37ebbef10414")> 
+<Assembly: Guid("4bbf9dc3-ae8a-4569-8a67-e341b4ce6e1f")> 
 
 ' Version information for an assembly consists of the following four values:
 '

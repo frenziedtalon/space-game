@@ -33,4 +33,18 @@ Public MustInherit Class BaseGameEntity
         Throw New NotImplementedException
     End Function
 
+    ''' <summary>
+    ''' Type of the entity
+    ''' </summary>
+    Public ReadOnly Property Type As String
+        Get
+            Return Me.GetType().ToString()
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' Whether the entity can be used as a camera target
+    ''' </summary>
+    Public Overridable Property CameraTarget As Boolean = True
+
 End Class

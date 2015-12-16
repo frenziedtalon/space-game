@@ -1,5 +1,7 @@
 ﻿
-Imports System.Windows.Media.Media3D
+Imports Core
+Imports Newtonsoft.Json
+Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
     Public Class Star
@@ -12,13 +14,13 @@ Namespace CelestialObjects
                        mass As Integer,
                        surfaceTemperature As Integer,
                        texture As String,
-                       position As Point3D,
-                       motion As Vector3D,
-                       radius As Integer)
+                       radius As Integer,
+                       orbit As Orbit)
 
-            MyBase.New(name, mass, texture, position, motion)
+            MyBase.New(name, mass, texture)
             _surfaceTemperature = surfaceTemperature
             _radius = radius
+            _orbit = orbit
         End Sub
 
         Public Overrides Sub Update()
@@ -77,6 +79,42 @@ Namespace CelestialObjects
                 Throw New NotImplementedException()
             End Get
         End Property
+
+        <JsonIgnore>
+        Public ReadOnly Property LightIntensity() As Integer
+            Get
+                Throw New NotImplementedException
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' Star light intensity fades gradually until becoming zero at this range
+        ''' </summary>
+        <JsonIgnore()>
+        Public ReadOnly Property LightRange() As Integer
+            Get
+                Throw New NotImplementedException
+            End Get
+        End Property
+
+        Private _volume As Double = 0
+
+        Public ReadOnly Property Volume As Double Implements I3DObject.Volume
+            Get
+                If Double.Equals(_volume, 0.0) AndAlso Radius > 0 Then
+                    _volume = Helpers.Shapes.ShapeHelper.VolumeOfASphere(Radius)
+                End If
+                Return _volume
+            End Get
+        End Property
+
+        Private ReadOnly _orbit As Orbit
+        Public ReadOnly Property Orbit As Orbit
+            Get
+                Return _orbit
+            End Get
+        End Property
+
     End Class
 
 
