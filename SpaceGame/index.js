@@ -41,7 +41,7 @@ var createScene = function () {
         // See if there's a mesh under the click
         var pickResult = scene.pick(evt.clientX, evt.clientY);
         // If there is a hit and we can select the object then set it as the camera target
-        if (pickResult.hit && pickResult.pickedMesh.hasOwnProperty('info') && pickResult.pickedMesh.info.CameraTarget) {
+        if (pickResult.hit) {
             scene.activeCamera.parent = pickResult.pickedMesh;
         }
     });
@@ -71,6 +71,7 @@ var createScene = function () {
 
         skybox.infiniteDistance = true; // Have the skybox move with the camera so we can never move outside it
         skybox.material = skyboxMaterial;
+        skybox.isPickable = false;
     }
 
     function toggleDebugLayer() {
@@ -168,6 +169,7 @@ var createScene = function () {
         star.material = starMaterial;
 
         star.info = starInfo;
+        star.isPickable = starInfo.CameraTarget;
       
         // Create a light to make the star shine
         var starLight = new BABYLON.PointLight(starInfo.Name + 'Light', starPosition, scene);
@@ -188,6 +190,8 @@ var createScene = function () {
         planetMaterial.specularColor = zeroColor();
         planet.material = planetMaterial;
 
+        planet.isPickable = planetInfo.CameraTarget;
+
         // Draw planet's orbit
         drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + 'Orbit')
 
@@ -207,6 +211,8 @@ var createScene = function () {
             moon.parent = parent;
         }
         moon.info = moonInfo;
+
+        moon.isPickable = moonInfo.CameraTarget;
 
         moon.position = createPosition(moonInfo.Orbit.Position);
 
