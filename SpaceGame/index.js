@@ -283,7 +283,8 @@ var createScene = function () {
     }
 
     function createCamera() {
-        createArcRotateCamera();
+        createVrDeviceOrientationCamera();
+        //createArcRotateCamera();
     }
 
     function createArcRotateCamera() {
@@ -297,6 +298,18 @@ var createScene = function () {
 
         // Let the user move the camera
         camera.attachControl(canvas, false);
+    }
+
+    function createVrDeviceOrientationCamera() {
+        var camera = new BABYLON.VRDeviceOrientationFreeCamera("VRDOCamera", new BABYLON.Vector3(0, 50, 50), scene);
+        camera.target = new BABYLON.Vector3(0, 0, 0);
+
+        // Use the new camera
+        scene.activeCamera = camera;
+
+        // Let the user move the camera
+        camera.attachControl(canvas, false);
+
     }
 
 }
