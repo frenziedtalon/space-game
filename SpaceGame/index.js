@@ -224,6 +224,8 @@ var createScene = function () {
 
     }
 
+    var animateScene = true;
+
     function beginRenderLoop() {
 
         scene.beforeRender = function () {
@@ -237,9 +239,7 @@ var createScene = function () {
             scene.render();
         });
     }
-
-    var animateScene = false;
-
+    
     function toggleAnimation() {
         animateScene = !animateScene;
     }
