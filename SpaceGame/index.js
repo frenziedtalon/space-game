@@ -32,7 +32,7 @@ var createScene = function () {
         // See if there's a mesh under the click
         var pickResult = scene.pick(evt.clientX, evt.clientY);
         // If there is a hit and we can select the object then set it as the camera target
-        if (pickResult.hit && pickResult.pickedMesh.hasOwnProperty('info') && pickResult.pickedMesh.info.CameraTarget) {
+        if (pickResult.hit) {
             scene.activeCamera.parent = pickResult.pickedMesh;
         }
     });
@@ -62,6 +62,7 @@ var createScene = function () {
 
         skybox.infiniteDistance = true; // Have the skybox move with the camera so we can never move outside it
         skybox.material = skyboxMaterial;
+        skybox.isPickable = false;
     }
 
     function toggleDebugLayer() {
@@ -100,8 +101,8 @@ var createScene = function () {
     }
 
     function renderSceneObjects(objects) {
-        if (objects !== undefined) {
-            for (i = 0; i < objects.length; i++) {
+        if (objects !== undefined && objects !== null) {
+            for (var i = 0; i < objects.length; i++) {
                 renderSceneObject(objects[i]);
             }
             beginRenderLoop();
@@ -111,7 +112,7 @@ var createScene = function () {
     }
 
     function renderSceneObject(item) {
-        if (item !== undefined) {
+        if (item !== undefined && item !== null) {
             switch (item.Type) {
                 case 'OrbitalMechanics.CelestialObjects.Star':
                     renderStar(item);
@@ -126,7 +127,7 @@ var createScene = function () {
                     break;
 
                 default:
-                    displayError('Unknown object type: ' + item.Type)
+                    displayError('Unknown object type: ' + item.Type);
                     break;
             }
         }
@@ -138,7 +139,7 @@ var createScene = function () {
 
     function createPosition(position) {
         // string like "x,y,z"
-        var array = position.split(',')
+        var array = position.split(',');
         return new BABYLON.Vector3(parseInt(array[0]), parseInt(array[1]), parseInt(array[2]));
     }
 
@@ -159,6 +160,7 @@ var createScene = function () {
         star.material = starMaterial;
 
         star.info = starInfo;
+        star.isPickable = starInfo.CameraTarget;
       
         // Create a light to make the star shine
         var starLight = new BABYLON.PointLight(starInfo.Name + 'Light', starPosition, scene);
@@ -179,12 +181,14 @@ var createScene = function () {
         planetMaterial.specularColor = zeroColor();
         planet.material = planetMaterial;
 
+        planet.isPickable = planetInfo.CameraTarget;
+
         // Draw planet's orbit
-        drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + 'Orbit')
+        drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + 'Orbit');
 
         // Create any moons
         if (planetInfo.hasOwnProperty('Moons')) {
-            for (j = 0; j < planetInfo.Moons.length; j++) {
+            for (var j = 0; j < planetInfo.Moons.length; j++) {
                 renderMoon(planetInfo.Moons[j], planet);
             }
         }
@@ -199,6 +203,8 @@ var createScene = function () {
         }
         moon.info = moonInfo;
 
+        moon.isPickable = moonInfo.CameraTarget;
+
         moon.position = createPosition(moonInfo.Orbit.Position);
 
         // Create a material for the moon
@@ -207,7 +213,12 @@ var createScene = function () {
         moonMaterial.specularColor = zeroColor();
         moon.material = moonMaterial;
 
+        // Draw moon's orbit
+        drawCircle(moonInfo.Orbit.Radius, moonInfo.Name + 'Orbit', parent);
+
     }
+
+    var animateScene = true;
 
     function beginRenderLoop() {
 
@@ -222,9 +233,7 @@ var createScene = function () {
             scene.render();
         });
     }
-
-    var animateScene = false;
-
+    
     function toggleAnimation() {
         animateScene = !animateScene;
     }
@@ -232,7 +241,7 @@ var createScene = function () {
     // Used in debugging, will not be required when turn based gameplay is implemented
     function animate() {
         var meshes = scene.meshes;
-        for (i = 0; i < meshes.length; i++) {
+        for (var i = 0; i < meshes.length; i++) {
             var mesh = meshes[i];
             if (mesh.hasOwnProperty('info') && !(mesh.info.Orbit === undefined)
                 && !(mesh.info.Orbit.Speed === 0)) {
@@ -244,13 +253,13 @@ var createScene = function () {
         }
     }
 
-    function drawCircle(radius, meshName) {
+    function drawCircle(radius, meshName, parent) {
         
         var tes = radius / 2; // number of path points, more is smoother
         if (tes < 40) {
             tes = 40;
-        } else if (tes > 200){
-            tes = 200
+        } else if (tes > 200) {
+            tes = 200;
         }
         var pi2 = Math.PI * 2;
         var step = pi2 / tes;
@@ -266,6 +275,11 @@ var createScene = function () {
         var circle = BABYLON.Mesh.CreateLines(meshName, path, scene);
         circle.color = new BABYLON.Color3(0.54, 0.54, 0.54);
 
+        if (parent !== undefined) {
+            // Positions applied are in addition to those of the parent
+            circle.parent = parent;
+        }
+        
     }
 
     function createCamera() {
