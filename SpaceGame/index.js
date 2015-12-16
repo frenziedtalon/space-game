@@ -13,16 +13,7 @@ var createScene = function () {
     scene.clearColor = new BABYLON.Color3(0, 0, 0); // Set background to black
 
     // Create a camera
-    var camera = new BABYLON.ArcRotateCamera('camera', 0, 0, 15, BABYLON.Vector3.Zero(), scene);
-    camera.setPosition(new BABYLON.Vector3(-200, 200, 0));
-    camera.lowerRadiusLimit = 50;
-    camera.upperRadiusLimit = 400;
-
-    // Use the new camera
-    scene.activeCamera = camera;
-
-    // Let the user move the camera
-    camera.attachControl(canvas, false);
+    createCamera();
 
     // Create a skybox
     createSkybox();
@@ -289,6 +280,36 @@ var createScene = function () {
             circle.parent = parent;
         }
         
+    }
+
+    function createCamera() {
+        createVrDeviceOrientationCamera();
+        //createArcRotateCamera();
+    }
+
+    function createArcRotateCamera() {
+        var camera = new BABYLON.ArcRotateCamera('camera', 0, 0, 15, BABYLON.Vector3.Zero(), scene);
+        camera.setPosition(new BABYLON.Vector3(-200, 200, 0));
+        camera.lowerRadiusLimit = 50;
+        camera.upperRadiusLimit = 400;
+
+        // Use the new camera
+        scene.activeCamera = camera;
+
+        // Let the user move the camera
+        camera.attachControl(canvas, false);
+    }
+
+    function createVrDeviceOrientationCamera() {
+        var camera = new BABYLON.VRDeviceOrientationFreeCamera("VRDOCamera", new BABYLON.Vector3(0, 50, 50), scene);
+        camera.target = new BABYLON.Vector3(0, 0, 0);
+
+        // Use the new camera
+        scene.activeCamera = camera;
+
+        // Let the user move the camera
+        camera.attachControl(canvas, false);
+
     }
 
 }
