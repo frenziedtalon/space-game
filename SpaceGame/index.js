@@ -193,7 +193,7 @@ var createScene = function () {
         planet.isPickable = planetInfo.CameraTarget;
 
         // Draw planet's orbit
-        drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + 'Orbit')
+        drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + 'Orbit');
 
         // Create any moons
         if (planetInfo.hasOwnProperty('Moons')) {
@@ -264,8 +264,8 @@ var createScene = function () {
         var tes = radius / 2; // number of path points, more is smoother
         if (tes < 40) {
             tes = 40;
-        } else if (tes > 200){
-            tes = 200
+        } else if (tes > 200) {
+            tes = 200;
         }
         var pi2 = Math.PI * 2;
         var step = pi2 / tes;
