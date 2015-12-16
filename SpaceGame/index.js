@@ -222,6 +222,9 @@ var createScene = function () {
         moonMaterial.specularColor = zeroColor();
         moon.material = moonMaterial;
 
+        // Draw moon's orbit
+        drawCircle(moonInfo.Orbit.Radius, moonInfo.Name + 'Orbit', parent);
+
     }
 
     var animateScene = true;
@@ -259,7 +262,7 @@ var createScene = function () {
         }
     }
 
-    function drawCircle(radius, meshName) {
+    function drawCircle(radius, meshName, parent) {
         
         var tes = radius / 2; // number of path points, more is smoother
         if (tes < 40) {
@@ -281,6 +284,11 @@ var createScene = function () {
         var circle = BABYLON.Mesh.CreateLines(meshName, path, scene);
         circle.color = new BABYLON.Color3(0.54, 0.54, 0.54);
 
+        if (parent !== undefined) {
+            // Positions applied are in addition to those of the parent
+            circle.parent = parent;
+        }
+        
     }
 
 }
