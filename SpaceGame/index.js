@@ -283,8 +283,7 @@ var createScene = function () {
     }
 
     function createCamera() {
-        createVrDeviceOrientationCamera();
-        //createArcRotateCamera();
+        createArcRotateCamera();
     }
 
     function createArcRotateCamera() {
