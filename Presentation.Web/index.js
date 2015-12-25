@@ -76,7 +76,7 @@ var createScene = function () {
     function retrieveSceneObjects() {
 
         $.ajax({
-            url: "http://localhost/SpaceGame/WebApi/api/Scene",
+            url: "http://localhost/SpaceGameApi/api/Scene",
             cache: false,
             type: 'GET',
         dataType: 'json'
