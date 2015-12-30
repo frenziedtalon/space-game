@@ -41,7 +41,6 @@
     <Content Include="Assets\Images\Skybox\skybox_pz.jpg" />
     <Content Include="Assets\Images\Star\sun.jpg" />
     <Content Include="index.html" />
-    <Content Include="index.js" />
     <Content Include="Scripts\babylon.max.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="web.config" />
@@ -56,6 +55,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\d.ts\babylon.d.ts" />
     <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
     <TypeScriptCompile Include="ts\references.ts" />

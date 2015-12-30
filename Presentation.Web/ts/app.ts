@@ -1,6 +1,6 @@
-﻿///<reference path="scripts/babylon.max.js" />
+﻿/// <reference path="references.ts" />
 
-var createScene = function () {
+var createScene = () => {
 
     // Get the canvas element from our HTML below
     var canvas = document.getElementById("renderCanvas");
@@ -76,22 +76,22 @@ var createScene = function () {
     function retrieveSceneObjects() {
 
         $.ajax({
-            url: "http://localhost/SpaceGameApi/api/Scene",
-            cache: false,
-            type: 'GET',
-        dataType: 'json'
-        })
-          .done(function (data) {
-              // call succeeded
+                url: "http://localhost/SpaceGameApi/api/Scene",
+                cache: false,
+                type: 'GET',
+                dataType: 'json'
+            })
+            .done(function (data) {
+                // call succeeded
                 renderSceneObjects(data.Objects);
             })
-        .fail(function (data) {
+            .fail(function (data) {
                 // call failed
                 displayError(data);
             })
-        .always(function (data) {
-            // happens after done/fail on every call
-        });
+            .always(function (data) {
+                // happens after done/fail on every call
+            });
 
     }
 
@@ -114,21 +114,21 @@ var createScene = function () {
     function renderSceneObject(item) {
         if (item !== undefined && item !== null) {
             switch (item.Type) {
-                case 'OrbitalMechanics.CelestialObjects.Star':
-                    renderStar(item);
-                    break;
-                
-                case 'OrbitalMechanics.CelestialObjects.Planet':
-                    renderPlanet(item);
-                    break;
+            case 'OrbitalMechanics.CelestialObjects.Star':
+                renderStar(item);
+                break;
 
-                case 'OrbitalMechanics.CelestialObjects.Moon':
-                    renderMoon(item);
-                    break;
+            case 'OrbitalMechanics.CelestialObjects.Planet':
+                renderPlanet(item);
+                break;
 
-                default:
-                    displayError('Unknown object type: ' + item.Type);
-                    break;
+            case 'OrbitalMechanics.CelestialObjects.Moon':
+                renderMoon(item);
+                break;
+
+            default:
+                displayError('Unknown object type: ' + item.Type);
+                break;
             }
         }
     }
@@ -147,7 +147,7 @@ var createScene = function () {
         
         // Create a star
         var starPosition = createPosition(starInfo.Orbit.Position);
-        
+
         var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, starInfo.Radius * 2, scene);
         star.position = starPosition;
 
@@ -233,7 +233,7 @@ var createScene = function () {
             scene.render();
         });
     }
-    
+
     function toggleAnimation() {
         animateScene = !animateScene;
     }
@@ -254,7 +254,7 @@ var createScene = function () {
     }
 
     function drawCircle(radius, meshName, parent) {
-        
+
         var tes = radius / 2; // number of path points, more is smoother
         if (tes < 40) {
             tes = 40;
@@ -279,7 +279,7 @@ var createScene = function () {
             // Positions applied are in addition to those of the parent
             circle.parent = parent;
         }
-        
+
     }
 
     function createCamera() {
