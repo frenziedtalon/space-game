@@ -54,8 +54,11 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Scripts\" />
+    <TypeScriptCompile Include="ts\d.ts\babylon.d.ts" />
+    <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
+    <TypeScriptCompile Include="ts\references.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
