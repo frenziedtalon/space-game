@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Web", "Present
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "StateManager", "StateManager\StateManager.vbproj", "{0D4795B8-76CD-486A-9D80-433386CAD100}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0E976BD5-CE22-4D60-80EB-E87BBABB24CE}"
+	ProjectSection(SolutionItems) = preProject
+		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
