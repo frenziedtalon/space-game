@@ -215,3 +215,8 @@ FakesAssemblies/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
+
+# Typescript generated javascript files
+Presentation.Web/Scripts/app.d.ts
+Presentation.Web/Scripts/app.js
+Presentation.Web/Scripts/app.js.map
