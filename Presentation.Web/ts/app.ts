@@ -50,14 +50,14 @@ var createScene = () => {
     });
 
     function createSkybox() {
-        var skybox = BABYLON.Mesh.CreateBox('Skybox', 5000, scene);
-        var skyboxMaterial = new BABYLON.StandardMaterial('skyboxMaterial', scene);
+        var skybox = BABYLON.Mesh.CreateBox("Skybox", 5000, scene);
+        var skyboxMaterial = new BABYLON.StandardMaterial("skyboxMaterial", scene);
         skyboxMaterial.backFaceCulling = false; // Render the inside of the skybox
         skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
         skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
 
         // Add textures to the skybox
-        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture('Assets/Images/Skybox/skybox', scene);
+        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("Assets/Images/Skybox/skybox", scene);
         skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 
         skybox.infiniteDistance = true; // Have the skybox move with the camera so we can never move outside it
@@ -78,8 +78,8 @@ var createScene = () => {
         $.ajax({
                 url: "http://localhost/SpaceGameApi/api/Scene",
                 cache: false,
-                type: 'GET',
-                dataType: 'json'
+                type: "GET",
+                dataType: "json"
             })
             .done(function (data) {
                 // call succeeded
@@ -107,27 +107,27 @@ var createScene = () => {
             }
             beginRenderLoop();
         } else {
-            displayError('Scene objects undefined');
+            displayError("Scene objects undefined");
         }
     }
 
     function renderSceneObject(item) {
         if (item !== undefined && item !== null) {
             switch (item.Type) {
-            case 'OrbitalMechanics.CelestialObjects.Star':
+            case "OrbitalMechanics.CelestialObjects.Star":
                 renderStar(item);
                 break;
 
-            case 'OrbitalMechanics.CelestialObjects.Planet':
+            case "OrbitalMechanics.CelestialObjects.Planet":
                 renderPlanet(item);
                 break;
 
-            case 'OrbitalMechanics.CelestialObjects.Moon':
+            case "OrbitalMechanics.CelestialObjects.Moon":
                 renderMoon(item);
                 break;
 
             default:
-                displayError('Unknown object type: ' + item.Type);
+                displayError("Unknown object type: " + item.Type);
                 break;
             }
         }
@@ -139,7 +139,7 @@ var createScene = () => {
 
     function createPosition(position) {
         // string like "x,y,z"
-        var array = position.split(',');
+        var array = position.split(",");
         return new BABYLON.Vector3(parseInt(array[0]), parseInt(array[1]), parseInt(array[2]));
     }
 
@@ -152,8 +152,8 @@ var createScene = () => {
         star.position = starPosition;
 
         // Create the material for the star, removing its reaction to other light sources
-        var starMaterial = new BABYLON.StandardMaterial(starInfo.Name + 'Material', scene);
-        starMaterial.emissiveTexture = new BABYLON.Texture('Assets/Images/Star/' + starInfo.Texture, scene);
+        var starMaterial = new BABYLON.StandardMaterial(starInfo.Name + "Material", scene);
+        starMaterial.emissiveTexture = new BABYLON.Texture("Assets/Images/Star/" + starInfo.Texture, scene);
         starMaterial.specularColor = zeroColor();
         starMaterial.diffuseColor = zeroColor();
 
@@ -163,7 +163,7 @@ var createScene = () => {
         star.isPickable = starInfo.CameraTarget;
       
         // Create a light to make the star shine
-        var starLight = new BABYLON.PointLight(starInfo.Name + 'Light', starPosition, scene);
+        var starLight = new BABYLON.PointLight(starInfo.Name + "Light", starPosition, scene);
         starLight.intensity = 2;
         starLight.range = 380;
 
@@ -176,18 +176,18 @@ var createScene = () => {
         planet.position = createPosition(planetInfo.Orbit.Position);
 
         // Create a material for the planet
-        var planetMaterial = new BABYLON.StandardMaterial(planetInfo.Name + 'Material', scene);
-        planetMaterial.diffuseTexture = new BABYLON.Texture('Assets/Images/Planet/' + planetInfo.Texture, scene);
+        var planetMaterial = new BABYLON.StandardMaterial(planetInfo.Name + "Material", scene);
+        planetMaterial.diffuseTexture = new BABYLON.Texture("Assets/Images/Planet/" + planetInfo.Texture, scene);
         planetMaterial.specularColor = zeroColor();
         planet.material = planetMaterial;
 
         planet.isPickable = planetInfo.CameraTarget;
 
         // Draw planet's orbit
-        drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + 'Orbit');
+        drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + "Orbit");
 
         // Create any moons
-        if (planetInfo.hasOwnProperty('Moons')) {
+        if (planetInfo.hasOwnProperty("Moons")) {
             for (var j = 0; j < planetInfo.Moons.length; j++) {
                 renderMoon(planetInfo.Moons[j], planet);
             }
@@ -208,13 +208,13 @@ var createScene = () => {
         moon.position = createPosition(moonInfo.Orbit.Position);
 
         // Create a material for the moon
-        var moonMaterial = new BABYLON.StandardMaterial(moonInfo.Name + 'Material', scene);
-        moonMaterial.diffuseTexture = new BABYLON.Texture('Assets/Images/Moon/' + moonInfo.Texture, scene);
+        var moonMaterial = new BABYLON.StandardMaterial(moonInfo.Name + "Material", scene);
+        moonMaterial.diffuseTexture = new BABYLON.Texture("Assets/Images/Moon/" + moonInfo.Texture, scene);
         moonMaterial.specularColor = zeroColor();
         moon.material = moonMaterial;
 
         // Draw moon's orbit
-        drawCircle(moonInfo.Orbit.Radius, moonInfo.Name + 'Orbit', parent);
+        drawCircle(moonInfo.Orbit.Radius, moonInfo.Name + "Orbit", parent);
 
     }
 
@@ -243,12 +243,13 @@ var createScene = () => {
         var meshes = scene.meshes;
         for (var i = 0; i < meshes.length; i++) {
             var mesh = meshes[i];
-            if (mesh.hasOwnProperty('info') && !(mesh.info.Orbit === undefined)
+            if (mesh.hasOwnProperty("info") && !(mesh.info.Orbit === undefined)
                 && !(mesh.info.Orbit.Speed === 0)) {
                 mesh.position.x = mesh.info.Orbit.Radius * Math.sin(mesh.info.Orbit.Angle);
                 mesh.position.y = 0;
                 mesh.position.z = mesh.info.Orbit.Radius * Math.cos(mesh.info.Orbit.Angle);
                 mesh.info.Orbit.Angle += mesh.info.Orbit.Speed;
+                
             }
         }
     }
@@ -287,7 +288,7 @@ var createScene = () => {
     }
 
     function createArcRotateCamera() {
-        var camera = new BABYLON.ArcRotateCamera('camera', 0, 0, 15, BABYLON.Vector3.Zero(), scene);
+        var camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 15, BABYLON.Vector3.Zero(), scene);
         camera.setPosition(new BABYLON.Vector3(-200, 200, 0));
         camera.lowerRadiusLimit = 50;
         camera.upperRadiusLimit = 400;
