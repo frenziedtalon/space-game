@@ -97,7 +97,7 @@ var createScene = () => {
 
     function displayError(data) {
         //TODO: Display error details
-    
+
     }
 
     function renderSceneObjects(objects) {
@@ -144,7 +144,7 @@ var createScene = () => {
     }
 
     function renderStar(starInfo) {
-        
+
         // Create a star
         var starPosition = createPosition(starInfo.Orbit.Position);
 
@@ -161,7 +161,7 @@ var createScene = () => {
 
         star.info = starInfo;
         star.isPickable = starInfo.CameraTarget;
-      
+
         // Create a light to make the star shine
         var starLight = new BABYLON.PointLight(starInfo.Name + "Light", starPosition, scene);
         starLight.intensity = 2;
@@ -249,7 +249,7 @@ var createScene = () => {
                 mesh.position.y = 0;
                 mesh.position.z = mesh.info.Orbit.Radius * Math.cos(mesh.info.Orbit.Angle);
                 mesh.info.Orbit.Angle += mesh.info.Orbit.Speed;
-                
+
             }
         }
     }
