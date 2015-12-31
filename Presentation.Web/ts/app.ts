@@ -302,7 +302,7 @@ var createScene = () => {
 
     function createVrDeviceOrientationCamera() {
         var camera = new BABYLON.VRDeviceOrientationFreeCamera("VRDOCamera", new BABYLON.Vector3(0, 50, 50), scene);
-        camera.target = new BABYLON.Vector3(0, 0, 0);
+        camera.setTarget(new BABYLON.Vector3(0, 0, 0));
 
         // Use the new camera
         scene.activeCamera = camera;
