@@ -223,14 +223,14 @@ var createScene = () => {
 
     function beginRenderLoop() {
 
-        scene.beforeRender = function () {
+        scene.beforeRender = () => {
             if (animateScene) {
                 animate();
             }
-        }
+        };
 
         // register a render loop to repeatedly render the scene
-        engine.runRenderLoop(function () {
+        engine.runRenderLoop(() => {
             scene.render();
         });
     }
@@ -313,5 +313,5 @@ var createScene = () => {
 
     }
 
-}
+};
 
