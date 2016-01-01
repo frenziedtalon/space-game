@@ -185,7 +185,7 @@ var createScene = () => {
         planet.isPickable = planetInfo.CameraTarget;
 
         // draw planet's orbit
-        drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + "Orbit");
+        drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + "Orbit", null);
 
         // create any moons
         if (planetInfo.hasOwnProperty("Moons")) {
@@ -255,7 +255,7 @@ var createScene = () => {
         }
     }
 
-    function drawCircle(radius, meshName, parent) {
+    function drawCircle(radius, meshName, parent: BABYLON.Mesh) {
 
         var tes = radius / 2; // number of path points, more is smoother
         if (tes < 40) {
