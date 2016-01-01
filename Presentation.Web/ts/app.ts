@@ -166,6 +166,7 @@ var createScene = () => {
         var starLight = new BABYLON.PointLight(starInfo.Name + "Light", starPosition, scene);
         starLight.intensity = 2;
         starLight.range = 380;
+        starLight.parent = star;
 
     }
 
