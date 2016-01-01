@@ -42,8 +42,7 @@ var createScene = () => {
         if (evt.keyCode === 32) {
             // spacebar
             toggleDebugLayer();
-        }
-        else if (evt.keyCode === 97) {
+        } else if (evt.keyCode === 97) {
             // a
             toggleAnimation();
         }
