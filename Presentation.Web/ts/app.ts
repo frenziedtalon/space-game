@@ -123,7 +123,7 @@ var createScene = () => {
                 break;
 
             case "OrbitalMechanics.CelestialObjects.Moon":
-                renderMoon(item);
+                renderMoon(item, null);
                 break;
 
             default:
@@ -195,7 +195,7 @@ var createScene = () => {
         }
     }
 
-    function renderMoon(moonInfo, parent) {
+    function renderMoon(moonInfo, parent: BABYLON.Mesh) {
         var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, 16, moonInfo.Radius * 2, scene);
 
         if (parent !== undefined) {
