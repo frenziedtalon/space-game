@@ -59,6 +59,7 @@
     <TypeScriptCompile Include="ts\d.ts\babylon.d.ts" />
     <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
     <TypeScriptCompile Include="ts\d.ts\lib.d.ts" />
+    <TypeScriptCompile Include="ts\d.ts\lib.es6.d.ts" />
     <TypeScriptCompile Include="ts\references.ts" />
   </ItemGroup>
   <PropertyGroup>
