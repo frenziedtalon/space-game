@@ -140,7 +140,7 @@ var createScene = () => {
     function createPosition(position) {
         // string like "x,y,z"
         var array = position.split(",");
-        return new BABYLON.Vector3(parseInt(array[0]), parseInt(array[1]), parseInt(array[2]));
+        return new BABYLON.Vector3(parseInt(array[0], 10), parseInt(array[1], 10), parseInt(array[2], 10));
     }
 
     function renderStar(starInfo) {
