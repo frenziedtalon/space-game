@@ -23,7 +23,7 @@ var createScene = () => {
     retrieveSceneObjects();
 
     // watch for browser/canvas resize events
-    window.addEventListener("resize", function () {
+    window.addEventListener("resize", (ev: UIEvent) => {
         engine.resize();
     });
 
