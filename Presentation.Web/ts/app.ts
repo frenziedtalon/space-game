@@ -3,8 +3,8 @@
 
 var createScene = () => {
 
-    var canvas = document.getElementById("renderCanvas");
     // get the canvas element from our HTML below
+    var canvas = <HTMLCanvasElement>document.getElementById("renderCanvas");
 
     // load the BABYLON 3D engine
     var engine = new BABYLON.Engine(canvas, true);
