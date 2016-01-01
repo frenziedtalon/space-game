@@ -137,7 +137,7 @@ var createScene = () => {
         return new BABYLON.Color3(0, 0, 0);
     }
 
-    function createPosition(position) {
+    function createPosition(position: string) {
         // string like "x,y,z"
         var array = position.split(",");
         return new BABYLON.Vector3(parseInt(array[0], 10), parseInt(array[1], 10), parseInt(array[2], 10));
