@@ -255,7 +255,7 @@ var createScene = () => {
         }
     }
 
-    function drawCircle(radius, meshName, parent: BABYLON.Mesh) {
+    function drawCircle(radius: number, meshName: string, parent: BABYLON.Mesh) {
 
         var tes = radius / 2; // number of path points, more is smoother
         if (tes < 40) {
