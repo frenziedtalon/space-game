@@ -28,7 +28,7 @@ var createScene = () => {
     });
 
     // listen for click events
-    window.addEventListener("click", function (evt) {
+    window.addEventListener("click", (evt: MouseEvent) => {
         // see if there's a mesh under the click
         var pickResult = scene.pick(evt.clientX, evt.clientY);
         // if there is a hit and we can select the object then set it as the camera target
