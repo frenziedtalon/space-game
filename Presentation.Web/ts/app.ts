@@ -38,7 +38,7 @@ var createScene = () => {
     });
 
     // listen for key presses
-    window.addEventListener("keypress", function (evt) {
+    window.addEventListener("keypress", (evt: KeyboardEvent) => {
         if (evt.keyCode === 32) {
             // spacebar
             toggleDebugLayer();
