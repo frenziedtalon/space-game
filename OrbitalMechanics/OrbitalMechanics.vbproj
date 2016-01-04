@@ -96,7 +96,9 @@
     <Compile Include="CelestialObjects\Asteroid.vb" />
     <Compile Include="CelestialObjects\BaseCelestialObject.vb" />
     <Compile Include="CelestialObjects\ICelestialObject.vb" />
+    <Compile Include="CelestialObjects\IOrbitingObject.vb" />
     <Compile Include="CelestialObjects\Moon.vb" />
+    <Compile Include="CelestialObjects\OrbitingCelestialObjectBase.vb" />
     <Compile Include="CelestialObjects\Planet.vb" />
     <Compile Include="CelestialObjects\Star.vb" />
     <Compile Include="I3dObject.vb" />

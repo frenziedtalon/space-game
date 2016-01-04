@@ -5,7 +5,7 @@ Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
     Public Class Star
-        Inherits BaseCelestialObject
+        Inherits OrbitingCelestialObjectBase
         Implements ISphere
 
         Private ReadOnly _surfaceTemperature As Integer
@@ -17,10 +17,9 @@ Namespace CelestialObjects
                        radius As Integer,
                        orbit As Orbit)
 
-            MyBase.New(name, mass, texture)
+            MyBase.New(name, mass, texture, orbit)
             _surfaceTemperature = surfaceTemperature
             _radius = radius
-            _orbit = orbit
         End Sub
 
         Public Overrides Sub Update()
@@ -105,13 +104,6 @@ Namespace CelestialObjects
                     _volume = Helpers.Shapes.ShapeHelper.VolumeOfASphere(Radius)
                 End If
                 Return _volume
-            End Get
-        End Property
-
-        Private ReadOnly _orbit As Orbit
-        Public ReadOnly Property Orbit As Orbit
-            Get
-                Return _orbit
             End Get
         End Property
 
