@@ -45,7 +45,7 @@
     "TermSemicolons": true
   },
   "Markdown": {
-    "CompileOnBuild": false,
+    "CompileOnBuild": true,
     "CompileOnSave": true,
     "GlobalPreviewCSSFile": null,
     "GlobalPreviewHtmlTemplate": null,
