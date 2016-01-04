@@ -1,8 +1,7 @@
-class Planet extends BaseCelestialObject implements ISphere {
+class Planet extends OrbitingCelestialObjectBase implements ISphere {
     Radius: number;
     AxialTilt: number;
     RotationSpeed: number;
     Volume: number;
-    Orbit: Orbit;
     Moons: Array<Moon>;
 }
