@@ -72,6 +72,8 @@ var createScene = () => {
         }
     }
 
+    var sceneObjects: Array<ICelestialObject>;
+
     function retrieveSceneObjects() {
 
         $.ajax({
@@ -82,7 +84,7 @@ var createScene = () => {
             })
             .done((data: any) => {
                 // call succeeded
-                renderSceneObjects(data.Objects);
+                renderSceneObjects(<Array<ICelestialObject>>data.Objects);
             })
             .fail((data: any) => {
                 // call failed
@@ -99,8 +101,9 @@ var createScene = () => {
 
     }
 
-    function renderSceneObjects(objects) {
+    function renderSceneObjects(objects: Array<ICelestialObject>): void {
         if (objects !== undefined && objects !== null) {
+            sceneObjects = objects;
             for (var i = 0; i < objects.length; i++) {
                 renderSceneObject(objects[i]);
             }
@@ -110,29 +113,29 @@ var createScene = () => {
         }
     }
 
-    function renderSceneObject(item) {
+    function renderSceneObject(item: ICelestialObject): void {
         if (item !== undefined && item !== null) {
-            switch (item.Type) {
-            case "OrbitalMechanics.CelestialObjects.Star":
-                renderStar(item);
-                break;
+            switch (typeof item) {
+                case "Star":
+                    renderStar(<Star>item);
+                    break;
 
-            case "OrbitalMechanics.CelestialObjects.Planet":
-                renderPlanet(item);
-                break;
+                case "Planet":
+                    renderPlanet(<Planet>item);
+                    break;
 
-            case "OrbitalMechanics.CelestialObjects.Moon":
-                renderMoon(item, null);
-                break;
+                case "Moon":
+                    renderMoon(<Moon>item, null);
+                    break;
 
-            default:
-                displayError("Unknown object type: " + item.Type);
-                break;
+                default:
+                    displayError("Unknown object type: ${item.Type}");
+                    break;
             }
         }
     }
 
-    function zeroColor() {
+    function zeroColor(): BABYLON.Color3 {
         return new BABYLON.Color3(0, 0, 0);
     }
 
@@ -142,7 +145,7 @@ var createScene = () => {
         return new BABYLON.Vector3(parseInt(array[0], 10), parseInt(array[1], 10), parseInt(array[2], 10));
     }
 
-    function renderStar(starInfo) {
+    function renderStar(starInfo: Star): void {
 
         // create a star
         var starPosition = createPosition(starInfo.Orbit.Position);
@@ -169,7 +172,7 @@ var createScene = () => {
 
     }
 
-    function renderPlanet(planetInfo) {
+    function renderPlanet(planetInfo: Planet): void {
 
         var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, planetInfo.Radius * 2, scene);
         planet.info = planetInfo;
@@ -194,7 +197,7 @@ var createScene = () => {
         }
     }
 
-    function renderMoon(moonInfo, parent: BABYLON.Mesh) {
+    function renderMoon(moonInfo: Moon, parent: BABYLON.Mesh): void {
         var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, 16, moonInfo.Radius * 2, scene);
 
         if (parent !== undefined) {
