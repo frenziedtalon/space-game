@@ -80,15 +80,15 @@ var createScene = () => {
                 type: "GET",
                 dataType: "json"
             })
-            .done(function (data) {
+            .done((data: any) => {
                 // call succeeded
                 renderSceneObjects(data.Objects);
             })
-            .fail(function (data) {
+            .fail((data: any) => {
                 // call failed
                 displayError(data);
             })
-            .always(function (data) {
+            .always((data: any) => {
                 // happens after done/fail on every call
             });
 
