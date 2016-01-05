@@ -156,8 +156,8 @@ var createScene = () => {
 
         star.material = starMaterial;
 
-        star.info = starInfo;
         star.isPickable = starInfo.CameraTarget;
+        star.id = starInfo.Id;
 
         // create a light to make the star shine
         var starLight = new BABYLON.PointLight(starInfo.Name + "Light", starPosition, scene);
@@ -170,7 +170,7 @@ var createScene = () => {
     function renderPlanet(planetInfo: Planet): void {
 
         var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, planetInfo.Radius * 2, scene);
-        planet.info = planetInfo;
+        planet.id = planetInfo.Id;
         planet.position = createPosition(planetInfo.Orbit.Position);
 
         // create a material for the planet
@@ -199,7 +199,7 @@ var createScene = () => {
             // positions applied are in addition to those of the parent
             moon.parent = parent;
         }
-        moon.info = moonInfo;
+        moon.id = moonInfo.Id;
 
         moon.isPickable = moonInfo.CameraTarget;
 
@@ -237,19 +237,24 @@ var createScene = () => {
     }
 
     // used in debugging, will not be required when turn based gameplay is implemented
-    function animate() {
-        var meshes = scene.meshes;
-        for (var i = 0; i < meshes.length; i++) {
-            var mesh = meshes[i];
-            if (mesh.hasOwnProperty("info") && !(mesh.info.Orbit === undefined)
-                && !(mesh.info.Orbit.Speed === 0)) {
-                mesh.position.x = mesh.info.Orbit.Radius * Math.sin(mesh.info.Orbit.Angle);
-                mesh.position.y = 0;
-                mesh.position.z = mesh.info.Orbit.Radius * Math.cos(mesh.info.Orbit.Angle);
-                mesh.info.Orbit.Angle += mesh.info.Orbit.Speed;
-
+    function animate(): void {
+        for (var i = 0; i < sceneObjects.length; i++) {
+            var target = sceneObjects[i] as OrbitingCelestialObjectBase;
+            if (!(target.Orbit === undefined) && !(target.Orbit.Speed === 0)) {
+                var mesh = scene.getMeshByID(target.Id);
+                if (!(mesh === undefined) && !(mesh === null)) {
+                    mesh.position = calculateNewOrbitPosition(target.Orbit);
+                    target.Orbit.Angle += target.Orbit.Speed;
+                }
             }
         }
+    }
+
+    function calculateNewOrbitPosition(orbit: Orbit): BABYLON.Vector3 {
+        var x = orbit.Radius * Math.sin(orbit.Angle);
+        var y = 0;
+        var z = orbit.Radius * Math.cos(orbit.Angle);
+        return new BABYLON.Vector3(x, y, z);
     }
 
     function drawCircle(radius: number, meshName: string, parent: BABYLON.Mesh) {
