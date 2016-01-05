@@ -93,8 +93,8 @@ var createScene = () => {
             });
     }
 
-    function displayError(data) {
-        //TODO: Display error details
+    function displayError(data: any) {
+        // TODO: Display error details
 
     }
 
