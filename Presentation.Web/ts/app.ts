@@ -1,5 +1,4 @@
-"use strict";
-
+﻿"use strict";
 var createScene = () => {
 
     // get the canvas element from our HTML below
@@ -92,7 +91,6 @@ var createScene = () => {
             .always((data: any) => {
                 // happens after done/fail on every call
             });
-
     }
 
     function displayError(data) {
