@@ -243,6 +243,7 @@ var createScene = () => {
     }
 
     // used in debugging, will not be required when turn based gameplay is implemented
+    // which is a good job as this is very hacky!
     function animate(): void {
         for (var i = 0; i < sceneObjects.length; i++) {
             var target = sceneObjects[i] as OrbitingCelestialObjectBase;
@@ -251,6 +252,21 @@ var createScene = () => {
                 if (!(mesh === undefined) && !(mesh === null)) {
                     mesh.position = calculateNewOrbitPosition(target.Orbit);
                     target.Orbit.Angle += target.Orbit.Speed;
+
+                    if (target.Type === "OrbitalMechanics.CelestialObjects.Planet") {
+                        var planet = <Planet>target;
+                        // animate any moons
+                        if (target.hasOwnProperty("Moons")) {
+                            for (var j = 0; j < planet.Moons.length; j++) {
+                                mesh = scene.getMeshByID(planet.Moons[j].Id);
+                                mesh.position = calculateNewOrbitPosition(planet.Moons[j].Orbit);
+                                planet.Moons[j].Orbit.Angle += planet.Moons[j].Orbit.Speed;
+                            }
+                        }
+
+                    }
+
+                    
                 }
             }
         }
