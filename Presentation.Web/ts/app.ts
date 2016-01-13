@@ -80,15 +80,15 @@ var createScene = () => {
                 type: "GET",
                 dataType: "json"
             })
-            .done((data: any) => {
+            .done((data: SceneObjectsResult) => {
                 // call succeeded
-                renderSceneObjects(<Array<ICelestialObject>>data.Objects);
+                retrieveSceneObjectsSuccess(data);
             })
-            .fail((data: any) => {
+            .fail((data: SceneObjectsResult) => {
                 // call failed
                 displayError(data);
             })
-            .always((data: any) => {
+            .always((data: SceneObjectsResult) => {
                 // happens after done/fail on every call
             });
     }
@@ -98,11 +98,15 @@ var createScene = () => {
 
     }
 
-    function renderSceneObjects(objects: Array<ICelestialObject>): void {
-        if (objects !== undefined && objects !== null) {
-            sceneObjects = objects;
-            for (var i = 0; i < objects.length; i++) {
-                renderSceneObject(objects[i]);
+    function retrieveSceneObjectsSuccess(sceneData: SceneObjectsResult): void {
+        sceneObjects = ((sceneData.Objects) as Array<ICelestialObject>);
+        renderSceneObjects();
+    }
+    
+    function renderSceneObjects(): void {
+        if (sceneObjects !== undefined && sceneObjects !== null) {
+            for (let i = 0; i < sceneObjects.length; i++) {
+                renderSceneObject(<BaseCelestialObject>sceneObjects[i]);
             }
             beginRenderLoop();
         } else {
@@ -110,23 +114,23 @@ var createScene = () => {
         }
     }
 
-    function renderSceneObject(item: ICelestialObject): void {
+    function renderSceneObject(item: BaseCelestialObject): void {
         if (item !== undefined && item !== null) {
-            switch (typeof item) {
-                case "Star":
-                    renderStar(<Star>item);
+            switch (item.Type) {
+                case "OrbitalMechanics.CelestialObjects.Star":
+                    renderStar(item as Star);
                     break;
 
-                case "Planet":
-                    renderPlanet(<Planet>item);
+                case "OrbitalMechanics.CelestialObjects.Planet":
+                    renderPlanet(item as Planet);
                     break;
 
-                case "Moon":
-                    renderMoon(<Moon>item, null);
+                case "OrbitalMechanics.CelestialObjects.Moon":
+                    renderMoon(item as Moon, null);
                     break;
 
                 default:
-                    displayError("Unknown object type: ${item.Type}");
+                    displayError("Unknown object type: " + item.Type);
                     break;
             }
         }
