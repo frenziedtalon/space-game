@@ -1,0 +1,3 @@
+interface IOrbitingObject {
+    Orbit: Orbit;
+}

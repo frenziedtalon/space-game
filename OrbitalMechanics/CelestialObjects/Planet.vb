@@ -4,7 +4,7 @@ Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
     Public Class Planet
-        Inherits BaseCelestialObject
+        Inherits OrbitingCelestialObjectBase
         Implements ISphere
 
         Public Sub New(name As String,
@@ -14,10 +14,9 @@ Namespace CelestialObjects
                        orbit As Orbit,
                        Optional moons As List(Of Moon) = Nothing)
 
-            MyBase.New(name, mass, texture)
+            MyBase.New(name, mass, texture, orbit)
             _radius = radius
             _moons = moons
-            _orbit = orbit
         End Sub
 
         Public Overrides Sub Update()
@@ -64,13 +63,6 @@ Namespace CelestialObjects
                 Return _volume
             End Get
         End Property
-
-        Private ReadOnly _orbit As Orbit
-        Public ReadOnly Property Orbit As Orbit
-            Get
-                Return _orbit
-            End Get
-        End Property
-
+        
     End Class
 End Namespace

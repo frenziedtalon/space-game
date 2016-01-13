@@ -41,7 +41,8 @@
     <Content Include="Assets\Images\Skybox\skybox_pz.jpg" />
     <Content Include="Assets\Images\Star\sun.jpg" />
     <Content Include="index.html" />
-    <Content Include="index.js" />
+    <Content Include="Scripts\babylon.max.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -52,8 +53,24 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Scripts\" />
+    <TypeScriptCompile Include="ts\app.ts" />
+    <TypeScriptCompile Include="ts\Classes\BaseCelestialObject.ts" />
+    <TypeScriptCompile Include="ts\Classes\BaseGameEntity.ts" />
+    <TypeScriptCompile Include="ts\Classes\I3DObject.ts" />
+    <TypeScriptCompile Include="ts\Classes\ICelestialObject.ts" />
+    <TypeScriptCompile Include="ts\Classes\IOrbitingObject.ts" />
+    <TypeScriptCompile Include="ts\Classes\ISphere.ts" />
+    <TypeScriptCompile Include="ts\Classes\Moon.ts" />
+    <TypeScriptCompile Include="ts\Classes\Orbit.ts" />
+    <TypeScriptCompile Include="ts\Classes\OrbitingCelestialObjectBase.ts" />
+    <TypeScriptCompile Include="ts\Classes\Planet.ts" />
+    <TypeScriptCompile Include="ts\Classes\SceneObjectsResult.ts" />
+    <TypeScriptCompile Include="ts\Classes\Star.ts" />
+    <TypeScriptCompile Include="ts\d.ts\babylon.d.ts" />
+    <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
+    <TypeScriptCompile Include="_references.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
@@ -82,24 +99,38 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <NoWarn>CS2008</NoWarn>
-    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptTarget>ES6</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
-    <TypeScriptOutFile>main.js</TypeScriptOutFile>
+    <TypeScriptOutFile>Scripts/app.js</TypeScriptOutFile>
     <TypeScriptOutDir>Scripts/</TypeScriptOutDir>
-    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
-    <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />
+    <TypeScriptMapRoot>
+    </TypeScriptMapRoot>
+    <TypeScriptSourceRoot>
+    </TypeScriptSourceRoot>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <NoWarn>CS2008</NoWarn>
+    <TypeScriptTarget>ES6</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>None</TypeScriptModuleKind>
+    <TypeScriptOutFile>Scripts/app.js</TypeScriptOutFile>
+    <TypeScriptOutDir>Scripts/</TypeScriptOutDir>
+    <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
 </Project>
