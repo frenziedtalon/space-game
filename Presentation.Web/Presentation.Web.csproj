@@ -66,7 +66,6 @@
     <TypeScriptCompile Include="ts\Classes\Orbit.ts" />
     <TypeScriptCompile Include="ts\Classes\OrbitingCelestialObjectBase.ts" />
     <TypeScriptCompile Include="ts\Classes\Planet.ts" />
-    <TypeScriptCompile Include="ts\Classes\Point3D.ts" />
     <TypeScriptCompile Include="ts\Classes\Star.ts" />
     <TypeScriptCompile Include="ts\d.ts\babylon.d.ts" />
     <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />

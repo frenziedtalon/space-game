@@ -135,9 +135,11 @@ var createScene = () => {
     function zeroColor(): BABYLON.Color3 {
         return new BABYLON.Color3(0, 0, 0);
     }
-
-    function createPosition(position: Point3D): BABYLON.Vector3 {
-        return new BABYLON.Vector3(position.X, position.Y, position.Z);
+    
+    function createPosition(position: string) {
+        // string like "x,y,z"
+        var array = position.split(",");
+        return new BABYLON.Vector3(parseInt(array[0], 10), parseInt(array[1], 10), parseInt(array[2], 10));
     }
 
     function renderStar(starInfo: Star): void {
