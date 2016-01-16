@@ -289,7 +289,7 @@ var createScene = () => {
         }
         var pi2 = Math.PI * 2;
         var step = pi2 / tes;
-        var path = [];
+        var path: Array<BABYLON.Vector3> = [];
         for (var i = 0; i < pi2; i += step) {
             var x = radius * Math.sin(i);
             var y = 0;
