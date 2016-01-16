@@ -188,7 +188,7 @@ var createScene = () => {
         planet.isPickable = planetInfo.CameraTarget;
 
         // draw planet's orbit
-        drawCircle(planetInfo.Orbit.Radius, planetInfo.Name + "Orbit", null);
+        drawOrbit(planetInfo.Orbit, planetInfo.Name + "Orbit", null);
 
         // create any moons
         if (planetInfo.hasOwnProperty("Moons")) {
@@ -218,7 +218,7 @@ var createScene = () => {
         moon.material = moonMaterial;
 
         // draw moon's orbit
-        drawCircle(moonInfo.Orbit.Radius, moonInfo.Name + "Orbit", parent);
+        drawOrbit(moonInfo.Orbit, moonInfo.Name + "Orbit", parent);
 
     }
 
@@ -279,33 +279,47 @@ var createScene = () => {
         return new BABYLON.Vector3(x, y, z);
     }
 
-    function drawCircle(radius: number, meshName: string, parent: BABYLON.Mesh) {
+    function drawOrbit(orbit: Orbit, meshName: string, parent: BABYLON.Mesh) {
+        var path = createCircularPath(orbit.Radius);
 
-        var tes = radius / 2; // number of path points, more is smoother
+        const colour = new BABYLON.Color3(0.54, 0.54, 0.54);
+        const orbitalPath = drawPath(meshName, path, colour);
+
+        if (parent !== undefined) {
+            // positions applied are in addition to those of the parent
+            orbitalPath.parent = parent;
+        }
+    }
+
+    function createCircularPath(radius: number): Array<BABYLON.Vector3> {
+        let tes = radius / 2;
+        // number of path points, more is smoother
         if (tes < 40) {
             tes = 40;
         } else if (tes > 200) {
             tes = 200;
         }
-        var pi2 = Math.PI * 2;
-        var step = pi2 / tes;
-        var path: Array<BABYLON.Vector3> = [];
-        for (var i = 0; i < pi2; i += step) {
-            var x = radius * Math.sin(i);
-            var y = 0;
-            var z = radius * Math.cos(i);
+        const pi2 = Math.PI * 2;
+        const step = pi2 / tes;
+
+        const path: Array<BABYLON.Vector3> = [];
+
+        for (let i = 0; i < pi2; i += step) {
+            const x = radius * Math.sin(i);
+            const y = 0;
+            const z = radius * Math.cos(i);
             path.push(new BABYLON.Vector3(x, y, z));
         }
+        // add the first point to complete the circle
         path.push(path[0]);
 
-        var circle = BABYLON.Mesh.CreateLines(meshName, path, scene);
-        circle.color = new BABYLON.Color3(0.54, 0.54, 0.54);
+        return path;
+    }
 
-        if (parent !== undefined) {
-            // positions applied are in addition to those of the parent
-            circle.parent = parent;
-        }
-
+    function drawPath(meshName: string, path: Array<BABYLON.Vector3>, colour: BABYLON.Color3) : BABYLON.LinesMesh {
+        const mesh = BABYLON.Mesh.CreateLines(meshName, path, scene);
+        mesh.color = colour;
+        return mesh;
     }
 
     function createCamera() {
