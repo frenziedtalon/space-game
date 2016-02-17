@@ -189,6 +189,8 @@
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="App_Start\WebApiConfig.vb" />
     <Compile Include="Controllers\SceneController.vb" />
+    <Compile Include="Controllers\TurnController.vb" />
+    <Compile Include="Classes\TurnResult.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -208,6 +210,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Services\SceneService.vb" />
+    <Compile Include="Services\TurnTrackerService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

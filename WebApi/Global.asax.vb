@@ -1,5 +1,7 @@
 ﻿Imports System.Web.Http
 Imports System.Web.Optimization
+Imports OrbitalMechanics
+Imports WebApi.Models
 
 Public Class WebApiApplication
     Inherits System.Web.HttpApplication
@@ -11,4 +13,5 @@ Public Class WebApiApplication
         RouteConfig.RegisterRoutes(RouteTable.Routes)
         BundleConfig.RegisterBundles(BundleTable.Bundles)
     End Sub
+
 End Class
