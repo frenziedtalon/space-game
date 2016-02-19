@@ -21,6 +21,7 @@ Namespace Services
 
         Public ReadOnly Property CurrentSceneState As SolarSystem
             Get
+                ' TODO: load only relevant entities from the EM
                 ' use the entity manager
                 Throw New NotImplementedException
             End Get
