@@ -7,8 +7,10 @@ Namespace Controllers
     Public Class TurnController
         Inherits ApiController
 
-        Public Function EndTurn() As TurnResult
-            TurnTrackerService.Instance.Update()
+        Public Function EndTurn(turnService As ITurnTrackerService) As TurnResult
+
+            ' TODO: implement IoC container for turnservice using a singleton
+            turnService.Update()
             EntityManager.Instance().UpdateAll()
 
             Return New TurnResult()

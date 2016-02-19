@@ -210,6 +210,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Services\ITurnTrackerService.vb" />
     <Compile Include="Services\SceneService.vb" />
     <Compile Include="Services\TurnTrackerService.vb" />
   </ItemGroup>
