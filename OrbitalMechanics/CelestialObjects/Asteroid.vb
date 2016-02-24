@@ -1,5 +1,6 @@
 ﻿
 Imports System.Windows.Media.Media3D
+Imports Entities
 Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
@@ -9,9 +10,10 @@ Namespace CelestialObjects
         Public Sub New(name As String,
                        mass As Integer,
                        texture As String,
-                       orbit As Orbit)
+                       orbit As Orbit,
+                       entityManager As IEntityManager)
 
-            MyBase.New(name, mass, texture)
+            MyBase.New(name, mass, texture, entityManager)
             _orbit = orbit
         End Sub
 

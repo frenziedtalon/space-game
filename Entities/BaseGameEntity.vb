@@ -15,19 +15,24 @@ Public MustInherit Class BaseGameEntity
     End Property
 
 
-    Protected Sub New()
+    Protected Sub New(entityManager As IEntityManager)
+
+        If entityManager Is Nothing Then
+            Throw New ArgumentNullException()
+        End If
+
         _id = Guid.NewGuid()
-        EntityManager.Instance.RegisterEntity(Me)
+        entityManager.RegisterEntity(Me)
     End Sub
 
     ''' <summary>
-    ''' all entities must implement an update function
+    ''' All entities must implement an update function
     ''' </summary>
     ''' <remarks></remarks>
     Public MustOverride Sub Update()
 
     ''' <summary>
-    ''' all subclasses can communicate using messages
+    ''' All subclasses can communicate using messages
     ''' </summary>
     Public Overridable Function HandleMessage(msg As Telegram) As Boolean
         Throw New NotImplementedException

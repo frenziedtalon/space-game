@@ -7,18 +7,18 @@ Namespace CelestialObjects
         Implements IOrbitingObject
 
         Protected Sub New(name As String,
-                       mass As Integer,
-                       texture As String,
-                       orbit As Orbit)
-
-            MyBase.New(name, mass, texture)
+                          mass As Integer,
+                          texture As String,
+                          orbit As IOrbit,
+                          entityManager As IEntityManager)
+            MyBase.New(name, mass, texture, entityManager)
             _orbit = orbit
         End Sub
 
-        Private ReadOnly _orbit As Orbit
-        Public ReadOnly Property Orbit As Orbit Implements IOrbitingObject.Orbit
+        Private ReadOnly _orbit As IOrbit
+        Public ReadOnly Property Orbit As IOrbit Implements IOrbitingObject.Orbit
             Get
-                return _orbit
+                Return _orbit
             End Get
         End Property
 

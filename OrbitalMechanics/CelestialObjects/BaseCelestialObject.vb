@@ -8,9 +8,10 @@ Namespace CelestialObjects
         Implements ICelestialObject
 
         Protected Sub New(name As String,
-                       mass As Integer,
-                          texture As String)
-
+                        mass As Integer,
+                        texture As String,
+                        entityManager As IEntityManager)
+            MyBase.New(entityManager)
             _name = name
             _mass = mass
             _texture = texture

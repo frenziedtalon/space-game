@@ -1,9 +1,7 @@
 ﻿Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
-    Public interface IOrbitingObject
-
-        ReadOnly Property Orbit As Orbit
-
-    End interface
+    Public Interface IOrbitingObject
+        ReadOnly Property Orbit As IOrbit
+    End Interface
 End NameSpace
