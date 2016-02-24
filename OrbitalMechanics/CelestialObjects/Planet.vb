@@ -12,7 +12,7 @@ Namespace CelestialObjects
                        mass As Integer,
                        texture As String,
                        radius As Integer,
-                       orbit As Orbit,
+                       orbit As IOrbit,
                        entityManager As IEntityManager,
                        Optional moons As List(Of Moon) = Nothing)
 
