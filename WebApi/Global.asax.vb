@@ -1,7 +1,5 @@
 ﻿Imports System.Web.Http
 Imports System.Web.Optimization
-Imports OrbitalMechanics
-Imports WebApi.Models
 
 Public Class WebApiApplication
     Inherits System.Web.HttpApplication
