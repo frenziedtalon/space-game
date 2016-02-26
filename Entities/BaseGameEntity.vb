@@ -18,7 +18,7 @@ Public MustInherit Class BaseGameEntity
     Protected Sub New(entityManager As IEntityManager)
 
         If entityManager Is Nothing Then
-            Throw New ArgumentNullException()
+            Throw New ArgumentNullException(NameOf(entityManager))
         End If
 
         _id = Guid.NewGuid()
