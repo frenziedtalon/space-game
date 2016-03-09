@@ -231,9 +231,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Services\ITurnTrackerService.vb" />
     <Compile Include="Services\SceneService.vb" />
-    <Compile Include="Services\TurnTrackerService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -276,6 +274,14 @@
     <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.vbproj">
       <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
       <Name>OrbitalMechanics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TurnTracker.InMemoryTurnTracker\TurnTracker.InMemoryTurnTracker.vbproj">
+      <Project>{dc91d260-31a7-4dd0-97fc-bd6dbcac0396}</Project>
+      <Name>TurnTracker.InMemoryTurnTracker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
+      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
+      <Name>TurnTracker</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
