@@ -1,28 +1,35 @@
+﻿
+
+Imports System.Web
 Imports System.Web.Http
 Imports Entities
 Imports Microsoft.Web.Infrastructure.DynamicModuleHelper
 Imports Ninject
 Imports Ninject.Web.Common
-
-<Assembly: WebActivatorEx.PreApplicationStartMethod(GetType(WebApi.App_Start.NinjectMVC3), "StartNinject")>
-<Assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(GetType(WebApi.App_Start.NinjectMVC3), "StopNinject")>
-
+<Assembly: WebActivatorEx.PreApplicationStartMethod(GetType(WebApi.App_Start.NinjectWebCommon), "Start")>
+<Assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(GetType(WebApi.App_Start.NinjectWebCommon), "Stop")>
 Namespace WebApi.App_Start
-    Public Module NinjectMVC3
-        Private ReadOnly bootstrapper As New Bootstrapper()
+
+
+
+    Public NotInheritable Class NinjectWebCommon
+        Private Sub New()
+        End Sub
+        Private Shared ReadOnly bootstrapper As New Bootstrapper()
 
         ''' <summary>
         ''' Starts the application
         ''' </summary>
-        Public Sub StartNinject()
+        Public Shared Sub Start()
             DynamicModuleUtility.RegisterModule(GetType(OnePerRequestHttpModule))
+            DynamicModuleUtility.RegisterModule(GetType(NinjectHttpModule))
             bootstrapper.Initialize(AddressOf CreateKernel)
         End Sub
 
         ''' <summary>
         ''' Stops the application.
         ''' </summary>
-        Public Sub StopNinject()
+        Public Shared Sub [Stop]()
             bootstrapper.ShutDown()
         End Sub
 
@@ -30,27 +37,27 @@ Namespace WebApi.App_Start
         ''' Creates the kernel that will manage your application.
         ''' </summary>
         ''' <returns>The created kernel.</returns>
-        Private Function CreateKernel() As IKernel
+        Private Shared Function CreateKernel() As IKernel
             Dim kernel = New StandardKernel()
+            Try
+                kernel.Bind(Of Func(Of IKernel))().ToMethod(Function(ctx) Function() New Bootstrapper().Kernel)
+                kernel.Bind(Of IHttpModule)().[To](Of HttpApplicationInitializationHttpModule)()
 
-            kernel.Bind(Of Func(Of IKernel))().ToMethod(Function(ctx) Function() New Bootstrapper().Kernel)
-            kernel.Bind(Of IHttpModule)().[To](Of HttpApplicationInitializationHttpModule)()
-
-
-
-            RegisterServices(kernel)
-
-            ' Install our Ninject-based IDependencyResolver into the Web API config
-            GlobalConfiguration.Configuration.DependencyResolver = New NinjectDependencyResolver(kernel)
-            Return kernel
+                RegisterServices(kernel)
+                Return kernel
+            Catch
+                kernel.Dispose()
+                Throw
+            End Try
         End Function
 
         ''' <summary>
         ''' Load your modules or register your services here!
         ''' </summary>
         ''' <param name="kernel">The kernel.</param>
-        Private Sub RegisterServices(ByVal kernel As IKernel)
-            kernel.Bind(Of IEntityManager).[To](Of EntityManager)()
+        Private Shared Sub RegisterServices(kernel As IKernel)
+
+            kernel.Bind(Of IEntityManager)().To(Of EntityManager)()
         End Sub
-    End Module
+    End Class
 End Namespace

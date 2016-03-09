@@ -8,16 +8,16 @@ Namespace Controllers
     Public Class SceneController
         Inherits ApiController
 
-        Private _entityManager As IEntityManager
+        Private ReadOnly _entityManager As IEntityManager
 
-        Public Sub SceneController(entityManager As IEntityManager)
+        Public Sub New(entityManager As IEntityManager)
             _entityManager = entityManager
         End Sub
 
         ' GET api/values
-        Public Function GetSceneObjects(entityManager As IEntityManager) As SolarSystem
+        Public Function GetSceneObjects() As SolarSystem
             Dim constructor = New SceneConstructor
-            Return constructor.SolSystem(entityManager)
+            Return constructor.SolSystem(_entityManager)
         End Function
 
     End Class
