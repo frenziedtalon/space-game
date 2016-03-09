@@ -57,7 +57,7 @@ Namespace WebApi.App_Start
         ''' <param name="kernel">The kernel.</param>
         Private Shared Sub RegisterServices(kernel As IKernel)
 
-            kernel.Bind(Of IEntityManager)().To(Of EntityManager)()
+            kernel.Bind(Of IEntityManager)().To(Of EntityManager)().InSingletonScope()
         End Sub
     End Class
 End Namespace
