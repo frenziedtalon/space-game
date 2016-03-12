@@ -1,25 +1,20 @@
-﻿Imports OrbitalMechanics
+﻿Imports Entities
+Imports OrbitalMechanics
+Imports WebApi.Models
 
 Namespace Services
     Public Class SceneService
+        Implements ISceneService
 
-        Private Shared _instance As SceneService
-        Private Shared _number As Integer = 0
+        Private ReadOnly _entityManager As IEntityManager
 
-
-        Public Shared ReadOnly Property Instance() As SceneService
-            Get
-                If _instance Is Nothing Then
-                    _instance = New SceneService()
-                End If
-                Return _instance
-            End Get
-        End Property
-
-        Private Sub New()
+        Public Sub New(entityManager As IEntityManager)
+            _entityManager = entityManager
         End Sub
 
-        Public ReadOnly Property CurrentSceneState As SolarSystem
+        End Sub
+
+        Public ReadOnly Property CurrentSceneState As SolarSystem Implements ISceneService.CurrentSceneState
             Get
                 ' TODO: load only relevant entities from the EM
                 ' use the entity manager
