@@ -23,7 +23,6 @@ Namespace Controllers
 
         Public Function EndTurn() As TurnResult
 
-            ' TODO: implement IoC container for turnservice and entityManager using a singleton
             _turnTrackerService.Update()
             _entityManager.UpdateAll()
 
