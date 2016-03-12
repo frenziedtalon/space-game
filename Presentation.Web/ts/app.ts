@@ -75,20 +75,20 @@ var createScene = () => {
     function retrieveSceneObjects() {
 
         $.ajax({
-                url: "http://localhost/SpaceGameApi/api/Scene",
+                url: "http://localhost/SpaceGameApi/api/Turn/EndTurn",
                 cache: false,
                 type: "GET",
                 dataType: "json"
             })
-            .done((data: SceneObjectsResult) => {
+            .done((data: TurnResult) => {
                 // call succeeded
                 retrieveSceneObjectsSuccess(data);
             })
-            .fail((data: SceneObjectsResult) => {
+            .fail((data: TurnResult) => {
                 // call failed
                 displayError(data);
             })
-            .always((data: SceneObjectsResult) => {
+            .always((data: TurnResult) => {
                 // happens after done/fail on every call
             });
     }
@@ -98,8 +98,8 @@ var createScene = () => {
 
     }
 
-    function retrieveSceneObjectsSuccess(sceneData: SceneObjectsResult): void {
-        sceneObjects = ((sceneData.Objects) as Array<ICelestialObject>);
+    function retrieveSceneObjectsSuccess(turnData: TurnResult): void {
+        sceneObjects = ((turnData.Scene) as Array<ICelestialObject>);
         renderSceneObjects();
     }
     

@@ -12,6 +12,9 @@ Namespace Services
             _entityManager = entityManager
         End Sub
 
+        Public Sub CreateStartingScene() Implements ISceneService.CreateStartingScene
+            Dim constructor = New SceneConstructor
+            constructor.SolSystem(_entityManager)
         End Sub
 
         Public ReadOnly Property CurrentSceneState As SolarSystem Implements ISceneService.CurrentSceneState

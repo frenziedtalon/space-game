@@ -21,10 +21,15 @@ Namespace Controllers
             _sceneService = sceneService
         End Sub
 
+        <HttpGet()>
         Public Function EndTurn() As TurnResult
 
-            _turnTrackerService.Update()
-            _entityManager.UpdateAll()
+            If _turnTrackerService.TurnNumber = 0 Then
+                _sceneService.CreateStartingScene()
+            Else
+                _turnTrackerService.Update()
+                _entityManager.UpdateAll()
+            End If
 
             Return New TurnResult(_sceneService)
         End Function
