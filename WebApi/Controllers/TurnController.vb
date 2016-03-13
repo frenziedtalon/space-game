@@ -27,9 +27,10 @@ Namespace Controllers
             If _turnTrackerService.TurnNumber = 0 Then
                 _sceneService.CreateStartingScene()
             Else
-                _turnTrackerService.Update()
                 _entityManager.UpdateAll()
             End If
+
+            _turnTrackerService.Update()
 
             Return New TurnResult(_sceneService)
         End Function
