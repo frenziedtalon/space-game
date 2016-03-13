@@ -17,11 +17,9 @@ Namespace Services
             constructor.SolSystem(_entityManager)
         End Sub
 
-        Public ReadOnly Property CurrentSceneState As SolarSystem Implements ISceneService.CurrentSceneState
+        Public ReadOnly Property CurrentSceneState As List(Of BaseGameEntity) Implements ISceneService.CurrentSceneState
             Get
-                ' TODO: load only relevant entities from the EM
-                ' use the entity manager
-                Throw New NotImplementedException
+                Return _entityManager.GetAllEntities()
             End Get
         End Property
 

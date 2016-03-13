@@ -1,3 +1,3 @@
 class TurnResult {
-    Scene: Array<ICelestialObject>;
+    Scene: Array<BaseGameEntity>;
 }

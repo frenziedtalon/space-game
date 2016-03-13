@@ -1,4 +1,4 @@
-﻿Imports OrbitalMechanics
+﻿Imports Entities
 Imports WebApi.Services
 
 Namespace Classes
@@ -10,7 +10,7 @@ Namespace Classes
             _sceneService = sceneService
         End Sub
 
-        Public ReadOnly Property Scene As SolarSystem
+        Public ReadOnly Property Scene As List(Of BaseGameEntity)
             Get
                 Return _sceneService.CurrentSceneState
             End Get

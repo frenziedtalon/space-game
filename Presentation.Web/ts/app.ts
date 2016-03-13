@@ -70,7 +70,7 @@ var createScene = () => {
         }
     }
 
-    var sceneObjects: Array<ICelestialObject>;
+    var sceneObjects: Array<BaseGameEntity>;
 
     function retrieveSceneObjects() {
 
@@ -99,7 +99,7 @@ var createScene = () => {
     }
 
     function retrieveSceneObjectsSuccess(turnData: TurnResult): void {
-        sceneObjects = ((turnData.Scene) as Array<ICelestialObject>);
+        sceneObjects = ((turnData.Scene) as Array<BaseGameEntity>);
         renderSceneObjects();
     }
     
