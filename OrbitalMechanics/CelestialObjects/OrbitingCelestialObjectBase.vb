@@ -23,7 +23,7 @@ Namespace CelestialObjects
         End Property
 
         Public Overrides Sub Update()
-            Throw New NotImplementedException()
+            _orbit.Update()
         End Sub
     End Class
 End NameSpace
