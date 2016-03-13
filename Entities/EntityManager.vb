@@ -42,5 +42,11 @@ Public Class EntityManager
         End Get
     End Property
 
+    Public Function GetAllEntities() As List(Of BaseGameEntity) Implements IEntityManager.GetAllEntities
+        If _entityMap.Count > 0 Then
+            Return _entityMap.Values.ToList()
+        End If
+        Return New List(Of BaseGameEntity)
+    End Function
 
 End Class
