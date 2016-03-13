@@ -18,11 +18,6 @@ Namespace CelestialObjects
             _radius = radius
         End Sub
 
-        Public Overrides Sub Update()
-            Throw New NotImplementedException()
-            Orbit.Update()
-        End Sub
-
         Private ReadOnly _radius As Integer
         Public ReadOnly Property Radius As Integer Implements ISphere.Radius
             Get

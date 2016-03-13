@@ -24,13 +24,7 @@ Namespace CelestialObjects
             _radius = radius
         End Sub
 
-        Public Overrides Sub Update()
-            Throw New NotImplementedException()
-        End Sub
-
-
         Private _classification As StarClassification
-
 
         Public ReadOnly Property Classification() As StarClassification
             Get
