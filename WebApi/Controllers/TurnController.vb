@@ -1,6 +1,6 @@
 ﻿Imports System.Web.Http
 Imports Entities
-Imports TurnTracker.Services
+Imports TurnTracker
 Imports WebApi.Classes
 Imports WebApi.Services
 
@@ -8,15 +8,15 @@ Namespace Controllers
     Public Class TurnController
         Inherits ApiController
 
-        Private ReadOnly _turnTrackerService As ITurnTrackerService
+        Private ReadOnly _turnTracker As ITurnTracker
         Private ReadOnly _entityManager As IEntityManager
         Private ReadOnly _sceneService As ISceneService
 
-        Public Sub New(turnTrackerService As ITurnTrackerService,
+        Public Sub New(turnTracker As ITurnTracker,
                         entityManager As IEntityManager,
                         sceneService As ISceneService)
 
-            _turnTrackerService = turnTrackerService
+            _turnTracker = turnTracker
             _entityManager = entityManager
             _sceneService = sceneService
         End Sub
@@ -24,13 +24,13 @@ Namespace Controllers
         <HttpGet()>
         Public Function EndTurn() As TurnResult
 
-            If _turnTrackerService.TurnNumber = 0 Then
+            If _turnTracker.TurnNumber = 0 Then
                 _sceneService.CreateStartingScene()
             Else
                 _entityManager.UpdateAll()
             End If
 
-            _turnTrackerService.Update()
+            _turnTracker.Update()
 
             Return New TurnResult(_sceneService)
         End Function

@@ -1,7 +1,7 @@
 ﻿Imports NUnit.Framework
 
 <TestFixture>
-Public Class TurnTrackerServiceTests
+Public Class TurnTrackerTests
 
     <TestCase(1, 1)>
     <TestCase(50, 50)>
@@ -9,7 +9,7 @@ Public Class TurnTrackerServiceTests
     Public Sub Update_WhenCalled_IncrementsTurnNumber(turns As Integer, expectedTurn As Integer)
 
         ' Arrange
-        Dim service = New TurnTrackerService()
+        Dim service = New TurnTracker()
 
         ' Act
         For i = 1 To turns

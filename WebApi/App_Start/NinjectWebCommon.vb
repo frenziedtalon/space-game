@@ -2,7 +2,7 @@
 Imports Microsoft.Web.Infrastructure.DynamicModuleHelper
 Imports Ninject
 Imports Ninject.Web.Common
-Imports TurnTracker.Services
+Imports TurnTracker
 Imports WebApi.Services
 
 <Assembly: WebActivatorEx.PreApplicationStartMethod(GetType(WebApi.App_Start.NinjectWebCommon), "Start")>
@@ -57,7 +57,7 @@ Namespace WebApi.App_Start
         Private Shared Sub RegisterServices(kernel As IKernel)
 
             kernel.Bind(Of IEntityManager)().To(Of EntityManager)().InSingletonScope()
-            kernel.Bind(Of ITurnTrackerService)().To(Of TurnTracker.InMemoryTurnTracker.TurnTrackerService)().InSingletonScope()
+            kernel.Bind(Of ITurnTracker)().To(Of TurnTracker.InMemoryTurnTracker.TurnTracker)().InSingletonScope()
             kernel.Bind(Of ISceneService)().To(Of SceneService)()
         End Sub
     End Class
