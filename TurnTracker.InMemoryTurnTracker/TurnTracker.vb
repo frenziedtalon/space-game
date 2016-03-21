@@ -1,18 +1,8 @@
-
-
 Public Class TurnTracker
-    Implements ITurnTracker
+    Inherits TurnTrackerBase
 
-    Private _number As Integer = 0
-
-    Public ReadOnly Property TurnNumber As Integer Implements ITurnTracker.TurnNumber
-        Get
-            Return _number
-        End Get
-    End Property
-
-    Public Sub Update() Implements ITurnTracker.Update
-        _number += 1
+    Public Sub New()
+        MyBase.New(TimeSpan.FromDays(30))
     End Sub
 
 End Class

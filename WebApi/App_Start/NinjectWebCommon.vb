@@ -57,7 +57,7 @@ Namespace WebApi.App_Start
         Private Shared Sub RegisterServices(kernel As IKernel)
 
             kernel.Bind(Of IEntityManager)().To(Of EntityManager)().InSingletonScope()
-            kernel.Bind(Of ITurnTracker)().To(Of TurnTracker.InMemoryTurnTracker.TurnTracker)().InSingletonScope()
+            kernel.Bind(Of ITurnTracker)().To(Of InMemoryTurnTracker.TurnTracker)().InSingletonScope()
             kernel.Bind(Of ISceneService)().To(Of SceneService)()
         End Sub
     End Class
