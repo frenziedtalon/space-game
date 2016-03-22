@@ -20,20 +20,8 @@ var createScene = () => {
     // retrieve the objects to be rendered in the scene
     retrieveSceneObjects();
 
-    // watch for browser/canvas resize events
-    window.addEventListener("resize", (ev: UIEvent) => {
-        engine.resize();
-    });
+    attachWindowEvents();
 
-    // listen for click events
-    window.addEventListener("click", (evt: MouseEvent) => {
-        // see if there's a mesh under the click
-        var pickResult = scene.pick(evt.clientX, evt.clientY);
-        // if there is a hit and we can select the object then set it as the camera target
-        if (pickResult.hit) {
-            scene.activeCamera.parent = pickResult.pickedMesh;
-        }
-    });
 
     // listen for key presses
     window.addEventListener("keypress", (evt: KeyboardEvent) => {
@@ -348,6 +336,26 @@ var createScene = () => {
 
         // let the user move the camera
         camera.attachControl(canvas, false);
+
+    }
+
+
+    function attachWindowEvents() {
+
+        // watch for browser/canvas resize events
+        window.addEventListener("resize", (ev: UIEvent) => {
+            engine.resize();
+        });
+
+        // listen for click events
+        window.addEventListener("click", (evt: MouseEvent) => {
+            // see if there's a mesh under the click
+            var pickResult = scene.pick(evt.clientX, evt.clientY);
+            // if there is a hit and we can select the object then set it as the camera target
+            if (pickResult.hit) {
+                scene.activeCamera.parent = pickResult.pickedMesh;
+            }
+        });
 
     }
 
