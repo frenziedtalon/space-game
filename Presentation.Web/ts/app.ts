@@ -14,13 +14,12 @@ var createScene = () => {
     // create a camera
     createCamera();
 
-    // create a skybox
-    createSkybox();
-
     // retrieve the objects to be rendered in the scene
-    retrieveSceneObjects();
+    endTurn();
 
+    attachUiControlEvents();
     attachWindowEvents();
+    beginRenderLoop();
 
 
     // listen for key presses
@@ -58,9 +57,9 @@ var createScene = () => {
         }
     }
 
-    var sceneObjects: Array<BaseGameEntity>;
+    var sceneObjects: Array<BaseGameEntity> = [];
 
-    function retrieveSceneObjects() {
+    function endTurn() {
 
         $.ajax({
                 url: "http://localhost/SpaceGameApi/api/Turn/EndTurn",
@@ -70,7 +69,7 @@ var createScene = () => {
             })
             .done((data: TurnResult) => {
                 // call succeeded
-                retrieveSceneObjectsSuccess(data);
+                endTurnSuccess(data);
             })
             .fail((data: TurnResult) => {
                 // call failed
@@ -86,17 +85,18 @@ var createScene = () => {
 
     }
 
-    function retrieveSceneObjectsSuccess(turnData: TurnResult): void {
+    function endTurnSuccess(turnData: TurnResult): void {
         sceneObjects = ((turnData.Scene) as Array<BaseGameEntity>);
         renderSceneObjects();
+        createSkybox();
     }
     
     function renderSceneObjects(): void {
         if (sceneObjects !== undefined && sceneObjects !== null) {
+            scene.meshes = [];
             for (let i = 0; i < sceneObjects.length; i++) {
                 renderSceneObject(<BaseCelestialObject>sceneObjects[i]);
             }
-            beginRenderLoop();
         } else {
             displayError("Scene objects undefined");
         }
@@ -339,6 +339,11 @@ var createScene = () => {
 
     }
 
+    function attachUiControlEvents() {
+        $("#end-turn").click(() => {
+            endTurn();
+        });
+    }
 
     function attachWindowEvents() {
 
