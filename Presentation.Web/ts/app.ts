@@ -22,16 +22,7 @@ var createScene = () => {
     beginRenderLoop();
 
 
-    // listen for key presses
-    window.addEventListener("keypress", (evt: KeyboardEvent) => {
-        if (evt.keyCode === 32) {
-            // spacebar
-            toggleDebugLayer();
-        } else if (evt.keyCode === 97) {
-            // a
-            toggleAnimation();
-        }
-    });
+    
 
     function createSkybox() {
         var skybox = BABYLON.Mesh.CreateBox("Skybox", 5000, scene);
@@ -362,7 +353,17 @@ var createScene = () => {
             }
         });
 
+        // listen for key presses
+        window.addEventListener("keypress", (evt: KeyboardEvent) => {
+            if (evt.keyCode === 32) {
+                // spacebar
+                toggleDebugLayer();
+            } else if (evt.keyCode === 97) {
+                // a
+                toggleAnimation();
+            }
+        });
     }
-
+    
 };
 
