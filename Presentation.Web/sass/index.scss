@@ -24,6 +24,10 @@
         background-color: white;
         line-height: 100px;
         text-align: center;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
 
         span {
             display: inline-block;
