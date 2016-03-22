@@ -1,35 +1,36 @@
 ﻿"use strict";
-var createScene = () => {
+var runGame = () => {
 
-    // get the canvas element from our HTML below
-    var canvas = <HTMLCanvasElement>document.getElementById("renderCanvas");
+    var canvas = getCanvas();
+    var engine = loadBabylonEngine(canvas);
+    var scene = createScene(engine);
 
-    // load the BABYLON 3D engine
-    var engine = new BABYLON.Engine(canvas, true);
-
-    // create a scene
-    var scene = new BABYLON.Scene(engine);
-    scene.clearColor = new BABYLON.Color3(0, 0, 0); // set background to black
-
-    // create a camera
     createCamera();
-
-    // retrieve the objects to be rendered in the scene
     endTurn();
-
     attachUiControlEvents();
     attachWindowEvents();
     beginRenderLoop();
-
-
     
+    function getCanvas(): HTMLCanvasElement {
+        return <HTMLCanvasElement>document.getElementById("renderCanvas");
+    }
+
+    function loadBabylonEngine(canvas: HTMLCanvasElement): BABYLON.Engine {
+        return new BABYLON.Engine(canvas, true);
+    }
+
+    function createScene(engine: BABYLON.Engine): BABYLON.Scene {
+        return new BABYLON.Scene(engine);
+    }
 
     function createSkybox() {
+        scene.clearColor = zeroColor(); // set background to black
+
         var skybox = BABYLON.Mesh.CreateBox("Skybox", 5000, scene);
         var skyboxMaterial = new BABYLON.StandardMaterial("skyboxMaterial", scene);
         skyboxMaterial.backFaceCulling = false; // render the inside of the skybox
-        skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-        skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+        skyboxMaterial.specularColor = zeroColor();
+        skyboxMaterial.diffuseColor = zeroColor();
 
         // add textures to the skybox
         skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("Assets/Images/Skybox/skybox", scene);
