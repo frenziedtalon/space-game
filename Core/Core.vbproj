@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\EnumerableExtensions.vb" />
+    <Compile Include="Extensions\GuidExtensions.vb" />
     <Compile Include="Helpers\Shapes\ShapeHelper.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
