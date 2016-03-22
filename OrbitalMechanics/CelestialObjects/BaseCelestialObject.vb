@@ -1,4 +1,4 @@
-﻿
+﻿Imports Core.Extensions
 Imports Entities
 
 Namespace CelestialObjects
@@ -10,11 +10,13 @@ Namespace CelestialObjects
         Protected Sub New(name As String,
                         mass As Integer,
                         texture As String,
-                        entityManager As IEntityManager)
+                        entityManager As IEntityManager,
+                        Optional satellites As List(Of OrbitingCelestialObjectBase) = Nothing)
             MyBase.New(entityManager)
             _name = name
             _mass = mass
             _texture = texture
+            _satellites = satellites
         End Sub
 
         Private ReadOnly _mass As Integer
@@ -37,5 +39,19 @@ Namespace CelestialObjects
                 Return _texture
             End Get
         End Property
+
+        Private _satellites As List(Of OrbitingCelestialObjectBase)
+        Public ReadOnly Property Satellites As List(Of OrbitingCelestialObjectBase)
+            Get
+                If _satellites Is Nothing Then
+                    _satellites = New List(Of OrbitingCelestialObjectBase)
+                End If
+                Return _satellites
+            End Get
+        End Property
+
+        Public Function ShouldSerializeSatellites() As Boolean
+            Return _satellites.HasAny()
+        End Function
     End Class
 End Namespace

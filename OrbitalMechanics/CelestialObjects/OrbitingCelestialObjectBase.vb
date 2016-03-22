@@ -10,8 +10,9 @@ Namespace CelestialObjects
                           mass As Integer,
                           texture As String,
                           orbit As IOrbit,
-                          entityManager As IEntityManager)
-            MyBase.New(name, mass, texture, entityManager)
+                          entityManager As IEntityManager,
+                        Optional satellites As List(Of OrbitingCelestialObjectBase) = Nothing)
+            MyBase.New(name, mass, texture, entityManager, satellites)
             _orbit = orbit
         End Sub
 
@@ -26,4 +27,4 @@ Namespace CelestialObjects
             _orbit.Update()
         End Sub
     End Class
-End NameSpace
+End Namespace

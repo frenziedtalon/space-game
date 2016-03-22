@@ -14,11 +14,10 @@ Namespace CelestialObjects
                        radius As Integer,
                        orbit As IOrbit,
                        entityManager As IEntityManager,
-                       Optional moons As List(Of Moon) = Nothing)
+                       Optional satellites As List(Of OrbitingCelestialObjectBase) = Nothing)
 
-            MyBase.New(name, mass, texture, orbit, entityManager)
+            MyBase.New(name, mass, texture, orbit, entityManager, satellites)
             _radius = radius
-            _moons = moons
         End Sub
 
         Private ReadOnly _radius As Integer
@@ -39,17 +38,6 @@ Namespace CelestialObjects
                 Throw New NotImplementedException()
             End Get
         End Property
-
-        Private ReadOnly _moons As List(Of Moon)
-        Public ReadOnly Property Moons As List(Of Moon)
-            Get
-                Return _moons
-            End Get
-        End Property
-
-        Public Function ShouldSerializeMoons() As Boolean
-            Return Moons IsNot Nothing
-        End Function
 
         Private _volume As Double = 0
 

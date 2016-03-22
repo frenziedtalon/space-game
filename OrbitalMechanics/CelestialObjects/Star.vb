@@ -17,9 +17,10 @@ Namespace CelestialObjects
                        texture As String,
                        radius As Integer,
                        orbit As IOrbit,
-                       entityManager As IEntityManager)
+                       entityManager As IEntityManager,
+                        Optional satellites As List(Of OrbitingCelestialObjectBase) = Nothing)
 
-            MyBase.New(name, mass, texture, orbit, entityManager)
+            MyBase.New(name, mass, texture, orbit, entityManager, satellites)
             _surfaceTemperature = surfaceTemperature
             _radius = radius
         End Sub
