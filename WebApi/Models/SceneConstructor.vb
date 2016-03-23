@@ -1,12 +1,11 @@
 ﻿Imports Entities
-Imports OrbitalMechanics
 Imports OrbitalMechanics.CelestialObjects
 Imports OrbitalMechanics.Classes
 
 Namespace Models
     Public Class SceneConstructor
 
-        Public Function SolSystem(entityManager As IEntityManager) As SolarSystem
+        Public Function SolSystem(entityManager As IEntityManager) As List(Of ICelestialObject)
 
             Dim objects = New List(Of ICelestialObject)
 
@@ -40,10 +39,8 @@ Namespace Models
 
             objects.Add(sun)
 
-            Return New SolarSystem(objects)
+            Return objects
         End Function
-
-
 
     End Class
 End Namespace
