@@ -1,5 +1,6 @@
-﻿Imports Entities
-Imports OrbitalMechanics
+﻿Imports Core.Extensions
+Imports Entities
+Imports OrbitalMechanics.CelestialObjects
 Imports WebApi.Models
 
 Namespace Services
@@ -19,7 +20,19 @@ Namespace Services
 
         Public ReadOnly Property CurrentSceneState As List(Of BaseGameEntity) Implements ISceneService.CurrentSceneState
             Get
-                Return _entityManager.GetAllEntities()
+                ' Prevent satellites being returned twice, once as own entity and again in the "Satellites" collection on the primary
+                Dim entities = _entityManager.GetAllEntities()
+
+                Dim result As New List(Of BaseGameEntity)
+
+                For Each e In entities
+                    Dim o = TryCast(e, OrbitingCelestialObjectBase)
+                    If o Is Nothing OrElse o.Primary.IsEmpty() Then
+                        result.Add(o)
+                    End If
+                Next
+
+                Return result
             End Get
         End Property
 

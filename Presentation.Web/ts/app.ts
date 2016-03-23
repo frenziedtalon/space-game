@@ -82,19 +82,19 @@ var runGame = () => {
         renderSceneObjects();
         createSkybox();
     }
-    
+
     function renderSceneObjects(): void {
         if (sceneObjects !== undefined && sceneObjects !== null) {
             scene.meshes = [];
             for (let i = 0; i < sceneObjects.length; i++) {
-                renderSceneObject(<BaseCelestialObject>sceneObjects[i]);
+                renderSceneObject(<BaseCelestialObject>sceneObjects[i], null);
             }
         } else {
             displayError("Scene objects undefined");
         }
     }
 
-    function renderSceneObject(item: BaseCelestialObject): void {
+    function renderSceneObject(item: BaseCelestialObject, parent: BABYLON.Mesh): void {
         if (item !== undefined && item !== null) {
             switch (item.Type) {
                 case "OrbitalMechanics.CelestialObjects.Star":
@@ -102,11 +102,11 @@ var runGame = () => {
                     break;
 
                 case "OrbitalMechanics.CelestialObjects.Planet":
-                    renderPlanet(item as Planet);
+                    renderPlanet(item as Planet, parent);
                     break;
 
                 case "OrbitalMechanics.CelestialObjects.Moon":
-                    renderMoon(item as Moon, null);
+                    renderMoon(item as Moon, parent);
                     break;
 
                 default:
@@ -151,11 +151,18 @@ var runGame = () => {
         starLight.range = 380;
         starLight.parent = star;
 
+        renderSatellites(starInfo, star);
     }
 
-    function renderPlanet(planetInfo: Planet): void {
+    function renderPlanet(planetInfo: Planet, parent: BABYLON.Mesh): void {
 
         var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, planetInfo.Radius * 2, scene);
+
+        if (parent !== undefined) {
+            // positions applied are in addition to those of the parent
+            planet.parent = parent;
+        }
+
         planet.id = planetInfo.Id;
         planet.position = createPosition(planetInfo.Orbit.Position);
 
@@ -170,12 +177,7 @@ var runGame = () => {
         // draw planet's orbit
         drawOrbit(planetInfo.Orbit, planetInfo.Name + "Orbit", null);
 
-        // create any moons
-        if (planetInfo.hasOwnProperty("Moons")) {
-            for (var j = 0; j < planetInfo.Moons.length; j++) {
-                renderMoon(planetInfo.Moons[j], planet);
-            }
-        }
+        renderSatellites(planetInfo, planet);
     }
 
     function renderMoon(moonInfo: Moon, parent: BABYLON.Mesh): void {
@@ -202,6 +204,15 @@ var runGame = () => {
 
     }
 
+    function renderSatellites(primary: BaseCelestialObject, mesh: BABYLON.Mesh): void {
+        // create any satellites
+        if (primary.hasOwnProperty("Satellites")) {
+            for (var j = 0; j < primary.Satellites.length; j++) {
+                renderSceneObject(primary.Satellites[j], mesh);
+            }
+        }
+    }
+
     var animateScene = true;
 
     function beginRenderLoop() {
@@ -226,28 +237,25 @@ var runGame = () => {
     // which is a good job as this is very hacky!
     function animate(): void {
         for (var i = 0; i < sceneObjects.length; i++) {
-            var target = sceneObjects[i] as OrbitingCelestialObjectBase;
-            if (!(target.Orbit === undefined) && !(target.Orbit.Speed === 0)) {
-                var mesh = scene.getMeshByID(target.Id);
-                if (!(mesh === undefined) && !(mesh === null)) {
-                    mesh.position = calculateNewOrbitPosition(target.Orbit);
-                    target.Orbit.Angle += target.Orbit.Speed;
+            animateObjectOrbit(sceneObjects[i] as OrbitingCelestialObjectBase);
+        }
+    }
 
-                    if (target.Type === "OrbitalMechanics.CelestialObjects.Planet") {
-                        var planet = <Planet>target;
-                        // animate any moons
-                        if (target.hasOwnProperty("Moons")) {
-                            for (var j = 0; j < planet.Moons.length; j++) {
-                                mesh = scene.getMeshByID(planet.Moons[j].Id);
-                                mesh.position = calculateNewOrbitPosition(planet.Moons[j].Orbit);
-                                planet.Moons[j].Orbit.Angle += planet.Moons[j].Orbit.Speed;
-                            }
-                        }
+    function animateObjectOrbit(target: OrbitingCelestialObjectBase): void {
 
-                    }
+        // animate orbit
+        if (!(target.Orbit === undefined) && !(target.Orbit.Speed === 0)) {
+            var mesh = scene.getMeshByID(target.Id);
+            if (!(mesh === undefined) && !(mesh === null)) {
+                mesh.position = calculateNewOrbitPosition(target.Orbit);
+                target.Orbit.Angle += target.Orbit.Speed;
+            }
+        }
 
-                    
-                }
+        // animate any satellites
+        if (target.hasOwnProperty("Satellites")) {
+            for (var j = 0; j < target.Satellites.length; j++) {
+                animateObjectOrbit(target.Satellites[j]);
             }
         }
     }

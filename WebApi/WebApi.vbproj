@@ -267,6 +267,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.vbproj">
+      <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.vbproj">
       <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>
       <Name>Entities</Name>

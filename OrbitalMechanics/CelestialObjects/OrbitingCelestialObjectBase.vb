@@ -1,5 +1,6 @@
 ﻿Imports Entities
 Imports OrbitalMechanics.Classes
+Imports Core.Extensions
 
 Namespace CelestialObjects
     Public Class OrbitingCelestialObjectBase
@@ -10,9 +11,8 @@ Namespace CelestialObjects
                           mass As Integer,
                           texture As String,
                           orbit As IOrbit,
-                          entityManager As IEntityManager,
-                        Optional satellites As List(Of OrbitingCelestialObjectBase) = Nothing)
-            MyBase.New(name, mass, texture, entityManager, satellites)
+                          entityManager As IEntityManager)
+            MyBase.New(name, mass, texture, entityManager)
             _orbit = orbit
         End Sub
 
@@ -22,6 +22,12 @@ Namespace CelestialObjects
                 Return _orbit
             End Get
         End Property
+
+        Public Property Primary As Guid Implements IOrbitingObject.Primary
+
+        Public Function ShouldSerializePrimary() As Boolean
+            Return Not Primary.IsEmpty()
+        End Function
 
         Public Overrides Sub Update()
             _orbit.Update()
