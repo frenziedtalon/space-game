@@ -10,7 +10,7 @@ var runGame = () => {
     attachUiControlEvents();
     attachWindowEvents();
     beginRenderLoop();
-    
+
     function getCanvas(): HTMLCanvasElement {
         return <HTMLCanvasElement>document.getElementById("renderCanvas");
     }
@@ -54,11 +54,11 @@ var runGame = () => {
     function endTurn() {
 
         $.ajax({
-                url: "http://localhost/SpaceGameApi/api/Turn/EndTurn",
-                cache: false,
-                type: "GET",
-                dataType: "json"
-            })
+            url: "http://localhost/SpaceGameApi/api/Turn/EndTurn",
+            cache: false,
+            type: "GET",
+            dataType: "json"
+        })
             .done((data: TurnResult) => {
                 // call succeeded
                 endTurnSuccess(data);
@@ -119,7 +119,7 @@ var runGame = () => {
     function zeroColor(): BABYLON.Color3 {
         return new BABYLON.Color3(0, 0, 0);
     }
-    
+
     function createPosition(position: string) {
         // string like "x,y,z"
         var array = position.split(",");
@@ -304,7 +304,7 @@ var runGame = () => {
         return path;
     }
 
-    function drawPath(meshName: string, path: Array<BABYLON.Vector3>, colour: BABYLON.Color3) : BABYLON.LinesMesh {
+    function drawPath(meshName: string, path: Array<BABYLON.Vector3>, colour: BABYLON.Color3): BABYLON.LinesMesh {
         const mesh = BABYLON.Mesh.CreateLines(meshName, path, scene);
         mesh.color = colour;
         return mesh;
@@ -373,6 +373,6 @@ var runGame = () => {
             }
         });
     }
-    
+
 };
 
