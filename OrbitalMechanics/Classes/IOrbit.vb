@@ -6,6 +6,7 @@ Namespace Classes
         ReadOnly Property Position As Point3D
         ReadOnly Property Radius As Integer
         ReadOnly Property Speed As Double
+        ReadOnly Property Period As TimeSpan
         Sub Update()
     End Interface
 End Namespace

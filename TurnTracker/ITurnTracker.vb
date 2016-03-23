@@ -4,4 +4,5 @@ Public Interface ITurnTracker
     Sub Update()
     ReadOnly Property StartDate As Date
     ReadOnly Property CurrentDate As Date
+    ReadOnly Property TurnLength As TimeSpan
 End Interface

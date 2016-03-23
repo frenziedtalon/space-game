@@ -120,16 +120,19 @@ var runGame = () => {
         return new BABYLON.Color3(0, 0, 0);
     }
 
-    function createPosition(position: string) {
-        // string like "x,y,z"
-        var array = position.split(",");
-        return new BABYLON.Vector3(parseInt(array[0], 10), parseInt(array[1], 10), parseInt(array[2], 10));
+    function createPosition(orbit: Orbit) {
+        if (!(orbit === null || orbit === undefined)) {
+            // string like "x,y,z"
+            var array = orbit.Position.split(",");
+            return new BABYLON.Vector3(parseInt(array[0], 10), parseInt(array[1], 10), parseInt(array[2], 10));
+        }
+        return new BABYLON.Vector3(0, 0, 0);
     }
 
     function renderStar(starInfo: Star): void {
 
         // create a star
-        var starPosition = createPosition(starInfo.Orbit.Position);
+        var starPosition = createPosition(starInfo.Orbit);
 
         var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, starInfo.Radius * 2, scene);
         star.position = starPosition;
@@ -164,7 +167,7 @@ var runGame = () => {
         }
 
         planet.id = planetInfo.Id;
-        planet.position = createPosition(planetInfo.Orbit.Position);
+        planet.position = createPosition(planetInfo.Orbit);
 
         // create a material for the planet
         var planetMaterial = new BABYLON.StandardMaterial(planetInfo.Name + "Material", scene);
@@ -191,7 +194,7 @@ var runGame = () => {
 
         moon.isPickable = moonInfo.CameraTarget;
 
-        moon.position = createPosition(moonInfo.Orbit.Position);
+        moon.position = createPosition(moonInfo.Orbit);
 
         // create a material for the moon
         var moonMaterial = new BABYLON.StandardMaterial(moonInfo.Name + "Material", scene);
@@ -213,7 +216,7 @@ var runGame = () => {
         }
     }
 
-    var animateScene = true;
+    var animateScene = false;
 
     function beginRenderLoop() {
 
@@ -244,7 +247,7 @@ var runGame = () => {
     function animateObjectOrbit(target: OrbitingCelestialObjectBase): void {
 
         // animate orbit
-        if (!(target.Orbit === undefined) && !(target.Orbit.Speed === 0)) {
+        if (!(target.Orbit === undefined || target.Orbit === null) && !(target.Orbit.Speed === 0)) {
             var mesh = scene.getMeshByID(target.Id);
             if (!(mesh === undefined) && !(mesh === null)) {
                 mesh.position = calculateNewOrbitPosition(target.Orbit);

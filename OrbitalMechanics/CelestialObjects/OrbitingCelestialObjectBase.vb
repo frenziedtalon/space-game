@@ -30,7 +30,9 @@ Namespace CelestialObjects
         End Function
 
         Public Overrides Sub Update()
-            _orbit.Update()
+            If _orbit IsNot Nothing Then
+                _orbit.Update()
+            End If
         End Sub
     End Class
 End Namespace

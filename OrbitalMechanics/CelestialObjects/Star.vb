@@ -1,5 +1,4 @@
-﻿
-Imports Core
+﻿Imports Core
 Imports Entities
 Imports Newtonsoft.Json
 Imports OrbitalMechanics.Classes

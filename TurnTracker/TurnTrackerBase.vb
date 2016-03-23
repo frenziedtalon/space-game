@@ -2,7 +2,7 @@
     Implements ITurnTracker
 
     Private _number As Integer = 0
-    Private _turnLength As TimeSpan
+    Private ReadOnly _turnLength As TimeSpan
     Private ReadOnly _defaultTurnLength As TimeSpan = TimeSpan.FromDays(30)
     Private ReadOnly _startdate As Date = New Date(1990, 1, 1)
 
@@ -36,4 +36,9 @@
         End Get
     End Property
 
+    Public ReadOnly Property TurnLength As TimeSpan Implements ITurnTracker.TurnLength
+        Get
+            Return _turnLength
+        End Get
+    End Property
 End Class
