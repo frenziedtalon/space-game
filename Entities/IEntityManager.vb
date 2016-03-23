@@ -1,6 +1,4 @@
-﻿Imports Entities
-
-Public Interface IEntityManager
+﻿Public Interface IEntityManager
     Sub RegisterEntity(ByRef newEntity As BaseGameEntity)
     Sub RemoveEntity(ByRef pEntity As BaseGameEntity)
     Sub UpdateAll()
