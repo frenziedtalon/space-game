@@ -6,7 +6,7 @@ Namespace Classes
     Public Class Orbit
         Implements IOrbit
 
-        Private _turnTracker As ITurnTracker
+        Private ReadOnly _turnTracker As ITurnTracker
 
         Public Sub New(radius As Integer,
                        period As TimeSpan,
@@ -16,7 +16,7 @@ Namespace Classes
             SetInitialPosition()
         End Sub
 
-        Public Sub New(radius As Integer,
+        Private Sub New(radius As Integer,
                        period As TimeSpan,
                        angle As Double,
                        position As Point3D,
