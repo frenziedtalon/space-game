@@ -220,3 +220,5 @@ _Pvt_Extensions
 Presentation.Web/Scripts/app.d.ts
 Presentation.Web/Scripts/app.js
 Presentation.Web/Scripts/app.js.map
+Presentation.Web/css/index.css
+Presentation.Web/css/index.min.css

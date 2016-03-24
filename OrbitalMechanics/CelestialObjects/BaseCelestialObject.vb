@@ -1,4 +1,4 @@
-﻿
+﻿Imports Core.Extensions
 Imports Entities
 
 Namespace CelestialObjects
@@ -8,9 +8,10 @@ Namespace CelestialObjects
         Implements ICelestialObject
 
         Protected Sub New(name As String,
-                       mass As Integer,
-                          texture As String)
-
+                        mass As Integer,
+                        texture As String,
+                        entityManager As IEntityManager)
+            MyBase.New(entityManager)
             _name = name
             _mass = mass
             _texture = texture
@@ -36,5 +37,31 @@ Namespace CelestialObjects
                 Return _texture
             End Get
         End Property
+
+        Private ReadOnly _satellites As New List(Of OrbitingCelestialObjectBase)
+        Public ReadOnly Property Satellites As List(Of OrbitingCelestialObjectBase)
+            Get
+                Return _satellites
+            End Get
+        End Property
+
+        Public Function ShouldSerializeSatellites() As Boolean
+            Return _satellites.HasAny()
+        End Function
+
+        Public Sub AddSatellite(s As OrbitingCelestialObjectBase)
+            If s IsNot Nothing Then
+                s.Primary = Id
+                _satellites.Add(s)
+            End If
+        End Sub
+
+        Public Sub AddSatellite(s As List(Of OrbitingCelestialObjectBase))
+            If s.HasAny() Then
+                For Each o In s
+                    AddSatellite(o)
+                Next
+            End If
+        End Sub
     End Class
 End Namespace

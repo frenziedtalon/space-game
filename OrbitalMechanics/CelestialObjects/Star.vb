@@ -1,5 +1,5 @@
-﻿
-Imports Core
+﻿Imports Core
+Imports Entities
 Imports Newtonsoft.Json
 Imports OrbitalMechanics.Classes
 
@@ -15,20 +15,15 @@ Namespace CelestialObjects
                        surfaceTemperature As Integer,
                        texture As String,
                        radius As Integer,
-                       orbit As Orbit)
+                       orbit As IOrbit,
+                       entityManager As IEntityManager)
 
-            MyBase.New(name, mass, texture, orbit)
+            MyBase.New(name, mass, texture, orbit, entityManager)
             _surfaceTemperature = surfaceTemperature
             _radius = radius
         End Sub
 
-        Public Overrides Sub Update()
-            Throw New NotImplementedException()
-        End Sub
-
-
         Private _classification As StarClassification
-
 
         Public ReadOnly Property Classification() As StarClassification
             Get

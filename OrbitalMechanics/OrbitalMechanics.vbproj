@@ -101,6 +101,7 @@
     <Compile Include="CelestialObjects\OrbitingCelestialObjectBase.vb" />
     <Compile Include="CelestialObjects\Planet.vb" />
     <Compile Include="CelestialObjects\Star.vb" />
+    <Compile Include="Classes\IOrbit.vb" />
     <Compile Include="I3dObject.vb" />
     <Compile Include="Classes\Orbit.vb" />
     <Compile Include="ISphere.vb" />
@@ -119,7 +120,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SolarSystem.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -149,6 +149,10 @@
     <ProjectReference Include="..\Entities\Entities.vbproj">
       <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>
       <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
+      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
+      <Name>TurnTracker</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

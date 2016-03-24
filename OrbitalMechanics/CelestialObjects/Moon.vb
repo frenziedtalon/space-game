@@ -1,4 +1,5 @@
 ﻿Imports Core
+Imports Entities
 Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
@@ -10,15 +11,11 @@ Namespace CelestialObjects
                        mass As Integer,
                        texture As String,
                        radius As Integer,
-                       orbit As Orbit)
+                       orbit As IOrbit,
+                       entityManager As IEntityManager)
 
-            MyBase.New(name, mass, texture, orbit)
+            MyBase.New(name, mass, texture, orbit, entityManager)
             _radius = radius
-        End Sub
-
-        Public Overrides Sub Update()
-            Throw New NotImplementedException()
-            Orbit.Update()
         End Sub
 
         Private ReadOnly _radius As Integer

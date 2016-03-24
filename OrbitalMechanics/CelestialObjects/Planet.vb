@@ -1,5 +1,6 @@
 ﻿
 Imports Core
+Imports Entities
 Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
@@ -11,16 +12,11 @@ Namespace CelestialObjects
                        mass As Integer,
                        texture As String,
                        radius As Integer,
-                       orbit As Orbit,
-                       Optional moons As List(Of Moon) = Nothing)
+                       orbit As IOrbit,
+                       entityManager As IEntityManager)
 
-            MyBase.New(name, mass, texture, orbit)
+            MyBase.New(name, mass, texture, orbit, entityManager)
             _radius = radius
-            _moons = moons
-        End Sub
-
-        Public Overrides Sub Update()
-            Throw New NotImplementedException()
         End Sub
 
         Private ReadOnly _radius As Integer
@@ -41,17 +37,6 @@ Namespace CelestialObjects
                 Throw New NotImplementedException()
             End Get
         End Property
-
-        Private ReadOnly _moons As List(Of Moon)
-        Public ReadOnly Property Moons As List(Of Moon)
-            Get
-                Return _moons
-            End Get
-        End Property
-
-        Public Function ShouldSerializeMoons() As Boolean
-            Return Moons IsNot Nothing
-        End Function
 
         Private _volume As Double = 0
 

@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="BaseGameEntity.vb" />
     <Compile Include="EntityManager.vb" />
+    <Compile Include="IEntityManager.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

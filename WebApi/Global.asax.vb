@@ -11,4 +11,5 @@ Public Class WebApiApplication
         RouteConfig.RegisterRoutes(RouteTable.Routes)
         BundleConfig.RegisterBundles(BundleTable.Bundles)
     End Sub
+
 End Class

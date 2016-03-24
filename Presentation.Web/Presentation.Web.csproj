@@ -10,7 +10,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -46,6 +46,11 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="sass\index.scss" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -53,7 +58,9 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="css\" />
+  </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\Classes\BaseCelestialObject.ts" />
@@ -66,7 +73,7 @@
     <TypeScriptCompile Include="ts\Classes\Orbit.ts" />
     <TypeScriptCompile Include="ts\Classes\OrbitingCelestialObjectBase.ts" />
     <TypeScriptCompile Include="ts\Classes\Planet.ts" />
-    <TypeScriptCompile Include="ts\Classes\SceneObjectsResult.ts" />
+    <TypeScriptCompile Include="ts\Classes\TurnResult.ts" />
     <TypeScriptCompile Include="ts\Classes\Star.ts" />
     <TypeScriptCompile Include="ts\d.ts\babylon.d.ts" />
     <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
