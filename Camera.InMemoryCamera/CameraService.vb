@@ -17,7 +17,16 @@ Public Class CameraService
         End Get
     End Property
 
-    Public Sub SetNewTarget(target As Guid) Implements ICameraService.SetNewTarget
+    Public Sub SetTarget(target As String) Implements ICameraService.SetTarget
+        If Not String.IsNullOrWhiteSpace(target) Then
+            Dim targetGuid As Guid
+            If Guid.TryParse(target, targetGuid) Then
+                SetTarget(targetGuid)
+            End If
+        End If
+    End Sub
+
+    Public Sub SetTarget(target As Guid) Implements ICameraService.SetTarget
         If Not target.IsEmpty() Then
             _lastTarget = _currentTarget
             _currentTarget = target
