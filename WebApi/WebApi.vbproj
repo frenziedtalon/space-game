@@ -209,6 +209,8 @@
     <Compile Include="App_Start\NinjectWebCommon.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="App_Start\WebApiConfig.vb" />
+    <Compile Include="Classes\Camera.vb" />
+    <Compile Include="Controllers\CameraController.vb" />
     <Compile Include="Controllers\TurnController.vb" />
     <Compile Include="Classes\TurnResult.vb" />
     <Compile Include="Global.asax.vb">
@@ -267,6 +269,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Camera.InMemoryCamera\Camera.InMemoryCamera.vbproj">
+      <Project>{e9c8d057-371a-4b7c-b2bb-4b5b07db02ac}</Project>
+      <Name>Camera.InMemoryCamera</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Camera\Camera.vbproj">
+      <Project>{10644977-96c4-4144-aa73-78043e86fb29}</Project>
+      <Name>Camera</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.vbproj">
       <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
       <Name>Core</Name>
