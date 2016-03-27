@@ -54,7 +54,7 @@ var runGame = () => {
     function endTurn() {
 
         $.ajax({
-            url: "http://localhost/SpaceGameApi/api/Turn/EndTurn",
+            url: "../SpaceGameApi/api/Turn/EndTurn",
             cache: false,
             type: "GET",
             dataType: "json"
@@ -81,6 +81,7 @@ var runGame = () => {
         sceneObjects = ((turnData.Scene) as Array<BaseGameEntity>);
         renderSceneObjects();
         createSkybox();
+        setCameraTarget(turnData.Camera.CurrentTarget);
     }
 
     function renderSceneObjects(): void {
@@ -362,6 +363,7 @@ var runGame = () => {
             // if there is a hit and we can select the object then set it as the camera target
             if (pickResult.hit) {
                 scene.activeCamera.parent = pickResult.pickedMesh;
+                updateCameraTarget(pickResult.pickedMesh.id);
             }
         });
 
@@ -375,6 +377,32 @@ var runGame = () => {
                 toggleAnimation();
             }
         });
+    }
+
+    function updateCameraTarget(targetId: string): void {
+        var data = "target=" + targetId;
+
+        $.ajax({
+            url: "../SpaceGameApi/api/Camera/SetTarget?" + data,
+            cache: false,
+            type: "GET"
+        })
+            .done(() => {
+                // call succeeded
+            })
+            .fail(() => {
+                // call failed
+            })
+            .always(() => {
+                // happens after done/fail on every call
+            });
+    }
+
+    function setCameraTarget(target: string): void {
+        var mesh = scene.getMeshByID(target);
+        if (!(mesh === null)) {
+            scene.activeCamera.parent = mesh;
+        }
     }
 
 };

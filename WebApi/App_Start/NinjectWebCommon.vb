@@ -1,4 +1,5 @@
-﻿Imports Entities
+﻿Imports Camera
+Imports Entities
 Imports Microsoft.Web.Infrastructure.DynamicModuleHelper
 Imports Ninject
 Imports Ninject.Web.Common
@@ -59,6 +60,7 @@ Namespace WebApi.App_Start
             kernel.Bind(Of IEntityManager)().To(Of EntityManager)().InSingletonScope()
             kernel.Bind(Of ITurnTracker)().To(Of InMemoryTurnTracker.TurnTracker)().InSingletonScope()
             kernel.Bind(Of ISceneService)().To(Of SceneService)()
+            kernel.Bind(Of ICameraService)().To(Of InMemoryCamera.CameraService)().InSingletonScope()
         End Sub
     End Class
 End Namespace

@@ -1,4 +1,5 @@
 ﻿Imports System.Web.Http
+Imports Camera
 Imports Entities
 Imports TurnTracker
 Imports WebApi.Classes
@@ -11,14 +12,17 @@ Namespace Controllers
         Private ReadOnly _turnTracker As ITurnTracker
         Private ReadOnly _entityManager As IEntityManager
         Private ReadOnly _sceneService As ISceneService
+        Private ReadOnly _cameraService As ICameraService
 
         Public Sub New(turnTracker As ITurnTracker,
                         entityManager As IEntityManager,
-                        sceneService As ISceneService)
+                        sceneService As ISceneService,
+                       cameraService As ICameraService)
 
             _turnTracker = turnTracker
             _entityManager = entityManager
             _sceneService = sceneService
+            _cameraService = cameraService
         End Sub
 
         <HttpGet()>
@@ -32,7 +36,7 @@ Namespace Controllers
 
             _turnTracker.Update()
 
-            Return New TurnResult(_sceneService)
+            Return New TurnResult(_sceneService, _cameraService)
         End Function
 
     End Class

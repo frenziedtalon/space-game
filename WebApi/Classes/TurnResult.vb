@@ -1,13 +1,19 @@
-﻿Imports Entities
+﻿Imports Camera
+Imports Entities
 Imports WebApi.Services
 
 Namespace Classes
     Public Class TurnResult
 
         Private ReadOnly _sceneService As ISceneService
+        Private ReadOnly _cameraService As ICameraService
+        Private ReadOnly _camera As Camera
 
-        Public Sub New(sceneService As ISceneService)
+        Public Sub New(sceneService As ISceneService,
+                       cameraService As ICameraService)
             _sceneService = sceneService
+            _cameraService = cameraService
+            _camera = New Camera(_cameraService)
         End Sub
 
         Public ReadOnly Property Scene As List(Of BaseGameEntity)
@@ -16,5 +22,11 @@ Namespace Classes
             End Get
         End Property
 
+        Public ReadOnly Property Camera As Camera
+            Get
+                Return _camera
+            End Get
+        End Property
+
     End Class
-End NameSpace
+End Namespace
