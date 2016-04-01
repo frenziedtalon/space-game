@@ -10,20 +10,23 @@ Namespace CelestialObjects
         Protected Sub New(name As String,
                           mass As Integer,
                           texture As String,
-                          orbit As IOrbit,
                           entityManager As IEntityManager)
             MyBase.New(name, mass, texture, entityManager)
-            _orbit = orbit
         End Sub
 
-        Private ReadOnly _orbit As IOrbit
+        Private _orbit As IOrbit
         Public ReadOnly Property Orbit As IOrbit Implements IOrbitingObject.Orbit
             Get
                 Return _orbit
             End Get
         End Property
 
-        Public Property Primary As Guid Implements IOrbitingObject.Primary
+        Private _primary As Guid
+        Public ReadOnly Property Primary As Guid Implements IOrbitingObject.Primary
+            Get
+                Return _primary
+            End Get
+        End Property
 
         Public Function ShouldSerializePrimary() As Boolean
             Return Not Primary.IsEmpty()
@@ -34,5 +37,20 @@ Namespace CelestialObjects
                 _orbit.Update()
             End If
         End Sub
+
+        Public Sub SetOrbit(p As BaseCelestialObject, o As IOrbit) Implements IOrbitingObject.SetOrbit
+            If p Is Nothing Then
+                Throw New ArgumentNullException(NameOf(p))
+            ElseIf o Is Nothing Then
+                Throw New ArgumentNullException(NameOf(o))
+            End If
+
+            _orbit = o
+            _primary = p.Id
+        End Sub
+
+        Private Function GetPrimary() As BaseCelestialObject
+            Return DirectCast(_entityManager.GetEntityFromId(Primary), BaseCelestialObject)
+        End Function
     End Class
 End Namespace

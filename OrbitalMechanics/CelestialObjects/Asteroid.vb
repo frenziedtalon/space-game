@@ -9,10 +9,9 @@ Namespace CelestialObjects
         Public Sub New(name As String,
                        mass As Integer,
                        texture As String,
-                       orbit As IOrbit,
                        entityManager As IEntityManager)
 
-            MyBase.New(name, mass, texture, orbit, entityManager)
+            MyBase.New(name, mass, texture, entityManager)
         End Sub
 
     End Class
