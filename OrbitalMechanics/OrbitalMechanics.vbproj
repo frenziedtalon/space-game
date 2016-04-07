@@ -101,6 +101,7 @@
     <Compile Include="CelestialObjects\OrbitingCelestialObjectBase.vb" />
     <Compile Include="CelestialObjects\Planet.vb" />
     <Compile Include="CelestialObjects\Star.vb" />
+    <Compile Include="Classes\Distance.vb" />
     <Compile Include="Classes\IOrbit.vb" />
     <Compile Include="I3dObject.vb" />
     <Compile Include="Classes\Orbit.vb" />
