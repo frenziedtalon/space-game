@@ -4,8 +4,6 @@ Imports NUnit.Framework
 Namespace Classes
     <TestFixture>
     Public Class AngleTests
-        ' rounding when dealing with radians as we can see errors at about 15 decimal places due to the limitation of double
-        Const Precision = 14
 
         <TestCase(0)>
         <TestCase(90.102)>
@@ -46,11 +44,9 @@ Namespace Classes
 
             Dim result = a.Radians
 
-            Dim roundedResult = Math.Round(result, Precision, MidpointRounding.AwayFromZero)
+            Dim roundedExpected = Math.Round(input, a.DecimalPlaces, MidpointRounding.AwayFromZero)
 
-            Dim roundedExpected = Math.Round(input, Precision, MidpointRounding.AwayFromZero)
-
-            Assert.AreEqual(roundedExpected, roundedResult)
+            Assert.AreEqual(roundedExpected, result)
         End Sub
 
         <TestCase(-Math.PI, Math.PI)>
@@ -62,11 +58,9 @@ Namespace Classes
 
             Dim result = a.Radians
 
-            Dim roundedResult = Math.Round(result, precision, MidpointRounding.AwayFromZero)
+            Dim roundedExpected = Math.Round(expected, a.DecimalPlaces, MidpointRounding.AwayFromZero)
 
-            Dim roundedExpected = Math.Round(expected, precision, MidpointRounding.AwayFromZero)
-
-            Assert.AreEqual(roundedExpected, roundedResult)
+            Assert.AreEqual(roundedExpected, result)
         End Sub
     End Class
 End Namespace
