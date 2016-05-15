@@ -2,7 +2,6 @@
 Imports NSubstitute
 Imports NUnit.Framework
 Imports OrbitalMechanics.CelestialObjects
-Imports OrbitalMechanics.Classes
 
 <TestFixture>
 Public Class StarTests
