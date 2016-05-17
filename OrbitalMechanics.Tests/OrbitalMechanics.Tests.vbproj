@@ -111,6 +111,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.vbproj">
+      <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.vbproj">
       <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>
       <Name>Entities</Name>
@@ -118,6 +122,10 @@
     <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.vbproj">
       <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
       <Name>OrbitalMechanics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
+      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
+      <Name>TurnTracker</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
