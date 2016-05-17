@@ -2,7 +2,7 @@
     Public Class Distance
         Private ReadOnly _kilometers As Double
 
-        Const KilometersInAstronomicalUnit As Double = 149597870.7
+        Const KilometersInAstronomicalUnit As Double = 149597870.691
 
         Private Sub New(kilometers As Double)
             If kilometers < 0 Then
@@ -13,7 +13,7 @@
 
         Public ReadOnly Property AstronomicalUnits As Double
             Get
-                Return _kilometers * KilometersInAstronomicalUnit
+                Return _kilometers / KilometersInAstronomicalUnit
             End Get
         End Property
 
