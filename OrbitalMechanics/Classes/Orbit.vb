@@ -113,7 +113,7 @@ Namespace Classes
         End Function
 
         Private Function MeanLongitude(meanAnomaly As Angle) As Angle
-            Return Angle.FromRadians(meanAnomaly.Radians + LongitudeOfAscendingNode.Radians)
+            Return Angle.FromRadians(meanAnomaly.Radians + LongitudeOfPeriapsis.Radians)
         End Function
 
         Private _meanAngularMotion As Double
