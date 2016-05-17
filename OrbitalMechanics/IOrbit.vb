@@ -7,11 +7,6 @@ Public Interface IOrbit
     ReadOnly Property Position As Point3D
     ReadOnly Property Period As TimeSpan
     Sub Update()
-    ''' <summary>
-    ''' Angle between planet and perihelion.
-    ''' </summary>
-    ''' <remarks>0 at perihelion. Unit is radians. Changes most rapidly at perihelion.</remarks>
-    Function TrueAnomaly() As Angle
     ReadOnly Property LongitudeOfAscendingNode As Angle
     ReadOnly Property Inclination As Angle
     ReadOnly Property ArgumentOfPeriapsis As Angle
@@ -25,11 +20,6 @@ Public Interface IOrbit
     ''' <remarks>Units=AU</remarks>
     ReadOnly Property Eccentricity As Double
     ''' <summary>
-    ''' Angle of average orbital motion.
-    ''' </summary>
-    ''' <remarks>0 at periapsis. Increases uniformly with time.</remarks>
-    Function MeanAnomaly() As Angle
-    ''' <summary>
     ''' Closest distance to the primary.
     ''' </summary>
     ''' <remarks>Units=AU</remarks>
@@ -42,5 +32,5 @@ Public Interface IOrbit
     ''' <summary>
     ''' Represents the angle at which the object lies within its orbit at zero time
     ''' </summary>
-    ReadOnly Property MeanAnomalyZero() As Angle
+    ReadOnly Property MeanAnomalyZero As Angle
 End Interface
