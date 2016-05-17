@@ -137,11 +137,11 @@ Namespace Classes
                     Dim meanAnomaly As Angle = CalculateMeanAnomaly()
                     Dim eccentricAnomaly As Angle = CalculateEccentricAnomaly(meanAnomaly)
                     Dim trueAnomaly As Angle = CalculateTrueAnomaly(eccentricAnomaly)
-                    Dim range As Distance = CalculateRange(trueAnomaly)
+                    Dim distance As Distance = CalculateDistance(trueAnomaly)
 
-                    Dim x = CalculateX(range, trueAnomaly)
-                    Dim y = CalculateY(range, trueAnomaly)
-                    Dim z = CalculateZ(range, trueAnomaly)
+                    Dim x = CalculateX(distance, trueAnomaly)
+                    Dim y = CalculateY(distance, trueAnomaly)
+                    Dim z = CalculateZ(distance, trueAnomaly)
 
                     _position = New Point3D(x, y, z)
                     _recalculatePosition = False
@@ -212,7 +212,7 @@ Namespace Classes
             ' e = eccentricity
         End Function
 
-        Private Function CalculateRange(trueAnomaly As Angle) As Distance
+        Private Function CalculateDistance(trueAnomaly As Angle) As Distance
             Dim aus = (SemiMajorAxis.AstronomicalUnits * (1 - (Math.Pow(Eccentricity, 2)))) / (1 + (Eccentricity * (Math.Cos(trueAnomaly.Radians))))
             Return Distance.FromAstronomicalUnits(aus)
         End Function
@@ -224,17 +224,17 @@ Namespace Classes
         'i - inclination
 
         'X = R * (Cos(N) * Cos(TA + w) - Sin(N) * Sin(TA+w)*Cos(i)
-        Private Function CalculateX(range As Distance, trueAnomaly As Angle) As Double
-            Return range.Kilometers * ((Math.Cos(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) - (Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians))) * Math.Cos(Inclination.Radians)
+        Private Function CalculateX(distance As Distance, trueAnomaly As Angle) As Double
+            Return distance.Kilometers * ((Math.Cos(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) - (Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians))) * Math.Cos(Inclination.Radians)
         End Function
 
         'Y = R * (Sin(N) * Cos(TA+w) + Cos(N) * Sin(TA+w)) * Cos(i))
-        Private Function CalculateY(range As Distance, trueAnomaly As Angle) As Double
-            Return range.Kilometers * ((Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) + (Math.Cos(LongitudeOfAscendingNode.Radians)) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) * Math.Cos(Inclination.Radians)
+        Private Function CalculateY(distance As Distance, trueAnomaly As Angle) As Double
+            Return distance.Kilometers * ((Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) + (Math.Cos(LongitudeOfAscendingNode.Radians)) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) * Math.Cos(Inclination.Radians)
         End Function
 
         'Z = R * Sin(TA+w) * Sin(i)
-        Private Function CalculateZ(range As Distance, trueAnomaly As Angle) As Double
+        Private Function CalculateZ(distance As Distance, trueAnomaly As Angle) As Double
             Return distance.Kilometers * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians) * Math.Sin(Inclination.Radians)
         End Function
 
