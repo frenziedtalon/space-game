@@ -235,7 +235,7 @@ Namespace Classes
 
         'Z = R * Sin(TA+w) * Sin(i)
         Private Function CalculateZ(range As Distance, trueAnomaly As Angle) As Double
-            Return range.Kilometers * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)
+            Return distance.Kilometers * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians) * Math.Sin(Inclination.Radians)
         End Function
 
     End Class
