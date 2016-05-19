@@ -1,4 +1,6 @@
-﻿Namespace Classes
+﻿Imports Newtonsoft.Json
+
+Namespace Classes
     ''' <summary>
     ''' Represents the concept of an angle and allows easily switching between the different unit types.
     ''' </summary>
@@ -29,6 +31,7 @@
             End Get
         End Property
 
+        <JsonIgnore()>
         Public ReadOnly Property Degrees As Double
             Get
                 Return Math.Round(_degrees, _decimalPlaces, RoundingMethod)
@@ -68,6 +71,7 @@
         ''' <summary>
         ''' The number of decimal places to which all results will be rounded
         ''' </summary>
+        <JsonIgnore>
         Public ReadOnly Property DecimalPlaces As Integer
             Get
                 Return _decimalPlaces

@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Media.Media3D
 Imports Core.Classes
+Imports Newtonsoft.Json
 Imports TurnTracker
 
 Namespace Classes
@@ -29,6 +30,7 @@ Namespace Classes
         End Sub
 
         Private _period As TimeSpan = TimeSpan.Zero
+        <JsonIgnore()>
         Public ReadOnly Property Period As TimeSpan Implements IOrbit.Period
             Get
                 If _period = TimeSpan.Zero AndAlso SemiMajorAxis IsNot Nothing Then
@@ -40,6 +42,7 @@ Namespace Classes
         End Property
 
         Private ReadOnly _longitudeOfAscendingNode As Angle
+        <JsonIgnore()>
         Public ReadOnly Property LongitudeOfAscendingNode As Angle Implements IOrbit.LongitudeOfAscendingNode
             Get
                 Return _longitudeOfAscendingNode
@@ -47,6 +50,7 @@ Namespace Classes
         End Property
 
         Private ReadOnly _inclination As Angle
+        <JsonIgnore()>
         Public ReadOnly Property Inclination As Angle Implements IOrbit.Inclination
             Get
                 Return _inclination
@@ -54,6 +58,7 @@ Namespace Classes
         End Property
 
         Private ReadOnly _argumentOfPeriapsis As Angle
+        <JsonIgnore()>
         Public ReadOnly Property ArgumentOfPeriapsis As Angle Implements IOrbit.ArgumentOfPeriapsis
             Get
                 Return _argumentOfPeriapsis
@@ -64,6 +69,7 @@ Namespace Classes
         ''' <summary>
         ''' One half of the major axis, represents the mean distance from the primary 
         ''' </summary>
+        <JsonIgnore()>
         Public ReadOnly Property SemiMajorAxis As Distance Implements IOrbit.SemiMajorAxis
             Get
                 Return _semiMajorAxis
@@ -71,6 +77,7 @@ Namespace Classes
         End Property
 
         Private ReadOnly _eccentricity As Double
+        <JsonIgnore()>
         Public ReadOnly Property Eccentricity As Double Implements IOrbit.Eccentricity
             Get
                 Return _eccentricity
@@ -78,6 +85,7 @@ Namespace Classes
         End Property
 
         Private _periapsisDistance As Distance
+        <JsonIgnore()>
         Public ReadOnly Property PeriapsisDistance As Distance Implements IOrbit.PeriapsisDistance
             Get
                 If _periapsisDistance Is Nothing Then
@@ -88,6 +96,7 @@ Namespace Classes
         End Property
 
         Private _apapsisDistance As Distance
+        <JsonIgnore()>
         Public ReadOnly Property ApapsisDistance As Distance Implements IOrbit.ApapsisDistance
             Get
                 If _apapsisDistance Is Nothing Then
@@ -98,6 +107,7 @@ Namespace Classes
         End Property
 
         Private ReadOnly _meanAnomalyZero As Angle
+        <JsonIgnore()>
         Public ReadOnly Property MeanAnomalyZero As Angle Implements IOrbit.MeanAnomalyZero
             Get
                 Return _meanAnomalyZero
@@ -120,6 +130,7 @@ Namespace Classes
         ''' <summary>
         ''' Radians moved in the orbit per day
         ''' </summary>
+        <JsonIgnore()>
         Private ReadOnly Property MeanAngularMotion As Double
             Get
                 If Double.Equals(_meanAngularMotion, 0.0) Then

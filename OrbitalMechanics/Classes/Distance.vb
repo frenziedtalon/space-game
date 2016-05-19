@@ -1,4 +1,6 @@
-﻿Namespace Classes
+﻿Imports Newtonsoft.Json
+
+Namespace Classes
     Public Class Distance
         Private ReadOnly _kilometers As Double
 
@@ -21,6 +23,7 @@
             Return New Distance(astronomicalUnits * KilometersInAstronomicalUnit)
         End Function
 
+        <JsonIgnore()>
         Public ReadOnly Property Kilometers As Double
             Get
                 Return _kilometers
