@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Media.Media3D
 Imports Core.Classes
+Imports Data.Classes
 Imports Newtonsoft.Json
 Imports TurnTracker
 
@@ -23,6 +24,18 @@ Namespace Classes
             _argumentOfPeriapsis = argumentOfPeriapsis
             _longitudeOfAscendingNode = longitudeOfAscendingNode
             _meanAnomalyZero = meanAnomalyZero
+        End Sub
+
+        Public Sub New(turnTracker As ITurnTracker,
+                       data As OrbitData)
+
+            Me.New(turnTracker:=turnTracker,
+                                   semiMajorAxis:=data.SemiMajorAxis,
+                                   eccentricity:=data.Eccentricity,
+                                   inclination:=data.Inclination,
+                                   argumentOfPeriapsis:=data.ArgumentOfPeriapsis,
+                                   longitudeOfAscendingNode:=data.LongitudeOfAscendingNode,
+                                   meanAnomalyZero:=data.MeanAnomalyZero)
         End Sub
 
         Public Sub Update() Implements IOrbit.Update
@@ -145,28 +158,44 @@ Namespace Classes
         Public ReadOnly Property Position As Point3D Implements IOrbit.Position
             Get
                 If _recalculatePosition Then
-                    Dim meanAnomaly As Angle = CalculateMeanAnomaly()
-                    Dim eccentricAnomaly As Angle = CalculateEccentricAnomaly(meanAnomaly)
-                    Dim trueAnomaly As Angle = CalculateTrueAnomaly(eccentricAnomaly)
-                    Dim distance As Distance = CalculateDistance(trueAnomaly)
-
-                    Dim x = CalculateX(distance, trueAnomaly)
-                    Dim y = CalculateY(distance, trueAnomaly)
-                    Dim z = CalculateZ(distance, trueAnomaly)
-
-                    _position = New Point3D(x, y, z)
+                    _position = CalculatePosition(_turnTracker.TimeSinceStart.TotalDays)
                     _recalculatePosition = False
                 End If
                 Return _position
             End Get
         End Property
 
+        Private _orbitPath As List(Of Point3D)
+        Public ReadOnly Property OrbitPath As List(Of Point3D) Implements IOrbit.OrbitPath
+            Get
+                If _orbitPath Is Nothing Then
+                    _orbitPath = GenerateOrbitPath()
+                End If
+                Return _orbitPath
+            End Get
+        End Property
+
+        Private Function CalculatePosition(days As Double) As Point3D
+            Dim meanAnomaly As Angle = CalculateMeanAnomaly(days)
+            Dim eccentricAnomaly As Angle = CalculateEccentricAnomaly(meanAnomaly)
+            Dim trueAnomaly As Angle = CalculateTrueAnomaly(eccentricAnomaly)
+            Dim distance As Distance = CalculateDistance(trueAnomaly)
+
+            'Debug.WriteLine("MA: {0}, EA: {1}, TA: {2}, D: {3}", meanAnomaly.Degrees, eccentricAnomaly.Degrees, trueAnomaly.Degrees, distance.AstronomicalUnits)
+
+            Dim x = CalculateX(distance, trueAnomaly)
+            Dim y = CalculateY(distance, trueAnomaly)
+            Dim z = CalculateZ(distance, trueAnomaly)
+
+            Return New Point3D(x, y, z)
+        End Function
+
         ''' <summary>
         ''' Angle of average orbital motion.
         ''' </summary>
         ''' <remarks>0 at periapsis. Increases uniformly with time.</remarks>
-        Private Function CalculateMeanAnomaly() As Angle
-            Dim radians = MeanAnomalyZero.Radians + (MeanAngularMotion * _turnTracker.TimeSinceStart.TotalDays)
+        Private Function CalculateMeanAnomaly(days As Double) As Angle
+            Dim radians = MeanAnomalyZero.Radians + (MeanAngularMotion * days)
             Return Angle.FromRadians(radians)
         End Function
 
@@ -185,19 +214,20 @@ Namespace Classes
             ')
 
             ' initial guess
-            Dim E0 As Double = If(Eccentricity > 0.8, Math.PI, meanAnomaly.Radians)
+            Dim En As Double = If(Eccentricity > 0.8, Math.PI, meanAnomaly.Radians)
 
             Do Until iterations >= maxIterations
                 ' E1 = E0 - ( E0 - e * sin(E0) - M ) / ( 1 - e * cos(E0) )
-                Dim E1 As Double = 0.0
+                Dim En1 As Double = 0.0
 
+                En1 = En - ((En - meanAnomaly.Radians - (Eccentricity * Math.Sin(En))) / (1 - (Eccentricity * Math.Cos(En))))
 
-                If E1 - E0 < threshold Then
-                    Return Angle.FromRadians(E1)
+                If En1 - En < threshold Then
+                    Return Angle.FromRadians(En1)
                 End If
 
                 iterations += 1
-
+                En = En1
             Loop
 
             ' values are not converging, eccentricity probably near to 1. Use calculation for a near-parabolic or parabolic orbit.
@@ -215,12 +245,14 @@ Namespace Classes
         ''' </summary>
         ''' <remarks>0 at perihelion. Unit is radians. Changes most rapidly at perihelion.</remarks>
         Private Function CalculateTrueAnomaly(eccentricAnomaly As Angle) As Angle
-            Throw New NotImplementedException()
-            ' uses _eccentricAnomaly
-            ' cosn(t) = (cosE(t)-e) / (1 - ecosE(t))
-            ' n(t) = true anomaly
-            ' E(t) = eccentric anomaly
-            ' e = eccentricity
+
+            Dim x = Math.Sqrt(1 - Eccentricity) * Math.Cos(eccentricAnomaly.Radians / 2)
+
+            Dim y = Math.Sqrt(1 + Eccentricity) * Math.Sin(eccentricAnomaly.Radians / 2)
+
+            Dim radians = 2 * Math.Atan2(y, x)
+
+            Return Angle.FromRadians(radians)
         End Function
 
         Private Function CalculateDistance(trueAnomaly As Angle) As Distance
@@ -236,17 +268,30 @@ Namespace Classes
 
         'X = R * (Cos(N) * Cos(TA + w) - Sin(N) * Sin(TA+w)*Cos(i)
         Private Function CalculateX(distance As Distance, trueAnomaly As Angle) As Double
-            Return distance.Kilometers * ((Math.Cos(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) - (Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians))) * Math.Cos(Inclination.Radians)
+            Return distance.AstronomicalUnits * ((Math.Cos(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) - (Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians))) * Math.Cos(Inclination.Radians)
         End Function
 
         'Y = R * (Sin(N) * Cos(TA+w) + Cos(N) * Sin(TA+w)) * Cos(i))
         Private Function CalculateY(distance As Distance, trueAnomaly As Angle) As Double
-            Return distance.Kilometers * ((Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) + (Math.Cos(LongitudeOfAscendingNode.Radians)) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) * Math.Cos(Inclination.Radians)
+            Return distance.AstronomicalUnits * ((Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) + (Math.Cos(LongitudeOfAscendingNode.Radians)) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) * Math.Cos(Inclination.Radians)
         End Function
 
         'Z = R * Sin(TA+w) * Sin(i)
         Private Function CalculateZ(distance As Distance, trueAnomaly As Angle) As Double
-            Return distance.Kilometers * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians) * Math.Sin(Inclination.Radians)
+            Return distance.AstronomicalUnits * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians) * Math.Sin(Inclination.Radians)
+        End Function
+
+        Private Function GenerateOrbitPath() As List(Of Point3D)
+            Dim result As New List(Of Point3D)
+
+            For i = 0 To Period.Days Step 1
+                result.Add(CalculatePosition(i))
+            Next
+
+            ' Add the first point at the end to complete the ellipse
+            result.Add(result(0))
+
+            Return result
         End Function
 
     End Class

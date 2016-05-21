@@ -51,6 +51,7 @@
       <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -113,6 +114,10 @@
     <ProjectReference Include="..\Core\Core.vbproj">
       <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.vbproj">
+      <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
+      <Name>Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.vbproj">
       <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>

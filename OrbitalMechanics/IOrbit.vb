@@ -33,4 +33,8 @@ Public Interface IOrbit
     ''' Represents the angle at which the object lies within its orbit at zero time
     ''' </summary>
     ReadOnly Property MeanAnomalyZero As Angle
+    ''' <summary>
+    ''' List of points representing the full orbit path
+    ''' </summary>
+    ReadOnly Property OrbitPath As List(Of Point3D)
 End Interface
