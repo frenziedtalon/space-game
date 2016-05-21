@@ -63,6 +63,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataProvider.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -78,6 +79,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SolarSystemData.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -99,6 +101,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.vbproj">
+      <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.vbproj">
       <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
       <Name>Data</Name>
