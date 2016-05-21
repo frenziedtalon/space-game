@@ -1,5 +1,5 @@
-﻿Imports NUnit.Framework
-Imports OrbitalMechanics.Classes
+﻿Imports Core.Classes
+Imports NUnit.Framework
 
 Namespace Classes
     <TestFixture>
