@@ -1,4 +1,5 @@
 ﻿Imports Core.Extensions
+Imports Data
 Imports Entities
 Imports OrbitalMechanics.CelestialObjects
 Imports TurnTracker
@@ -10,15 +11,18 @@ Namespace Services
 
         Private ReadOnly _entityManager As IEntityManager
         Private ReadOnly _turnTracker As ITurnTracker
+        Private ReadOnly _dataProvider As IDataProvider
 
         Public Sub New(entityManager As IEntityManager,
-                       turnTracker As ITurnTracker)
+                       turnTracker As ITurnTracker,
+                       dataProvider As IDataProvider)
             _entityManager = entityManager
             _turnTracker = turnTracker
+            _dataProvider = dataProvider
         End Sub
 
         Public Sub CreateStartingScene() Implements ISceneService.CreateStartingScene
-            Dim constructor = New SceneConstructor(_entityManager, _turnTracker)
+            Dim constructor = New SceneConstructor(_entityManager, _turnTracker, _dataProvider)
             constructor.SolSystem()
         End Sub
 
