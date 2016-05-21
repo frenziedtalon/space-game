@@ -121,11 +121,18 @@ var runGame = () => {
         return new BABYLON.Color3(0, 0, 0);
     }
 
-    function createPosition(orbit: Orbit) {
+    function createPositionFromOrbit(orbit: Orbit): BABYLON.Vector3 {
         if (!(orbit === null || orbit === undefined)) {
+            return createPosition(orbit.Position);
+        }
+        return new BABYLON.Vector3(0, 0, 0);
+    }
+
+    function createPosition(position: string): BABYLON.Vector3 {
+        if (!(position === null || position === undefined)) {
             // string like "x,y,z"
-            var array = orbit.Position.split(",");
-            return new BABYLON.Vector3(parseInt(array[0], 10), parseInt(array[1], 10), parseInt(array[2], 10));
+            var array = position.split(",");
+            return new BABYLON.Vector3(parseFloat(array[0]), parseFloat(array[1]), parseFloat(array[2]));
         }
         return new BABYLON.Vector3(0, 0, 0);
     }
@@ -133,7 +140,7 @@ var runGame = () => {
     function renderStar(starInfo: Star): void {
 
         // create a star
-        var starPosition = createPosition(starInfo.Orbit);
+        var starPosition = createPositionFromOrbit(starInfo.Orbit);
 
         var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, starInfo.Radius * 2, scene);
         star.position = starPosition;
@@ -168,8 +175,7 @@ var runGame = () => {
         }
 
         planet.id = planetInfo.Id;
-        planet.position = createPosition(planetInfo.Orbit);
-
+        planet.position = createPositionFromOrbit(planetInfo.Orbit);
         // create a material for the planet
         var planetMaterial = new BABYLON.StandardMaterial(planetInfo.Name + "Material", scene);
         planetMaterial.diffuseTexture = new BABYLON.Texture("Assets/Images/Planet/" + planetInfo.Texture, scene);
@@ -195,7 +201,7 @@ var runGame = () => {
 
         moon.isPickable = moonInfo.CameraTarget;
 
-        moon.position = createPosition(moonInfo.Orbit);
+        moon.position = createPositionFromOrbit(moonInfo.Orbit);
 
         // create a material for the moon
         var moonMaterial = new BABYLON.StandardMaterial(moonInfo.Name + "Material", scene);
@@ -211,20 +217,16 @@ var runGame = () => {
     function renderSatellites(primary: BaseCelestialObject, mesh: BABYLON.Mesh): void {
         // create any satellites
         if (primary.hasOwnProperty("Satellites")) {
-            for (var j = 0; j < primary.Satellites.length; j++) {
+            for (let j = 0; j < primary.Satellites.length; j++) {
                 renderSceneObject(primary.Satellites[j], mesh);
             }
         }
     }
 
-    var animateScene = false;
-
     function beginRenderLoop() {
 
         scene.beforeRender = () => {
-            if (animateScene) {
-                animate();
-            }
+           // nothing for now
         };
 
         // register a render loop to repeatedly render the scene
@@ -233,47 +235,8 @@ var runGame = () => {
         });
     }
 
-    function toggleAnimation() {
-        animateScene = !animateScene;
-    }
-
-    // used in debugging, will not be required when turn based gameplay is implemented
-    // which is a good job as this is very hacky!
-    function animate(): void {
-        for (var i = 0; i < sceneObjects.length; i++) {
-            animateObjectOrbit(sceneObjects[i] as OrbitingCelestialObjectBase);
-        }
-    }
-
-    function animateObjectOrbit(target: OrbitingCelestialObjectBase): void {
-
-        // animate orbit
-        if (!(target.Orbit === undefined || target.Orbit === null) && !(target.Orbit.Speed === 0)) {
-            var mesh = scene.getMeshByID(target.Id);
-            if (!(mesh === undefined) && !(mesh === null)) {
-                mesh.position = calculateNewOrbitPosition(target.Orbit);
-                target.Orbit.Angle += target.Orbit.Speed;
-            }
-        }
-
-        // animate any satellites
-        if (target.hasOwnProperty("Satellites")) {
-            for (var j = 0; j < target.Satellites.length; j++) {
-                animateObjectOrbit(target.Satellites[j]);
-            }
-        }
-    }
-
-    function calculateNewOrbitPosition(orbit: Orbit): BABYLON.Vector3 {
-        var x = orbit.Radius * Math.sin(orbit.Angle);
-        var y = 0;
-        var z = orbit.Radius * Math.cos(orbit.Angle);
-        return new BABYLON.Vector3(x, y, z);
-    }
-
     function drawOrbit(orbit: Orbit, meshName: string, parent: BABYLON.Mesh) {
-        var path = createCircularPath(orbit.Radius);
-
+        const path: BABYLON.Vector3[] = createOrbitPath(orbit.OrbitPath);
         const colour = new BABYLON.Color3(0.54, 0.54, 0.54);
         const orbitalPath = drawPath(meshName, path, colour);
 
@@ -283,33 +246,17 @@ var runGame = () => {
         }
     }
 
-    function createCircularPath(radius: number): Array<BABYLON.Vector3> {
-        let tes = radius / 2;
-        // number of path points, more is smoother
-        if (tes < 40) {
-            tes = 40;
-        } else if (tes > 200) {
-            tes = 200;
+    function createOrbitPath(path: Array<string>): Array<BABYLON.Vector3> {
+        const result: Array<BABYLON.Vector3> = [];
+        for (let i = 0; i < path.length; i += 1) {
+            const position: BABYLON.Vector3 = createPosition(path[i]);
+            result.push(position);
         }
-        const pi2 = Math.PI * 2;
-        const step = pi2 / tes;
-
-        const path: Array<BABYLON.Vector3> = [];
-
-        for (let i = 0; i < pi2; i += step) {
-            const x = radius * Math.sin(i);
-            const y = 0;
-            const z = radius * Math.cos(i);
-            path.push(new BABYLON.Vector3(x, y, z));
-        }
-        // add the first point to complete the circle
-        path.push(path[0]);
-
-        return path;
+        return result;
     }
 
     function drawPath(meshName: string, path: Array<BABYLON.Vector3>, colour: BABYLON.Color3): BABYLON.LinesMesh {
-        const mesh = BABYLON.Mesh.CreateLines(meshName, path, scene);
+        const mesh: BABYLON.LinesMesh = BABYLON.Mesh.CreateLines(meshName, path, scene);
         mesh.color = colour;
         return mesh;
     }
@@ -321,7 +268,7 @@ var runGame = () => {
     function createArcRotateCamera() {
         var camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 15, BABYLON.Vector3.Zero(), scene);
         camera.setPosition(new BABYLON.Vector3(-200, 200, 0));
-        camera.lowerRadiusLimit = 50;
+        camera.lowerRadiusLimit = 2;
         camera.upperRadiusLimit = 400;
 
         // use the new camera
@@ -372,15 +319,12 @@ var runGame = () => {
             if (evt.keyCode === 32) {
                 // spacebar
                 toggleDebugLayer();
-            } else if (evt.keyCode === 97) {
-                // a
-                toggleAnimation();
             }
         });
     }
 
     function updateCameraTarget(targetId: string): void {
-        var data = "target=" + targetId;
+        const data = "target=" + targetId;
 
         $.ajax({
             url: "../SpaceGameApi/api/Camera/SetTarget?" + data,
@@ -399,7 +343,7 @@ var runGame = () => {
     }
 
     function setCameraTarget(target: string): void {
-        var mesh = scene.getMeshByID(target);
+        const mesh = scene.getMeshByID(target);
         if (!(mesh === null)) {
             scene.activeCamera.parent = mesh;
         }
