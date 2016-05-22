@@ -181,8 +181,6 @@ Namespace Classes
             Dim trueAnomaly As Angle = CalculateTrueAnomaly(eccentricAnomaly)
             Dim distance As Distance = CalculateDistance(trueAnomaly)
 
-            'Debug.WriteLine("MA: {0}, EA: {1}, TA: {2}, D: {3}", meanAnomaly.Degrees, eccentricAnomaly.Degrees, trueAnomaly.Degrees, distance.AstronomicalUnits)
-
             Dim x = CalculateX(distance, trueAnomaly)
             Dim y = CalculateY(distance, trueAnomaly)
             Dim z = CalculateZ(distance, trueAnomaly)
@@ -203,15 +201,7 @@ Namespace Classes
 
             Dim threshold = Angle.FromDegrees(0.001).Radians
             Dim maxIterations = 50
-
             Dim iterations = 0
-
-            ' E = M + e * sin(M) * ( 1.0 + e * cos(M) )
-            ' E = M + (e * sin(M) * ( 1.0 + (e * cos(M)) ))
-            'Dim E0 = MeanAnomaly().Radians + (
-            '    Eccentricity * Math.Sin(MeanAnomaly().Radians) *
-            '    (1 + (Eccentricity * Math.Cos(MeanAnomaly().Radians)))
-            ')
 
             ' initial guess
             Dim En As Double = If(Eccentricity > 0.8, Math.PI, meanAnomaly.Radians)
