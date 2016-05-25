@@ -31,17 +31,5 @@ Namespace Classes
             Assert.AreEqual(aus, result)
         End Sub
 
-        <Test()>
-        Public Sub Distance_WhenLessThanZero_ThrowsArgumentOutOfRangeException()
-
-            Dim d As Double = -10000
-            Dim expected = GetType(ArgumentOutOfRangeException)
-
-            Dim ex = Assert.Catch(Of Exception)(Function() Distance.FromKilometers(d))
-
-            Assert.IsInstanceOf(expected, ex)
-        End Sub
-
-
     End Class
 End Namespace

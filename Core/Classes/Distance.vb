@@ -7,9 +7,6 @@ Namespace Classes
         Const KilometersInAstronomicalUnit As Double = 149597870.691
 
         Private Sub New(kilometers As Double)
-            If kilometers < 0 Then
-                Throw New ArgumentOutOfRangeException(NameOf(kilometers), "Distance should be greater than zero.")
-            End If
             _kilometers = kilometers
         End Sub
 
