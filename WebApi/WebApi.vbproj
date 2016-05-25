@@ -174,7 +174,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -216,7 +215,6 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\SceneConstructor.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -232,8 +230,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Services\ISceneService.vb" />
-    <Compile Include="Services\SceneService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -281,6 +277,14 @@
       <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Data.InMemoryData\Data.InMemoryData.vbproj">
+      <Project>{a797f444-2a0f-4fba-9b63-9ad42c55e787}</Project>
+      <Name>Data.InMemoryData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.vbproj">
+      <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.vbproj">
       <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>
       <Name>Entities</Name>
@@ -288,6 +292,10 @@
     <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.vbproj">
       <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
       <Name>OrbitalMechanics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scene\Scene.vbproj">
+      <Project>{0c3f75e6-608f-4fc5-8f2a-1c74c01807ce}</Project>
+      <Name>Scene</Name>
     </ProjectReference>
     <ProjectReference Include="..\TurnTracker.InMemoryTurnTracker\TurnTracker.InMemoryTurnTracker.vbproj">
       <Project>{dc91d260-31a7-4dd0-97fc-bd6dbcac0396}</Project>

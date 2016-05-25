@@ -67,6 +67,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AngleTests.vb" />
+    <Compile Include="Classes\DistanceTests.vb" />
     <Compile Include="Extensions\EnumerableExtensionsTests.vb" />
     <Compile Include="Extensions\GuidExtensionsTests.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

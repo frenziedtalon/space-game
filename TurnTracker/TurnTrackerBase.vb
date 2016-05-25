@@ -41,4 +41,10 @@
             Return _turnLength
         End Get
     End Property
+
+    Public ReadOnly Property TimeSinceStart As TimeSpan Implements ITurnTracker.TimeSinceStart
+        Get
+            Return TimeSpan.FromDays(_turnLength.Days * _number)
+        End Get
+    End Property
 End Class

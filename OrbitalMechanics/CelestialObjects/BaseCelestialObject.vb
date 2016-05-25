@@ -1,5 +1,6 @@
 ﻿Imports Core.Extensions
 Imports Entities
+Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
 
@@ -49,19 +50,16 @@ Namespace CelestialObjects
             Return _satellites.HasAny()
         End Function
 
-        Public Sub AddSatellite(s As OrbitingCelestialObjectBase)
-            If s IsNot Nothing Then
-                s.Primary = Id
-                _satellites.Add(s)
-            End If
-        End Sub
+        Public Sub AddSatellite(s As OrbitingCelestialObjectBase, o As IOrbit)
 
-        Public Sub AddSatellite(s As List(Of OrbitingCelestialObjectBase))
-            If s.HasAny() Then
-                For Each o In s
-                    AddSatellite(o)
-                Next
+            If s Is Nothing Then
+                Throw New ArgumentNullException(NameOf(s))
+            ElseIf o Is Nothing Then
+                Throw New ArgumentNullException(NameOf(o))
             End If
+
+            s.SetOrbit(Me, o)
+            _satellites.Add(s)
         End Sub
     End Class
 End Namespace

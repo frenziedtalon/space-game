@@ -7,6 +7,7 @@ Public MustInherit Class BaseGameEntity
 
     ' every entity has a unique identifier
     Private ReadOnly _id As Guid
+    Protected ReadOnly _entityManager As IEntityManager
 
     Public ReadOnly Property Id As Guid
         Get
@@ -22,7 +23,8 @@ Public MustInherit Class BaseGameEntity
         End If
 
         _id = Guid.NewGuid()
-        entityManager.RegisterEntity(Me)
+        _entityManager = entityManager
+        _entityManager.RegisterEntity(Me)
     End Sub
 
     ''' <summary>

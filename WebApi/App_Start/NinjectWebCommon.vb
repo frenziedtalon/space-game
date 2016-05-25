@@ -1,10 +1,12 @@
 ﻿Imports Camera
+Imports Data
+Imports Data.InMemoryData
 Imports Entities
 Imports Microsoft.Web.Infrastructure.DynamicModuleHelper
 Imports Ninject
 Imports Ninject.Web.Common
+Imports Scene
 Imports TurnTracker
-Imports WebApi.Services
 
 <Assembly: WebActivatorEx.PreApplicationStartMethod(GetType(WebApi.App_Start.NinjectWebCommon), "Start")>
 <Assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(GetType(WebApi.App_Start.NinjectWebCommon), "Stop")>
@@ -61,6 +63,8 @@ Namespace WebApi.App_Start
             kernel.Bind(Of ITurnTracker)().To(Of InMemoryTurnTracker.TurnTracker)().InSingletonScope()
             kernel.Bind(Of ISceneService)().To(Of SceneService)()
             kernel.Bind(Of ICameraService)().To(Of InMemoryCamera.CameraService)().InSingletonScope()
+            kernel.Bind(Of IDataProvider)().To(Of DataProvider)().InSingletonScope()
+            kernel.Bind(Of ISolarSystemData)().To(Of SolarSystemData)().InSingletonScope()
         End Sub
     End Class
 End Namespace

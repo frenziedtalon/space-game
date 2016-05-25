@@ -1,6 +1,4 @@
 class Orbit {
-    Radius: number;
-    Speed: number;
-    Angle: number;
+    OrbitPath: Array<string>;
     Position: string;
 }

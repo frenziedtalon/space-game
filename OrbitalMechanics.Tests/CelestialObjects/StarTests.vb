@@ -2,7 +2,6 @@
 Imports NSubstitute
 Imports NUnit.Framework
 Imports OrbitalMechanics.CelestialObjects
-Imports OrbitalMechanics.Classes
 
 <TestFixture>
 Public Class StarTests
@@ -17,9 +16,8 @@ Public Class StarTests
     Public Sub Classification_WhenCalled_ReturnsCorrectValue(temperature As Integer, expected As StarClassification)
 
         Dim entityManager As IEntityManager = Substitute.For(Of IEntityManager)
-        Dim orbit As IOrbit = Substitute.For(Of IOrbit)
 
-        Dim star As New Star("test", 1, temperature, "none", 1, orbit, entityManager)
+        Dim star As New Star("test", 1, temperature, "none", 1, entityManager)
 
         Assert.AreEqual(expected, star.Classification)
 

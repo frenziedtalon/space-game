@@ -14,11 +14,10 @@ Namespace CelestialObjects
                        mass As Integer,
                        surfaceTemperature As Integer,
                        texture As String,
-                       radius As Integer,
-                       orbit As IOrbit,
+                       radius As Double,
                        entityManager As IEntityManager)
 
-            MyBase.New(name, mass, texture, orbit, entityManager)
+            MyBase.New(name, mass, texture, entityManager)
             _surfaceTemperature = surfaceTemperature
             _radius = radius
         End Sub
@@ -55,8 +54,8 @@ Namespace CelestialObjects
             End Get
         End Property
 
-        Private ReadOnly _radius As Integer
-        Public ReadOnly Property Radius As Integer Implements ISphere.Radius
+        Private ReadOnly _radius As Double
+        Public ReadOnly Property Radius As Double Implements ISphere.Radius
             Get
                 Return _radius
             End Get

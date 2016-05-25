@@ -5,4 +5,5 @@ Public Interface ITurnTracker
     ReadOnly Property StartDate As Date
     ReadOnly Property CurrentDate As Date
     ReadOnly Property TurnLength As TimeSpan
+    ReadOnly Property TimeSinceStart As TimeSpan
 End Interface

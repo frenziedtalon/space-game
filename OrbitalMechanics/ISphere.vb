@@ -3,7 +3,7 @@
 Public Interface ISphere
     Inherits I3DObject
 
-    ReadOnly Property Radius As Integer
+    ReadOnly Property Radius As Double
 
     <JsonIgnore>
     ReadOnly Property AxialTilt As Integer
