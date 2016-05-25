@@ -176,6 +176,17 @@ Namespace Classes
         End Property
 
         Private Function CalculatePosition(days As Double) As Point3D
+            Select Case Eccentricity
+                Case > 1
+                    Return CalculatePositionForHyperbolicOrbit(days)
+                Case 1
+                    Return CalculatePositionForParabolicOrbit(days)
+                Case Else
+                    Return CalculatePositionForEllipticalOrbit(days)
+            End Select
+        End Function
+
+        Private Function CalculatePositionForEllipticalOrbit(days As Double) As Point3D
             Dim meanAnomaly As Angle = CalculateMeanAnomaly(days)
             Dim eccentricAnomaly As Angle = CalculateEccentricAnomaly(meanAnomaly)
             Dim trueAnomaly As Angle = CalculateTrueAnomaly(eccentricAnomaly)
@@ -185,7 +196,15 @@ Namespace Classes
             Dim y = CalculateY(distance, trueAnomaly)
             Dim z = CalculateZ(distance, trueAnomaly)
 
-            Return New Point3D(x, y, z)
+            Return New Point3D(x.AstronomicalUnits, y.AstronomicalUnits, z.AstronomicalUnits)
+        End Function
+
+        Private Function CalculatePositionForParabolicOrbit(days As Double) As Point3D
+            Throw New NotImplementedException
+        End Function
+
+        Private Function CalculatePositionForHyperbolicOrbit(days As Double) As Point3D
+            Throw New NotImplementedException
         End Function
 
         ''' <summary>
@@ -205,29 +224,21 @@ Namespace Classes
 
             ' initial guess
             Dim En As Double = If(Eccentricity > 0.8, Math.PI, meanAnomaly.Radians)
+            Dim En1 As Double = 0.0
 
             Do Until iterations >= maxIterations
                 ' E1 = E0 - ( E0 - e * sin(E0) - M ) / ( 1 - e * cos(E0) )
-                Dim En1 As Double = 0.0
-
                 En1 = En - ((En - meanAnomaly.Radians - (Eccentricity * Math.Sin(En))) / (1 - (Eccentricity * Math.Cos(En))))
 
                 If En1 - En < threshold Then
-                    Return Angle.FromRadians(En1)
+                    Exit Do
                 End If
 
                 iterations += 1
                 En = En1
             Loop
 
-            ' values are not converging, eccentricity probably near to 1. Use calculation for a near-parabolic or parabolic orbit.
-
-            If Double.Equals(Eccentricity, 1.0) Then
-                ' http://www.stjarnhimlen.se/comp/ppcomp.html#18
-
-            Else
-                ' http://www.stjarnhimlen.se/comp/ppcomp.html#19
-            End If
+            Return Angle.FromRadians(En1)
         End Function
 
         ''' <summary>
@@ -257,31 +268,46 @@ Namespace Classes
         'i - inclination
 
         'X = R * (Cos(N) * Cos(TA + w) - Sin(N) * Sin(TA+w)*Cos(i)
-        Private Function CalculateX(distance As Distance, trueAnomaly As Angle) As Double
-            Return distance.AstronomicalUnits * ((Math.Cos(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) - (Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians))) * Math.Cos(Inclination.Radians)
+        Private Function CalculateX(distance As Distance, trueAnomaly As Angle) As Distance
+            Dim kilometers = distance.Kilometers * ((Math.Cos(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) - (Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians))) * Math.Cos(Inclination.Radians)
+            Return Distance.FromKilometers(kilometers)
         End Function
 
         'Y = R * (Sin(N) * Cos(TA+w) + Cos(N) * Sin(TA+w)) * Cos(i))
-        Private Function CalculateY(distance As Distance, trueAnomaly As Angle) As Double
-            Return distance.AstronomicalUnits * ((Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) + (Math.Cos(LongitudeOfAscendingNode.Radians)) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) * Math.Cos(Inclination.Radians)
+        Private Function CalculateY(distance As Distance, trueAnomaly As Angle) As Distance
+            Dim kilometers = distance.Kilometers * ((Math.Sin(LongitudeOfAscendingNode.Radians) * Math.Cos(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) + (Math.Cos(LongitudeOfAscendingNode.Radians)) * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians)) * Math.Cos(Inclination.Radians)
+            Return Distance.FromKilometers(kilometers)
         End Function
 
         'Z = R * Sin(TA+w) * Sin(i)
-        Private Function CalculateZ(distance As Distance, trueAnomaly As Angle) As Double
-            Return distance.AstronomicalUnits * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians) * Math.Sin(Inclination.Radians)
+        Private Function CalculateZ(distance As Distance, trueAnomaly As Angle) As Distance
+            Dim kilometers = distance.Kilometers * Math.Sin(trueAnomaly.Radians + ArgumentOfPeriapsis.Radians) * Math.Sin(Inclination.Radians)
+            Return Distance.FromKilometers(kilometers)
         End Function
 
         Private Function GenerateOrbitPath() As List(Of Point3D)
             Dim result As New List(Of Point3D)
+            Dim stepSize = CalculateOrbitPathStep()
 
-            For i = 0 To Period.Days Step 1
+            For i = 0 To Period.Days Step stepSize
                 result.Add(CalculatePosition(i))
             Next
 
-            ' Add the first point at the end to complete the ellipse
-            result.Add(result(0))
+            If Eccentricity < 1 Then
+                ' Add the first point at the end to complete the ellipse
+                result.Add(result(0))
+            End If
 
             Return result
+        End Function
+
+        Private Function CalculateOrbitPathStep() As Double
+            ' speed around periapsis can be very high and so we need greater plot points to maintain the illusion of a continuous ellipse in certain circumstances
+
+            ' lower the eccentricity, higher the step size
+            ' higher the semi major axis, higher the step size
+
+            Return 1
         End Function
 
     End Class

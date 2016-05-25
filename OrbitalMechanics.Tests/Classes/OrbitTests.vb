@@ -38,8 +38,6 @@ Namespace Classes
 
         End Sub
 
-        ' TODO: Need tests for near parabolic and parabolic orbits
-
         <Test, TestCaseSource(NameOf(PositionTestCases))>
         Public Sub Postion_WhenCalled_CalculatesCorrectValue(orbitData As OrbitData,
                                                              days As Integer,
@@ -48,14 +46,16 @@ Namespace Classes
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
             turnTracker.TimeSinceStart.Returns(TimeSpan.FromDays(days))
 
+            Dim acceptableDelta = Distance.FromKilometers(1).AstronomicalUnits
+
             Dim orbit As New Orbit(turnTracker:=turnTracker,
                                    data:=orbitData)
 
             Dim result = orbit.Position
 
-            Assert.AreEqual(expected.X, result.X)
-            Assert.AreEqual(expected.Y, result.Y)
-            Assert.AreEqual(expected.Z, result.Z)
+            Assert.AreEqual(expected.X, result.X, acceptableDelta)
+            Assert.AreEqual(expected.Y, result.Y, acceptableDelta)
+            Assert.AreEqual(expected.Z, result.Z, acceptableDelta)
 
         End Sub
 
@@ -63,11 +63,11 @@ Namespace Classes
             Get
                 Dim result As New List(Of TestCaseData)
 
-                Dim data = MercuryOrbitData()
-
-                Dim expectedPosition = New Point3D(0, 0, 0)
-
-                result.Add(New TestCaseData(data, 24, expectedPosition))
+                result.Add(New TestCaseData(CircleOrbitData(), 24, New Point3D(0.369928936893292, -0.103776979676777, -0.0424300359336039)))
+                result.Add(New TestCaseData(EllipseOrbitData(), 24, New Point3D(0.316490543667733, -0.251640966090076, -0.0496036407071594)))
+                result.Add(New TestCaseData(NearParabolicOrbitData(), 24, New Point3D(-0.102456758387709, -0.640085808608179, -0.0428818574544085)))
+                'result.Add(New TestCaseData(ParabolicOrbitData(), 24, New Point3D(0, 0, 0)))
+                'result.Add(New TestCaseData(HyperbolaOrbitData(), 24, New Point3D(0, 0, 0)))
 
                 Return result
             End Get
@@ -79,7 +79,7 @@ Namespace Classes
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
             turnTracker.TimeSinceStart.Returns(TimeSpan.FromDays(57))
 
-            Dim orbitData = MercuryOrbitData()
+            Dim orbitData = EllipseOrbitData()
             Dim orbit = New Orbit(turnTracker, orbitData)
 
             Dim result1 = orbit.Position
@@ -93,7 +93,7 @@ Namespace Classes
         <Test()>
         Public Sub OrbitPath_WhenCalled_ReturnsMultipleValues()
 
-            Dim orbitData = MercuryOrbitData()
+            Dim orbitData = EllipseOrbitData()
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
             Dim orbit = New Orbit(turnTracker, orbitData)
 
@@ -106,7 +106,7 @@ Namespace Classes
         <Test()>
         Public Sub OrbitPath_WhenCalled_ReturnsSameValueInFirstAndLastPosition()
 
-            Dim orbitData = MercuryOrbitData()
+            Dim orbitData = EllipseOrbitData()
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
             Dim orbit = New Orbit(turnTracker, orbitData)
 
@@ -119,12 +119,49 @@ Namespace Classes
             Assert.AreEqual(result(0).Z, result(last).Z)
         End Sub
 
-        Private Shared Function MercuryOrbitData() As OrbitData
+        Private Shared Function CircleOrbitData() As OrbitData
+            Return New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(48.3313),
+                                  inclination:=Angle.FromDegrees(7.0047),
+                                  argumentOfPeriapsis:=Angle.FromDegrees(29.1241),
+                                  semiMajorAxis:=Distance.FromAstronomicalUnits(0.38709893),
+                                  eccentricity:=0.0,
+                                  meanAnomalyZero:=Angle.FromDegrees(168.6562))
+        End Function
+
+        Private Shared Function EllipseOrbitData() As OrbitData
+            ' Data is for Mercury
             Return New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(48.3313),
                                   inclination:=Angle.FromDegrees(7.0047),
                                   argumentOfPeriapsis:=Angle.FromDegrees(29.1241),
                                   semiMajorAxis:=Distance.FromAstronomicalUnits(0.38709893),
                                   eccentricity:=0.205635,
+                                  meanAnomalyZero:=Angle.FromDegrees(168.6562))
+        End Function
+
+        Private Shared Function NearParabolicOrbitData() As OrbitData
+            Return New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(48.3313),
+                                  inclination:=Angle.FromDegrees(7.0047),
+                                  argumentOfPeriapsis:=Angle.FromDegrees(29.1241),
+                                  semiMajorAxis:=Distance.FromAstronomicalUnits(0.38709893),
+                                  eccentricity:=0.99,
+                                  meanAnomalyZero:=Angle.FromDegrees(168.6562))
+        End Function
+
+        Private Shared Function ParabolicOrbitData() As OrbitData
+            Return New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(48.3313),
+                                  inclination:=Angle.FromDegrees(7.0047),
+                                  argumentOfPeriapsis:=Angle.FromDegrees(29.1241),
+                                  semiMajorAxis:=Distance.FromAstronomicalUnits(0.38709893),
+                                  eccentricity:=1.0,
+                                  meanAnomalyZero:=Angle.FromDegrees(168.6562))
+        End Function
+
+        Private Shared Function HyperbolaOrbitData() As OrbitData
+            Return New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(48.3313),
+                                  inclination:=Angle.FromDegrees(7.0047),
+                                  argumentOfPeriapsis:=Angle.FromDegrees(29.1241),
+                                  semiMajorAxis:=Distance.FromAstronomicalUnits(0.38709893),
+                                  eccentricity:=1.1,
                                   meanAnomalyZero:=Angle.FromDegrees(168.6562))
         End Function
 
