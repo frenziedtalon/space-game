@@ -23,8 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WebApi.Tests", "WebApi.Tests\WebApi.Tests.vbproj", "{83F40C0D-3CA0-4790-B2CF-2E112FD2C5A8}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "OrbitalMechanics.Tests", "OrbitalMechanics.Tests\OrbitalMechanics.Tests.vbproj", "{4F704AA4-7F50-4E4B-A3EC-7CA8C2E2F216}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Entities.Tests", "Entities.Tests\Entities.Tests.vbproj", "{68E76602-845B-4D9D-A928-3CD9A5BD081A}"
@@ -35,15 +33,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TurnTracker", "TurnTracker\
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TurnTracker.InMemoryTurnTracker", "TurnTracker.InMemoryTurnTracker\TurnTracker.InMemoryTurnTracker.vbproj", "{DC91D260-31A7-4DD0-97FC-BD6DBCAC0396}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TurnTracker.InMemoryTurnTracker.Tests", "TurnTracker.InMemoryTurnTracker.Tests\TurnTracker.InMemoryTurnTracker.Tests.vbproj", "{D1E6E059-A6F6-40A7-B7BD-C0F18DC86D36}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TurnTracker.Tests", "TurnTracker.Tests\TurnTracker.Tests.vbproj", "{87F6BF8F-4C73-4A68-B8D8-A34DC8FA002D}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Core.Tests", "Core.Tests\Core.Tests.vbproj", "{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Camera", "Camera\Camera.vbproj", "{10644977-96C4-4144-AA73-78043E86FB29}"
-EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Camera.Tests", "Camera.Tests\Camera.Tests.vbproj", "{570B2F00-F1C9-4014-84C7-3A840CC97994}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Camera.InMemoryCamera", "Camera.InMemoryCamera\Camera.InMemoryCamera.vbproj", "{E9C8D057-371A-4B7C-B2BB-4B5B07DB02AC}"
 EndProject
@@ -87,10 +81,6 @@ Global
 		{0D4795B8-76CD-486A-9D80-433386CAD100}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D4795B8-76CD-486A-9D80-433386CAD100}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D4795B8-76CD-486A-9D80-433386CAD100}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83F40C0D-3CA0-4790-B2CF-2E112FD2C5A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83F40C0D-3CA0-4790-B2CF-2E112FD2C5A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83F40C0D-3CA0-4790-B2CF-2E112FD2C5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83F40C0D-3CA0-4790-B2CF-2E112FD2C5A8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4F704AA4-7F50-4E4B-A3EC-7CA8C2E2F216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F704AA4-7F50-4E4B-A3EC-7CA8C2E2F216}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F704AA4-7F50-4E4B-A3EC-7CA8C2E2F216}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -111,10 +101,6 @@ Global
 		{DC91D260-31A7-4DD0-97FC-BD6DBCAC0396}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC91D260-31A7-4DD0-97FC-BD6DBCAC0396}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC91D260-31A7-4DD0-97FC-BD6DBCAC0396}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1E6E059-A6F6-40A7-B7BD-C0F18DC86D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1E6E059-A6F6-40A7-B7BD-C0F18DC86D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1E6E059-A6F6-40A7-B7BD-C0F18DC86D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1E6E059-A6F6-40A7-B7BD-C0F18DC86D36}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87F6BF8F-4C73-4A68-B8D8-A34DC8FA002D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{87F6BF8F-4C73-4A68-B8D8-A34DC8FA002D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87F6BF8F-4C73-4A68-B8D8-A34DC8FA002D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -127,10 +113,6 @@ Global
 		{10644977-96C4-4144-AA73-78043E86FB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10644977-96C4-4144-AA73-78043E86FB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10644977-96C4-4144-AA73-78043E86FB29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{570B2F00-F1C9-4014-84C7-3A840CC97994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{570B2F00-F1C9-4014-84C7-3A840CC97994}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{570B2F00-F1C9-4014-84C7-3A840CC97994}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{570B2F00-F1C9-4014-84C7-3A840CC97994}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9C8D057-371A-4B7C-B2BB-4B5B07DB02AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E9C8D057-371A-4B7C-B2BB-4B5B07DB02AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9C8D057-371A-4B7C-B2BB-4B5B07DB02AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
