@@ -16,7 +16,8 @@ Namespace Classes
                         inclination As Angle,
                         argumentOfPeriapsis As Angle,
                         longitudeOfAscendingNode As Angle,
-                        meanAnomalyZero As Angle)
+                        meanAnomalyZero As Angle,
+                        Optional shouldDisplayOrbit As Boolean = False)
             _turnTracker = turnTracker
             _semiMajorAxis = semiMajorAxis
             _eccentricity = eccentricity
@@ -24,10 +25,12 @@ Namespace Classes
             _argumentOfPeriapsis = argumentOfPeriapsis
             _longitudeOfAscendingNode = longitudeOfAscendingNode
             _meanAnomalyZero = meanAnomalyZero
+            _shouldDisplayOrbit = shouldDisplayOrbit
         End Sub
 
         Public Sub New(turnTracker As ITurnTracker,
-                       data As OrbitData)
+                       data As OrbitData,
+                       Optional shouldDisplayOrbit As Boolean = False)
 
             Me.New(turnTracker:=turnTracker,
                                    semiMajorAxis:=data.SemiMajorAxis,
@@ -35,7 +38,8 @@ Namespace Classes
                                    inclination:=data.Inclination,
                                    argumentOfPeriapsis:=data.ArgumentOfPeriapsis,
                                    longitudeOfAscendingNode:=data.LongitudeOfAscendingNode,
-                                   meanAnomalyZero:=data.MeanAnomalyZero)
+                                   meanAnomalyZero:=data.MeanAnomalyZero,
+                                   shouldDisplayOrbit:=shouldDisplayOrbit)
         End Sub
 
         Public Sub Update() Implements IOrbit.Update
@@ -165,15 +169,36 @@ Namespace Classes
             End Get
         End Property
 
+        Private _shouldDisplayOrbit As Boolean
+        Private ReadOnly Property ShouldDisplayOrbit As Boolean
+            Get
+                Return _shouldDisplayOrbit
+            End Get
+        End Property
+
         Private _orbitPath As List(Of Point3D)
         Public ReadOnly Property OrbitPath As List(Of Point3D) Implements IOrbit.OrbitPath
             Get
                 If _orbitPath Is Nothing Then
-                    _orbitPath = GenerateOrbitPath()
+                    If ShouldDisplayOrbit Then
+                        _orbitPath = GenerateOrbitPath()
+                    Else
+                        _orbitPath = New List(Of Point3D)
+                    End If
                 End If
                 Return _orbitPath
             End Get
         End Property
+
+        Public Sub StartDisplayingOrbitPath()
+            _shouldDisplayOrbit = True
+            _orbitPath = Nothing
+        End Sub
+
+        Public Sub StopDisplayingOrbitPath()
+            _shouldDisplayOrbit = False
+            _orbitPath = Nothing
+        End Sub
 
         Private Function CalculatePosition(days As Double) As Point3D
             Select Case Eccentricity
