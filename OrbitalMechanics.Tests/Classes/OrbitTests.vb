@@ -95,7 +95,7 @@ Namespace Classes
 
             Dim orbitData = EllipseOrbitData()
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
-            Dim orbit = New Orbit(turnTracker, orbitData)
+            Dim orbit = New Orbit(turnTracker, orbitData, shouldDisplayOrbit:=True)
 
             Dim result = orbit.OrbitPath
 
@@ -108,7 +108,7 @@ Namespace Classes
 
             Dim orbitData = EllipseOrbitData()
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
-            Dim orbit = New Orbit(turnTracker, orbitData)
+            Dim orbit = New Orbit(turnTracker, orbitData, shouldDisplayOrbit:=True)
 
             Dim result = orbit.OrbitPath
 
@@ -164,6 +164,56 @@ Namespace Classes
                                   eccentricity:=1.1,
                                   meanAnomalyZero:=Angle.FromDegrees(168.6562))
         End Function
+
+        <Test()>
+        Public Sub ctor_ShouldDisplayOrbitIsFalse_DoesNotGenerateOrbitPath()
+            Dim orbitData = EllipseOrbitData()
+            Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
+            Dim orbit = New Orbit(turnTracker, orbitData, shouldDisplayOrbit:=False)
+
+            Dim result = orbit.OrbitPath
+
+            Assert.AreNotEqual(Nothing, result)
+            Assert.AreEqual(0, result.Count)
+        End Sub
+
+        <Test()>
+        Public Sub StartDisplayingOrbitPath_WhenCalled_GeneratesOrbitPath()
+            Dim orbitData = EllipseOrbitData()
+            Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
+            Dim orbit = New Orbit(turnTracker, orbitData, shouldDisplayOrbit:=False)
+
+            Dim displayFalseResult = orbit.OrbitPath
+
+            Assert.AreNotEqual(Nothing, displayFalseResult)
+            Assert.AreEqual(0, displayFalseResult.Count)
+
+            orbit.StartDisplayingOrbitPath()
+
+            Dim result = orbit.OrbitPath
+
+            Assert.AreNotEqual(Nothing, result)
+            Assert.AreNotEqual(0, result.Count)
+        End Sub
+
+        <Test()>
+        Public Sub StopDisplayingOrbitPath_WhenCalled_ClearsOrbitPath()
+            Dim orbitData = EllipseOrbitData()
+            Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
+            Dim orbit = New Orbit(turnTracker, orbitData, shouldDisplayOrbit:=True)
+
+            Dim displayTrueResult = orbit.OrbitPath
+
+            Assert.AreNotEqual(Nothing, displayTrueResult)
+            Assert.AreNotEqual(0, displayTrueResult.Count)
+
+            orbit.StopDisplayingOrbitPath()
+
+            Dim result = orbit.OrbitPath
+
+            Assert.AreNotEqual(Nothing, result)
+            Assert.AreEqual(0, result.Count)
+        End Sub
 
     End Class
 End Namespace

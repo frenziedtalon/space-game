@@ -42,6 +42,7 @@
     <Content Include="Assets\Images\Star\sun.jpg" />
     <Content Include="index.html" />
     <Content Include="Scripts\babylon.max.js" />
+    <Content Include="Scripts\hand.minified-1.2.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
