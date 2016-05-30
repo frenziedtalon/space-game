@@ -1,5 +1,4 @@
 ﻿Imports Entities
-Imports OrbitalMechanics.Classes
 Imports Core.Extensions
 
 Namespace CelestialObjects
