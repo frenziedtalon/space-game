@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AngleTests.vb" />
+    <Compile Include="Classes\DistanceRangeTests.vb" />
     <Compile Include="Classes\DistanceTests.vb" />
     <Compile Include="Classes\RangeTests.vb" />
     <Compile Include="Extensions\EnumerableExtensionsTests.vb" />
