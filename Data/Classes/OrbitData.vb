@@ -12,12 +12,6 @@ Namespace Classes
         ''' <summary>
         ''' Distances and angles must be in the correct units, astronomical units and radians
         ''' </summary>
-        ''' <param name="semiMajorAxis">astronomical units</param>
-        ''' <param name="eccentricity">double</param>
-        ''' <param name="inclination">radians</param>
-        ''' <param name="argumentOfPeriapsis">radians</param>
-        ''' <param name="longitudeOfAscendingNode">radians</param>
-        ''' <param name="meanAnomalyZero">radians</param>
         Public Sub New(semiMajorAxis As Distance,
                         eccentricity As Double,
                         inclination As Angle,
