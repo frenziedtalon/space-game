@@ -63,7 +63,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SceneScaling.vb" />
     <Compile Include="ISceneService.vb" />
+    <Compile Include="ISceneState.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -81,6 +83,7 @@
     </Compile>
     <Compile Include="SceneConstructor.vb" />
     <Compile Include="SceneService.vb" />
+    <Compile Include="SceneState.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

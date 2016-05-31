@@ -78,7 +78,7 @@ var runGame = () => {
     }
 
     function endTurnSuccess(turnData: TurnResult): void {
-        sceneObjects = ((turnData.Scene) as Array<BaseGameEntity>);
+        sceneObjects = ((turnData.Scene.CelestialObjects) as Array<BaseGameEntity>);
         renderSceneObjects();
         createSkybox();
         setCameraTarget(turnData.Camera.CurrentTarget);
