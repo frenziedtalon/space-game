@@ -1,4 +1,5 @@
 ﻿Imports Core
+Imports Core.Classes
 Imports Entities
 Imports Newtonsoft.Json
 Imports OrbitalMechanics.Classes
@@ -14,7 +15,7 @@ Namespace CelestialObjects
                        mass As Integer,
                        surfaceTemperature As Integer,
                        texture As String,
-                       radius As Double,
+                       radius As Distance,
                        entityManager As IEntityManager)
 
             MyBase.New(name, mass, texture, entityManager)
@@ -54,8 +55,8 @@ Namespace CelestialObjects
             End Get
         End Property
 
-        Private ReadOnly _radius As Double
-        Public ReadOnly Property Radius As Double Implements ISphere.Radius
+        Private ReadOnly _radius As Distance
+        Public ReadOnly Property Radius As Distance Implements ISphere.Radius
             Get
                 Return _radius
             End Get
@@ -94,15 +95,14 @@ Namespace CelestialObjects
 
         Public ReadOnly Property Volume As Double Implements I3DObject.Volume
             Get
-                If Double.Equals(_volume, 0.0) AndAlso Radius > 0 Then
-                    _volume = Helpers.Shapes.ShapeHelper.VolumeOfASphere(Radius)
+                If Double.Equals(_volume, 0.0) AndAlso Radius.Kilometers > 0 Then
+                    _volume = Helpers.Shapes.ShapeHelper.VolumeOfASphere(Radius.Kilometers)
                 End If
                 Return _volume
             End Get
         End Property
 
     End Class
-
 
     Public Enum StarClassification
         O

@@ -142,7 +142,7 @@ var runGame = () => {
         // create a star
         var starPosition = createPositionFromOrbit(starInfo.Orbit);
 
-        var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, starInfo.Radius * 2, scene);
+        var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, starInfo.Radius.Kilometers * 2, scene);
         star.position = starPosition;
 
         // create the material for the star, removing its reaction to other light sources
@@ -167,7 +167,7 @@ var runGame = () => {
 
     function renderPlanet(planetInfo: Planet, parent: BABYLON.Mesh): void {
 
-        var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, planetInfo.Radius * 2, scene);
+        var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, planetInfo.Radius.Kilometers * 2, scene);
 
         if (parent !== undefined) {
             // positions applied are in addition to those of the parent
@@ -191,7 +191,7 @@ var runGame = () => {
     }
 
     function renderMoon(moonInfo: Moon, parent: BABYLON.Mesh): void {
-        var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, 16, moonInfo.Radius * 2, scene);
+        var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, 16, moonInfo.Radius.Kilometers * 2, scene);
 
         if (parent !== undefined) {
             // positions applied are in addition to those of the parent
