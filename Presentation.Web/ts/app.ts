@@ -134,9 +134,9 @@ var runGame = () => {
             // string like "x,y,z"
             var array = position.split(",");
 
-            var x = scaleSemiMajorAxisKilometers(parseFloat(array[0]));
-            var y = scaleSemiMajorAxisKilometers(parseFloat(array[1]));
-            var z = scaleSemiMajorAxisKilometers(parseFloat(array[2]));
+            var x = scaleSemiMajorAxisKilometers(parseFloat(array[1]));
+            var y = scaleSemiMajorAxisKilometers(parseFloat(array[2]));
+            var z = scaleSemiMajorAxisKilometers(parseFloat(array[0]));
 
             return new BABYLON.Vector3(x, y, z);
         }
