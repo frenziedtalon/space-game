@@ -1,7 +1,7 @@
 ﻿Imports Core
 Imports Core.Classes
+Imports Data.Data
 Imports Entities
-Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
     Public Class Moon
@@ -16,6 +16,14 @@ Namespace CelestialObjects
 
             MyBase.New(name, mass, texture, entityManager)
             _radius = radius
+        End Sub
+
+        Public Sub New(texture As String,
+                       physicalData As PhysicalData,
+                       entityManager As IEntityManager)
+
+            MyBase.New(physicalData.Name, physicalData.Mass, texture, entityManager)
+            _radius = physicalData.Radius
         End Sub
 
         Private ReadOnly _radius As Distance

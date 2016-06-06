@@ -63,6 +63,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\IPhysicalData.vb" />
     <Compile Include="Classes\OrbitingObjectData.vb" />
     <Compile Include="Classes\OrbitData.vb" />
     <Compile Include="Classes\PhysicalData.vb" />

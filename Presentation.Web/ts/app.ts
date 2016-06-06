@@ -4,7 +4,6 @@ var runGame = () => {
     var canvas = getCanvas();
     var engine = loadBabylonEngine(canvas);
     var scene = createScene(engine);
-
     createCamera();
     endTurn();
     attachUiControlEvents();
@@ -79,8 +78,10 @@ var runGame = () => {
 
     function endTurnSuccess(turnData: TurnResult): void {
         sceneObjects = ((turnData.Scene.CelestialObjects) as Array<BaseGameEntity>);
+        setSceneScaling(turnData.Scene.Scaling);
         renderSceneObjects();
-        createSkybox();
+        //createSkybox();
+        makePlanes();
         setCameraTarget(turnData.Camera.CurrentTarget);
     }
 
@@ -132,7 +133,12 @@ var runGame = () => {
         if (!(position === null || position === undefined)) {
             // string like "x,y,z"
             var array = position.split(",");
-            return new BABYLON.Vector3(parseFloat(array[0]), parseFloat(array[1]), parseFloat(array[2]));
+
+            var x = scaleSemiMajorAxisKilometers(parseFloat(array[0]));
+            var y = scaleSemiMajorAxisKilometers(parseFloat(array[1]));
+            var z = scaleSemiMajorAxisKilometers(parseFloat(array[2]));
+
+            return new BABYLON.Vector3(x, y, z);
         }
         return new BABYLON.Vector3(0, 0, 0);
     }
@@ -142,7 +148,8 @@ var runGame = () => {
         // create a star
         var starPosition = createPositionFromOrbit(starInfo.Orbit);
 
-        var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, starInfo.Radius.Kilometers * 2, scene);
+        var radius = scaleRadius(starInfo.Radius);
+        var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, radius * 2, scene);
         star.position = starPosition;
 
         // create the material for the star, removing its reaction to other light sources
@@ -167,7 +174,8 @@ var runGame = () => {
 
     function renderPlanet(planetInfo: Planet, parent: BABYLON.Mesh): void {
 
-        var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, planetInfo.Radius.Kilometers * 2, scene);
+        var radius = scaleRadius(planetInfo.Radius);
+        var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, radius * 2, scene);
 
         if (parent !== undefined) {
             // positions applied are in addition to those of the parent
@@ -191,7 +199,9 @@ var runGame = () => {
     }
 
     function renderMoon(moonInfo: Moon, parent: BABYLON.Mesh): void {
-        var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, 16, moonInfo.Radius.Kilometers * 2, scene);
+
+        var radius = scaleRadius(moonInfo.Radius);
+        var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, 16, radius * 2, scene);
 
         if (parent !== undefined) {
             // positions applied are in addition to those of the parent
@@ -267,9 +277,9 @@ var runGame = () => {
 
     function createArcRotateCamera() {
         var camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 15, BABYLON.Vector3.Zero(), scene);
-        camera.setPosition(new BABYLON.Vector3(-200, 200, 0));
-        camera.lowerRadiusLimit = 2;
-        camera.upperRadiusLimit = 400;
+        camera.setPosition(new BABYLON.Vector3(0, 0, 200));
+        camera.lowerRadiusLimit = 1;
+        camera.upperRadiusLimit = 1500;
 
         // use the new camera
         scene.activeCamera = camera;
@@ -349,5 +359,76 @@ var runGame = () => {
         }
     }
 
+    var radiusKilometerScaleFactor = 1;
+    var semiMajorAxisKilometerScaleFactor = 1;
+
+    function setSceneScaling(bounds: SceneScaling): void {
+
+        var ratio = bounds.SemiMajorAxis.LowerBound.Kilometers / (bounds.CelestialObjectRadius.UpperBound.Kilometers * 4);
+
+        radiusKilometerScaleFactor = (0.1 / bounds.CelestialObjectRadius.LowerBound.Kilometers);
+        semiMajorAxisKilometerScaleFactor = (0.1 / bounds.SemiMajorAxis.LowerBound.Kilometers) / ratio;
+
+        console.log("radiusKilometerScaleFactor: " + radiusKilometerScaleFactor);
+        console.log("semiMajorAxisKilometerScaleFactor: " + semiMajorAxisKilometerScaleFactor);
+    }
+
+    function scaleRadius(radius: Distance): number {
+        return radius.Kilometers * radiusKilometerScaleFactor;
+    }
+
+    function scaleSemiMajorAxisKilometers(semiMajorAxis: number): number {
+        return semiMajorAxis * semiMajorAxisKilometerScaleFactor;
+    }
+
+    function makePlanes(): void {
+
+
+        var leftzplane =  BABYLON.Mesh.CreateGround("lzp", 50, 10, 1, scene);
+        var lzpmat = new BABYLON.StandardMaterial("lzpmat", scene);
+        var tex1 = new BABYLON.Texture("textures/zStrip.jpg", scene);
+        lzpmat.diffuseTexture = tex1;
+        lzpmat.backFaceCulling = false;
+        leftzplane.material = lzpmat;
+        leftzplane.position = new BABYLON.Vector3(-30, 0, 0);
+        leftzplane.rotation = new BABYLON.Vector3(0, -Math.PI / 2, 0);
+
+        var rightzplane =  BABYLON.Mesh.CreateGround("rzp", 50, 10, 1, scene);
+        var rzpmat = new BABYLON.StandardMaterial("rzpmat", scene);
+        // var tex1 = new BABYLON.Texture("textures/zStrip.jpg", scene);
+        rzpmat.diffuseTexture = tex1;
+        rzpmat.backFaceCulling = false;
+        rightzplane.material = rzpmat;
+        rightzplane.position = new BABYLON.Vector3(30, 0, 0);
+        rightzplane.rotation = new BABYLON.Vector3(0, -Math.PI / 2, 0);
+
+
+        var frontxplane =  BABYLON.Mesh.CreateGround("fxp", 70, 10, 1, scene);
+        var fxpmat = new BABYLON.StandardMaterial("fxpmat", scene);
+        tex1 = new BABYLON.Texture("textures/xStrip.jpg", scene);
+        fxpmat.diffuseTexture = tex1;
+        fxpmat.backFaceCulling = false;
+        frontxplane.material = fxpmat;
+        frontxplane.position = new BABYLON.Vector3(0, 0, -30);
+        frontxplane.rotation = new BABYLON.Vector3(0, 0, 0);
+
+        var rearxplane =  BABYLON.Mesh.CreateGround("rxp", 70, 10, 1, scene);
+        var rxpmat = new BABYLON.StandardMaterial("rxpmat", scene);
+        // var tex1 = new BABYLON.Texture("textures/zStrip.jpg", scene);
+        rxpmat.diffuseTexture = tex1;
+        rxpmat.backFaceCulling = false;
+        rearxplane.material = rxpmat;
+        rearxplane.position = new BABYLON.Vector3(0, 0, 30);
+        rearxplane.rotation = new BABYLON.Vector3(0, 0, 0);
+
+        var yplane =  BABYLON.Mesh.CreateGround("yp", 5, 30, 1, scene);
+        var ypmat = new BABYLON.StandardMaterial("ypmat", scene);
+        tex1 = new BABYLON.Texture("textures/yStrip.jpg", scene);
+        ypmat.diffuseTexture = tex1;
+        ypmat.backFaceCulling = false;
+        yplane.material = ypmat;
+        yplane.position = new BABYLON.Vector3(0, 2.3, -0.5);
+        yplane.rotation = new BABYLON.Vector3(-Math.PI / 2, 0, 0);
+    }
 };
 
