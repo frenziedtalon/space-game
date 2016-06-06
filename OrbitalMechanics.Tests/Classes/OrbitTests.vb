@@ -46,7 +46,7 @@ Namespace Classes
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
             turnTracker.TimeSinceStart.Returns(TimeSpan.FromDays(days))
 
-            Dim acceptableDelta = Distance.FromKilometers(1).AstronomicalUnits
+            Dim acceptableDelta = Distance.FromKilometers(1).Kilometers
 
             Dim orbit As New Orbit(turnTracker:=turnTracker,
                                    data:=orbitData)
@@ -63,9 +63,24 @@ Namespace Classes
             Get
                 Dim result As New List(Of TestCaseData)
 
-                result.Add(New TestCaseData(CircleOrbitData(), 24, New Point3D(0.369928936893292, -0.103776979676777, -0.0424300359336039)))
-                result.Add(New TestCaseData(EllipseOrbitData(), 24, New Point3D(0.316490543667733, -0.251640966090076, -0.0496036407071594)))
-                result.Add(New TestCaseData(NearParabolicOrbitData(), 24, New Point3D(-0.102456758387709, -0.640085808608179, -0.0428818574544085)))
+                result.Add(New TestCaseData(CircleOrbitData(), 24,
+                                            New Point3D(Distance.FromAstronomicalUnits(0.369928936893292).Kilometers,
+                                                        Distance.FromAstronomicalUnits(-0.103776979676777).Kilometers,
+                                                        Distance.FromAstronomicalUnits(-0.0424300359336039).Kilometers)
+                                                        )
+                                            )
+                result.Add(New TestCaseData(EllipseOrbitData(), 24,
+                                            New Point3D(Distance.FromAstronomicalUnits(0.316490543667733).Kilometers,
+                                                        Distance.FromAstronomicalUnits(-0.251640966090076).Kilometers,
+                                                        Distance.FromAstronomicalUnits(-0.0496036407071594).Kilometers)
+                                                        )
+                                            )
+                result.Add(New TestCaseData(NearParabolicOrbitData(), 24,
+                                            New Point3D(Distance.FromAstronomicalUnits(-0.102456758387709).Kilometers,
+                                                        Distance.FromAstronomicalUnits(-0.640085808608179).Kilometers,
+                                                        Distance.FromAstronomicalUnits(-0.0428818574544085).Kilometers)
+                                                        )
+                                            )
                 'result.Add(New TestCaseData(ParabolicOrbitData(), 24, New Point3D(0, 0, 0)))
                 'result.Add(New TestCaseData(HyperbolaOrbitData(), 24, New Point3D(0, 0, 0)))
 
