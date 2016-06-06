@@ -44,6 +44,9 @@
     <Content Include="Scripts\babylon.max.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="textures\xStrip.jpg" />
+    <Content Include="textures\yStrip.jpg" />
+    <Content Include="textures\zStrip.jpg" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>

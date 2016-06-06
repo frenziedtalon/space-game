@@ -81,7 +81,7 @@ var runGame = () => {
         setSceneScaling(turnData.Scene.Scaling);
         renderSceneObjects();
         //createSkybox();
-        makePlanes();
+        //makePlanes();
         setCameraTarget(turnData.Camera.CurrentTarget);
     }
 
