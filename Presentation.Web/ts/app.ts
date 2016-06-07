@@ -375,10 +375,7 @@ var runGame = () => {
 
         radiusKilometerScaleFactor = (0.1 / bounds.CelestialObjectRadius.LowerBound.Kilometers);
         semiMajorAxisKilometerScaleFactor = (0.1 / bounds.SemiMajorAxis.LowerBound.Kilometers) / ratio;
-
-        console.log("radiusKilometerScaleFactor: " + radiusKilometerScaleFactor);
-        console.log("semiMajorAxisKilometerScaleFactor: " + semiMajorAxisKilometerScaleFactor);
-
+        
         setCameraZoomRate(semiMajorAxisKilometerScaleFactor * bounds.SemiMajorAxis.UpperBound.Kilometers);
     }
 
@@ -441,8 +438,6 @@ var runGame = () => {
     }
 
     function setCameraZoomRate(maxDistance: number) {
-        console.log("maxDistance: " + maxDistance);
-
         var ratio = 0.0000014410187; // based on (0.2 / max radius)
 
         var c = <BABYLON.ArcRotateCamera>scene.activeCamera;
@@ -452,7 +447,6 @@ var runGame = () => {
     }
 
     function getMeshBoundingSphereRadius(mesh: BABYLON.AbstractMesh): number {
-        console.log(mesh.name + " boundingSphere.radius: " + mesh._boundingInfo.boundingSphere.radius);
         return mesh._boundingInfo.boundingSphere.radius;
     }
 
