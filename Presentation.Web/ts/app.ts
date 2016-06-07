@@ -83,7 +83,7 @@ var runGame = () => {
         renderSceneObjects();
         //createSkybox();
         //makePlanes();
-        setCameraTarget(turnData.Camera.CurrentTarget);
+        setCameraTargetFromId(turnData.Camera.CurrentTarget);
     }
 
     function renderSceneObjects(): void {
@@ -321,7 +321,7 @@ var runGame = () => {
             var pickResult = scene.pick(evt.clientX, evt.clientY);
             // if there is a hit and we can select the object then set it as the camera target
             if (pickResult.hit) {
-                scene.activeCamera.parent = pickResult.pickedMesh;
+                setCameraTarget(pickResult.pickedMesh);
                 updateCameraTarget(pickResult.pickedMesh.id);
             }
         });
@@ -354,9 +354,14 @@ var runGame = () => {
             });
     }
 
-    function setCameraTarget(target: string): void {
-        const mesh = scene.getMeshByID(target);
+    function setCameraTargetFromId(id: string):void {
+        const mesh = scene.getMeshByID(id);
+        setCameraTarget(mesh);
+    }
+
+    function setCameraTarget(mesh: BABYLON.AbstractMesh): void {
         if (!(mesh === null)) {
+            (<BABYLON.ArcRotateCamera>scene.activeCamera).lowerRadiusLimit = getMeshBoundingSphereRadius(mesh) * 1.5;
             scene.activeCamera.parent = mesh;
         }
     }
@@ -444,6 +449,11 @@ var runGame = () => {
         c.wheelPrecision = ratio * maxDistance;
         c.upperRadiusLimit = maxDistance * 1.1;
         scene.activeCamera = c;
+    }
+
+    function getMeshBoundingSphereRadius(mesh: BABYLON.AbstractMesh): number {
+        console.log(mesh.name + " boundingSphere.radius: " + mesh._boundingInfo.boundingSphere.radius);
+        return mesh._boundingInfo.boundingSphere.radius;
     }
 
     function getSceneObjectInfo(target: string): BaseGameEntity {
