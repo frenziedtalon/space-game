@@ -168,7 +168,7 @@ var runGame = () => {
         // create a light to make the star shine
         var starLight = new BABYLON.PointLight(starInfo.Name + "Light", starPosition, scene);
         starLight.intensity = 2;
-        starLight.range = 380;
+        //starLight.range = 380;
         starLight.parent = star;
 
         renderSatellites(starInfo, star);
