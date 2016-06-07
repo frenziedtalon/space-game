@@ -49,6 +49,7 @@ var runGame = () => {
     }
 
     var sceneObjects: Array<BaseGameEntity> = [];
+    var sceneObjectsLookup: Array<string> = [];
 
     function endTurn() {
 
@@ -89,6 +90,7 @@ var runGame = () => {
         if (sceneObjects !== undefined && sceneObjects !== null) {
             scene.meshes = [];
             for (let i = 0; i < sceneObjects.length; i++) {
+                sceneObjectsLookup[sceneObjects[i].Id] = sceneObjects;
                 renderSceneObject(<BaseCelestialObject>sceneObjects[i], null);
             }
         } else {
@@ -429,6 +431,12 @@ var runGame = () => {
         yplane.material = ypmat;
         yplane.position = new BABYLON.Vector3(0, 2.3, -0.5);
         yplane.rotation = new BABYLON.Vector3(-Math.PI / 2, 0, 0);
+    }
+    function getSceneObjectInfo(target: string): BaseGameEntity {
+        if (target !== undefined && target !== null) {
+            return sceneObjectsLookup[target];
+        }
+        return null;
     }
 };
 
