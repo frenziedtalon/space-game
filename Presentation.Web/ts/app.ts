@@ -373,6 +373,8 @@ var runGame = () => {
 
         console.log("radiusKilometerScaleFactor: " + radiusKilometerScaleFactor);
         console.log("semiMajorAxisKilometerScaleFactor: " + semiMajorAxisKilometerScaleFactor);
+
+        setCameraZoomRate(semiMajorAxisKilometerScaleFactor * bounds.SemiMajorAxis.UpperBound.Kilometers);
     }
 
     function scaleRadius(radius: Distance): number {
@@ -432,6 +434,18 @@ var runGame = () => {
         yplane.position = new BABYLON.Vector3(0, 2.3, -0.5);
         yplane.rotation = new BABYLON.Vector3(-Math.PI / 2, 0, 0);
     }
+
+    function setCameraZoomRate(maxDistance: number) {
+        console.log("maxDistance: " + maxDistance);
+
+        var ratio = 0.0000014410187; // based on (0.2 / max radius)
+
+        var c = <BABYLON.ArcRotateCamera>scene.activeCamera;
+        c.wheelPrecision = ratio * maxDistance;
+        c.upperRadiusLimit = maxDistance * 1.1;
+        scene.activeCamera = c;
+    }
+
     function getSceneObjectInfo(target: string): BaseGameEntity {
         if (target !== undefined && target !== null) {
             return sceneObjectsLookup[target];
