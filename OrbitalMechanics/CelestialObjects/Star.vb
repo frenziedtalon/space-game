@@ -1,4 +1,6 @@
 ﻿Imports Core
+Imports Core.Classes
+Imports Data.Data
 Imports Entities
 Imports Newtonsoft.Json
 Imports OrbitalMechanics.Classes
@@ -14,12 +16,22 @@ Namespace CelestialObjects
                        mass As Integer,
                        surfaceTemperature As Integer,
                        texture As String,
-                       radius As Double,
+                       radius As Distance,
                        entityManager As IEntityManager)
 
             MyBase.New(name, mass, texture, entityManager)
             _surfaceTemperature = surfaceTemperature
             _radius = radius
+        End Sub
+
+        Public Sub New(surfaceTemperature As Integer,
+                       texture As String,
+                       physicalData As PhysicalData,
+                       entityManager As IEntityManager)
+
+            MyBase.New(physicalData.Name, physicalData.Mass, texture, entityManager)
+            _surfaceTemperature = surfaceTemperature
+            _radius = physicalData.Radius
         End Sub
 
         Private _classification As StarClassification
@@ -54,8 +66,8 @@ Namespace CelestialObjects
             End Get
         End Property
 
-        Private ReadOnly _radius As Double
-        Public ReadOnly Property Radius As Double Implements ISphere.Radius
+        Private ReadOnly _radius As Distance
+        Public ReadOnly Property Radius As Distance Implements ISphere.Radius
             Get
                 Return _radius
             End Get
@@ -94,15 +106,14 @@ Namespace CelestialObjects
 
         Public ReadOnly Property Volume As Double Implements I3DObject.Volume
             Get
-                If Double.Equals(_volume, 0.0) AndAlso Radius > 0 Then
-                    _volume = Helpers.Shapes.ShapeHelper.VolumeOfASphere(Radius)
+                If Double.Equals(_volume, 0.0) AndAlso Radius.Kilometers > 0 Then
+                    _volume = Helpers.Shapes.ShapeHelper.VolumeOfASphere(Radius.Kilometers)
                 End If
                 Return _volume
             End Get
         End Property
 
     End Class
-
 
     Public Enum StarClassification
         O

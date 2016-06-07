@@ -24,47 +24,47 @@ Public Class SceneConstructor
 
         Dim objects = New List(Of ICelestialObject)
 
-        Dim sun = New Star("Sol", 1, 5500, "sun.jpg", 0.2, _entityManager)
+        Dim sun = New Star(5500, "sun.jpg", _dataProvider.SolarSystem.Sun, _entityManager)
 
-        Dim mercury = New Planet("Mercury", 1, "mercury.jpg", 0.1, _entityManager)
-        Dim mercuryOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Mercury().Orbit, True)
+        Dim mercury = New Planet("mercury.jpg", _dataProvider.SolarSystem.Mercury.Physical, _entityManager)
+        Dim mercuryOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Mercury.Orbit, True)
         sun.AddSatellite(mercury, mercuryOrbit)
 
-        Dim venus = New Planet("Venus", 1, "venus.jpg", 0.1, _entityManager)
-        Dim venusOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Venus().Orbit, True)
+        Dim venus = New Planet("venus.jpg", _dataProvider.SolarSystem.Venus.Physical, _entityManager)
+        Dim venusOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Venus.Orbit, True)
         sun.AddSatellite(venus, venusOrbit)
 
-        Dim moon = New Moon("Moon", 1, "moon.png", 0.1, _entityManager)
-        Dim moonOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Moon().Orbit, True)
+        Dim moon = New Moon("moon.png", _dataProvider.SolarSystem.Moon.Physical, _entityManager)
+        Dim moonOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Moon.Orbit, True)
 
-        Dim earth = New Planet("Earth", 1, "earth.jpg", 0.1, _entityManager)
+        Dim earth = New Planet("earth.jpg", _dataProvider.SolarSystem.Earth.Physical, _entityManager)
         earth.AddSatellite(moon, moonOrbit)
 
-        Dim earthOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Earth().Orbit, True)
+        Dim earthOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Earth.Orbit, True)
         sun.AddSatellite(earth, earthOrbit)
 
-        Dim mars = New Planet("Mars", 1, "mars.jpg", 0.1, _entityManager)
-        Dim marsOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Mars().Orbit, True)
+        Dim mars = New Planet("mars.jpg", _dataProvider.SolarSystem.Mars.Physical, _entityManager)
+        Dim marsOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Mars.Orbit, True)
         sun.AddSatellite(mars, marsOrbit)
 
-        Dim jupiter = New Planet("Jupiter", 1, "jupiter.jpg", 0.15, _entityManager)
-        Dim jupiterOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Jupiter().Orbit, True)
+        Dim jupiter = New Planet("jupiter.jpg", _dataProvider.SolarSystem.Jupiter.Physical, _entityManager)
+        Dim jupiterOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Jupiter.Orbit, True)
         sun.AddSatellite(jupiter, jupiterOrbit)
 
-        Dim saturn = New Planet("Saturn", 1, "saturn.jpg", 0.12, _entityManager)
-        Dim saturnOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Saturn().Orbit, True)
+        Dim saturn = New Planet("saturn.jpg", _dataProvider.SolarSystem.Saturn.Physical, _entityManager)
+        Dim saturnOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Saturn.Orbit, True)
         sun.AddSatellite(saturn, saturnOrbit)
 
-        Dim uranus = New Planet("Uranus", 1, "uranus.jpg", 0.1, _entityManager)
-        Dim uranusOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Uranus().Orbit, True)
+        Dim uranus = New Planet("uranus.jpg", _dataProvider.SolarSystem.Uranus.Physical, _entityManager)
+        Dim uranusOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Uranus.Orbit, True)
         sun.AddSatellite(uranus, uranusOrbit)
 
-        Dim neptune = New Planet("Neptune", 1, "neptune.jpg", 0.1, _entityManager)
-        Dim neptuneOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Neptune().Orbit, True)
+        Dim neptune = New Planet("neptune.jpg", _dataProvider.SolarSystem.Neptune.Physical, _entityManager)
+        Dim neptuneOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Neptune.Orbit, True)
         sun.AddSatellite(neptune, neptuneOrbit)
 
-        Dim pluto = New Planet("Pluto", 1, "pluto.jpg", 0.1, _entityManager)
-        Dim plutoOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Pluto().Orbit, True)
+        Dim pluto = New Planet("pluto.jpg", _dataProvider.SolarSystem.Pluto.Physical, _entityManager)
+        Dim plutoOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Pluto.Orbit, True)
         sun.AddSatellite(pluto, plutoOrbit)
 
         objects.Add(sun)
@@ -76,9 +76,9 @@ Public Class SceneConstructor
 
         Dim objects = New List(Of ICelestialObject)
 
-        Dim sun = New Star("Sol", 1, 5500, "sun.jpg", 0.2, _entityManager)
+        Dim sun = New Star(5500, "sun.jpg", _dataProvider.SolarSystem.Sun, _entityManager)
 
-        Dim planet = New Planet("Pluto", 1, "pluto.jpg", 0.1, _entityManager)
+        Dim planet = New Planet("pluto.jpg", _dataProvider.SolarSystem.Pluto.Physical, _entityManager)
 
         Dim orbit = New Orbit(_turnTracker,
                               longitudeOfAscendingNode:=Angle.FromDegrees(48.3313),
@@ -98,9 +98,9 @@ Public Class SceneConstructor
 
         Dim objects = New List(Of ICelestialObject)
 
-        Dim sun = New Star("Sol", 1, 5500, "sun.jpg", 0.01, _entityManager)
+        Dim sun = New Star(5500, "sun.jpg", _dataProvider.SolarSystem.Sun, _entityManager)
 
-        Dim planet = New Planet("Pluto", 1, "pluto.jpg", 0.01, _entityManager)
+        Dim planet = New Planet("pluto.jpg", _dataProvider.SolarSystem.Pluto.Physical, _entityManager)
 
         Dim orbit = New Orbit(_turnTracker,
                               longitudeOfAscendingNode:=Angle.FromDegrees(48.3313),

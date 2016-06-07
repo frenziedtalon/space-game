@@ -1,14 +1,15 @@
 ﻿Imports Data.Data
 
 Public Interface ISolarSystemData
-    Function Mercury() As OrbitingObjectData
-    Function Venus() As OrbitingObjectData
-    Function Earth() As OrbitingObjectData
-    Function Moon() As OrbitingObjectData
-    Function Mars() As OrbitingObjectData
-    Function Jupiter() As OrbitingObjectData
-    Function Saturn() As OrbitingObjectData
-    Function Uranus() As OrbitingObjectData
-    Function Neptune() As OrbitingObjectData
-    Function Pluto() As OrbitingObjectData
+    ReadOnly Property Sun As PhysicalData
+    ReadOnly Property Mercury As OrbitingObjectData
+    ReadOnly Property Venus As OrbitingObjectData
+    ReadOnly Property Earth As OrbitingObjectData
+    ReadOnly Property Moon As OrbitingObjectData
+    ReadOnly Property Mars As OrbitingObjectData
+    ReadOnly Property Jupiter As OrbitingObjectData
+    ReadOnly Property Saturn As OrbitingObjectData
+    ReadOnly Property Uranus As OrbitingObjectData
+    ReadOnly Property Neptune As OrbitingObjectData
+    ReadOnly Property Pluto As OrbitingObjectData
 End Interface

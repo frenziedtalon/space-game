@@ -1,6 +1,6 @@
 ﻿Imports Entities
 
 Public Interface ISceneService
-    ReadOnly Property CurrentSceneState As List(Of BaseGameEntity)
+    ReadOnly Property CurrentSceneState As ISceneState
     Sub CreateStartingScene()
 End Interface

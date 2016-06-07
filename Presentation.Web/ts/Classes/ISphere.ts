@@ -1,5 +1,5 @@
 interface ISphere extends I3DObject {
-    Radius: number;
+    Radius: Distance;
     AxialTilt: number;
     RotationSpeed: number;
 }

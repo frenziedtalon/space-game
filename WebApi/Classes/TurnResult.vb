@@ -16,7 +16,7 @@ Namespace Classes
             _camera = New Camera(_cameraService)
         End Sub
 
-        Public ReadOnly Property Scene As List(Of BaseGameEntity)
+        Public ReadOnly Property Scene As ISceneState
             Get
                 Return _sceneService.CurrentSceneState
             End Get

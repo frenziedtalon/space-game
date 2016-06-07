@@ -44,6 +44,9 @@
     <Content Include="Scripts\babylon.max.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="textures\xStrip.jpg" />
+    <Content Include="textures\yStrip.jpg" />
+    <Content Include="textures\zStrip.jpg" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +70,8 @@
     <TypeScriptCompile Include="ts\Classes\BaseCelestialObject.ts" />
     <TypeScriptCompile Include="ts\Classes\BaseGameEntity.ts" />
     <TypeScriptCompile Include="ts\Classes\Camera.ts" />
+    <TypeScriptCompile Include="ts\Classes\Distance.ts" />
+    <TypeScriptCompile Include="ts\Classes\DistanceRange.ts" />
     <TypeScriptCompile Include="ts\Classes\I3DObject.ts" />
     <TypeScriptCompile Include="ts\Classes\ICelestialObject.ts" />
     <TypeScriptCompile Include="ts\Classes\IOrbitingObject.ts" />
@@ -75,6 +80,8 @@
     <TypeScriptCompile Include="ts\Classes\Orbit.ts" />
     <TypeScriptCompile Include="ts\Classes\OrbitingCelestialObjectBase.ts" />
     <TypeScriptCompile Include="ts\Classes\Planet.ts" />
+    <TypeScriptCompile Include="ts\Classes\SceneScaling.ts" />
+    <TypeScriptCompile Include="ts\Classes\SceneState.ts" />
     <TypeScriptCompile Include="ts\Classes\TurnResult.ts" />
     <TypeScriptCompile Include="ts\Classes\Star.ts" />
     <TypeScriptCompile Include="ts\d.ts\babylon.d.ts" />

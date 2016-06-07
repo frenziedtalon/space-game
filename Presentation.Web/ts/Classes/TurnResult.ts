@@ -1,4 +1,4 @@
 class TurnResult {
-    Scene: Array<BaseGameEntity>;
+    Scene: SceneState;
     Camera: Camera;
 }

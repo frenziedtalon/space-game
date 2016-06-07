@@ -221,7 +221,7 @@ Namespace Classes
             Dim y = CalculateY(distance, trueAnomaly)
             Dim z = CalculateZ(distance, trueAnomaly)
 
-            Return New Point3D(x.AstronomicalUnits, y.AstronomicalUnits, z.AstronomicalUnits)
+            Return New Point3D(x.Kilometers, y.Kilometers, z.Kilometers)
         End Function
 
         Private Function CalculatePositionForParabolicOrbit(days As Double) As Point3D

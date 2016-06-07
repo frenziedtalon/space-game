@@ -1,9 +1,10 @@
-﻿Imports Newtonsoft.Json
+﻿Imports Core.Classes
+Imports Newtonsoft.Json
 
 Public Interface ISphere
     Inherits I3DObject
 
-    ReadOnly Property Radius As Double
+    ReadOnly Property Radius As Distance
 
     <JsonIgnore>
     ReadOnly Property AxialTilt As Integer

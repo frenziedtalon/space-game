@@ -1,5 +1,5 @@
 class Moon extends OrbitingCelestialObjectBase implements ISphere {
-    Radius: number;
+    Radius: Distance;
     AxialTilt: number;
     RotationSpeed: number;
     Volume: number;

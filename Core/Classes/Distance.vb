@@ -20,7 +20,6 @@ Namespace Classes
             Return New Distance(astronomicalUnits * KilometersInAstronomicalUnit)
         End Function
 
-        <JsonIgnore()>
         Public ReadOnly Property Kilometers As Double
             Get
                 Return _kilometers
