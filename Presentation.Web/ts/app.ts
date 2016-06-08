@@ -145,87 +145,68 @@ var runGame = () => {
         return new BABYLON.Vector3(0, 0, 0);
     }
 
-    function renderStar(starInfo: Star): void {
+    function renderStar(info: Star): void {
+        var star = renderOrbitingSphericalCelestialObject(info,
+                                                            "Assets/Images/Star/" + info.Texture,
+                                                            info.Radius,
+                                                            null);
 
-        // create a star
-        var starPosition = createPositionFromOrbit(starInfo.Orbit);
+        // stars shine, other objects don't
+        (<BABYLON.StandardMaterial>star.material).emissiveTexture = (<BABYLON.StandardMaterial>star.material).diffuseTexture;
 
-        var radius = scaleRadius(starInfo.Radius);
-        var star = BABYLON.Mesh.CreateSphere(starInfo.Name, 16, radius * 2, scene);
-        star.position = starPosition;
-
-        // create the material for the star, removing its reaction to other light sources
-        var starMaterial = new BABYLON.StandardMaterial(starInfo.Name + "Material", scene);
-        starMaterial.emissiveTexture = new BABYLON.Texture("Assets/Images/Star/" + starInfo.Texture, scene);
-        starMaterial.specularColor = zeroColor();
-        starMaterial.diffuseColor = zeroColor();
-
-        star.material = starMaterial;
-
-        star.isPickable = starInfo.CameraTarget;
-        star.id = starInfo.Id;
-
-        // create a light to make the star shine
-        var starLight = new BABYLON.PointLight(starInfo.Name + "Light", starPosition, scene);
-        starLight.intensity = 2;
-        //starLight.range = 380;
+        // create a light to represent the star shining on other objects
+        var starLight = new BABYLON.PointLight(info.Name + "Light", star.position, scene);
         starLight.parent = star;
-
-        renderSatellites(starInfo, star);
     }
 
-    function renderPlanet(planetInfo: Planet, parent: BABYLON.Mesh): void {
+    function renderPlanet(info: Planet, parent: BABYLON.Mesh): void {
+        renderOrbitingSphericalCelestialObject(info,
+                                                "Assets/Images/Planet/" + info.Texture,
+                                                info.Radius,
+                                                parent);
+    }
 
-        var radius = scaleRadius(planetInfo.Radius);
-        var planet = BABYLON.Mesh.CreateSphere(planetInfo.Name, 16, radius * 2, scene);
+    function renderMoon(info: Moon, parent: BABYLON.Mesh): void {
+        renderOrbitingSphericalCelestialObject(info,
+                                                "Assets/Images/Moon/" + info.Texture,
+                                                info.Radius,
+                                                parent);
+    }
+
+    function renderOrbitingSphericalCelestialObject(info: OrbitingCelestialObjectBase,
+                                                    texture: string,
+                                                    radius: Distance,
+                                                    parent: BABYLON.Mesh): BABYLON.Mesh {
+        
+        const scaledRadius = scaleRadius(radius);
+
+        const mesh = BABYLON.Mesh.CreateSphere(info.Name, 16, scaledRadius * 2, scene);
+        mesh.isPickable = info.CameraTarget;
+        mesh.id = info.Id;
+        mesh.position = createPositionFromOrbit(info.Orbit);
+        
+        const material = createDiffuseMaterial(info.Name + "Material", texture);
+        material.specularColor = zeroColor();
+        mesh.material = material;
 
         if (parent !== undefined) {
-            // positions applied are in addition to those of the parent
-            planet.parent = parent;
+            mesh.parent = parent;
         }
+        
+        drawOrbit(info.Orbit, info.Name + "Orbit", parent);
 
-        planet.id = planetInfo.Id;
-        planet.position = createPositionFromOrbit(planetInfo.Orbit);
-        // create a material for the planet
-        var planetMaterial = new BABYLON.StandardMaterial(planetInfo.Name + "Material", scene);
-        planetMaterial.diffuseTexture = new BABYLON.Texture("Assets/Images/Planet/" + planetInfo.Texture, scene);
-        planetMaterial.specularColor = zeroColor();
-        planet.material = planetMaterial;
+        renderSatellites(info, mesh);
 
-        planet.isPickable = planetInfo.CameraTarget;
-
-        // draw planet's orbit
-        drawOrbit(planetInfo.Orbit, planetInfo.Name + "Orbit", null);
-
-        renderSatellites(planetInfo, planet);
+        return mesh;
     }
 
-    function renderMoon(moonInfo: Moon, parent: BABYLON.Mesh): void {
-
-        var radius = scaleRadius(moonInfo.Radius);
-        var moon = BABYLON.Mesh.CreateSphere(moonInfo.Name, 16, radius * 2, scene);
-
-        if (parent !== undefined) {
-            // positions applied are in addition to those of the parent
-            moon.parent = parent;
-        }
-        moon.id = moonInfo.Id;
-
-        moon.isPickable = moonInfo.CameraTarget;
-
-        moon.position = createPositionFromOrbit(moonInfo.Orbit);
-
-        // create a material for the moon
-        var moonMaterial = new BABYLON.StandardMaterial(moonInfo.Name + "Material", scene);
-        moonMaterial.diffuseTexture = new BABYLON.Texture("Assets/Images/Moon/" + moonInfo.Texture, scene);
-        moonMaterial.specularColor = zeroColor();
-        moon.material = moonMaterial;
-
-        // draw moon's orbit
-        drawOrbit(moonInfo.Orbit, moonInfo.Name + "Orbit", parent);
-
+    function createDiffuseMaterial(name: string,
+                            texture: string): BABYLON.StandardMaterial {
+        var m = new BABYLON.StandardMaterial(name, scene);
+        m.diffuseTexture = new BABYLON.Texture(texture, scene);
+        return m;
     }
-
+    
     function renderSatellites(primary: BaseCelestialObject, mesh: BABYLON.Mesh): void {
         // create any satellites
         if (primary.hasOwnProperty("Satellites")) {
@@ -248,13 +229,15 @@ var runGame = () => {
     }
 
     function drawOrbit(orbit: Orbit, meshName: string, parent: BABYLON.Mesh) {
-        const path: BABYLON.Vector3[] = createOrbitPath(orbit.OrbitPath);
-        const colour = new BABYLON.Color3(0.54, 0.54, 0.54);
-        const orbitalPath = drawPath(meshName, path, colour);
+        if (!(orbit === null || orbit === undefined)) {
+            const path: BABYLON.Vector3[] = createOrbitPath(orbit.OrbitPath);
+            const colour = new BABYLON.Color3(0.54, 0.54, 0.54);
+            const orbitalPath = drawPath(meshName, path, colour);
 
-        if (parent !== undefined) {
-            // positions applied are in addition to those of the parent
-            orbitalPath.parent = parent;
+            if (parent !== undefined) {
+                // positions applied are in addition to those of the parent
+                orbitalPath.parent = parent;
+            }
         }
     }
 
@@ -361,7 +344,13 @@ var runGame = () => {
 
     function setCameraTarget(mesh: BABYLON.AbstractMesh): void {
         if (!(mesh === null)) {
-            (<BABYLON.ArcRotateCamera>scene.activeCamera).lowerRadiusLimit = getMeshBoundingSphereRadius(mesh) * 1.5;
+            var limit = getMeshBoundingSphereRadius(mesh) * 1.5;
+
+            if (limit < 1) {
+                limit = 1;
+            }
+
+            (<BABYLON.ArcRotateCamera>scene.activeCamera).lowerRadiusLimit = limit;
             scene.activeCamera.parent = mesh;
         }
     }
