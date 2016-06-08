@@ -363,7 +363,13 @@ var runGame = () => {
 
     function setCameraTarget(mesh: BABYLON.AbstractMesh): void {
         if (!(mesh === null)) {
-            (<BABYLON.ArcRotateCamera>scene.activeCamera).lowerRadiusLimit = getMeshBoundingSphereRadius(mesh) * 1.5;
+            var limit = getMeshBoundingSphereRadius(mesh) * 1.5;
+
+            if (limit < 1) {
+                limit = 1;
+            }
+
+            (<BABYLON.ArcRotateCamera>scene.activeCamera).lowerRadiusLimit = limit;
             scene.activeCamera.parent = mesh;
         }
     }
