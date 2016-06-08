@@ -248,13 +248,15 @@ var runGame = () => {
     }
 
     function drawOrbit(orbit: Orbit, meshName: string, parent: BABYLON.Mesh) {
-        const path: BABYLON.Vector3[] = createOrbitPath(orbit.OrbitPath);
-        const colour = new BABYLON.Color3(0.54, 0.54, 0.54);
-        const orbitalPath = drawPath(meshName, path, colour);
+        if (!(orbit === null || orbit === undefined)) {
+            const path: BABYLON.Vector3[] = createOrbitPath(orbit.OrbitPath);
+            const colour = new BABYLON.Color3(0.54, 0.54, 0.54);
+            const orbitalPath = drawPath(meshName, path, colour);
 
-        if (parent !== undefined) {
-            // positions applied are in addition to those of the parent
-            orbitalPath.parent = parent;
+            if (parent !== undefined) {
+                // positions applied are in addition to those of the parent
+                orbitalPath.parent = parent;
+            }
         }
     }
 
