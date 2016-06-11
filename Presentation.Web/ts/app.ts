@@ -230,7 +230,7 @@ var runGame = () => {
 
     function drawOrbit(orbit: Orbit, meshName: string, parent: BABYLON.Mesh) {
         if (!(orbit === null || orbit === undefined)) {
-            const path: BABYLON.Vector3[] = createOrbitPath(orbit.OrbitPath);
+            const path: BABYLON.Vector3[] = new OrbitalMechanics().generateOrbitPath(orbit);
             const colour = new BABYLON.Color3(0.54, 0.54, 0.54);
             const orbitalPath = drawPath(meshName, path, colour);
 
@@ -239,15 +239,6 @@ var runGame = () => {
                 orbitalPath.parent = parent;
             }
         }
-    }
-
-    function createOrbitPath(path: Array<string>): Array<BABYLON.Vector3> {
-        const result: Array<BABYLON.Vector3> = [];
-        for (let i = 0; i < path.length; i += 1) {
-            const position: BABYLON.Vector3 = createPosition(path[i]);
-            result.push(position);
-        }
-        return result;
     }
 
     function drawPath(meshName: string, path: Array<BABYLON.Vector3>, colour: BABYLON.Color3): BABYLON.LinesMesh {

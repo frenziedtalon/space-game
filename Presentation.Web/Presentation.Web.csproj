@@ -78,6 +78,7 @@
     <TypeScriptCompile Include="ts\Classes\ISphere.ts" />
     <TypeScriptCompile Include="ts\Classes\Moon.ts" />
     <TypeScriptCompile Include="ts\Classes\Orbit.ts" />
+    <TypeScriptCompile Include="ts\Classes\OrbitalMechanics.ts" />
     <TypeScriptCompile Include="ts\Classes\OrbitingCelestialObjectBase.ts" />
     <TypeScriptCompile Include="ts\Classes\Planet.ts" />
     <TypeScriptCompile Include="ts\Classes\SceneScaling.ts" />

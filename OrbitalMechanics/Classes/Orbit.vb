@@ -58,6 +58,12 @@ Namespace Classes
             End Get
         End Property
 
+        Public ReadOnly Property PeriodDays As Double
+            Get
+                Return Period.TotalDays
+            End Get
+        End Property
+
         Private ReadOnly _longitudeOfAscendingNode As Angle
         <JsonIgnore()>
         Public ReadOnly Property LongitudeOfAscendingNode As Angle Implements IOrbit.LongitudeOfAscendingNode
@@ -94,7 +100,6 @@ Namespace Classes
         End Property
 
         Private ReadOnly _eccentricity As Double
-        <JsonIgnore()>
         Public ReadOnly Property Eccentricity As Double Implements IOrbit.Eccentricity
             Get
                 Return _eccentricity
@@ -177,6 +182,7 @@ Namespace Classes
         End Property
 
         Private _orbitPath As List(Of Point3D)
+        <JsonIgnore()>
         Public ReadOnly Property OrbitPath As List(Of Point3D) Implements IOrbit.OrbitPath
             Get
                 If _orbitPath Is Nothing Then
