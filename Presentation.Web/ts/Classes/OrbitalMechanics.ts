@@ -48,10 +48,10 @@ class OrbitalMechanics {
         const x = this.calculateX(distance, trueAnomaly);
         const y = this.calculateY(distance, trueAnomaly);
         const z = this.calculateZ(distance, trueAnomaly);
-        
-        return new BABYLON.Vector3(this.ScaleSemiMajorAxisCallback(x.Kilometers),
-                                    this.ScaleSemiMajorAxisCallback(y.Kilometers),
-                                    this.ScaleSemiMajorAxisCallback(z.Kilometers));
+
+        return new BABYLON.Vector3(this.ScaleSemiMajorAxisCallback(y.Kilometers),
+                                    this.ScaleSemiMajorAxisCallback(z.Kilometers),
+                                    this.ScaleSemiMajorAxisCallback(x.Kilometers));
     }
 
     private _meanAngularMotion: Angle;
