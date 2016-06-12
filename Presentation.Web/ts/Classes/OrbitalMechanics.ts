@@ -87,7 +87,7 @@ class OrbitalMechanics {
             }
             en = en1;
         }
-        return new Angle(0);
+        return new Angle(en1);
     }
 
     calculateTrueAnomaly(eccentricAnomaly: Angle): Angle {
