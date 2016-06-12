@@ -65,7 +65,6 @@ Namespace Classes
         End Property
 
         Private ReadOnly _longitudeOfAscendingNode As Angle
-        <JsonIgnore()>
         Public ReadOnly Property LongitudeOfAscendingNode As Angle Implements IOrbit.LongitudeOfAscendingNode
             Get
                 Return _longitudeOfAscendingNode
@@ -73,7 +72,6 @@ Namespace Classes
         End Property
 
         Private ReadOnly _inclination As Angle
-        <JsonIgnore()>
         Public ReadOnly Property Inclination As Angle Implements IOrbit.Inclination
             Get
                 Return _inclination
@@ -81,7 +79,6 @@ Namespace Classes
         End Property
 
         Private ReadOnly _argumentOfPeriapsis As Angle
-        <JsonIgnore()>
         Public ReadOnly Property ArgumentOfPeriapsis As Angle Implements IOrbit.ArgumentOfPeriapsis
             Get
                 Return _argumentOfPeriapsis
@@ -92,7 +89,6 @@ Namespace Classes
         ''' <summary>
         ''' One half of the major axis, represents the mean distance from the primary 
         ''' </summary>
-        <JsonIgnore()>
         Public ReadOnly Property SemiMajorAxis As Distance Implements IOrbit.SemiMajorAxis
             Get
                 Return _semiMajorAxis
