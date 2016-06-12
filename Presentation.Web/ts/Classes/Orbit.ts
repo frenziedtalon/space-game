@@ -3,4 +3,6 @@ class Orbit {
     Position: string;
     Eccentricity: number;
     PeriodDays: number;
+    MeanAnomalyZero: Angle;
+    MeanAngularMotion: Angle;
 }

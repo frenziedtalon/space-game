@@ -129,7 +129,6 @@ Namespace Classes
         End Property
 
         Private ReadOnly _meanAnomalyZero As Angle
-        <JsonIgnore()>
         Public ReadOnly Property MeanAnomalyZero As Angle Implements IOrbit.MeanAnomalyZero
             Get
                 Return _meanAnomalyZero
@@ -152,7 +151,6 @@ Namespace Classes
         ''' <summary>
         ''' Radians moved in the orbit per day
         ''' </summary>
-        <JsonIgnore()>
         Private ReadOnly Property MeanAngularMotion As Angle
             Get
                 If _meanAngularMotion Is Nothing Then
