@@ -98,18 +98,22 @@ class OrbitalMechanics {
     }
 
     calculateDistance(trueAnomaly: Angle): Distance {
-        throw new Error("Not implemented");
+        const aus = (this.Orbit.SemiMajorAxis.AstronomicalUnits * (1 - (Math.pow(this.Orbit.Eccentricity, 2)))) / (1 + (this.Orbit.Eccentricity * (Math.cos(trueAnomaly.Radians))));
+        return new Distance(new AstronomicalUnit(aus));
     }
 
     calculateX(distance: Distance, trueAnomaly: Angle): Distance {
-        throw new Error("Not implemented");
+        const kilometers = distance.Kilometers * ((Math.cos(this.Orbit.LongitudeOfAscendingNode.Radians) * Math.cos(trueAnomaly.Radians + this.Orbit.ArgumentOfPeriapsis.Radians)) - (Math.sin(this.Orbit.LongitudeOfAscendingNode.Radians) * Math.sin(trueAnomaly.Radians + this.Orbit.ArgumentOfPeriapsis.Radians))) * Math.cos(this.Orbit.Inclination.Radians);
+        return new Distance(new Kilometer(kilometers));
     }
 
     calculateY(distance: Distance, trueAnomaly: Angle): Distance {
-        throw new Error("Not implemented");
+        const kilometers = distance.Kilometers * ((Math.sin(this.Orbit.LongitudeOfAscendingNode.Radians) * Math.cos(trueAnomaly.Radians + this.Orbit.ArgumentOfPeriapsis.Radians)) + (Math.cos(this.Orbit.LongitudeOfAscendingNode.Radians)) * Math.sin(trueAnomaly.Radians + this.Orbit.ArgumentOfPeriapsis.Radians)) * Math.cos(this.Orbit.Inclination.Radians);
+        return new Distance(new Kilometer(kilometers));
     }
 
     calculateZ(distance: Distance, trueAnomaly: Angle): Distance {
-        throw new Error("Not implemented");
+        const kilometers = distance.Kilometers * Math.sin(trueAnomaly.Radians + this.Orbit.ArgumentOfPeriapsis.Radians) * Math.sin(this.Orbit.Inclination.Radians);
+        return new Distance(new Kilometer(kilometers));
     }
 }
