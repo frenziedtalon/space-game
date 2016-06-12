@@ -91,7 +91,10 @@ class OrbitalMechanics {
     }
 
     calculateTrueAnomaly(eccentricAnomaly: Angle): Angle {
-        throw new Error("Not implemented");
+        const x = Math.sqrt(1 - this.Orbit.Eccentricity) * Math.cos(eccentricAnomaly.Radians / 2);
+        const y = Math.sqrt(1 + this.Orbit.Eccentricity) * Math.sin(eccentricAnomaly.Radians / 2);
+        const r = 2 * Math.atan2(y, x);
+        return new Angle(r);
     }
 
     calculateDistance(trueAnomaly: Angle): Distance {
