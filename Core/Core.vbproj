@@ -99,6 +99,7 @@
     <Compile Include="Classes\Angle.vb" />
     <Compile Include="Classes\Distance.vb" />
     <Compile Include="Classes\DistanceRange.vb" />
+    <Compile Include="Classes\Mass.vb" />
     <Compile Include="Classes\Range.vb" />
     <Compile Include="Extensions\EnumerableExtensions.vb" />
     <Compile Include="Extensions\GuidExtensions.vb" />
