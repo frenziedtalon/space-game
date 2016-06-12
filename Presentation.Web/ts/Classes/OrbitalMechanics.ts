@@ -54,8 +54,17 @@ class OrbitalMechanics {
                                     this.ScaleSemiMajorAxisCallback(z.Kilometers));
     }
 
+    private _meanAngularMotion: Angle;
+    meanAngularMotion(): Angle {
+        if (this._meanAngularMotion === null || this._meanAngularMotion === undefined) {
+            const r = (2 * Math.PI) / this.Orbit.PeriodDays;
+            this._meanAngularMotion = new Angle(r);
+        }
+        return this._meanAngularMotion;
+    }
+
     calculateMeanAnomaly(days: number): Angle {
-        var r = this.Orbit.MeanAnomalyZero.Radians + (this.Orbit.MeanAngularMotion.Radians * days);
+        const r = this.Orbit.MeanAnomalyZero.Radians + (this.meanAngularMotion().Radians * days);
         return new Angle(r);
     }
 
