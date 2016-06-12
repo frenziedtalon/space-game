@@ -1,6 +1,5 @@
 ﻿Imports Core.Classes
 Imports Entities
-Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
     Public Class Asteroid
