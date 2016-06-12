@@ -58,8 +58,13 @@ Namespace Classes
             End Get
         End Property
 
+        Public ReadOnly Property PeriodDays As Double
+            Get
+                Return Period.TotalDays
+            End Get
+        End Property
+
         Private ReadOnly _longitudeOfAscendingNode As Angle
-        <JsonIgnore()>
         Public ReadOnly Property LongitudeOfAscendingNode As Angle Implements IOrbit.LongitudeOfAscendingNode
             Get
                 Return _longitudeOfAscendingNode
@@ -67,7 +72,6 @@ Namespace Classes
         End Property
 
         Private ReadOnly _inclination As Angle
-        <JsonIgnore()>
         Public ReadOnly Property Inclination As Angle Implements IOrbit.Inclination
             Get
                 Return _inclination
@@ -75,7 +79,6 @@ Namespace Classes
         End Property
 
         Private ReadOnly _argumentOfPeriapsis As Angle
-        <JsonIgnore()>
         Public ReadOnly Property ArgumentOfPeriapsis As Angle Implements IOrbit.ArgumentOfPeriapsis
             Get
                 Return _argumentOfPeriapsis
@@ -86,7 +89,6 @@ Namespace Classes
         ''' <summary>
         ''' One half of the major axis, represents the mean distance from the primary 
         ''' </summary>
-        <JsonIgnore()>
         Public ReadOnly Property SemiMajorAxis As Distance Implements IOrbit.SemiMajorAxis
             Get
                 Return _semiMajorAxis
@@ -94,7 +96,6 @@ Namespace Classes
         End Property
 
         Private ReadOnly _eccentricity As Double
-        <JsonIgnore()>
         Public ReadOnly Property Eccentricity As Double Implements IOrbit.Eccentricity
             Get
                 Return _eccentricity
@@ -124,7 +125,6 @@ Namespace Classes
         End Property
 
         Private ReadOnly _meanAnomalyZero As Angle
-        <JsonIgnore()>
         Public ReadOnly Property MeanAnomalyZero As Angle Implements IOrbit.MeanAnomalyZero
             Get
                 Return _meanAnomalyZero
@@ -143,15 +143,14 @@ Namespace Classes
             Return Angle.FromRadians(meanAnomaly.Radians + LongitudeOfPeriapsis.Radians)
         End Function
 
-        Private _meanAngularMotion As Double
+        Private _meanAngularMotion As Angle
         ''' <summary>
         ''' Radians moved in the orbit per day
         ''' </summary>
-        <JsonIgnore()>
-        Private ReadOnly Property MeanAngularMotion As Double
+        Private ReadOnly Property MeanAngularMotion As Angle
             Get
-                If Double.Equals(_meanAngularMotion, 0.0) Then
-                    _meanAngularMotion = (2 * Math.PI) / Period.TotalDays
+                If _meanAngularMotion Is Nothing Then
+                    _meanAngularMotion = Angle.FromRadians((2 * Math.PI) / Period.TotalDays)
                 End If
                 Return _meanAngularMotion
             End Get
@@ -177,6 +176,7 @@ Namespace Classes
         End Property
 
         Private _orbitPath As List(Of Point3D)
+        <JsonIgnore()>
         Public ReadOnly Property OrbitPath As List(Of Point3D) Implements IOrbit.OrbitPath
             Get
                 If _orbitPath Is Nothing Then
@@ -237,7 +237,7 @@ Namespace Classes
         ''' </summary>
         ''' <remarks>0 at periapsis. Increases uniformly with time.</remarks>
         Private Function CalculateMeanAnomaly(days As Double) As Angle
-            Dim radians = MeanAnomalyZero.Radians + (MeanAngularMotion * days)
+            Dim radians = MeanAnomalyZero.Radians + (MeanAngularMotion.Radians * days)
             Return Angle.FromRadians(radians)
         End Function
 

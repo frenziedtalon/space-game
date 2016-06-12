@@ -67,6 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ts\app.ts" />
+    <TypeScriptCompile Include="ts\Classes\Angle.ts" />
+    <TypeScriptCompile Include="ts\Classes\AstronomicalUnit.ts" />
     <TypeScriptCompile Include="ts\Classes\BaseCelestialObject.ts" />
     <TypeScriptCompile Include="ts\Classes\BaseGameEntity.ts" />
     <TypeScriptCompile Include="ts\Classes\Camera.ts" />
@@ -76,8 +78,10 @@
     <TypeScriptCompile Include="ts\Classes\ICelestialObject.ts" />
     <TypeScriptCompile Include="ts\Classes\IOrbitingObject.ts" />
     <TypeScriptCompile Include="ts\Classes\ISphere.ts" />
+    <TypeScriptCompile Include="ts\Classes\Kilometer.ts" />
     <TypeScriptCompile Include="ts\Classes\Moon.ts" />
     <TypeScriptCompile Include="ts\Classes\Orbit.ts" />
+    <TypeScriptCompile Include="ts\Classes\OrbitalMechanics.ts" />
     <TypeScriptCompile Include="ts\Classes\OrbitingCelestialObjectBase.ts" />
     <TypeScriptCompile Include="ts\Classes\Planet.ts" />
     <TypeScriptCompile Include="ts\Classes\SceneScaling.ts" />
