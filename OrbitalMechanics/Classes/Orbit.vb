@@ -148,15 +148,15 @@ Namespace Classes
             Return Angle.FromRadians(meanAnomaly.Radians + LongitudeOfPeriapsis.Radians)
         End Function
 
-        Private _meanAngularMotion As Double
+        Private _meanAngularMotion As Angle
         ''' <summary>
         ''' Radians moved in the orbit per day
         ''' </summary>
         <JsonIgnore()>
-        Private ReadOnly Property MeanAngularMotion As Double
+        Private ReadOnly Property MeanAngularMotion As Angle
             Get
-                If Double.Equals(_meanAngularMotion, 0.0) Then
-                    _meanAngularMotion = (2 * Math.PI) / Period.TotalDays
+                If _meanAngularMotion Is Nothing Then
+                    _meanAngularMotion = Angle.FromRadians((2 * Math.PI) / Period.TotalDays)
                 End If
                 Return _meanAngularMotion
             End Get
@@ -243,7 +243,7 @@ Namespace Classes
         ''' </summary>
         ''' <remarks>0 at periapsis. Increases uniformly with time.</remarks>
         Private Function CalculateMeanAnomaly(days As Double) As Angle
-            Dim radians = MeanAnomalyZero.Radians + (MeanAngularMotion * days)
+            Dim radians = MeanAnomalyZero.Radians + (MeanAngularMotion.Radians * days)
             Return Angle.FromRadians(radians)
         End Function
 
