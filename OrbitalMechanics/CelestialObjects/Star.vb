@@ -13,7 +13,7 @@ Namespace CelestialObjects
         Private ReadOnly _surfaceTemperature As Integer
 
         Public Sub New(name As String,
-                       mass As Integer,
+                       mass As Mass,
                        surfaceTemperature As Integer,
                        texture As String,
                        radius As Distance,

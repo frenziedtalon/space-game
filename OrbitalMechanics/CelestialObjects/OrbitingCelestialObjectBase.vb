@@ -1,4 +1,5 @@
-﻿Imports Entities
+﻿Imports Core.Classes
+Imports Entities
 Imports Core.Extensions
 
 Namespace CelestialObjects
@@ -7,7 +8,7 @@ Namespace CelestialObjects
         Implements IOrbitingObject
 
         Protected Sub New(name As String,
-                          mass As Integer,
+                          mass As Mass,
                           texture As String,
                           entityManager As IEntityManager)
             MyBase.New(name, mass, texture, entityManager)

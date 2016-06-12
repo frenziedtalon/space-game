@@ -18,7 +18,7 @@ Public Class StarTests
 
         Dim entityManager As IEntityManager = Substitute.For(Of IEntityManager)
 
-        Dim star As New Star("test", 1, temperature, "none", Distance.FromKilometers(1), entityManager)
+        Dim star As New Star("test", Mass.FromSolarMasses(1), temperature, "none", Distance.FromKilometers(1), entityManager)
 
         Assert.AreEqual(expected, star.Classification)
 

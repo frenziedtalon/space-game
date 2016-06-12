@@ -1,4 +1,4 @@
-﻿
+﻿Imports Core.Classes
 Imports Entities
 Imports OrbitalMechanics.Classes
 
@@ -7,7 +7,7 @@ Namespace CelestialObjects
         Inherits OrbitingCelestialObjectBase
 
         Public Sub New(name As String,
-                       mass As Integer,
+                       mass As Mass,
                        texture As String,
                        entityManager As IEntityManager)
 
