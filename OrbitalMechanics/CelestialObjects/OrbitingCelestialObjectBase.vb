@@ -46,6 +46,11 @@ Namespace CelestialObjects
             End If
 
             _orbit = o
+
+            ' TODO: If parent / satellite mass can ever be changed in the future this needs to change
+            _orbit.MassOfPrimary = p.Mass
+            _orbit.MassOfSatellite = Me.Mass
+
             _primary = p.Id
         End Sub
 

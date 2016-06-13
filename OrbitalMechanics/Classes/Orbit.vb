@@ -143,6 +143,11 @@ Namespace Classes
             Return Angle.FromRadians(meanAnomaly.Radians + LongitudeOfPeriapsis.Radians)
         End Function
 
+        ' TODO: If parent / satellite mass can ever be changed in the future this needs to change
+        Public Property MassOfPrimary As Mass Implements IOrbit.MassOfPrimary
+
+        Public Property MassOfSatellite As Mass Implements IOrbit.MassOfSatellite
+
         Private _meanAngularMotion As Angle
         ''' <summary>
         ''' Radians moved in the orbit per day
