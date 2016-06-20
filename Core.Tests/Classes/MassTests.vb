@@ -30,5 +30,18 @@ Namespace Classes
 
             Assert.AreEqual(solarMasses, result, acceptableDelta)
         End Sub
+
+        <TestCase(0.0)>
+        <TestCase(56.0)>
+        <TestCase(0.00000001)>
+        <TestCase(25444588655.0)>
+        Public Sub FromEarthMasses_WhenCalled_StoresCorrectValue(earthMasses As Double)
+            Dim acceptableDelta = Mass.FromKilograms(1).Kilograms
+            Dim m = Mass.FromEarthMasses(earthMasses)
+
+            Dim result = m.EarthMasses
+
+            Assert.AreEqual(earthMasses, result, acceptableDelta)
+        End Sub
     End Class
 End Namespace
