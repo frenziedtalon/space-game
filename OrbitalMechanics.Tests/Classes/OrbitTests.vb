@@ -23,6 +23,8 @@ Namespace Classes
 
             Dim orbit As New Orbit(turnTracker:=turnTracker,
                                    data:=orbitData)
+            orbit.MassOfPrimary = MassOfSun
+            orbit.MassOfSatellite = MassOfMercury
 
             Dim result = orbit.Position
 
@@ -61,6 +63,18 @@ Namespace Classes
             End Get
         End Property
 
+        Private Shared ReadOnly Property MassOfSun As Mass
+            Get
+                Return Mass.FromSolarMasses(1)
+            End Get
+        End Property
+
+        Private Shared ReadOnly Property MassOfMercury As Mass
+            Get
+                Return Mass.FromEarthMasses(0.0553)
+            End Get
+        End Property
+
         <Test()>
         Public Sub Position_WhenCalledRepeatedlyWithoutIncrementingTurn_ReturnsSameValue()
 
@@ -69,6 +83,8 @@ Namespace Classes
 
             Dim orbitData = EllipseOrbitData()
             Dim orbit = New Orbit(turnTracker, orbitData)
+            orbit.MassOfPrimary = MassOfSun
+            orbit.MassOfSatellite = MassOfMercury
 
             Dim result1 = orbit.Position
             Dim result2 = orbit.Position
@@ -84,6 +100,8 @@ Namespace Classes
             Dim orbitData = EllipseOrbitData()
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
             Dim orbit = New Orbit(turnTracker, orbitData, shouldDisplayOrbit:=True)
+            orbit.MassOfPrimary = MassOfSun
+            orbit.MassOfSatellite = MassOfMercury
 
             Dim result = orbit.OrbitPath
 
@@ -97,6 +115,8 @@ Namespace Classes
             Dim orbitData = EllipseOrbitData()
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
             Dim orbit = New Orbit(turnTracker, orbitData, shouldDisplayOrbit:=True)
+            orbit.MassOfPrimary = MassOfSun
+            orbit.MassOfSatellite = MassOfMercury
 
             Dim result = orbit.OrbitPath
 
@@ -170,6 +190,8 @@ Namespace Classes
             Dim orbitData = EllipseOrbitData()
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
             Dim orbit = New Orbit(turnTracker, orbitData, shouldDisplayOrbit:=False)
+            orbit.MassOfPrimary = MassOfSun
+            orbit.MassOfSatellite = MassOfMercury
 
             Dim displayFalseResult = orbit.OrbitPath
 
@@ -189,6 +211,8 @@ Namespace Classes
             Dim orbitData = EllipseOrbitData()
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
             Dim orbit = New Orbit(turnTracker, orbitData, shouldDisplayOrbit:=True)
+            orbit.MassOfPrimary = MassOfSun
+            orbit.MassOfSatellite = MassOfMercury
 
             Dim displayTrueResult = orbit.OrbitPath
 

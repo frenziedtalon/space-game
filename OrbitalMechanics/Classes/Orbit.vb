@@ -50,9 +50,9 @@ Namespace Classes
         <JsonIgnore()>
         Public ReadOnly Property Period As TimeSpan Implements IOrbit.Period
             Get
-                If _period = TimeSpan.Zero AndAlso SemiMajorAxis IsNot Nothing Then
-                    Dim years = Math.Pow(SemiMajorAxis.AstronomicalUnits, 1.5)
-                    _period = TimeSpan.FromDays(years * Constants.DaysInJulianYear)
+                If _period = TimeSpan.Zero Then
+                    Dim orbitHelper = New OrbitHelper
+                    _period = orbitHelper.CalculatePeriod(orbitHelper.CalculateTotalMass(MassOfPrimary, MassOfSatellite), SemiMajorAxis)
                 End If
                 Return _period
             End Get
