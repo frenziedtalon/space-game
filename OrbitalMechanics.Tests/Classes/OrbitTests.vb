@@ -19,7 +19,7 @@ Namespace Classes
             Dim turnTracker As ITurnTracker = Substitute.For(Of ITurnTracker)
             turnTracker.TimeSinceStart.Returns(TimeSpan.FromDays(days))
 
-            Dim acceptableDelta = Distance.FromKilometers(1).Kilometers
+            Dim acceptableDelta = Distance.FromKilometers(1800).Kilometers
 
             Dim orbit As New Orbit(turnTracker:=turnTracker,
                                    data:=orbitData)
