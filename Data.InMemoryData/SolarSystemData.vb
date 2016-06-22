@@ -24,7 +24,7 @@ Public Class SolarSystemData
 
             Dim physicalData = New PhysicalData("Mercury",
                                     Distance.FromKilometers(2440),
-                                    Mass.FromSolarMasses(1))
+                                    Mass.FromEarthMasses(0.06))
 
             Return New OrbitingObjectData(orbit, physicalData)
         End Get
@@ -41,7 +41,7 @@ Public Class SolarSystemData
 
             Dim physicalData = New PhysicalData("Venus",
                                     Distance.FromKilometers(6052),
-                                    Mass.FromSolarMasses(1))
+                                    Mass.FromEarthMasses(0.82))
 
             Return New OrbitingObjectData(orbit, physicalData)
         End Get
@@ -58,7 +58,7 @@ Public Class SolarSystemData
 
             Dim physicalData = New PhysicalData("Earth",
                                     Distance.FromKilometers(6371),
-                                    Mass.FromSolarMasses(1))
+                                    Mass.FromEarthMasses(1))
 
             Return New OrbitingObjectData(orbit, physicalData)
         End Get
@@ -75,7 +75,7 @@ Public Class SolarSystemData
 
             Dim physicalData = New PhysicalData("Moon",
                                     Distance.FromKilometers(1737),
-                                    Mass.FromSolarMasses(1))
+                                    Mass.FromEarthMasses(0.0123))
 
             Return New OrbitingObjectData(orbit, physicalData)
         End Get
@@ -92,7 +92,7 @@ Public Class SolarSystemData
 
             Dim physicalData = New PhysicalData("Mars",
                                     Distance.FromKilometers(3390),
-                                    Mass.FromSolarMasses(1))
+                                    Mass.FromEarthMasses(0.11))
 
             Return New OrbitingObjectData(orbit, physicalData)
         End Get
@@ -109,7 +109,7 @@ Public Class SolarSystemData
 
             Dim physicalData = New PhysicalData("Jupiter",
                                     Distance.FromKilometers(69911),
-                                    Mass.FromSolarMasses(1))
+                                    Mass.FromEarthMasses(317.8))
 
             Return New OrbitingObjectData(orbit, physicalData)
         End Get
@@ -126,7 +126,7 @@ Public Class SolarSystemData
 
             Dim physicalData = New PhysicalData("Saturn",
                                     Distance.FromKilometers(58232),
-                                    Mass.FromSolarMasses(1))
+                                    Mass.FromEarthMasses(95.2))
 
             Return New OrbitingObjectData(orbit, physicalData)
         End Get
@@ -143,7 +143,7 @@ Public Class SolarSystemData
 
             Dim physicalData = New PhysicalData("Uranus",
                                     Distance.FromKilometers(25362),
-                                    Mass.FromSolarMasses(1))
+                                    Mass.FromEarthMasses(14.6))
 
             Return New OrbitingObjectData(orbit, physicalData)
         End Get
@@ -160,7 +160,7 @@ Public Class SolarSystemData
 
             Dim physicalData = New PhysicalData("Neptune",
                                     Distance.FromKilometers(24622),
-                                    Mass.FromSolarMasses(1))
+                                    Mass.FromEarthMasses(17.2))
 
             Return New OrbitingObjectData(orbit, physicalData)
         End Get
