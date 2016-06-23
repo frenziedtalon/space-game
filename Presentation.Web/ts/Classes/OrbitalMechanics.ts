@@ -8,8 +8,9 @@ class OrbitalMechanics {
 
     generateOrbitPath(): Array<BABYLON.Vector3> {
         const result: Array<BABYLON.Vector3> = [];
+        const step = this.calculateOrbitPathStep();
 
-        for (let i = 0; i < this.Orbit.PeriodDays; i += 1) {
+        for (let i = 0; i < this.Orbit.PeriodDays; i += step) {
             result.push(this.calculateOrbitPosition(i));
         }
 
@@ -18,6 +19,18 @@ class OrbitalMechanics {
         }
 
         return result;
+    }
+
+    calculateOrbitPathStep(): number {
+        if (this.Orbit.PeriodDays < 30) {
+            return 0.25;
+        } else if (this.Orbit.PeriodDays < 60) {
+            return 0.5;
+        } else if (this.Orbit.PeriodDays > 1000) {
+            return 5;
+        } else {
+            return 1;
+        }
     }
 
     calculateOrbitPosition(days: number): BABYLON.Vector3 {
