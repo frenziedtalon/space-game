@@ -1,4 +1,5 @@
-﻿Imports Core.Extensions
+﻿Imports Core.Classes
+Imports Core.Extensions
 Imports Entities
 Imports OrbitalMechanics.Classes
 
@@ -9,7 +10,7 @@ Namespace CelestialObjects
         Implements ICelestialObject
 
         Protected Sub New(name As String,
-                        mass As Integer,
+                        mass As Mass,
                         texture As String,
                         entityManager As IEntityManager)
             MyBase.New(entityManager)
@@ -18,8 +19,8 @@ Namespace CelestialObjects
             _texture = texture
         End Sub
 
-        Private ReadOnly _mass As Integer
-        Public ReadOnly Property Mass As Integer Implements ICelestialObject.Mass
+        Private ReadOnly _mass As Mass
+        Public ReadOnly Property Mass As Mass Implements ICelestialObject.Mass
             Get
                 Return _mass
             End Get

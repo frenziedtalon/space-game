@@ -1,6 +1,6 @@
 ﻿"use strict";
 var runGame = () => {
-
+    var targetObjectName = 'Mars'; //Todo: remove SG-114
     var canvas = getCanvas();
     var engine = loadBabylonEngine(canvas);
     var scene = createScene(engine);
@@ -177,7 +177,11 @@ var runGame = () => {
                                                     texture: string,
                                                     radius: Distance,
                                                     parent: BABYLON.Mesh): BABYLON.Mesh {
-        
+
+        if (info.Name === targetObjectName) {
+            updateCameraTarget(info.Id);
+        }
+
         const scaledRadius = scaleRadius(radius);
 
         const mesh = BABYLON.Mesh.CreateSphere(info.Name, 16, scaledRadius * 2, scene);

@@ -37,4 +37,6 @@ Public Interface IOrbit
     ''' List of points representing the full orbit path
     ''' </summary>
     ReadOnly Property OrbitPath As List(Of Point3D)
+    Property MassOfPrimary As Mass
+    Property MassOfSatellite As Mass
 End Interface

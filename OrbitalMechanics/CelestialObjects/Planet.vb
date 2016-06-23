@@ -11,7 +11,7 @@ Namespace CelestialObjects
         Implements ISphere
 
         Public Sub New(name As String,
-                       mass As Integer,
+                       mass As Mass,
                        texture As String,
                        radius As Distance,
                        entityManager As IEntityManager)

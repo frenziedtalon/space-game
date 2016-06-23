@@ -1,4 +1,5 @@
-﻿Imports Entities
+﻿Imports Core.Classes
+Imports Entities
 Imports Core.Extensions
 
 Namespace CelestialObjects
@@ -7,7 +8,7 @@ Namespace CelestialObjects
         Implements IOrbitingObject
 
         Protected Sub New(name As String,
-                          mass As Integer,
+                          mass As Mass,
                           texture As String,
                           entityManager As IEntityManager)
             MyBase.New(name, mass, texture, entityManager)
@@ -45,6 +46,11 @@ Namespace CelestialObjects
             End If
 
             _orbit = o
+
+            ' TODO: If parent / satellite mass can ever be changed in the future this needs to change
+            _orbit.MassOfPrimary = p.Mass
+            _orbit.MassOfSatellite = Me.Mass
+
             _primary = p.Id
         End Sub
 

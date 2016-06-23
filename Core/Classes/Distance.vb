@@ -1,6 +1,4 @@
-﻿Imports Newtonsoft.Json
-
-Namespace Classes
+﻿Namespace Classes
     Public Class Distance
         Private ReadOnly _kilometers As Double
 
