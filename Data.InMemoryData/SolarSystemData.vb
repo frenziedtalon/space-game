@@ -13,7 +13,7 @@ Public Class SolarSystemData
         End Get
     End Property
 
-    Public ReadOnly Property Mercury As OrbitingObjectData Implements ISolarSystemData.Mercury
+    Public ReadOnly Property Mercury As CelestialObjectData Implements ISolarSystemData.Mercury
         Get
             Dim orbit = New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(48.3313),
                                    inclination:=Angle.FromDegrees(7.0047),
@@ -26,11 +26,11 @@ Public Class SolarSystemData
                                     Distance.FromKilometers(2440),
                                     Mass.FromEarthMasses(0.06))
 
-            Return New OrbitingObjectData(orbit, physicalData)
+            Return New CelestialObjectData(orbit, physicalData)
         End Get
     End Property
 
-    Public ReadOnly Property Venus As OrbitingObjectData Implements ISolarSystemData.Venus
+    Public ReadOnly Property Venus As CelestialObjectData Implements ISolarSystemData.Venus
         Get
             Dim orbit = New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(76.6799),
                                    inclination:=Angle.FromDegrees(3.3946),
@@ -43,11 +43,11 @@ Public Class SolarSystemData
                                     Distance.FromKilometers(6052),
                                     Mass.FromEarthMasses(0.82))
 
-            Return New OrbitingObjectData(orbit, physicalData)
+            Return New CelestialObjectData(orbit, physicalData)
         End Get
     End Property
 
-    Public ReadOnly Property Earth As OrbitingObjectData Implements ISolarSystemData.Earth
+    Public ReadOnly Property Earth As CelestialObjectData Implements ISolarSystemData.Earth
         Get
             Dim orbit = New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(0),
                                    inclination:=Angle.FromDegrees(0),
@@ -60,11 +60,11 @@ Public Class SolarSystemData
                                     Distance.FromKilometers(6371),
                                     Mass.FromEarthMasses(1))
 
-            Return New OrbitingObjectData(orbit, physicalData)
+            Return New CelestialObjectData(orbit, physicalData)
         End Get
     End Property
 
-    Public ReadOnly Property Moon As OrbitingObjectData Implements ISolarSystemData.Moon
+    Public ReadOnly Property Moon As CelestialObjectData Implements ISolarSystemData.Moon
         Get
             Dim orbit = New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(125.1228),
                                    inclination:=Angle.FromDegrees(5.1454),
@@ -77,11 +77,11 @@ Public Class SolarSystemData
                                     Distance.FromKilometers(1737),
                                     Mass.FromEarthMasses(0.0123))
 
-            Return New OrbitingObjectData(orbit, physicalData)
+            Return New CelestialObjectData(orbit, physicalData)
         End Get
     End Property
 
-    Public ReadOnly Property Mars As OrbitingObjectData Implements ISolarSystemData.Mars
+    Public ReadOnly Property Mars As CelestialObjectData Implements ISolarSystemData.Mars
         Get
             Dim orbit = New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(49.5574),
                                    inclination:=Angle.FromDegrees(1.8497),
@@ -94,11 +94,11 @@ Public Class SolarSystemData
                                     Distance.FromKilometers(3390),
                                     Mass.FromEarthMasses(0.11))
 
-            Return New OrbitingObjectData(orbit, physicalData)
+            Return New CelestialObjectData(orbit, physicalData)
         End Get
     End Property
 
-    Public ReadOnly Property Jupiter As OrbitingObjectData Implements ISolarSystemData.Jupiter
+    Public ReadOnly Property Jupiter As CelestialObjectData Implements ISolarSystemData.Jupiter
         Get
             Dim orbit = New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(100.4542),
                                    inclination:=Angle.FromDegrees(1.303),
@@ -111,11 +111,11 @@ Public Class SolarSystemData
                                     Distance.FromKilometers(69911),
                                     Mass.FromEarthMasses(317.8))
 
-            Return New OrbitingObjectData(orbit, physicalData)
+            Return New CelestialObjectData(orbit, physicalData)
         End Get
     End Property
 
-    Public ReadOnly Property Saturn As OrbitingObjectData Implements ISolarSystemData.Saturn
+    Public ReadOnly Property Saturn As CelestialObjectData Implements ISolarSystemData.Saturn
         Get
             Dim orbit = New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(113.6634),
                                    inclination:=Angle.FromDegrees(2.4886),
@@ -128,11 +128,11 @@ Public Class SolarSystemData
                                     Distance.FromKilometers(58232),
                                     Mass.FromEarthMasses(95.2))
 
-            Return New OrbitingObjectData(orbit, physicalData)
+            Return New CelestialObjectData(orbit, physicalData)
         End Get
     End Property
 
-    Public ReadOnly Property Uranus As OrbitingObjectData Implements ISolarSystemData.Uranus
+    Public ReadOnly Property Uranus As CelestialObjectData Implements ISolarSystemData.Uranus
         Get
             Dim orbit = New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(74.0005),
                                    inclination:=Angle.FromDegrees(0.7733),
@@ -145,11 +145,11 @@ Public Class SolarSystemData
                                     Distance.FromKilometers(25362),
                                     Mass.FromEarthMasses(14.6))
 
-            Return New OrbitingObjectData(orbit, physicalData)
+            Return New CelestialObjectData(orbit, physicalData)
         End Get
     End Property
 
-    Public ReadOnly Property Neptune As OrbitingObjectData Implements ISolarSystemData.Neptune
+    Public ReadOnly Property Neptune As CelestialObjectData Implements ISolarSystemData.Neptune
         Get
             Dim orbit = New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(131.7806),
                                    inclination:=Angle.FromDegrees(1.77),
@@ -162,11 +162,11 @@ Public Class SolarSystemData
                                     Distance.FromKilometers(24622),
                                     Mass.FromEarthMasses(17.2))
 
-            Return New OrbitingObjectData(orbit, physicalData)
+            Return New CelestialObjectData(orbit, physicalData)
         End Get
     End Property
 
-    Public ReadOnly Property Pluto As OrbitingObjectData Implements ISolarSystemData.Pluto
+    Public ReadOnly Property Pluto As CelestialObjectData Implements ISolarSystemData.Pluto
         Get
             Dim orbit = New OrbitData(longitudeOfAscendingNode:=Angle.FromDegrees(1.9250982),
                                    inclination:=Angle.FromDegrees(0.29914960832),
@@ -179,7 +179,7 @@ Public Class SolarSystemData
                                     Distance.FromKilometers(1186),
                                     Mass.FromSolarMasses(1))
 
-            Return New OrbitingObjectData(orbit, physicalData)
+            Return New CelestialObjectData(orbit, physicalData)
         End Get
     End Property
 End Class

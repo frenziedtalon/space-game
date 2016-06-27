@@ -1,7 +1,7 @@
-﻿Imports Data.Classes
+﻿Imports Data.Data
 
-Namespace Data
-    Public Class OrbitingObjectData
+Namespace Classes
+    Public Class CelestialObjectData
         Private ReadOnly _physical As PhysicalData
         Private ReadOnly _orbit As OrbitData
 
