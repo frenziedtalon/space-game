@@ -72,48 +72,4 @@ Public Class SceneConstructor
         Return objects
     End Function
 
-    Public Function CircularTestSystem() As List(Of ICelestialObject)
-
-        Dim objects = New List(Of ICelestialObject)
-
-        Dim sun = New Star(5500, "sun.jpg", _dataProvider.SolarSystem.Sun, _entityManager)
-
-        Dim planet = New Planet("pluto.jpg", _dataProvider.SolarSystem.Pluto.Physical, _entityManager)
-
-        Dim orbit = New Orbit(_turnTracker,
-                              longitudeOfAscendingNode:=Angle.FromDegrees(48.3313),
-                              inclination:=Angle.FromDegrees(7.0047),
-                              argumentOfPeriapsis:=Angle.FromDegrees(29.1241),
-                              semiMajorAxis:=Distance.FromAstronomicalUnits(0.38709893),
-                              eccentricity:=0.0,
-                              meanAnomalyZero:=Angle.FromDegrees(168.6562))
-
-        sun.AddSatellite(planet, orbit)
-
-        objects.Add(sun)
-        Return objects
-    End Function
-
-    Public Function NearParabolicTestSystem() As List(Of ICelestialObject)
-
-        Dim objects = New List(Of ICelestialObject)
-
-        Dim sun = New Star(5500, "sun.jpg", _dataProvider.SolarSystem.Sun, _entityManager)
-
-        Dim planet = New Planet("pluto.jpg", _dataProvider.SolarSystem.Pluto.Physical, _entityManager)
-
-        Dim orbit = New Orbit(_turnTracker,
-                              longitudeOfAscendingNode:=Angle.FromDegrees(48.3313),
-                              inclination:=Angle.FromDegrees(7.0047),
-                              argumentOfPeriapsis:=Angle.FromDegrees(29.1241),
-                              semiMajorAxis:=Distance.FromAstronomicalUnits(0.38709893),
-                              eccentricity:=0.79,
-                              meanAnomalyZero:=Angle.FromDegrees(168.6562))
-
-        sun.AddSatellite(planet, orbit)
-
-        objects.Add(sun)
-        Return objects
-    End Function
-
 End Class
