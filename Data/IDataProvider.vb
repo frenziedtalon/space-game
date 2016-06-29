@@ -1,5 +1,6 @@
-﻿Public Interface IDataProvider
+﻿Imports Data.Classes
 
-    ReadOnly Property SolarSystem() As ISolarSystemData
+Public Interface IDataProvider
 
+    ReadOnly Property SolarSystem() As List(Of CelestialObjectData)
 End Interface

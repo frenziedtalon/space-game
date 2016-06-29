@@ -64,7 +64,6 @@ Namespace WebApi.App_Start
             kernel.Bind(Of ISceneService)().To(Of SceneService)()
             kernel.Bind(Of ICameraService)().To(Of InMemoryCamera.CameraService)().InSingletonScope()
             kernel.Bind(Of IDataProvider)().To(Of DataProvider)().InSingletonScope()
-            kernel.Bind(Of ISolarSystemData)().To(Of SolarSystemData)().InSingletonScope()
         End Sub
     End Class
 End Namespace
