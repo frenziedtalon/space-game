@@ -5,15 +5,38 @@ Imports Data.Data
 Public Class SolarSystemData
 
     Public Function SolSystem() As List(Of CelestialObjectData)
+        Dim result As New List(Of CelestialObjectData)
+
+        Dim sol = Sun
+
+        sol.AddSatellite(Mercury)
+        sol.AddSatellite(Venus)
+
+        Dim e = Earth
+        e.AddSatellite(Moon)
+        sol.AddSatellite(e)
+
+        sol.AddSatellite(Mars)
+        sol.AddSatellite(Jupiter)
+        sol.AddSatellite(Saturn)
+        sol.AddSatellite(Uranus)
+        sol.AddSatellite(Neptune)
+        sol.AddSatellite(Pluto)
+
+        result.Add(sol)
+
+        Return result
     End Function
 
     Private ReadOnly Property Sun As CelestialObjectData
         Get
-            Return New PhysicalData("Sol",
+            Dim physicalData = New PhysicalData("Sol",
                                     Distance.FromKilometers(695700),
                                     Mass.FromSolarMasses(1),
                                     "sun.jpg",
                                     CelestialObjectType.Star)
+
+            Return New CelestialObjectData(Nothing, physicalData)
         End Get
     End Property
 

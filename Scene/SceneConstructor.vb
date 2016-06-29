@@ -1,5 +1,5 @@
-﻿Imports Core.Classes
-Imports Data
+﻿Imports Data
+Imports Data.Classes
 Imports Entities
 Imports OrbitalMechanics.CelestialObjects
 Imports OrbitalMechanics.Classes
@@ -20,56 +20,39 @@ Public Class SceneConstructor
         _dataProvider = dataProvider
     End Sub
 
+
+    Private Function RecursiveCreateCelestialObject(o As CelestialObjectData) As ICelestialObject
+        Dim primary As BaseCelestialObject = CreateCorrectCelestialObject(o)
+
+        If o.Satellites.Any() Then
+            For Each satellite In o.Satellites
+                Dim s = RecursiveCreateCelestialObject(satellite)
+                If s IsNot Nothing Then
+                    Dim orbit = New Orbit(_turnTracker, satellite.Orbit, True)
+                    primary.AddSatellite(DirectCast(s, OrbitingCelestialObjectBase), orbit)
+                End If
+            Next
+        End If
+
+        Return primary
+    End Function
+
+    Private Function CreateCorrectCelestialObject(o As CelestialObjectData) As BaseCelestialObject
+        Select Case o.Physical.Type
+            Case CelestialObjectType.Star
+                Return New Star(5500, o.Physical, _entityManager)
+            Case CelestialObjectType.Planet
+                Return New Planet(o.Physical, _entityManager)
+            Case CelestialObjectType.Moon
+                Return New Moon(o.Physical, _entityManager)
+            Case Else
+                Return Nothing
+        End Select
+    End Function
+
     Public Function SolSystem() As List(Of ICelestialObject)
-
-        Dim objects = New List(Of ICelestialObject)
-
-        Dim sun = New Star(5500, "sun.jpg", _dataProvider.SolarSystem.Sun, _entityManager)
-
-        Dim mercury = New Planet("mercury.jpg", _dataProvider.SolarSystem.Mercury.Physical, _entityManager)
-        Dim mercuryOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Mercury.Orbit, True)
-        sun.AddSatellite(mercury, mercuryOrbit)
-
-        Dim venus = New Planet("venus.jpg", _dataProvider.SolarSystem.Venus.Physical, _entityManager)
-        Dim venusOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Venus.Orbit, True)
-        sun.AddSatellite(venus, venusOrbit)
-
-        Dim moon = New Moon("moon.png", _dataProvider.SolarSystem.Moon.Physical, _entityManager)
-        Dim moonOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Moon.Orbit, True)
-
-        Dim earth = New Planet("earth.jpg", _dataProvider.SolarSystem.Earth.Physical, _entityManager)
-        earth.AddSatellite(moon, moonOrbit)
-
-        Dim earthOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Earth.Orbit, True)
-        sun.AddSatellite(earth, earthOrbit)
-
-        Dim mars = New Planet("mars.jpg", _dataProvider.SolarSystem.Mars.Physical, _entityManager)
-        Dim marsOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Mars.Orbit, True)
-        sun.AddSatellite(mars, marsOrbit)
-
-        Dim jupiter = New Planet("jupiter.jpg", _dataProvider.SolarSystem.Jupiter.Physical, _entityManager)
-        Dim jupiterOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Jupiter.Orbit, True)
-        sun.AddSatellite(jupiter, jupiterOrbit)
-
-        Dim saturn = New Planet("saturn.jpg", _dataProvider.SolarSystem.Saturn.Physical, _entityManager)
-        Dim saturnOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Saturn.Orbit, True)
-        sun.AddSatellite(saturn, saturnOrbit)
-
-        Dim uranus = New Planet("uranus.jpg", _dataProvider.SolarSystem.Uranus.Physical, _entityManager)
-        Dim uranusOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Uranus.Orbit, True)
-        sun.AddSatellite(uranus, uranusOrbit)
-
-        Dim neptune = New Planet("neptune.jpg", _dataProvider.SolarSystem.Neptune.Physical, _entityManager)
-        Dim neptuneOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Neptune.Orbit, True)
-        sun.AddSatellite(neptune, neptuneOrbit)
-
-        Dim pluto = New Planet("pluto.jpg", _dataProvider.SolarSystem.Pluto.Physical, _entityManager)
-        Dim plutoOrbit = New Orbit(_turnTracker, _dataProvider.SolarSystem.Pluto.Orbit, True)
-        sun.AddSatellite(pluto, plutoOrbit)
-
-        objects.Add(sun)
-
-        Return objects
+        Dim system = _dataProvider.SolarSystem
+        Return (From o In system Select RecursiveCreateCelestialObject(o)).ToList()
     End Function
 
 End Class
