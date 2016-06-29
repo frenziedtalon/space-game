@@ -86,6 +86,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SceneConstructorTests.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -106,6 +107,32 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data.InMemoryData\Data.InMemoryData.vbproj">
+      <Project>{a797f444-2a0f-4fba-9b63-9ad42c55e787}</Project>
+      <Name>Data.InMemoryData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.vbproj">
+      <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.vbproj">
+      <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.vbproj">
+      <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
+      <Name>OrbitalMechanics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scene\Scene.vbproj">
+      <Project>{0c3f75e6-608f-4fc5-8f2a-1c74c01807ce}</Project>
+      <Name>Scene</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
+      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
+      <Name>TurnTracker</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

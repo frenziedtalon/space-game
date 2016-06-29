@@ -49,6 +49,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Scene", "Scene\Scene.vbproj
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Data.SqlData", "Data.SqlData\Data.SqlData.vbproj", "{20749D8D-8215-42FB-B399-14560FA1EE3A}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Scene.Tests", "Scene.Tests\Scene.Tests.vbproj", "{EFDA865F-5D2F-4CDA-94B7-EF70DE86AE7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{20749D8D-8215-42FB-B399-14560FA1EE3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20749D8D-8215-42FB-B399-14560FA1EE3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20749D8D-8215-42FB-B399-14560FA1EE3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFDA865F-5D2F-4CDA-94B7-EF70DE86AE7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFDA865F-5D2F-4CDA-94B7-EF70DE86AE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFDA865F-5D2F-4CDA-94B7-EF70DE86AE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFDA865F-5D2F-4CDA-94B7-EF70DE86AE7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
