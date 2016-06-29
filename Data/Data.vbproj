@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\IPhysicalData.vb" />
+    <Compile Include="Classes\CelestialObjectType.vb" />
     <Compile Include="Classes\CelestialObjectData.vb" />
     <Compile Include="Classes\OrbitData.vb" />
     <Compile Include="Classes\PhysicalData.vb" />
