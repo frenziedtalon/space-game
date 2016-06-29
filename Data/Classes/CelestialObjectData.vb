@@ -21,5 +21,20 @@ Namespace Classes
                 Return _orbit
             End Get
         End Property
+
+        Private ReadOnly _satellites As New List(Of CelestialObjectData)
+        Public ReadOnly Property Satellites As List(Of CelestialObjectData)
+            Get
+                Return _satellites
+            End Get
+        End Property
+
+        Public Sub AddSatellite(s As CelestialObjectData)
+            _satellites.Add(s)
+        End Sub
+
+        Public Sub AddSatellite(o As OrbitData, p As PhysicalData)
+            _satellites.Add(New CelestialObjectData(o, p))
+        End Sub
     End Class
 End Namespace
