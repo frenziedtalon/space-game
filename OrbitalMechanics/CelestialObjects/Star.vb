@@ -3,7 +3,6 @@ Imports Core.Classes
 Imports Data.Data
 Imports Entities
 Imports Newtonsoft.Json
-Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
     Public Class Star
@@ -25,11 +24,10 @@ Namespace CelestialObjects
         End Sub
 
         Public Sub New(surfaceTemperature As Integer,
-                       texture As String,
                        physicalData As PhysicalData,
                        entityManager As IEntityManager)
 
-            MyBase.New(physicalData.Name, physicalData.Mass, texture, entityManager)
+            MyBase.New(physicalData.Name, physicalData.Mass, physicalData.Texture, entityManager)
             _surfaceTemperature = surfaceTemperature
             _radius = physicalData.Radius
         End Sub
