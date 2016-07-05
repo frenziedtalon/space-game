@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Data.SqlData")> 
+<Assembly: AssemblyTitle("Data.SqlDataProvider")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("Data.SqlData")> 
+<Assembly: AssemblyProduct("Data.SqlDataProvider")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("6e27fb2c-f485-4dc9-89bb-3a88ed4529b2")> 
+<Assembly: Guid("5cf77617-dce7-4564-9bfc-ee28f0c950b7")> 
 
 ' Version information for an assembly consists of the following four values:
 '
