@@ -74,6 +74,7 @@
     <Compile Include="Classes\RangeTests.vb" />
     <Compile Include="Extensions\EnumerableExtensionsTests.vb" />
     <Compile Include="Extensions\GuidExtensionsTests.vb" />
+    <Compile Include="Extensions\StringExtensionsTests.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
