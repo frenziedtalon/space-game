@@ -74,6 +74,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DataProvider.vb" />
     <Compile Include="Classes\Entity.vb" />
     <Compile Include="Classes\EntityFrameworkReadOnlyRepository.vb" />
     <Compile Include="Classes\EntityFrameworkUnitOfWork.vb" />
@@ -165,6 +166,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.vbproj">
+      <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.vbproj">
       <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
       <Name>Data</Name>
