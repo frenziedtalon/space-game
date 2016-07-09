@@ -79,9 +79,15 @@ Namespace Classes
                 Using con As New SolarSystemEntities
                     Return con.CelestialObjects.
                                 Where(Function(o) o.SolarSystem.Name = name AndAlso o.PrimaryId Is Nothing).
-                                Include(Function(s) s.CelestialObjectType).
-                                Include(Function(s) s.CelestialObject1).
+                                Include(Function(s) s.CelestialObjectType). ' top level, stars, free floating objects
+                                Include(Function(s) s.CelestialObject1). ' planets
+                                Include(Function(s) s.CelestialObject1.Select(Function(t) t.CelestialObjectType)).
+                                Include(Function(s) s.CelestialObject1.Select(Function(t) t.CelestialObject1)). ' moons of planets
+                                Include(Function(s) s.CelestialObject1.Select(Function(t) t.CelestialObject1.Select(Function(u) u.CelestialObjectType))).
+                                Include(Function(s) s.CelestialObject1.Select(Function(t) t.CelestialObject1.Select(Function(u) u.CelestialObject1))). ' anything orbiting a moon of a planet
                                 ToList()
+
+                    ' This will need refactoring if we ever get as far as moons having orbiting objects.
                 End Using
             End If
 
