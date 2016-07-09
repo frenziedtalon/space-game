@@ -77,6 +77,12 @@
     <Compile Include="Classes\Entity.vb" />
     <Compile Include="Classes\EntityFrameworkReadOnlyRepository.vb" />
     <Compile Include="Classes\EntityFrameworkUnitOfWork.vb" />
+    <Compile Include="Model\CelestialObject.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CelestialObjectType.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SolarSystem.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>
@@ -96,6 +102,9 @@
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Universe.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\User.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -164,6 +173,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

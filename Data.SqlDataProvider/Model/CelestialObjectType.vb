@@ -10,16 +10,10 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class Universe
+Partial Public Class CelestialObjectType
     Public Property Id As Integer
     Public Property Name As String
-    Public Property CreatedBy As Integer
-    Public Property CreatedDateUtc As Date
-    Public Property ModifiedBy As Integer
-    Public Property ModifiedDateUtc As Date
 
-    Public Overridable Property SolarSystems As ICollection(Of SolarSystem) = New HashSet(Of SolarSystem)
-    Public Overridable Property User As User
-    Public Overridable Property User1 As User
+    Public Overridable Property CelestialObjects As ICollection(Of CelestialObject) = New HashSet(Of CelestialObject)
 
 End Class

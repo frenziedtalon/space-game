@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class Universe
+Partial Public Class User
     Public Property Id As Integer
     Public Property Name As String
     Public Property CreatedBy As Integer
@@ -19,7 +19,12 @@ Partial Public Class Universe
     Public Property ModifiedDateUtc As Date
 
     Public Overridable Property SolarSystems As ICollection(Of SolarSystem) = New HashSet(Of SolarSystem)
-    Public Overridable Property User As User
+    Public Overridable Property SolarSystems1 As ICollection(Of SolarSystem) = New HashSet(Of SolarSystem)
+    Public Overridable Property Universes As ICollection(Of Universe) = New HashSet(Of Universe)
+    Public Overridable Property Universes1 As ICollection(Of Universe) = New HashSet(Of Universe)
+    Public Overridable Property Users1 As ICollection(Of User) = New HashSet(Of User)
     Public Overridable Property User1 As User
+    Public Overridable Property Users11 As ICollection(Of User) = New HashSet(Of User)
+    Public Overridable Property User2 As User
 
 End Class

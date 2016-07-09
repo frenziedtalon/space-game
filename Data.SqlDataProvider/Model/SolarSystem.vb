@@ -14,7 +14,14 @@ Partial Public Class SolarSystem
     Public Property Id As Integer
     Public Property Name As String
     Public Property UniverseId As Integer
+    Public Property CreatedBy As Integer
+    Public Property CreatedDateUtc As Date
+    Public Property ModifiedBy As Integer
+    Public Property ModifiedDateUtc As Date
 
     Public Overridable Property Universe As Universe
+    Public Overridable Property User As User
+    Public Overridable Property User1 As User
+    Public Overridable Property CelestialObjects As ICollection(Of CelestialObject) = New HashSet(Of CelestialObject)
 
 End Class

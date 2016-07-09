@@ -24,5 +24,8 @@ Partial Public Class SolarSystemEntities
 
     Public Overridable Property SolarSystems() As DbSet(Of SolarSystem)
     Public Overridable Property Universes() As DbSet(Of Universe)
+    Public Overridable Property Users() As DbSet(Of User)
+    Public Overridable Property CelestialObjectTypes() As DbSet(Of CelestialObjectType)
+    Public Overridable Property CelestialObjects() As DbSet(Of CelestialObject)
 
 End Class
