@@ -48,6 +48,14 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -277,9 +285,9 @@
       <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Data.InMemoryData\Data.InMemoryData.vbproj">
-      <Project>{a797f444-2a0f-4fba-9b63-9ad42c55e787}</Project>
-      <Name>Data.InMemoryData</Name>
+    <ProjectReference Include="..\Data.SqlDataProvider\Data.SqlDataProvider.vbproj">
+      <Project>{56b17816-2820-401b-9f41-dfcec79cc4cf}</Project>
+      <Name>Data.SqlDataProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\Data\Data.vbproj">
       <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>

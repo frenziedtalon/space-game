@@ -63,12 +63,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\IPhysicalData.vb" />
-    <Compile Include="Classes\OrbitingObjectData.vb" />
+    <Compile Include="Classes\CelestialObjectType.vb" />
+    <Compile Include="Interfaces\IPhysicalData.vb" />
+    <Compile Include="Classes\CelestialObjectData.vb" />
     <Compile Include="Classes\OrbitData.vb" />
     <Compile Include="Classes\PhysicalData.vb" />
     <Compile Include="IDataProvider.vb" />
-    <Compile Include="ISolarSystemData.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

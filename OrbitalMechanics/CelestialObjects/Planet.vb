@@ -1,9 +1,7 @@
-﻿
-Imports Core
+﻿Imports Core
 Imports Core.Classes
 Imports Data.Data
 Imports Entities
-Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
     Public Class Planet
@@ -20,11 +18,10 @@ Namespace CelestialObjects
             _radius = radius
         End Sub
 
-        Public Sub New(texture As String,
-                       physicalData As PhysicalData,
+        Public Sub New(physicalData As PhysicalData,
                        entityManager As IEntityManager)
 
-            MyBase.New(physicalData.Name, physicalData.Mass, texture, entityManager)
+            MyBase.New(physicalData.Name, physicalData.Mass, physicalData.Texture, entityManager)
             _radius = physicalData.Radius
         End Sub
 

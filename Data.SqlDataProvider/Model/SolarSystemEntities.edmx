@@ -1,0 +1,580 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SolarSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CelestialObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SolarSystemId" Type="int" Nullable="false" />
+          <Property Name="Mass" Type="float" Nullable="false" />
+          <Property Name="Radius" Type="float" Nullable="false" />
+          <Property Name="Texture" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="PrimaryId" Type="int" />
+          <Property Name="SemiMajorAxis" Type="float" />
+          <Property Name="Eccentricity" Type="float" />
+          <Property Name="Inclination" Type="float" />
+          <Property Name="ArgumentOfPeriapsis" Type="float" />
+          <Property Name="LongitudeOfAscendingNode" Type="float" />
+          <Property Name="MeanAnomalyZero" Type="float" />
+        </EntityType>
+        <EntityType Name="CelestialObjectType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SolarSystem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UniverseId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDateUtc" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDateUtc" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Universe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDateUtc" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDateUtc" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDateUtc" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDateUtc" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CelestialObject_CelestialObjectType">
+          <End Role="CelestialObjectType" Type="Self.CelestialObjectType" Multiplicity="1" />
+          <End Role="CelestialObject" Type="Self.CelestialObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CelestialObjectType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CelestialObject">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CelestialObject_Primary">
+          <End Role="CelestialObject" Type="Self.CelestialObject" Multiplicity="0..1" />
+          <End Role="CelestialObject1" Type="Self.CelestialObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CelestialObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CelestialObject1">
+              <PropertyRef Name="PrimaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CelestialObject_SolarSystem">
+          <End Role="SolarSystem" Type="Self.SolarSystem" Multiplicity="1" />
+          <End Role="CelestialObject" Type="Self.CelestialObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SolarSystem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CelestialObject">
+              <PropertyRef Name="SolarSystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolarSystem_CreatedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="SolarSystem" Type="Self.SolarSystem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolarSystem">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolarSystem_ModifiedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="SolarSystem" Type="Self.SolarSystem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolarSystem">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolarSystem_Universe">
+          <End Role="Universe" Type="Self.Universe" Multiplicity="1" />
+          <End Role="SolarSystem" Type="Self.SolarSystem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolarSystem">
+              <PropertyRef Name="UniverseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Universe_CreatedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Universe" Type="Self.Universe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Universe">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Universe_ModifiedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Universe" Type="Self.Universe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Universe">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_CreatedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users1" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users1">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_ModifiedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users1" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users1">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SolarSystemModelStoreContainer">
+          <EntitySet Name="CelestialObject" EntityType="Self.CelestialObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CelestialObjectType" EntityType="Self.CelestialObjectType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolarSystem" EntityType="Self.SolarSystem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Universe" EntityType="Self.Universe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CelestialObject_CelestialObjectType" Association="Self.FK_CelestialObject_CelestialObjectType">
+            <End Role="CelestialObjectType" EntitySet="CelestialObjectType" />
+            <End Role="CelestialObject" EntitySet="CelestialObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CelestialObject_Primary" Association="Self.FK_CelestialObject_Primary">
+            <End Role="CelestialObject" EntitySet="CelestialObject" />
+            <End Role="CelestialObject1" EntitySet="CelestialObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CelestialObject_SolarSystem" Association="Self.FK_CelestialObject_SolarSystem">
+            <End Role="SolarSystem" EntitySet="SolarSystem" />
+            <End Role="CelestialObject" EntitySet="CelestialObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolarSystem_CreatedBy" Association="Self.FK_SolarSystem_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SolarSystem" EntitySet="SolarSystem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolarSystem_ModifiedBy" Association="Self.FK_SolarSystem_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SolarSystem" EntitySet="SolarSystem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolarSystem_Universe" Association="Self.FK_SolarSystem_Universe">
+            <End Role="Universe" EntitySet="Universe" />
+            <End Role="SolarSystem" EntitySet="SolarSystem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Universe_CreatedBy" Association="Self.FK_Universe_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Universe" EntitySet="Universe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Universe_ModifiedBy" Association="Self.FK_Universe_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Universe" EntitySet="Universe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_CreatedBy" Association="Self.FK_Users_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_ModifiedBy" Association="Self.FK_Users_ModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SolarSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SolarSystem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UniverseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Universe" Relationship="Self.FK_SolarSystem_Universe" FromRole="SolarSystem" ToRole="Universe" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateUtc" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDateUtc" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="User" Relationship="SolarSystemModel.FK_SolarSystem_CreatedBy" FromRole="SolarSystem" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="SolarSystemModel.FK_SolarSystem_ModifiedBy" FromRole="SolarSystem" ToRole="User" />
+          <NavigationProperty Name="CelestialObjects" Relationship="SolarSystemModel.FK_CelestialObject_SolarSystem" FromRole="SolarSystem" ToRole="CelestialObject" />
+        </EntityType>
+        <EntityType Name="Universe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SolarSystems" Relationship="Self.FK_SolarSystem_Universe" FromRole="Universe" ToRole="SolarSystem" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateUtc" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDateUtc" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="User" Relationship="SolarSystemModel.FK_Universe_CreatedBy" FromRole="Universe" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="SolarSystemModel.FK_Universe_ModifiedBy" FromRole="Universe" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_SolarSystem_Universe">
+          <End Role="Universe" Type="Self.Universe" Multiplicity="1" />
+          <End Role="SolarSystem" Type="Self.SolarSystem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolarSystem">
+              <PropertyRef Name="UniverseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SolarSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SolarSystems" EntityType="Self.SolarSystem" />
+          <EntitySet Name="Universes" EntityType="Self.Universe" />
+          <AssociationSet Name="FK_SolarSystem_Universe" Association="Self.FK_SolarSystem_Universe">
+            <End Role="Universe" EntitySet="Universes" />
+            <End Role="SolarSystem" EntitySet="SolarSystems" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="SolarSystemModel.User" />
+          <AssociationSet Name="FK_SolarSystem_CreatedBy" Association="SolarSystemModel.FK_SolarSystem_CreatedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="SolarSystem" EntitySet="SolarSystems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolarSystem_ModifiedBy" Association="SolarSystemModel.FK_SolarSystem_ModifiedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="SolarSystem" EntitySet="SolarSystems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Universe_CreatedBy" Association="SolarSystemModel.FK_Universe_CreatedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Universe" EntitySet="Universes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Universe_ModifiedBy" Association="SolarSystemModel.FK_Universe_ModifiedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Universe" EntitySet="Universes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_CreatedBy" Association="SolarSystemModel.FK_Users_CreatedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User1" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_ModifiedBy" Association="SolarSystemModel.FK_Users_ModifiedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User1" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="CelestialObjectTypes" EntityType="SolarSystemModel.CelestialObjectType" />
+          <EntitySet Name="CelestialObjects" EntityType="SolarSystemModel.CelestialObject" />
+          <AssociationSet Name="FK_CelestialObject_CelestialObjectType" Association="SolarSystemModel.FK_CelestialObject_CelestialObjectType">
+            <End Role="CelestialObjectType" EntitySet="CelestialObjectTypes" />
+            <End Role="CelestialObject" EntitySet="CelestialObjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CelestialObject_Primary" Association="SolarSystemModel.FK_CelestialObject_Primary">
+            <End Role="CelestialObject" EntitySet="CelestialObjects" />
+            <End Role="CelestialObject1" EntitySet="CelestialObjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CelestialObject_SolarSystem" Association="SolarSystemModel.FK_CelestialObject_SolarSystem">
+            <End Role="SolarSystem" EntitySet="SolarSystems" />
+            <End Role="CelestialObject" EntitySet="CelestialObjects" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateUtc" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDateUtc" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="SolarSystems" Relationship="SolarSystemModel.FK_SolarSystem_CreatedBy" FromRole="User" ToRole="SolarSystem" />
+          <NavigationProperty Name="SolarSystems1" Relationship="SolarSystemModel.FK_SolarSystem_ModifiedBy" FromRole="User" ToRole="SolarSystem" />
+          <NavigationProperty Name="Universes" Relationship="SolarSystemModel.FK_Universe_CreatedBy" FromRole="User" ToRole="Universe" />
+          <NavigationProperty Name="Universes1" Relationship="SolarSystemModel.FK_Universe_ModifiedBy" FromRole="User" ToRole="Universe" />
+          <NavigationProperty Name="Users1" Relationship="SolarSystemModel.FK_Users_CreatedBy" FromRole="User" ToRole="User1" />
+          <NavigationProperty Name="User1" Relationship="SolarSystemModel.FK_Users_CreatedBy" FromRole="User1" ToRole="User" />
+          <NavigationProperty Name="Users11" Relationship="SolarSystemModel.FK_Users_ModifiedBy" FromRole="User" ToRole="User1" />
+          <NavigationProperty Name="User2" Relationship="SolarSystemModel.FK_Users_ModifiedBy" FromRole="User1" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_SolarSystem_CreatedBy">
+          <End Type="SolarSystemModel.User" Role="User" Multiplicity="1" />
+          <End Type="SolarSystemModel.SolarSystem" Role="SolarSystem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolarSystem">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolarSystem_ModifiedBy">
+          <End Type="SolarSystemModel.User" Role="User" Multiplicity="1" />
+          <End Type="SolarSystemModel.SolarSystem" Role="SolarSystem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SolarSystem">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Universe_CreatedBy">
+          <End Type="SolarSystemModel.User" Role="User" Multiplicity="1" />
+          <End Type="SolarSystemModel.Universe" Role="Universe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Universe">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Universe_ModifiedBy">
+          <End Type="SolarSystemModel.User" Role="User" Multiplicity="1" />
+          <End Type="SolarSystemModel.Universe" Role="Universe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Universe">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_CreatedBy">
+          <End Type="SolarSystemModel.User" Role="User" Multiplicity="1" />
+          <End Type="SolarSystemModel.User" Role="User1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User1">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_ModifiedBy">
+          <End Type="SolarSystemModel.User" Role="User" Multiplicity="1" />
+          <End Type="SolarSystemModel.User" Role="User1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User1">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CelestialObjectType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CelestialObjects" Relationship="SolarSystemModel.FK_CelestialObject_CelestialObjectType" FromRole="CelestialObjectType" ToRole="CelestialObject" />
+        </EntityType>
+        <EntityType Name="CelestialObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SolarSystemId" Type="Int32" Nullable="false" />
+          <Property Name="Mass" Type="Double" Nullable="false" />
+          <Property Name="Radius" Type="Double" Nullable="false" />
+          <Property Name="Texture" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="PrimaryId" Type="Int32" />
+          <Property Name="SemiMajorAxis" Type="Double" />
+          <Property Name="Eccentricity" Type="Double" />
+          <Property Name="Inclination" Type="Double" />
+          <Property Name="ArgumentOfPeriapsis" Type="Double" />
+          <Property Name="LongitudeOfAscendingNode" Type="Double" />
+          <Property Name="MeanAnomalyZero" Type="Double" />
+          <NavigationProperty Name="CelestialObjectType" Relationship="SolarSystemModel.FK_CelestialObject_CelestialObjectType" FromRole="CelestialObject" ToRole="CelestialObjectType" />
+          <NavigationProperty Name="CelestialObject1" Relationship="SolarSystemModel.FK_CelestialObject_Primary" FromRole="CelestialObject" ToRole="CelestialObject1" />
+          <NavigationProperty Name="CelestialObject2" Relationship="SolarSystemModel.FK_CelestialObject_Primary" FromRole="CelestialObject1" ToRole="CelestialObject" />
+          <NavigationProperty Name="SolarSystem" Relationship="SolarSystemModel.FK_CelestialObject_SolarSystem" FromRole="CelestialObject" ToRole="SolarSystem" />
+        </EntityType>
+        <Association Name="FK_CelestialObject_CelestialObjectType">
+          <End Type="SolarSystemModel.CelestialObjectType" Role="CelestialObjectType" Multiplicity="1" />
+          <End Type="SolarSystemModel.CelestialObject" Role="CelestialObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CelestialObjectType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CelestialObject">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CelestialObject_Primary">
+          <End Type="SolarSystemModel.CelestialObject" Role="CelestialObject" Multiplicity="0..1" />
+          <End Type="SolarSystemModel.CelestialObject" Role="CelestialObject1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CelestialObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CelestialObject1">
+              <PropertyRef Name="PrimaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CelestialObject_SolarSystem">
+          <End Type="SolarSystemModel.SolarSystem" Role="SolarSystem" Multiplicity="1" />
+          <End Type="SolarSystemModel.CelestialObject" Role="CelestialObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SolarSystem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CelestialObject">
+              <PropertyRef Name="SolarSystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SolarSystemModelStoreContainer" CdmEntityContainer="SolarSystemEntities">
+          <EntitySetMapping Name="SolarSystems">
+            <EntityTypeMapping TypeName="SolarSystemModel.SolarSystem">
+              <MappingFragment StoreEntitySet="SolarSystem">
+                <ScalarProperty Name="ModifiedDateUtc" ColumnName="ModifiedDateUtc" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDateUtc" ColumnName="CreatedDateUtc" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UniverseId" ColumnName="UniverseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Universes">
+            <EntityTypeMapping TypeName="SolarSystemModel.Universe">
+              <MappingFragment StoreEntitySet="Universe">
+                <ScalarProperty Name="ModifiedDateUtc" ColumnName="ModifiedDateUtc" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDateUtc" ColumnName="CreatedDateUtc" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SolarSystemModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ModifiedDateUtc" ColumnName="ModifiedDateUtc" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDateUtc" ColumnName="CreatedDateUtc" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CelestialObjectTypes">
+            <EntityTypeMapping TypeName="SolarSystemModel.CelestialObjectType">
+              <MappingFragment StoreEntitySet="CelestialObjectType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CelestialObjects">
+            <EntityTypeMapping TypeName="SolarSystemModel.CelestialObject">
+              <MappingFragment StoreEntitySet="CelestialObject">
+                <ScalarProperty Name="MeanAnomalyZero" ColumnName="MeanAnomalyZero" />
+                <ScalarProperty Name="LongitudeOfAscendingNode" ColumnName="LongitudeOfAscendingNode" />
+                <ScalarProperty Name="ArgumentOfPeriapsis" ColumnName="ArgumentOfPeriapsis" />
+                <ScalarProperty Name="Inclination" ColumnName="Inclination" />
+                <ScalarProperty Name="Eccentricity" ColumnName="Eccentricity" />
+                <ScalarProperty Name="SemiMajorAxis" ColumnName="SemiMajorAxis" />
+                <ScalarProperty Name="PrimaryId" ColumnName="PrimaryId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Texture" ColumnName="Texture" />
+                <ScalarProperty Name="Radius" ColumnName="Radius" />
+                <ScalarProperty Name="Mass" ColumnName="Mass" />
+                <ScalarProperty Name="SolarSystemId" ColumnName="SolarSystemId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

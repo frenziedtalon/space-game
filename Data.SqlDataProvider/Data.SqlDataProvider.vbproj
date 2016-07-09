@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}</ProjectGuid>
+    <ProjectGuid>{56B17816-2820-401B-9F41-DFCEC79CC4CF}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Core.Tests</RootNamespace>
-    <AssemblyName>Core.Tests</AssemblyName>
+    <RootNamespace>Data.SqlDataProvider</RootNamespace>
+    <AssemblyName>Data.SqlDataProvider</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -18,7 +18,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Core.Tests.xml</DocumentationFile>
+    <DocumentationFile>Data.SqlDataProvider.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -27,7 +27,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Core.Tests.xml</DocumentationFile>
+    <DocumentationFile>Data.SqlDataProvider.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -43,12 +43,19 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -67,14 +74,37 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\AngleTests.vb" />
-    <Compile Include="Classes\DistanceRangeTests.vb" />
-    <Compile Include="Classes\DistanceTests.vb" />
-    <Compile Include="Classes\MassTests.vb" />
-    <Compile Include="Classes\RangeTests.vb" />
-    <Compile Include="Extensions\EnumerableExtensionsTests.vb" />
-    <Compile Include="Extensions\GuidExtensionsTests.vb" />
-    <Compile Include="Extensions\StringExtensionsTests.vb" />
+    <Compile Include="Classes\DataProvider.vb" />
+    <Compile Include="Model\CelestialObject.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CelestialObjectType.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SolarSystem.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SolarSystemEntities.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SolarSystemEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SolarSystemEntities.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SolarSystemEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SolarSystemEntities.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Universe.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\User.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -100,6 +130,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Model\SolarSystemEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SolarSystemEntities.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\SolarSystemEntities.edmx.diagram">
+      <DependentUpon>SolarSystemEntities.edmx</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -112,11 +150,31 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Model\SolarSystemEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SolarSystemEntities.edmx</DependentUpon>
+      <LastGenOutput>SolarSystemEntities.Context.vb</LastGenOutput>
+    </Content>
+    <Content Include="Model\SolarSystemEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SolarSystemEntities.edmx</DependentUpon>
+      <LastGenOutput>SolarSystemEntities.vb</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Core\Core.vbproj">
       <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Data\Data.vbproj">
+      <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}</ProjectGuid>
+    <ProjectGuid>{EFDA865F-5D2F-4CDA-94B7-EF70DE86AE7D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Core.Tests</RootNamespace>
-    <AssemblyName>Core.Tests</AssemblyName>
+    <RootNamespace>Scene.Tests</RootNamespace>
+    <AssemblyName>Scene.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -18,7 +18,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Core.Tests.xml</DocumentationFile>
+    <DocumentationFile>Scene.Tests.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -27,7 +27,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Core.Tests.xml</DocumentationFile>
+    <DocumentationFile>Scene.Tests.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -43,6 +43,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NSubstitute, Version=1.9.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.1.9.2.0\lib\net45\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -67,14 +71,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\AngleTests.vb" />
-    <Compile Include="Classes\DistanceRangeTests.vb" />
-    <Compile Include="Classes\DistanceTests.vb" />
-    <Compile Include="Classes\MassTests.vb" />
-    <Compile Include="Classes\RangeTests.vb" />
-    <Compile Include="Extensions\EnumerableExtensionsTests.vb" />
-    <Compile Include="Extensions\GuidExtensionsTests.vb" />
-    <Compile Include="Extensions\StringExtensionsTests.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -90,6 +86,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SceneConstructorTests.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -112,9 +109,29 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.vbproj">
-      <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
-      <Name>Core</Name>
+    <ProjectReference Include="..\Data.InMemoryData\Data.InMemoryData.vbproj">
+      <Project>{a797f444-2a0f-4fba-9b63-9ad42c55e787}</Project>
+      <Name>Data.InMemoryData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.vbproj">
+      <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.vbproj">
+      <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.vbproj">
+      <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
+      <Name>OrbitalMechanics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scene\Scene.vbproj">
+      <Project>{0c3f75e6-608f-4fc5-8f2a-1c74c01807ce}</Project>
+      <Name>Scene</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
+      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
+      <Name>TurnTracker</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
