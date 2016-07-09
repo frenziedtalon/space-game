@@ -78,7 +78,7 @@ Namespace Classes
             If Not String.IsNullOrWhiteSpace(name) Then
                 Using con As New SolarSystemEntities
                     Return con.CelestialObjects.
-                                Where(Function(o) o.SolarSystem.Name = name).
+                                Where(Function(o) o.SolarSystem.Name = name AndAlso o.PrimaryId Is Nothing).
                                 Include(Function(s) s.CelestialObjectType).
                                 Include(Function(s) s.CelestialObject1).
                                 ToList()
