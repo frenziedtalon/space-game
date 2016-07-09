@@ -222,7 +222,7 @@ Public Class SolarSystemData
 
             Dim physicalData = New PhysicalData("Pluto",
                                     Distance.FromKilometers(1186),
-                                    Mass.FromSolarMasses(1),
+                                    Mass.FromEarthMasses(0.0022),
                                     "pluto.jpg",
                                     CelestialObjectType.Planet)
 
