@@ -75,9 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\DataProvider.vb" />
-    <Compile Include="Classes\Entity.vb" />
-    <Compile Include="Classes\EntityFrameworkReadOnlyRepository.vb" />
-    <Compile Include="Classes\EntityFrameworkUnitOfWork.vb" />
     <Compile Include="Model\CelestialObject.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>
@@ -123,7 +120,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Repository\SolarSystemRepository.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
