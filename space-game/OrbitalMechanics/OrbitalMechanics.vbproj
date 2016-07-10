@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{847E5B29-49B3-4C2D-A9FD-5CA302BB6F50}</ProjectGuid>
+    <ProjectGuid>{EA0CD7F9-922C-48FF-B8FC-092419A8A4D6}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Core</RootNamespace>
-    <AssemblyName>Core</AssemblyName>
+    <RootNamespace>OrbitalMechanics</RootNamespace>
+    <AssemblyName>OrbitalMechanics</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -18,7 +18,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Core.xml</DocumentationFile>
+    <DocumentationFile>OrbitalMechanics.xml</DocumentationFile>
     <NoWarn>
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
@@ -29,7 +29,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Core.xml</DocumentationFile>
+    <DocumentationFile>OrbitalMechanics.xml</DocumentationFile>
     <NoWarn>
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
@@ -51,31 +51,28 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DocumentationFile>Core.xml</DocumentationFile>
-    <NoWarn>
-    </NoWarn>
+    <DocumentationFile>OrbitalMechanics.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DocumentationFile>Core.xml</DocumentationFile>
+    <DocumentationFile>OrbitalMechanics.xml</DocumentationFile>
     <Optimize>true</Optimize>
-    <NoWarn>
-    </NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(SolutionDir)packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -96,15 +93,20 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Angle.vb" />
-    <Compile Include="Classes\Distance.vb" />
-    <Compile Include="Classes\DistanceRange.vb" />
-    <Compile Include="Classes\Mass.vb" />
-    <Compile Include="Classes\Range.vb" />
-    <Compile Include="Extensions\EnumerableExtensions.vb" />
-    <Compile Include="Extensions\GuidExtensions.vb" />
-    <Compile Include="Extensions\StringExtensions.vb" />
-    <Compile Include="Helpers\Shapes\ShapeHelper.vb" />
+    <Compile Include="CelestialObjects\Asteroid.vb" />
+    <Compile Include="CelestialObjects\BaseCelestialObject.vb" />
+    <Compile Include="CelestialObjects\ICelestialObject.vb" />
+    <Compile Include="CelestialObjects\IOrbitingObject.vb" />
+    <Compile Include="CelestialObjects\Moon.vb" />
+    <Compile Include="CelestialObjects\OrbitingCelestialObjectBase.vb" />
+    <Compile Include="CelestialObjects\Planet.vb" />
+    <Compile Include="CelestialObjects\Star.vb" />
+    <Compile Include="Helpers\OrbitHelper.vb" />
+    <Compile Include="IOrbit.vb" />
+    <Compile Include="Constants.vb" />
+    <Compile Include="I3dObject.vb" />
+    <Compile Include="Classes\Orbit.vb" />
+    <Compile Include="ISphere.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -141,6 +143,24 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.vbproj">
+      <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.vbproj">
+      <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.vbproj">
+      <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
+      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
+      <Name>TurnTracker</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -150,3 +170,4 @@
   </Target>
   -->
 </Project>
+

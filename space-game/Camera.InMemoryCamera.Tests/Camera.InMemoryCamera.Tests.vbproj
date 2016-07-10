@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{87F6BF8F-4C73-4A68-B8D8-A34DC8FA002D}</ProjectGuid>
+    <ProjectGuid>{53C1DB68-9C11-4514-A2E4-68240F21BC45}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TurnTracker.Tests</RootNamespace>
-    <AssemblyName>TurnTracker.Tests</AssemblyName>
+    <RootNamespace>Camera.InMemoryCamera.Tests</RootNamespace>
+    <AssemblyName>Camera.InMemoryCamera.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -18,7 +18,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>TurnTracker.Tests.xml</DocumentationFile>
+    <DocumentationFile>Camera.InMemoryCamera.Tests.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -27,7 +27,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>TurnTracker.Tests.xml</DocumentationFile>
+    <DocumentationFile>Camera.InMemoryCamera.Tests.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -44,7 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
+      <HintPath>$(SolutionDir)packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -67,6 +67,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CameraServiceTests.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -82,7 +83,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TurnTrackerTests.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -105,9 +105,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
-      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
-      <Name>TurnTracker</Name>
+    <ProjectReference Include="..\Camera.InMemoryCamera\Camera.InMemoryCamera.vbproj">
+      <Project>{e9c8d057-371a-4b7c-b2bb-4b5b07db02ac}</Project>
+      <Name>Camera.InMemoryCamera</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
@@ -119,3 +119,4 @@
   </Target>
   -->
 </Project>
+

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{53C1DB68-9C11-4514-A2E4-68240F21BC45}</ProjectGuid>
+    <ProjectGuid>{4F704AA4-7F50-4E4B-A3EC-7CA8C2E2F216}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Camera.InMemoryCamera.Tests</RootNamespace>
-    <AssemblyName>Camera.InMemoryCamera.Tests</AssemblyName>
+    <RootNamespace>OrbitalMechanics.Tests</RootNamespace>
+    <AssemblyName>OrbitalMechanics.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -18,7 +18,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Camera.InMemoryCamera.Tests.xml</DocumentationFile>
+    <DocumentationFile>OrbitalMechanics.Tests.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -27,7 +27,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Camera.InMemoryCamera.Tests.xml</DocumentationFile>
+    <DocumentationFile>OrbitalMechanics.Tests.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -43,10 +43,15 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="NSubstitute, Version=1.9.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)packages\NSubstitute.1.9.2.0\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nunit.framework, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -67,7 +72,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CameraServiceTests.vb" />
+    <Compile Include="Classes\OrbitTests.vb" />
+    <Compile Include="Helpers\OrbitHelperTests.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -83,6 +89,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="CelestialObjects\StarTests.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -105,9 +112,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Camera.InMemoryCamera\Camera.InMemoryCamera.vbproj">
-      <Project>{e9c8d057-371a-4b7c-b2bb-4b5b07db02ac}</Project>
-      <Name>Camera.InMemoryCamera</Name>
+    <ProjectReference Include="..\Core\Core.vbproj">
+      <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.vbproj">
+      <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.vbproj">
+      <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.vbproj">
+      <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
+      <Name>OrbitalMechanics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
+      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
+      <Name>TurnTracker</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
@@ -119,3 +142,4 @@
   </Target>
   -->
 </Project>
+
