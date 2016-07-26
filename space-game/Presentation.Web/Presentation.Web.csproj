@@ -84,6 +84,7 @@
     <TypeScriptCompile Include="ts\Classes\OrbitalMechanics.ts" />
     <TypeScriptCompile Include="ts\Classes\OrbitingCelestialObjectBase.ts" />
     <TypeScriptCompile Include="ts\Classes\Planet.ts" />
+    <TypeScriptCompile Include="ts\Classes\Scaling.ts" />
     <TypeScriptCompile Include="ts\Classes\SceneScaling.ts" />
     <TypeScriptCompile Include="ts\Classes\SceneState.ts" />
     <TypeScriptCompile Include="ts\Classes\TurnResult.ts" />

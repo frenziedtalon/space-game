@@ -4,7 +4,6 @@ var runGame = () => {
     var canvas = getCanvas();
     var engine = loadBabylonEngine(canvas);
     var scene = createScene(engine);
-    createCamera();
     endTurn();
     attachUiControlEvents();
     attachWindowEvents();
@@ -84,6 +83,7 @@ var runGame = () => {
         setSceneScaling(turnData.Scene.Scaling);
         renderSceneObjects();
         //createSkybox();
+        createCamera(scaling.CameraClippingDistance);
         //makePlanes();
         setCameraTargetFromId(turnData.Camera.CurrentTarget);
     }
@@ -254,15 +254,16 @@ var runGame = () => {
         return mesh;
     }
 
-    function createCamera() {
-        createArcRotateCamera();
+    function createCamera(clippingDistance: number) {
+        createArcRotateCamera(clippingDistance);
     }
 
-    function createArcRotateCamera() {
+    function createArcRotateCamera(clippingDistance: number) {
         var camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 15, BABYLON.Vector3.Zero(), scene);
         camera.setPosition(new BABYLON.Vector3(0, 0, 200));
         camera.lowerRadiusLimit = 1;
         camera.upperRadiusLimit = 1500;
+        camera.maxZ = clippingDistance;
 
         // use the new camera
         scene.activeCamera = camera;
@@ -280,7 +281,6 @@ var runGame = () => {
 
         // let the user move the camera
         camera.attachControl(canvas, false);
-
     }
 
     function attachUiControlEvents() {
@@ -353,25 +353,21 @@ var runGame = () => {
         }
     }
 
-    var radiusKilometerScaleFactor = 1;
-    var semiMajorAxisKilometerScaleFactor = 1;
+    var scaling: Scaling;
 
     function setSceneScaling(bounds: SceneScaling): void {
-
-        var ratio = bounds.SemiMajorAxis.LowerBound.Kilometers / (bounds.CelestialObjectRadius.UpperBound.Kilometers * 5);
-
-        radiusKilometerScaleFactor = (0.1 / bounds.CelestialObjectRadius.LowerBound.Kilometers);
-        semiMajorAxisKilometerScaleFactor = (0.1 / bounds.SemiMajorAxis.LowerBound.Kilometers) / ratio;
+        scaling = new Scaling(bounds);
         
-        setCameraZoomRate(semiMajorAxisKilometerScaleFactor * bounds.SemiMajorAxis.UpperBound.Kilometers);
+        setCameraZoomRate(scaling.MaxDistance);
+        
     }
 
     function scaleRadius(radius: Distance): number {
-        return radius.Kilometers * radiusKilometerScaleFactor;
+        return radius.Kilometers * scaling.RadiusKilometerScaleFactor;
     }
 
     function scaleSemiMajorAxisKilometers(semiMajorAxis: number): number {
-        return semiMajorAxis * semiMajorAxisKilometerScaleFactor;
+        return semiMajorAxis * scaling.SemiMajorAxisKilometerScaleFactor;
     }
 
     function makePlanes(): void {
