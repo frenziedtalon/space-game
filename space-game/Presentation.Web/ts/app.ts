@@ -19,7 +19,9 @@ var runGame = () => {
     }
 
     function createScene(engine: BABYLON.Engine): BABYLON.Scene {
-        return new BABYLON.Scene(engine);
+        var s = new BABYLON.Scene(engine);
+        s.ambientColor = new BABYLON.Color3(1, 1, 1);
+        return s;
     }
 
     function createSkybox() {
@@ -208,6 +210,7 @@ var runGame = () => {
                             texture: string): BABYLON.StandardMaterial {
         var m = new BABYLON.StandardMaterial(name, scene);
         m.diffuseTexture = new BABYLON.Texture(texture, scene);
+        m.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
         return m;
     }
     
