@@ -41,7 +41,7 @@
     <Content Include="Assets\Images\Skybox\skybox_pz.jpg" />
     <Content Include="Assets\Images\Star\sun.jpg" />
     <Content Include="index.html" />
-    <Content Include="Scripts\babylon.max.js" />
+    <Content Include="Scripts\babylon-2.4.max.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="textures\xStrip.jpg" />
@@ -88,7 +88,7 @@
     <TypeScriptCompile Include="ts\Classes\SceneState.ts" />
     <TypeScriptCompile Include="ts\Classes\TurnResult.ts" />
     <TypeScriptCompile Include="ts\Classes\Star.ts" />
-    <TypeScriptCompile Include="ts\d.ts\babylon.d.ts" />
+    <TypeScriptCompile Include="ts\d.ts\babylon-2.4.d.ts" />
     <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
     <TypeScriptCompile Include="_references.ts" />
   </ItemGroup>
