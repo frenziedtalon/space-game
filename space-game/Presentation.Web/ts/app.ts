@@ -25,10 +25,10 @@ var runGame = () => {
         return s;
     }
 
-    function createSkybox() {
+    function createSkybox(maxSize) {
         scene.clearColor = zeroColor(); // set background to black
 
-        var skybox = BABYLON.Mesh.CreateBox("Skybox", 5000, scene);
+        var skybox = BABYLON.Mesh.CreateBox("Skybox", maxSize, scene);
         var skyboxMaterial = new BABYLON.StandardMaterial("skyboxMaterial", scene);
         skyboxMaterial.backFaceCulling = false; // render the inside of the skybox
         skyboxMaterial.specularColor = zeroColor();
@@ -37,8 +37,7 @@ var runGame = () => {
         // add textures to the skybox
         skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("Assets/Images/Skybox/skybox", scene);
         skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-
-        skybox.infiniteDistance = true; // have the skybox move with the camera so we can never move outside it
+        
         skybox.material = skyboxMaterial;
         skybox.isPickable = false;
     }
@@ -84,7 +83,7 @@ var runGame = () => {
         sceneObjects = ((turnData.Scene.CelestialObjects) as Array<BaseGameEntity>);
         setSceneScaling(turnData.Scene.Scaling);
         renderSceneObjects();
-        //createSkybox();
+        createSkybox(scaling.SkyBoxSize);
         //makePlanes();
         setCameraTargetFromId(turnData.Camera.CurrentTarget);
     }
@@ -371,7 +370,7 @@ var runGame = () => {
         
         var c = <BABYLON.ArcRotateCamera>scene.activeCamera;
         c.wheelPrecision = ratio * maxDistance;
-        c.upperRadiusLimit = maxDistance * 1.1;
+        c.upperRadiusLimit = maxDistance;
         c.maxZ = clippingDistance;
         scene.activeCamera = c;
     }

@@ -18,10 +18,10 @@
     }
 
     get SkyBoxSize(): number {
-        return this.MaxDistance * 2.5;
+        return this.MaxDistance * 3 * 2;
     }
 
     get CameraClippingDistance(): number {
-        return this.MaxDistance * 3.1;
+        return this.SkyBoxSize * 1;
     }
 }
