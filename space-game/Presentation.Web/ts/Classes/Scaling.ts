@@ -22,6 +22,6 @@
     }
 
     get CameraClippingDistance(): number {
-        return this.MaxDistance * 3.5;
+        return this.MaxDistance * 3.1;
     }
 }

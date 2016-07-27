@@ -4,7 +4,9 @@ var runGame = () => {
     var canvas = getCanvas();
     var engine = loadBabylonEngine(canvas);
     var scene = createScene(engine);
+    var scaling: Scaling;
     endTurn();
+    createCamera();
     attachUiControlEvents();
     attachWindowEvents();
     beginRenderLoop();
@@ -83,7 +85,6 @@ var runGame = () => {
         setSceneScaling(turnData.Scene.Scaling);
         renderSceneObjects();
         //createSkybox();
-        createCamera(scaling.CameraClippingDistance);
         //makePlanes();
         setCameraTargetFromId(turnData.Camera.CurrentTarget);
     }
@@ -254,16 +255,15 @@ var runGame = () => {
         return mesh;
     }
 
-    function createCamera(clippingDistance: number) {
-        createArcRotateCamera(clippingDistance);
+    function createCamera() {
+        createArcRotateCamera();
     }
 
-    function createArcRotateCamera(clippingDistance: number) {
+    function createArcRotateCamera() {
         var camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 15, BABYLON.Vector3.Zero(), scene);
         camera.setPosition(new BABYLON.Vector3(0, 0, 200));
         camera.lowerRadiusLimit = 1;
-        camera.upperRadiusLimit = 1500;
-        camera.maxZ = clippingDistance;
+        camera.upperRadiusLimit = 500;
 
         // use the new camera
         scene.activeCamera = camera;
@@ -271,7 +271,7 @@ var runGame = () => {
         // let the user move the camera
         camera.attachControl(canvas, false);
     }
-
+    
     function createVrDeviceOrientationCamera() {
         var camera = new BABYLON.VRDeviceOrientationFreeCamera("VRDOCamera", new BABYLON.Vector3(0, 50, 50), scene);
         camera.setTarget(new BABYLON.Vector3(0, 0, 0));
@@ -353,13 +353,9 @@ var runGame = () => {
         }
     }
 
-    var scaling: Scaling;
-
     function setSceneScaling(bounds: SceneScaling): void {
         scaling = new Scaling(bounds);
-        
-        setCameraZoomRate(scaling.MaxDistance);
-        
+        setCameraScaling(scaling.MaxDistance, scaling.CameraClippingDistance);
     }
 
     function scaleRadius(radius: Distance): number {
@@ -368,6 +364,16 @@ var runGame = () => {
 
     function scaleSemiMajorAxisKilometers(semiMajorAxis: number): number {
         return semiMajorAxis * scaling.SemiMajorAxisKilometerScaleFactor;
+    }
+    
+    function setCameraScaling(maxDistance: number, clippingDistance:number) {
+        var ratio = 0.0000014410187; // based on (0.2 / max radius)
+        
+        var c = <BABYLON.ArcRotateCamera>scene.activeCamera;
+        c.wheelPrecision = ratio * maxDistance;
+        c.upperRadiusLimit = maxDistance * 1.1;
+        c.maxZ = clippingDistance;
+        scene.activeCamera = c;
     }
 
     function makePlanes(): void {
@@ -418,15 +424,6 @@ var runGame = () => {
         yplane.material = ypmat;
         yplane.position = new BABYLON.Vector3(0, 2.3, -0.5);
         yplane.rotation = new BABYLON.Vector3(-Math.PI / 2, 0, 0);
-    }
-
-    function setCameraZoomRate(maxDistance: number) {
-        var ratio = 0.0000014410187; // based on (0.2 / max radius)
-
-        var c = <BABYLON.ArcRotateCamera>scene.activeCamera;
-        c.wheelPrecision = ratio * maxDistance;
-        c.upperRadiusLimit = maxDistance * 1.1;
-        scene.activeCamera = c;
     }
 
     function getMeshBoundingSphereRadius(mesh: BABYLON.AbstractMesh): number {
