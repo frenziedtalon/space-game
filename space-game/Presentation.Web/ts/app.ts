@@ -158,6 +158,10 @@ var runGame = () => {
         // stars shine, other objects don't
         (<BABYLON.StandardMaterial>star.material).emissiveTexture = (<BABYLON.StandardMaterial>star.material).diffuseTexture;
 
+        // create god rays effect
+        var vls = new BABYLON.VolumetricLightScatteringPostProcess(info.Name + "Vls", 1.0, scene.activeCamera, star, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
+        vls.exposure = 0.12;
+
         // create a light to represent the star shining on other objects
         var starLight = new BABYLON.PointLight(info.Name + "Light", star.position, scene);
         starLight.parent = star;
