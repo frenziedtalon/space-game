@@ -161,6 +161,9 @@ var runGame = () => {
         // create a light to represent the star shining on other objects
         var starLight = new BABYLON.PointLight(info.Name + "Light", star.position, scene);
         starLight.parent = star;
+
+
+
     }
 
     function renderPlanet(info: Planet, parent: BABYLON.Mesh): void {
@@ -257,10 +260,13 @@ var runGame = () => {
     }
 
     function createCamera() {
-        createArcRotateCamera();
+        //createArcRotateCamera();
+        createWebVrFreeCamera();
+        //createVrDeviceOrientationCamera();
     }
 
     function createArcRotateCamera() {
+       
         var camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 15, BABYLON.Vector3.Zero(), scene);
         camera.setPosition(new BABYLON.Vector3(0, 0, 200));
         camera.lowerRadiusLimit = 1;
@@ -271,6 +277,34 @@ var runGame = () => {
 
         // let the user move the camera
         camera.attachControl(canvas, false);
+    }
+
+    function createWebVrFreeCamera() {
+
+        var camera = new BABYLON.WebVRFreeCamera("WVR", new BABYLON.Vector3(1000, 1000, 1000), scene, true);
+
+        // let the user move the camera
+        camera.attachControl(canvas, true);
+
+       // use the new camera
+        scene.activeCamera = camera;
+
+        console.log(camera._hmdDevice);
+        console.log(camera._sensorDevice);
+        console.log(camera.fovMode);
+        console.log(camera.inputs);
+        console.log(camera.rotationQuaternion);
+
+        //camera.inputs.attached.VRDeviceOrientation.detachControl(canvas);
+        var onOrientationEvent = function (evt) {
+            this._alpha = (+evt.alpha | 0) + 45;
+            this._beta = (+evt.beta | 0) + 45;
+            this._gamma = +evt.gamma | 0;
+            this._dirty = true;
+        }
+
+        //camera.inputs.attached.._deviceOrientationHandler = onOrientationEvent.bind(camera.inputs.attached.VRDeviceOrientation);
+        //camera.inputs.attached.VRDeviceOrientation.attachControl(canvas);
     }
     
     function createVrDeviceOrientationCamera() {
@@ -286,8 +320,24 @@ var runGame = () => {
 
     function attachUiControlEvents() {
         $("#end-turn").click(() => {
-            endTurn();
+            //endTurn();
+
+            var metrics = BABYLON.VRCameraMetrics.GetDefault();
+            //console.log(metrics);
+
+            dumpit(metrics);
+
+            (<BABYLON.WebVRFreeCamera>scene.activeCamera).requestVRFullscreen(true);
+            $("#end-turn").text("Exit VR");
         });
+    }
+
+    function dumpit(metrics) {
+        var output = '';
+        for (var property in metrics) {
+            output += property + ' = ' + metrics[property] + ';\n ';
+        }
+        console.log(output);
     }
 
     function attachWindowEvents() {
@@ -350,14 +400,14 @@ var runGame = () => {
                 limit = 1;
             }
 
-            (<BABYLON.ArcRotateCamera>scene.activeCamera).lowerRadiusLimit = limit;
+            //(<BABYLON.ArcRotateCamera>scene.activeCamera).lowerRadiusLimit = limit;
             scene.activeCamera.parent = mesh;
         }
     }
 
     function setSceneScaling(bounds: SceneScaling): void {
         scaling = new Scaling(bounds);
-        setCameraScaling(scaling.MaxDistance, scaling.CameraClippingDistance);
+        //setCameraScaling(scaling.MaxDistance, scaling.CameraClippingDistance);
     }
 
     function scaleRadius(radius: Distance): number {
