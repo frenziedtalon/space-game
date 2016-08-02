@@ -92,13 +92,25 @@ var runGame = () => {
 
     function renderSceneObjects(): void {
         if (sceneObjects !== undefined && sceneObjects !== null) {
-            scene.meshes = [];
             for (let i = 0; i < sceneObjects.length; i++) {
                 sceneObjectsLookup[sceneObjects[i].Id] = sceneObjects;
-                renderSceneObject(<BaseCelestialObject>sceneObjects[i], null);
+                renderOrUpdateSceneObject(<BaseCelestialObject>sceneObjects[i], null);
             }
         } else {
             displayError("Scene objects undefined");
+        }
+    }
+
+    function renderOrUpdateSceneObject(item: BaseCelestialObject, parent: BABYLON.Mesh): void {
+        const mesh = scene.getMeshByID(item.Id);
+
+        if (mesh === null) {
+            // render the object
+            sceneObjectsLookup[item.Id] = sceneObjects;
+            renderSceneObject(item, parent);
+        } else {
+            // update it
+            updateSceneObject(item, mesh as BABYLON.Mesh);
         }
     }
 
@@ -124,6 +136,31 @@ var runGame = () => {
         }
     }
 
+    function updateSceneObject(item: BaseCelestialObject, mesh: BABYLON.Mesh): void {
+        if (item !== undefined && item !== null) {
+            switch (item.Type) {
+                case "OrbitalMechanics.CelestialObjects.Star":
+                    mesh.position = createPositionFromOrbit((<OrbitingCelestialObjectBase>item).Orbit);
+                    break;
+
+                case "OrbitalMechanics.CelestialObjects.Planet":
+                    mesh.position = createPositionFromOrbit((<OrbitingCelestialObjectBase>item).Orbit);
+                    break;
+
+                case "OrbitalMechanics.CelestialObjects.Moon":
+                    mesh.position = createPositionFromOrbit((<OrbitingCelestialObjectBase>item).Orbit);
+                    break;
+
+                default:
+                    displayError("Unknown object type: " + item.Type);
+                    break;
+            }
+        }
+
+        // check for satellites
+        renderSatellites(item, mesh);
+    }
+    
     function zeroColor(): BABYLON.Color3 {
         return new BABYLON.Color3(0, 0, 0);
     }
@@ -224,7 +261,7 @@ var runGame = () => {
         // create any satellites
         if (primary.hasOwnProperty("Satellites")) {
             for (let j = 0; j < primary.Satellites.length; j++) {
-                renderSceneObject(primary.Satellites[j], mesh);
+                renderOrUpdateSceneObject(primary.Satellites[j], mesh);
             }
         }
     }
