@@ -5,12 +5,11 @@ var runGame = () => {
     var engine = loadBabylonEngine(canvas);
     var scene = createScene(engine);
     var scaling: Scaling;
-    var navigationBarCanvas: BABYLON.ScreenSpaceCanvas2D
+
     endTurn();
     createCamera();
     attachUiControlEvents();
     attachWindowEvents();
-    createNavigationBar();
     beginRenderLoop();
 
     function getCanvas(): HTMLCanvasElement {
@@ -336,7 +335,6 @@ var runGame = () => {
         // watch for browser/canvas resize events
         window.addEventListener("resize", (ev: UIEvent) => {
             engine.resize();
-            setNavigationBarWidth();
         });
 
         // listen for click events
@@ -479,32 +477,6 @@ var runGame = () => {
         }
         return null;
     }
-
-    function setNavigationBarWidth() {
-        navigationBarCanvas.width = calculateNavigationBarWidth();
-    }
-
-    function calculateNavigationBarWidth(): number {
-        const minWidth = 200;
-        const padding = 200;
-        var result = engine.getRenderWidth() - (2 * padding);
-
-        return result > minWidth ? result : minWidth;
-    }
-
-    function createNavigationBar() {
-        const height = 100;
-
-        navigationBarCanvas = new BABYLON.ScreenSpaceCanvas2D(scene,
-            {
-                id: "NavigationBar",
-                size: new BABYLON.Size(calculateNavigationBarWidth(), height),
-                backgroundFill: "#C0C0C040",
-                backgroundRoundRadius: 0,
-                x: 200
-            }
-        );
-
-    }
+    
 };
 
