@@ -1,6 +1,7 @@
 ﻿"use strict";
 var runGame = () => {
     var targetObjectName = 'Mars'; //Todo: remove SG-114
+    var mainSceneCameraName = "mainSceneCamera";
     var canvas = getCanvas();
     var engine = loadBabylonEngine(canvas);
     var scene = createScene(engine);
@@ -87,6 +88,7 @@ var runGame = () => {
         createSkybox(scaling.SkyBoxSize);
         //makePlanes();
         setCameraTargetFromId(turnData.Camera.CurrentTarget);
+        NavigationCameraHelper.updateNavigationCameras(scene.activeCameras);
     }
 
     function renderSceneObjects(): void {
@@ -280,6 +282,9 @@ var runGame = () => {
             const colour = new BABYLON.Color3(0.54, 0.54, 0.54);
             const orbitalPath = drawPath(meshName, path, colour);
 
+            // set layer mask so that orbit is only visible to main scene camera
+            orbitalPath.layerMask = 1; // 001 in binary;
+
             if (parent !== undefined) {
                 // positions applied are in addition to those of the parent
                 orbitalPath.parent = parent;
@@ -298,16 +303,13 @@ var runGame = () => {
     }
 
     function createArcRotateCamera() {
-        var camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 15, BABYLON.Vector3.Zero(), scene);
+        var camera = new BABYLON.ArcRotateCamera(mainSceneCameraName, 0, 0, 15, BABYLON.Vector3.Zero(), scene);
         camera.setPosition(new BABYLON.Vector3(0, 0, 200));
         camera.lowerRadiusLimit = 1;
         camera.upperRadiusLimit = 500;
-
-        // use the new camera
-        scene.activeCamera = camera;
-
-        // let the user move the camera
+        scene.activeCameras.push(camera);
         camera.attachControl(canvas, false);
+        camera.viewport = new BABYLON.Viewport(0, 0.2, 1, 0.8);
     }
     
     function createVrDeviceOrientationCamera() {
@@ -380,7 +382,7 @@ var runGame = () => {
 
     function setCameraTarget(mesh: BABYLON.AbstractMesh): void {
         if (!(mesh === null)) {
-            var limit = getMeshBoundingSphereRadius(mesh) * 1.5;
+            var limit = MeshHelper.getMeshBoundingSphereRadius(mesh) * 1.5;
 
             if (limit < 1) {
                 limit = 1;
@@ -463,17 +465,12 @@ var runGame = () => {
         yplane.position = new BABYLON.Vector3(0, 2.3, -0.5);
         yplane.rotation = new BABYLON.Vector3(-Math.PI / 2, 0, 0);
     }
-
-    function getMeshBoundingSphereRadius(mesh: BABYLON.AbstractMesh): number {
-        return mesh._boundingInfo.boundingSphere.radius;
-    }
-
+    
     function getSceneObjectInfo(target: string): BaseGameEntity {
         if (target !== undefined && target !== null) {
             return sceneObjectsLookup[target];
         }
         return null;
     }
-    
-};
 
+};

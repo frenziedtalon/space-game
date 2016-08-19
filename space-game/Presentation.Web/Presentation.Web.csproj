@@ -80,6 +80,7 @@
     <TypeScriptCompile Include="ts\Classes\ISphere.ts" />
     <TypeScriptCompile Include="ts\Classes\Kilometer.ts" />
     <TypeScriptCompile Include="ts\Classes\Moon.ts" />
+    <TypeScriptCompile Include="ts\Classes\NavigationCamera.ts" />
     <TypeScriptCompile Include="ts\Classes\Orbit.ts" />
     <TypeScriptCompile Include="ts\Classes\OrbitalMechanics.ts" />
     <TypeScriptCompile Include="ts\Classes\OrbitingCelestialObjectBase.ts" />
@@ -91,6 +92,9 @@
     <TypeScriptCompile Include="ts\Classes\Star.ts" />
     <TypeScriptCompile Include="ts\d.ts\babylon-2.4.d.ts" />
     <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
+    <TypeScriptCompile Include="ts\Helpers\MeshHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\NavigationCameraHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\VectorHelper.ts" />
     <TypeScriptCompile Include="_references.ts" />
   </ItemGroup>
   <PropertyGroup>
