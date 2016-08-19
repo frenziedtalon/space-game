@@ -92,7 +92,6 @@ var runGame = () => {
     function renderSceneObjects(): void {
         if (sceneObjects !== undefined && sceneObjects !== null) {
             for (let i = 0; i < sceneObjects.length; i++) {
-                sceneObjectsLookup[sceneObjects[i].Id] = sceneObjects;
                 renderOrUpdateSceneObject(<BaseCelestialObject>sceneObjects[i], null);
             }
         } else {
@@ -104,11 +103,9 @@ var runGame = () => {
         const mesh = scene.getMeshByID(item.Id);
 
         if (mesh === null) {
-            // render the object
-            sceneObjectsLookup[item.Id] = sceneObjects;
+            sceneObjectsLookup[item.Id] = item;
             renderSceneObject(item, parent);
         } else {
-            // update it
             updateSceneObject(item, mesh as BABYLON.Mesh);
         }
     }
