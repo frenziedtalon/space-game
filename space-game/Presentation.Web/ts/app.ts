@@ -88,7 +88,7 @@ var runGame = () => {
         createSkybox(scaling.SkyBoxSize);
         //makePlanes();
         setCameraTargetFromId(turnData.Camera.CurrentTarget);
-        NavigationCameraHelper.updateNavigationCameras(scene.activeCameras);
+        CameraHelper.updateNavigationCameras(scene.activeCameras);
     }
 
     function renderSceneObjects(): void {

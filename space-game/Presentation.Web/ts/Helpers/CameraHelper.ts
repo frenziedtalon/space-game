@@ -1,5 +1,5 @@
 ﻿"use strict";
-class NavigationCameraHelper {
+class CameraHelper {
     static navCameraNameEnd = "NavCamera";
     static navBarWidth = 0.6;
     static y = 0;
