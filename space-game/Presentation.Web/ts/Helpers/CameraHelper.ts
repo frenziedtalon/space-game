@@ -6,7 +6,7 @@ class CameraHelper {
     private y = 0;
     private height = 0.2;
 
-    private canvas: HTMLCanvasElement; 
+    private canvas: HTMLCanvasElement;
     private meshHelper: MeshHelper;
 
     constructor(private engine: BABYLON.Engine) {
@@ -112,21 +112,21 @@ class CameraHelper {
     }
 
     updateCameraTarget(targetId: string): void {
-    const data = "target=" + targetId;
+        const data = "target=" + targetId;
 
-    $.ajax({
-        url: "../SpaceGameApi/api/Camera/SetTarget?" + data,
-        cache: false,
-        type: "GET"
-    })
-        .done(() => {
-            // call succeeded
+        $.ajax({
+            url: "../SpaceGameApi/api/Camera/SetTarget?" + data,
+            cache: false,
+            type: "GET"
         })
-        .fail(() => {
-            // call failed
-        })
-        .always(() => {
-            // happens after done/fail on every call
-        });
-}
+            .done(() => {
+                // call succeeded
+            })
+            .fail(() => {
+                // call failed
+            })
+            .always(() => {
+                // happens after done/fail on every call
+            });
+    }
 }

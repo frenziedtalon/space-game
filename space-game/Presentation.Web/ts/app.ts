@@ -162,7 +162,7 @@ var runGame = () => {
         // check for satellites
         renderSatellites(item, mesh);
     }
-    
+
     function zeroColor(): BABYLON.Color3 {
         return new BABYLON.Color3(0, 0, 0);
     }
@@ -190,9 +190,9 @@ var runGame = () => {
 
     function renderStar(info: Star): void {
         var star = renderOrbitingSphericalCelestialObject(info,
-                                                            "Assets/Images/Star/" + info.Texture,
-                                                            info.Radius,
-                                                            null);
+            "Assets/Images/Star/" + info.Texture,
+            info.Radius,
+            null);
 
         // stars shine, other objects don't
         (<BABYLON.StandardMaterial>star.material).emissiveTexture = (<BABYLON.StandardMaterial>star.material).diffuseTexture;
@@ -208,24 +208,24 @@ var runGame = () => {
 
     function renderPlanet(info: Planet, parent: BABYLON.Mesh): void {
         const planet = renderOrbitingSphericalCelestialObject(info,
-                                                            "Assets/Images/Planet/" + info.Texture,
-                                                            info.Radius,
-                                                            parent);
+            "Assets/Images/Planet/" + info.Texture,
+            info.Radius,
+            parent);
 
         const c = new NavigationCamera(planet, scene, cameraHelper);
     }
 
     function renderMoon(info: Moon, parent: BABYLON.Mesh): void {
         renderOrbitingSphericalCelestialObject(info,
-                                                "Assets/Images/Moon/" + info.Texture,
-                                                info.Radius,
-                                                parent);
+            "Assets/Images/Moon/" + info.Texture,
+            info.Radius,
+            parent);
     }
 
     function renderOrbitingSphericalCelestialObject(info: OrbitingCelestialObjectBase,
-                                                    texture: string,
-                                                    radius: Distance,
-                                                    parent: BABYLON.Mesh): BABYLON.Mesh {
+        texture: string,
+        radius: Distance,
+        parent: BABYLON.Mesh): BABYLON.Mesh {
 
         if (info.Name === targetObjectName) {
             cameraHelper.updateCameraTarget(info.Id);
@@ -237,7 +237,7 @@ var runGame = () => {
         mesh.isPickable = info.CameraTarget;
         mesh.id = info.Id;
         mesh.position = createPositionFromOrbit(info.Orbit);
-        
+
         const material = createDiffuseMaterial(info.Name + "Material", texture);
         material.specularColor = zeroColor();
         mesh.material = material;
@@ -245,7 +245,7 @@ var runGame = () => {
         if (parent !== undefined) {
             mesh.parent = parent;
         }
-        
+
         drawOrbit(info.Orbit, info.Name + "Orbit", parent);
 
         renderSatellites(info, mesh);
@@ -254,13 +254,13 @@ var runGame = () => {
     }
 
     function createDiffuseMaterial(name: string,
-                            texture: string): BABYLON.StandardMaterial {
+        texture: string): BABYLON.StandardMaterial {
         var m = new BABYLON.StandardMaterial(name, scene);
         m.diffuseTexture = new BABYLON.Texture(texture, scene);
         m.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
         return m;
     }
-    
+
     function renderSatellites(primary: BaseCelestialObject, mesh: BABYLON.Mesh): void {
         // create any satellites
         if (primary.hasOwnProperty("Satellites")) {
@@ -273,7 +273,7 @@ var runGame = () => {
     function beginRenderLoop() {
 
         scene.beforeRender = () => {
-           // nothing for now
+            // nothing for now
         };
 
         // register a render loop to repeatedly render the scene
@@ -317,7 +317,7 @@ var runGame = () => {
         camera.attachControl(canvas, false);
         camera.viewport = new BABYLON.Viewport(0, 0.2, 1, 0.8);
     }
-    
+
     function createVrDeviceOrientationCamera() {
         var camera = new BABYLON.VRDeviceOrientationFreeCamera("VRDOCamera", new BABYLON.Vector3(0, 50, 50), scene);
         camera.setTarget(new BABYLON.Vector3(0, 0, 0));
@@ -368,10 +368,10 @@ var runGame = () => {
     function scaleSemiMajorAxisKilometers(semiMajorAxis: number): number {
         return semiMajorAxis * scaling.SemiMajorAxisKilometerScaleFactor;
     }
-    
-    function setCameraScaling(maxDistance: number, clippingDistance:number) {
+
+    function setCameraScaling(maxDistance: number, clippingDistance: number) {
         var ratio = 0.0000014410187; // based on (0.2 / max radius)
-        
+
         var c = <BABYLON.ArcRotateCamera>scene.activeCamera;
         c.wheelPrecision = ratio * maxDistance;
         c.upperRadiusLimit = maxDistance;
@@ -382,7 +382,7 @@ var runGame = () => {
     function makePlanes(): void {
 
 
-        var leftzplane =  BABYLON.Mesh.CreateGround("lzp", 50, 10, 1, scene);
+        var leftzplane = BABYLON.Mesh.CreateGround("lzp", 50, 10, 1, scene);
         var lzpmat = new BABYLON.StandardMaterial("lzpmat", scene);
         var tex1 = new BABYLON.Texture("textures/zStrip.jpg", scene);
         lzpmat.diffuseTexture = tex1;
@@ -391,7 +391,7 @@ var runGame = () => {
         leftzplane.position = new BABYLON.Vector3(-30, 0, 0);
         leftzplane.rotation = new BABYLON.Vector3(0, -Math.PI / 2, 0);
 
-        var rightzplane =  BABYLON.Mesh.CreateGround("rzp", 50, 10, 1, scene);
+        var rightzplane = BABYLON.Mesh.CreateGround("rzp", 50, 10, 1, scene);
         var rzpmat = new BABYLON.StandardMaterial("rzpmat", scene);
         // var tex1 = new BABYLON.Texture("textures/zStrip.jpg", scene);
         rzpmat.diffuseTexture = tex1;
@@ -401,7 +401,7 @@ var runGame = () => {
         rightzplane.rotation = new BABYLON.Vector3(0, -Math.PI / 2, 0);
 
 
-        var frontxplane =  BABYLON.Mesh.CreateGround("fxp", 70, 10, 1, scene);
+        var frontxplane = BABYLON.Mesh.CreateGround("fxp", 70, 10, 1, scene);
         var fxpmat = new BABYLON.StandardMaterial("fxpmat", scene);
         tex1 = new BABYLON.Texture("textures/xStrip.jpg", scene);
         fxpmat.diffuseTexture = tex1;
@@ -410,7 +410,7 @@ var runGame = () => {
         frontxplane.position = new BABYLON.Vector3(0, 0, -30);
         frontxplane.rotation = new BABYLON.Vector3(0, 0, 0);
 
-        var rearxplane =  BABYLON.Mesh.CreateGround("rxp", 70, 10, 1, scene);
+        var rearxplane = BABYLON.Mesh.CreateGround("rxp", 70, 10, 1, scene);
         var rxpmat = new BABYLON.StandardMaterial("rxpmat", scene);
         // var tex1 = new BABYLON.Texture("textures/zStrip.jpg", scene);
         rxpmat.diffuseTexture = tex1;
@@ -419,7 +419,7 @@ var runGame = () => {
         rearxplane.position = new BABYLON.Vector3(0, 0, 30);
         rearxplane.rotation = new BABYLON.Vector3(0, 0, 0);
 
-        var yplane =  BABYLON.Mesh.CreateGround("yp", 5, 30, 1, scene);
+        var yplane = BABYLON.Mesh.CreateGround("yp", 5, 30, 1, scene);
         var ypmat = new BABYLON.StandardMaterial("ypmat", scene);
         tex1 = new BABYLON.Texture("textures/yStrip.jpg", scene);
         ypmat.diffuseTexture = tex1;
@@ -428,7 +428,7 @@ var runGame = () => {
         yplane.position = new BABYLON.Vector3(0, 2.3, -0.5);
         yplane.rotation = new BABYLON.Vector3(-Math.PI / 2, 0, 0);
     }
-    
+
     function getSceneObjectInfo(target: string): BaseGameEntity {
         if (target !== undefined && target !== null) {
             return sceneObjectsLookup[target];
