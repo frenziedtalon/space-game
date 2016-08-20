@@ -203,10 +203,12 @@ var runGame = () => {
     }
 
     function renderPlanet(info: Planet, parent: BABYLON.Mesh): void {
-        renderOrbitingSphericalCelestialObject(info,
-                                                "Assets/Images/Planet/" + info.Texture,
-                                                info.Radius,
-                                                parent);
+        const planet = renderOrbitingSphericalCelestialObject(info,
+                                                            "Assets/Images/Planet/" + info.Texture,
+                                                            info.Radius,
+                                                            parent);
+
+        const c = new NavigationCamera(planet, scene);
     }
 
     function renderMoon(info: Moon, parent: BABYLON.Mesh): void {
