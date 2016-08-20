@@ -1,11 +1,14 @@
 ﻿"use strict";
 var runGame = () => {
     var targetObjectName = 'Mars'; //Todo: remove SG-114
-    var mainSceneCameraName = "mainSceneCamera";
+
     var canvas = getCanvas();
     var engine = loadBabylonEngine(canvas);
     var scene = createScene(engine);
     var scaling: Scaling;
+
+    var cameraHelper = new CameraHelper(engine);
+    var meshHelper = new MeshHelper(cameraHelper);
 
     endTurn();
     createCamera();
@@ -39,7 +42,7 @@ var runGame = () => {
         // add textures to the skybox
         skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("Assets/Images/Skybox/skybox", scene);
         skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-        
+
         skybox.material = skyboxMaterial;
         skybox.isPickable = false;
     }
@@ -87,8 +90,9 @@ var runGame = () => {
         renderSceneObjects();
         createSkybox(scaling.SkyBoxSize);
         //makePlanes();
-        setCameraTargetFromId(turnData.Camera.CurrentTarget);
-        CameraHelper.updateNavigationCameras(scene.activeCameras);
+        cameraHelper.setCameraTargetFromId(turnData.Camera.CurrentTarget, scene);
+        cameraHelper.updateNavigationCameras(scene.activeCameras);
+        cameraHelper.setMainSceneCameraActive(scene.activeCameras);
     }
 
     function renderSceneObjects(): void {
@@ -194,7 +198,7 @@ var runGame = () => {
         (<BABYLON.StandardMaterial>star.material).emissiveTexture = (<BABYLON.StandardMaterial>star.material).diffuseTexture;
 
         // create god rays effect
-        var vls = new BABYLON.VolumetricLightScatteringPostProcess(info.Name + "Vls", 1.0, scene.activeCamera, star, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
+        var vls = new BABYLON.VolumetricLightScatteringPostProcess(info.Name + "Vls", 1.0, scene.getCameraByName(cameraHelper.MainSceneCameraName), star, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
         vls.exposure = 0.12;
 
         // create a light to represent the star shining on other objects
@@ -208,7 +212,7 @@ var runGame = () => {
                                                             info.Radius,
                                                             parent);
 
-        const c = new NavigationCamera(planet, scene);
+        const c = new NavigationCamera(planet, scene, cameraHelper);
     }
 
     function renderMoon(info: Moon, parent: BABYLON.Mesh): void {
@@ -224,7 +228,7 @@ var runGame = () => {
                                                     parent: BABYLON.Mesh): BABYLON.Mesh {
 
         if (info.Name === targetObjectName) {
-            updateCameraTarget(info.Id);
+            cameraHelper.updateCameraTarget(info.Id);
         }
 
         const scaledRadius = scaleRadius(radius);
@@ -305,7 +309,7 @@ var runGame = () => {
     }
 
     function createArcRotateCamera() {
-        var camera = new BABYLON.ArcRotateCamera(mainSceneCameraName, 0, 0, 15, BABYLON.Vector3.Zero(), scene);
+        var camera = new BABYLON.ArcRotateCamera(cameraHelper.MainSceneCameraName, 0, 0, 15, BABYLON.Vector3.Zero(), scene);
         camera.setPosition(new BABYLON.Vector3(0, 0, 200));
         camera.lowerRadiusLimit = 1;
         camera.upperRadiusLimit = 500;
@@ -339,14 +343,8 @@ var runGame = () => {
         });
 
         // listen for click events
-        window.addEventListener("click", (evt: MouseEvent) => {
-            // see if there's a mesh under the click
-            var pickResult = scene.pick(evt.clientX, evt.clientY);
-            // if there is a hit and we can select the object then set it as the camera target
-            if (pickResult.hit) {
-                setCameraTarget(pickResult.pickedMesh);
-                updateCameraTarget(pickResult.pickedMesh.id);
-            }
+        canvas.addEventListener("click", (evt: MouseEvent) => {
+            meshHelper.pickMesh(evt, scene);
         });
 
         // listen for key presses
@@ -356,43 +354,6 @@ var runGame = () => {
                 toggleDebugLayer();
             }
         });
-    }
-
-    function updateCameraTarget(targetId: string): void {
-        const data = "target=" + targetId;
-
-        $.ajax({
-            url: "../SpaceGameApi/api/Camera/SetTarget?" + data,
-            cache: false,
-            type: "GET"
-        })
-            .done(() => {
-                // call succeeded
-            })
-            .fail(() => {
-                // call failed
-            })
-            .always(() => {
-                // happens after done/fail on every call
-            });
-    }
-
-    function setCameraTargetFromId(id: string):void {
-        const mesh = scene.getMeshByID(id);
-        setCameraTarget(mesh);
-    }
-
-    function setCameraTarget(mesh: BABYLON.AbstractMesh): void {
-        if (!(mesh === null)) {
-            var limit = MeshHelper.getMeshBoundingSphereRadius(mesh) * 1.5;
-
-            if (limit < 1) {
-                limit = 1;
-            }
-
-            (<BABYLON.ArcRotateCamera>scene.activeCamera).lowerRadiusLimit = limit;
-            scene.activeCamera.parent = mesh;
-        }
     }
 
     function setSceneScaling(bounds: SceneScaling): void {
@@ -474,5 +435,4 @@ var runGame = () => {
         }
         return null;
     }
-
 };
