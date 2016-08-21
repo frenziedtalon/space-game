@@ -290,6 +290,7 @@ var runGame = () => {
 
             // set layer mask so that orbit is only visible to main scene camera
             orbitalPath.layerMask = 1; // 001 in binary;
+            orbitalPath.isPickable = false;
 
             if (parent !== undefined) {
                 // positions applied are in addition to those of the parent
