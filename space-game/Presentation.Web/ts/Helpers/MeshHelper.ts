@@ -15,10 +15,7 @@ class MeshHelper {
             null,
             false,
             this.cameraHelper.getViewportCamera(clientPoint, scene.activeCameras));
-
-        console.log("pickResult.pickedPoint: " + pickResult.pickedPoint);
-
-
+        
         // if there is a hit and we can select the object then set it as the camera target
         if (pickResult.hit) {
             this.cameraHelper.setCameraTarget(pickResult.pickedMesh, scene);
