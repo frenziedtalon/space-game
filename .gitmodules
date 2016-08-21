@@ -1,3 +1,3 @@
 [submodule "space-game-sql-database"]
 	path = space-game-sql-database
-	url = https://bitbucket.org/frenziedtalon/space-game-sql-database.git
+	url = ../space-game-sql-database.git
