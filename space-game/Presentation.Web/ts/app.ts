@@ -262,8 +262,7 @@ var runGame = () => {
         return mesh;
     }
 
-    function createDiffuseMaterial(name: string,
-        texture: string): BABYLON.StandardMaterial {
+    function createDiffuseMaterial(name: string, texture: string): BABYLON.StandardMaterial {
         var m = new BABYLON.StandardMaterial(name, scene);
         m.diffuseTexture = new BABYLON.Texture(texture, scene);
         m.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
