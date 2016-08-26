@@ -13,15 +13,19 @@
         this.SemiMajorAxisKilometerScaleFactor = (0.1 / bounds.SemiMajorAxis.LowerBound.Kilometers) / ratio;
     }
 
-    get MaxDistance(): number {
+    get maxDistance(): number {
         return this.SemiMajorAxisKilometerScaleFactor * this.Bounds.SemiMajorAxis.UpperBound.Kilometers;
     }
-
-    get SkyBoxSize(): number {
-        return this.MaxDistance * 3 * 2;
+    
+    get innerSkySphereDiameter(): number {
+        return this.maxDistance * 3;
     }
 
-    get CameraClippingDistance(): number {
-        return this.SkyBoxSize * 1;
+    get outerSkySphereDiameter(): number {
+        return this.innerSkySphereDiameter * 2;
+    }
+
+    get cameraClippingDistance(): number {
+        return this.outerSkySphereDiameter;
     }
 }

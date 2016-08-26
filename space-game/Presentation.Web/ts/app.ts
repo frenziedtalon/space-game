@@ -30,21 +30,30 @@ var runGame = () => {
         return s;
     }
 
-    function createSkybox(maxSize) {
+    function createSkySpheres(): void {
+        const texture = "skysphere-8192x4096.png";
         scene.clearColor = zeroColor(); // set background to black
 
-        var skybox = BABYLON.Mesh.CreateBox("Skybox", maxSize, scene);
-        var skyboxMaterial = new BABYLON.StandardMaterial("skyboxMaterial", scene);
-        skyboxMaterial.backFaceCulling = false; // render the inside of the skybox
-        skyboxMaterial.specularColor = zeroColor();
-        skyboxMaterial.diffuseColor = zeroColor();
+        const innerSphere = createSkySphere(scaling.innerSkySphereDiameter, "inner", texture);
+        innerSphere.material.alpha = 0.5; // make it semi-transparent so we can see the outer skysphere
 
-        // add textures to the skybox
-        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("Assets/Images/Skybox/skybox", scene);
-        skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+        const outerSphere = createSkySphere(scaling.outerSkySphereDiameter, "outer", texture);
+        outerSphere.rotation = AngleHelper.randomRotationVector();
+    }
 
-        skybox.material = skyboxMaterial;
-        skybox.isPickable = false;
+    function createSkySphere(diameter: number, name: string, texture: string): BABYLON.Mesh {
+        const skysphere = BABYLON.Mesh.CreateSphere("skysphere-" + name, 10, diameter, scene);
+
+        const skysphereMaterial = new BABYLON.StandardMaterial("skysphere-" + name + "-material", scene);
+        skysphereMaterial.backFaceCulling = false; // render the inside of the skybox
+        skysphereMaterial.specularColor = zeroColor();
+        skysphereMaterial.diffuseColor = zeroColor();
+        skysphereMaterial.emissiveTexture = new BABYLON.Texture("Assets/Images/Skysphere/" + texture, scene);
+
+        skysphere.material = skysphereMaterial;
+        skysphere.isPickable = false;
+
+        return skysphere;
     }
 
     function toggleDebugLayer() {
@@ -88,7 +97,7 @@ var runGame = () => {
         sceneObjects = ((turnData.Scene.CelestialObjects) as Array<BaseGameEntity>);
         setSceneScaling(turnData.Scene.Scaling);
         renderSceneObjects();
-        createSkybox(scaling.SkyBoxSize);
+        createSkySpheres();
         //makePlanes();
         cameraHelper.setCameraTargetFromId(turnData.Camera.CurrentTarget, scene);
         cameraHelper.updateNavigationCameras(scene.activeCameras);
@@ -359,7 +368,7 @@ var runGame = () => {
 
     function setSceneScaling(bounds: SceneScaling): void {
         scaling = new Scaling(bounds);
-        setCameraScaling(scaling.MaxDistance, scaling.CameraClippingDistance);
+        setCameraScaling(scaling.maxDistance, scaling.cameraClippingDistance);
     }
 
     function scaleRadius(radius: Distance): number {
