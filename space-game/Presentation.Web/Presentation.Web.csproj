@@ -33,12 +33,7 @@
     <Content Include="Assets\Images\Planet\saturn.jpg" />
     <Content Include="Assets\Images\Planet\uranus.jpg" />
     <Content Include="Assets\Images\Planet\venus.jpg" />
-    <Content Include="Assets\Images\Skybox\skybox_nx.jpg" />
-    <Content Include="Assets\Images\Skybox\skybox_ny.jpg" />
-    <Content Include="Assets\Images\Skybox\skybox_nz.jpg" />
-    <Content Include="Assets\Images\Skybox\skybox_px.jpg" />
-    <Content Include="Assets\Images\Skybox\skybox_py.jpg" />
-    <Content Include="Assets\Images\Skybox\skybox_pz.jpg" />
+    <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
     <Content Include="Assets\Images\Star\sun.jpg" />
     <Content Include="index.html" />
     <Content Include="Scripts\babylon-2.4.max.js" />
@@ -74,6 +69,7 @@
     <TypeScriptCompile Include="ts\Classes\Cameras\Camera.ts" />
     <TypeScriptCompile Include="ts\Classes\Motion\Distance.ts" />
     <TypeScriptCompile Include="ts\Classes\Motion\DistanceRange.ts" />
+    <TypeScriptCompile Include="ts\Helpers\AngleHelper.ts" />
     <TypeScriptCompile Include="ts\Interfaces\I3DObject.ts" />
     <TypeScriptCompile Include="ts\Interfaces\ICelestialObject.ts" />
     <TypeScriptCompile Include="ts\Interfaces\IOrbitingObject.ts" />
