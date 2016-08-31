@@ -22,19 +22,38 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Images\Moon\moon.png" />
-    <Content Include="Assets\Images\Planet\earth.jpg" />
-    <Content Include="Assets\Images\Planet\jupiter.jpg" />
-    <Content Include="Assets\Images\Planet\mars.jpg" />
-    <Content Include="Assets\Images\Planet\mercury.jpg" />
-    <Content Include="Assets\Images\Planet\neptune.jpg" />
-    <Content Include="Assets\Images\Planet\pluto.jpg" />
-    <Content Include="Assets\Images\Planet\sand.jpg" />
-    <Content Include="Assets\Images\Planet\saturn.jpg" />
-    <Content Include="Assets\Images\Planet\uranus.jpg" />
-    <Content Include="Assets\Images\Planet\venus.jpg" />
+    <Content Include="Assets\Images\Moon\Low\moon.png" />
+    <Content Include="Assets\Images\Moon\Medium\moon.jpg" />
+    <Content Include="Assets\Images\Planet\High\earth_day.jpg" />
+    <Content Include="Assets\Images\Planet\High\earth_night.jpg" />
+    <Content Include="Assets\Images\Planet\High\mars.jpg" />
+    <Content Include="Assets\Images\Moon\High\moon.jpg" />
+    <Content Include="Assets\Images\Planet\High\mercury.jpg" />
+    <Content Include="Assets\Images\Planet\High\saturn-ring.png" />
+    <Content Include="Assets\Images\Planet\High\venus.jpg" />
+    <Content Include="Assets\Images\Planet\Low\earth.jpg" />
+    <Content Include="Assets\Images\Planet\Low\jupiter.jpg" />
+    <Content Include="Assets\Images\Planet\Low\mars.jpg" />
+    <Content Include="Assets\Images\Planet\Low\mercury.jpg" />
+    <Content Include="Assets\Images\Planet\Low\neptune.jpg" />
+    <Content Include="Assets\Images\Planet\Low\pluto.jpg" />
+    <Content Include="Assets\Images\Planet\Low\sand.jpg" />
+    <Content Include="Assets\Images\Planet\Low\saturn.jpg" />
+    <Content Include="Assets\Images\Planet\Low\uranus.jpg" />
+    <Content Include="Assets\Images\Planet\Low\venus.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\earth_day.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\earth_night.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\jupiter.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\mars.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\mercury.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\neptune.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\saturn.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\saturn_ring.png" />
+    <Content Include="Assets\Images\Planet\Medium\uranus.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\venus.jpg" />
     <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
-    <Content Include="Assets\Images\Star\sun.jpg" />
+    <Content Include="Assets\Images\Star\Low\sun.jpg" />
+    <Content Include="Assets\Images\Star\Medium\sun.jpg" />
     <Content Include="index.html" />
     <Content Include="Scripts\babylon-2.4.max.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
@@ -58,6 +77,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Images\Star\High\" />
     <Folder Include="css\" />
   </ItemGroup>
   <ItemGroup>
