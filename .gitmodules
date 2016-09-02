@@ -1,3 +1,6 @@
 [submodule "space-game-sql-database"]
 	path = space-game-sql-database
 	url = ../space-game-sql-database.git
+[submodule "jespers"]
+	path = jespers
+	url = ../jespers.git
