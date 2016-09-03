@@ -6,7 +6,7 @@ Namespace Interfaces
         Property Mass As Mass
         Property Name As String
         Property Radius As Distance
-        Property Texture As String
+        Property Texture As Textures
         Property Type As CelestialObjectType
     End Interface
 End Namespace

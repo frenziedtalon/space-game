@@ -14,7 +14,7 @@ Namespace CelestialObjects
         Public Sub New(name As String,
                        mass As Mass,
                        surfaceTemperature As Integer,
-                       texture As String,
+                       texture As Textures,
                        radius As Distance,
                        entityManager As IEntityManager)
 

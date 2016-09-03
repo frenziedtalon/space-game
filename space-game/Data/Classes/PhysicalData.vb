@@ -20,7 +20,7 @@ Namespace Data
 
         Public Property Name As String Implements IPhysicalData.Name
         Public Property Mass As Mass Implements IPhysicalData.Mass
-        Public Property Texture As String Implements IPhysicalData.Texture
+        Public Property Texture As Textures Implements IPhysicalData.Texture
         Public Property Type As CelestialObjectType Implements IPhysicalData.Type
         Public Property Radius As Distance Implements IPhysicalData.Radius
     End Class
