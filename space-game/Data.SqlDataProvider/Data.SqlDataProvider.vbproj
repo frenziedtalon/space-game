@@ -99,6 +99,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Texture.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TextureGroup.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TexturePath.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TextureType.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Universe.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>

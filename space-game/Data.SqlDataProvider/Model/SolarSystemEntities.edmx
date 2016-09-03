@@ -14,7 +14,7 @@
           <Property Name="SolarSystemId" Type="int" Nullable="false" />
           <Property Name="Mass" Type="float" Nullable="false" />
           <Property Name="Radius" Type="float" Nullable="false" />
-          <Property Name="Texture" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TextureGroupId" Type="int" />
           <Property Name="TypeId" Type="int" Nullable="false" />
           <Property Name="PrimaryId" Type="int" />
           <Property Name="SemiMajorAxis" Type="float" />
@@ -42,6 +42,37 @@
           <Property Name="CreatedDateUtc" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
           <Property Name="ModifiedDateUtc" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Texture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PathId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TextureGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="TextureId" Type="int" Nullable="false" />
+          <Property Name="TextureTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TexturePath">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Path" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TextureType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Universe">
           <Key>
@@ -101,6 +132,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CelestialObject_TextureGroup">
+          <End Role="TextureGroup" Type="Self.TextureGroup" Multiplicity="0..1" />
+          <End Role="CelestialObject" Type="Self.CelestialObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TextureGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CelestialObject">
+              <PropertyRef Name="TextureGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SolarSystem_CreatedBy">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="SolarSystem" Type="Self.SolarSystem" Multiplicity="*" />
@@ -134,6 +177,42 @@
             </Principal>
             <Dependent Role="SolarSystem">
               <PropertyRef Name="UniverseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Texture_TexturePath">
+          <End Role="TexturePath" Type="Self.TexturePath" Multiplicity="1" />
+          <End Role="Texture" Type="Self.Texture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TexturePath">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Texture">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TextureGroup_Texture">
+          <End Role="Texture" Type="Self.Texture" Multiplicity="1" />
+          <End Role="TextureGroup" Type="Self.TextureGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Texture">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TextureGroup">
+              <PropertyRef Name="TextureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TextureGroup_TextureType">
+          <End Role="TextureType" Type="Self.TextureType" Multiplicity="1" />
+          <End Role="TextureGroup" Type="Self.TextureGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TextureType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TextureGroup">
+              <PropertyRef Name="TextureTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -189,6 +268,10 @@
           <EntitySet Name="CelestialObject" EntityType="Self.CelestialObject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CelestialObjectType" EntityType="Self.CelestialObjectType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolarSystem" EntityType="Self.SolarSystem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Texture" EntityType="Self.Texture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TextureGroup" EntityType="Self.TextureGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TexturePath" EntityType="Self.TexturePath" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TextureType" EntityType="Self.TextureType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Universe" EntityType="Self.Universe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CelestialObject_CelestialObjectType" Association="Self.FK_CelestialObject_CelestialObjectType">
@@ -203,6 +286,10 @@
             <End Role="SolarSystem" EntitySet="SolarSystem" />
             <End Role="CelestialObject" EntitySet="CelestialObject" />
           </AssociationSet>
+          <AssociationSet Name="FK_CelestialObject_TextureGroup" Association="Self.FK_CelestialObject_TextureGroup">
+            <End Role="TextureGroup" EntitySet="TextureGroup" />
+            <End Role="CelestialObject" EntitySet="CelestialObject" />
+          </AssociationSet>
           <AssociationSet Name="FK_SolarSystem_CreatedBy" Association="Self.FK_SolarSystem_CreatedBy">
             <End Role="Users" EntitySet="Users" />
             <End Role="SolarSystem" EntitySet="SolarSystem" />
@@ -214,6 +301,18 @@
           <AssociationSet Name="FK_SolarSystem_Universe" Association="Self.FK_SolarSystem_Universe">
             <End Role="Universe" EntitySet="Universe" />
             <End Role="SolarSystem" EntitySet="SolarSystem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Texture_TexturePath" Association="Self.FK_Texture_TexturePath">
+            <End Role="TexturePath" EntitySet="TexturePath" />
+            <End Role="Texture" EntitySet="Texture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TextureGroup_Texture" Association="Self.FK_TextureGroup_Texture">
+            <End Role="Texture" EntitySet="Texture" />
+            <End Role="TextureGroup" EntitySet="TextureGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TextureGroup_TextureType" Association="Self.FK_TextureGroup_TextureType">
+            <End Role="TextureType" EntitySet="TextureType" />
+            <End Role="TextureGroup" EntitySet="TextureGroup" />
           </AssociationSet>
           <AssociationSet Name="FK_Universe_CreatedBy" Association="Self.FK_Universe_CreatedBy">
             <End Role="Users" EntitySet="Users" />
@@ -312,6 +411,10 @@
           </AssociationSet>
           <EntitySet Name="CelestialObjectTypes" EntityType="SolarSystemModel.CelestialObjectType" />
           <EntitySet Name="CelestialObjects" EntityType="SolarSystemModel.CelestialObject" />
+          <EntitySet Name="Textures" EntityType="SolarSystemModel.Texture" />
+          <EntitySet Name="TextureGroups" EntityType="SolarSystemModel.TextureGroup" />
+          <EntitySet Name="TexturePaths" EntityType="SolarSystemModel.TexturePath" />
+          <EntitySet Name="TextureTypes" EntityType="SolarSystemModel.TextureType" />
           <AssociationSet Name="FK_CelestialObject_CelestialObjectType" Association="SolarSystemModel.FK_CelestialObject_CelestialObjectType">
             <End Role="CelestialObjectType" EntitySet="CelestialObjectTypes" />
             <End Role="CelestialObject" EntitySet="CelestialObjects" />
@@ -324,7 +427,23 @@
             <End Role="SolarSystem" EntitySet="SolarSystems" />
             <End Role="CelestialObject" EntitySet="CelestialObjects" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_CelestialObject_TextureGroup" Association="SolarSystemModel.FK_CelestialObject_TextureGroup">
+            <End Role="TextureGroup" EntitySet="TextureGroups" />
+            <End Role="CelestialObject" EntitySet="CelestialObjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Texture_TexturePath" Association="SolarSystemModel.FK_Texture_TexturePath">
+            <End Role="TexturePath" EntitySet="TexturePaths" />
+            <End Role="Texture" EntitySet="Textures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TextureGroup_Texture" Association="SolarSystemModel.FK_TextureGroup_Texture">
+            <End Role="Texture" EntitySet="Textures" />
+            <End Role="TextureGroup" EntitySet="TextureGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TextureGroup_TextureType" Association="SolarSystemModel.FK_TextureGroup_TextureType">
+            <End Role="TextureType" EntitySet="TextureTypes" />
+            <End Role="TextureGroup" EntitySet="TextureGroups" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -433,7 +552,7 @@
           <Property Name="SolarSystemId" Type="Int32" Nullable="false" />
           <Property Name="Mass" Type="Double" Nullable="false" />
           <Property Name="Radius" Type="Double" Nullable="false" />
-          <Property Name="Texture" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TextureGroupId" Type="Int32" />
           <Property Name="TypeId" Type="Int32" Nullable="false" />
           <Property Name="PrimaryId" Type="Int32" />
           <Property Name="SemiMajorAxis" Type="Double" />
@@ -446,6 +565,45 @@
           <NavigationProperty Name="CelestialObject1" Relationship="SolarSystemModel.FK_CelestialObject_Primary" FromRole="CelestialObject" ToRole="CelestialObject1" />
           <NavigationProperty Name="CelestialObject2" Relationship="SolarSystemModel.FK_CelestialObject_Primary" FromRole="CelestialObject1" ToRole="CelestialObject" />
           <NavigationProperty Name="SolarSystem" Relationship="SolarSystemModel.FK_CelestialObject_SolarSystem" FromRole="CelestialObject" ToRole="SolarSystem" />
+          <NavigationProperty Name="TextureGroup" Relationship="SolarSystemModel.FK_CelestialObject_TextureGroup" FromRole="CelestialObject" ToRole="TextureGroup" />
+        </EntityType>
+        <EntityType Name="Texture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PathId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TexturePath" Relationship="SolarSystemModel.FK_Texture_TexturePath" FromRole="Texture" ToRole="TexturePath" />
+          <NavigationProperty Name="TextureGroups" Relationship="SolarSystemModel.FK_TextureGroup_Texture" FromRole="Texture" ToRole="TextureGroup" />
+        </EntityType>
+        <EntityType Name="TextureGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="TextureId" Type="Int32" Nullable="false" />
+          <Property Name="TextureTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CelestialObjects" Relationship="SolarSystemModel.FK_CelestialObject_TextureGroup" FromRole="TextureGroup" ToRole="CelestialObject" />
+          <NavigationProperty Name="Texture" Relationship="SolarSystemModel.FK_TextureGroup_Texture" FromRole="TextureGroup" ToRole="Texture" />
+          <NavigationProperty Name="TextureType" Relationship="SolarSystemModel.FK_TextureGroup_TextureType" FromRole="TextureGroup" ToRole="TextureType" />
+        </EntityType>
+        <EntityType Name="TexturePath">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Textures" Relationship="SolarSystemModel.FK_Texture_TexturePath" FromRole="TexturePath" ToRole="Texture" />
+        </EntityType>
+        <EntityType Name="TextureType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TextureGroups" Relationship="SolarSystemModel.FK_TextureGroup_TextureType" FromRole="TextureType" ToRole="TextureGroup" />
         </EntityType>
         <Association Name="FK_CelestialObject_CelestialObjectType">
           <End Type="SolarSystemModel.CelestialObjectType" Role="CelestialObjectType" Multiplicity="1" />
@@ -483,7 +641,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_CelestialObject_TextureGroup">
+          <End Type="SolarSystemModel.TextureGroup" Role="TextureGroup" Multiplicity="0..1" />
+          <End Type="SolarSystemModel.CelestialObject" Role="CelestialObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TextureGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CelestialObject">
+              <PropertyRef Name="TextureGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Texture_TexturePath">
+          <End Type="SolarSystemModel.TexturePath" Role="TexturePath" Multiplicity="1" />
+          <End Type="SolarSystemModel.Texture" Role="Texture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TexturePath">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Texture">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TextureGroup_Texture">
+          <End Type="SolarSystemModel.Texture" Role="Texture" Multiplicity="1" />
+          <End Type="SolarSystemModel.TextureGroup" Role="TextureGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Texture">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TextureGroup">
+              <PropertyRef Name="TextureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TextureGroup_TextureType">
+          <End Type="SolarSystemModel.TextureType" Role="TextureType" Multiplicity="1" />
+          <End Type="SolarSystemModel.TextureGroup" Role="TextureGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TextureType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TextureGroup">
+              <PropertyRef Name="TextureTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -545,11 +751,46 @@
                 <ScalarProperty Name="SemiMajorAxis" ColumnName="SemiMajorAxis" />
                 <ScalarProperty Name="PrimaryId" ColumnName="PrimaryId" />
                 <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="Texture" ColumnName="Texture" />
+                <ScalarProperty Name="TextureGroupId" ColumnName="TextureGroupId" />
                 <ScalarProperty Name="Radius" ColumnName="Radius" />
                 <ScalarProperty Name="Mass" ColumnName="Mass" />
                 <ScalarProperty Name="SolarSystemId" ColumnName="SolarSystemId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Textures">
+            <EntityTypeMapping TypeName="SolarSystemModel.Texture">
+              <MappingFragment StoreEntitySet="Texture">
+                <ScalarProperty Name="PathId" ColumnName="PathId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TextureGroups">
+            <EntityTypeMapping TypeName="SolarSystemModel.TextureGroup">
+              <MappingFragment StoreEntitySet="TextureGroup">
+                <ScalarProperty Name="TextureTypeId" ColumnName="TextureTypeId" />
+                <ScalarProperty Name="TextureId" ColumnName="TextureId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TexturePaths">
+            <EntityTypeMapping TypeName="SolarSystemModel.TexturePath">
+              <MappingFragment StoreEntitySet="TexturePath">
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TextureTypes">
+            <EntityTypeMapping TypeName="SolarSystemModel.TextureType">
+              <MappingFragment StoreEntitySet="TextureType">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
