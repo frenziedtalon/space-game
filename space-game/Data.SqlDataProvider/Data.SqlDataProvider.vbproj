@@ -105,6 +105,9 @@
     <Compile Include="Model\TextureGroup.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\TextureGroupToTexture.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TexturePath.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>

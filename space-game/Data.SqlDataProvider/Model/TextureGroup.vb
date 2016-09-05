@@ -12,12 +12,9 @@ Imports System.Collections.Generic
 
 Partial Public Class TextureGroup
     Public Property Id As Integer
-    Public Property GroupId As Integer
-    Public Property TextureId As Integer
-    Public Property TextureTypeId As Integer
+    Public Property Name As String
 
     Public Overridable Property CelestialObjects As ICollection(Of CelestialObject) = New HashSet(Of CelestialObject)
-    Public Overridable Property Texture As Texture
-    Public Overridable Property TextureType As TextureType
+    Public Overridable Property TextureGroupToTextures As ICollection(Of TextureGroupToTexture) = New HashSet(Of TextureGroupToTexture)
 
 End Class

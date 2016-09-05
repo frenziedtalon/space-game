@@ -16,7 +16,7 @@ Partial Public Class CelestialObject
     Public Property SolarSystemId As Integer
     Public Property Mass As Double
     Public Property Radius As Double
-    Public Property TextureGroupId As Nullable(Of Integer)
+    Public Property TextureGroupId As Integer
     Public Property TypeId As Integer
     Public Property PrimaryId As Nullable(Of Integer)
     Public Property SemiMajorAxis As Nullable(Of Double)
