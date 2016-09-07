@@ -24,12 +24,9 @@ Namespace Helpers
         Public Sub PathCombine_WithInvalidInput_ThrowsArgumentNullException(path1 As String, path2 As String)
             Dim expected = GetType(ArgumentNullException)
 
-            Dim ex = Assert.Throws(Of ArgumentNullException)(Function() PathHelper.SitePathCombine(path1, path2))
+            Dim ex = Assert.Catch(Of ArgumentNullException)(Function() PathHelper.SitePathCombine(path1, path2))
             
             Assert.AreEqual(expected, ex.GetType())
         End Sub
-
-
-
     End Class
 End Namespace
