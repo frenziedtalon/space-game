@@ -32,7 +32,7 @@ namespace Data.SqlDataProvider.Tests
         {
             TextureGroup source = new TextureGroup { Id = 1, Name = "Group" };
 
-            TexturePath lowPath = new TexturePath() {Path = "low/path/"};
+            TexturePath lowPath = new TexturePath() { Path = "low/path/" };
             TexturePath mediumPath = new TexturePath() { Path = "medium/path/" };
             TexturePath highPath = new TexturePath() { Path = "high/path" };
 
@@ -40,11 +40,11 @@ namespace Data.SqlDataProvider.Tests
             TextureType mediumTextureType = new TextureType() { Type = "Medium" };
             TextureType highTextureType = new TextureType() { Type = "High" };
 
-            Texture lowTexture = new Texture() {Name = "/Low.jpg", TexturePath = lowPath, TextureType = lowTextureType};
-            Texture mediumTexture = new Texture() { Name = "Medium.jpg", TexturePath = mediumPath , TextureType = mediumTextureType};
-            Texture highTexture = new Texture() {Name = "/High.jpg", TexturePath = highPath, TextureType = highTextureType};
-            
-            TextureGroupToTexture lowTextureGroupToTexture = new TextureGroupToTexture() {Texture = lowTexture, TextureGroup = source};
+            Texture lowTexture = new Texture() { Name = "/Low.jpg", TexturePath = lowPath, TextureType = lowTextureType };
+            Texture mediumTexture = new Texture() { Name = "Medium.jpg", TexturePath = mediumPath, TextureType = mediumTextureType };
+            Texture highTexture = new Texture() { Name = "/High.jpg", TexturePath = highPath, TextureType = highTextureType };
+
+            TextureGroupToTexture lowTextureGroupToTexture = new TextureGroupToTexture() { Texture = lowTexture, TextureGroup = source };
             TextureGroupToTexture mediumTextureGroupToTexture = new TextureGroupToTexture() { Texture = mediumTexture, TextureGroup = source };
             TextureGroupToTexture highTextureGroupToTexture = new TextureGroupToTexture() { Texture = highTexture, TextureGroup = source };
 
@@ -52,7 +52,7 @@ namespace Data.SqlDataProvider.Tests
             source.TextureGroupToTextures.Add(lowTextureGroupToTexture);
             source.TextureGroupToTextures.Add(mediumTextureGroupToTexture);
             source.TextureGroupToTextures.Add(highTextureGroupToTexture);
-            
+
             Textures expected = new Textures { Low = "low/path/Low.jpg", Medium = "medium/path/Medium.jpg", High = "high/path/High.jpg" };
 
             Textures result = source.Adapt<Textures>();
@@ -62,7 +62,7 @@ namespace Data.SqlDataProvider.Tests
             Assert.AreEqual(expected.High, result.High);
         }
 
-        [TestCaseSource(typeof(MappingsTestsData),nameof(MappingsTestsData.SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType_Data))]
+        [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType_Data))]
         public void SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType(SqlDataProvider.CelestialObjectType input, global::Data.Classes.CelestialObjectType expected)
         {
             var result = input.Adapt<global::Data.Classes.CelestialObjectType>();
