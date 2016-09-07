@@ -7,6 +7,9 @@ Public Class Mappings
 
     Public Sub Register(config As TypeAdapterConfig) Implements IRegister.Register
 
+        config.ForType(Of Global.Data.SqlDataProvider.CelestialObjectType, Global.Data.Classes.CelestialObjectType).
+            MapWith(Function(src) src.Name.ToEnum(Of Global.Data.Classes.CelestialObjectType).Value)
+
         config.ForType(Of TextureGroup, Textures).
             Map(Function(dest) dest.Low, Function(src) CreateTexturePath("Low", src.TextureGroupToTextures)).
             Map(Function(dest) dest.Medium, Function(src) CreateTexturePath("Medium", src.TextureGroupToTextures)).

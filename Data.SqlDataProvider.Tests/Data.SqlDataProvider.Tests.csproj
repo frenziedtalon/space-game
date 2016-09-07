@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\MappingsTestsData.cs" />
     <Compile Include="MappingsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\space-game\Data.SqlDataProvider\Data.SqlDataProvider.vbproj">
       <Project>{56b17816-2820-401b-9f41-dfcec79cc4cf}</Project>
       <Name>Data.SqlDataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\space-game\Data\Data.vbproj">
+      <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
+      <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

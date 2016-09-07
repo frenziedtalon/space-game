@@ -1,4 +1,5 @@
 ﻿using Core.Classes;
+using Data.SqlDataProvider.Tests.Data;
 using Mapster;
 using NUnit.Framework;
 
@@ -59,6 +60,14 @@ namespace Data.SqlDataProvider.Tests
             Assert.AreEqual(expected.Low, result.Low);
             Assert.AreEqual(expected.Medium, result.Medium);
             Assert.AreEqual(expected.High, result.High);
+        }
+
+        [TestCaseSource(typeof(MappingsTestsData),nameof(MappingsTestsData.SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType_Data))]
+        public void SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType(SqlDataProvider.CelestialObjectType input, global::Data.Classes.CelestialObjectType expected)
+        {
+            var result = input.Adapt<global::Data.Classes.CelestialObjectType>();
+
+            Assert.AreEqual(expected, result);
         }
 
     }
