@@ -68,27 +68,6 @@ namespace Data.SqlDataProvider.Tests.Data
         {
             var result = new List<TestCaseData>();
 
-            var sourceWithoutOrbit = new CelestialObject()
-            {
-                Id = 1,
-                Name = "Sol",
-                SolarSystemId = 1,
-                Mass = 1.98855E+30,
-                Radius = 695700,
-                TextureGroup = SampleTextureGroup,
-                CelestialObjectType = new CelestialObjectType()
-                {
-                    Name = "Star"
-                },
-                PrimaryId = null,
-                SemiMajorAxis = null,
-                Eccentricity = null,
-                Inclination = null,
-                ArgumentOfPeriapsis = null,
-                LongitudeOfAscendingNode = null,
-                MeanAnomalyZero = null
-            };
-
             var expectedWithoutOrbit = new PhysicalData()
             {
                 Name = "Sol",
@@ -98,28 +77,7 @@ namespace Data.SqlDataProvider.Tests.Data
                 Type = global::Data.Classes.CelestialObjectType.Star
             };
 
-            result.Add(new TestCaseData(sourceWithoutOrbit, expectedWithoutOrbit));
-
-            var sourceWithOrbit = new CelestialObject()
-            {
-                Id = 4,
-                Name = "Earth",
-                SolarSystemId = 1,
-                Mass = 5.9736E+24,
-                Radius = 6371,
-                TextureGroup = SampleTextureGroup,
-                CelestialObjectType = new CelestialObjectType()
-                {
-                    Name = "Planet"
-                },
-                PrimaryId = 1,
-                SemiMajorAxis = 149597870.691,
-                Eccentricity = 0.016709,
-                Inclination = 0,
-                ArgumentOfPeriapsis = 282.9404,
-                LongitudeOfAscendingNode = 0,
-                MeanAnomalyZero = 356.047
-            };
+            result.Add(new TestCaseData(CelestialObjectWithoutOrbit, expectedWithoutOrbit));
 
             var expectedWithOrbit = new PhysicalData()
             {
@@ -130,9 +88,51 @@ namespace Data.SqlDataProvider.Tests.Data
                 Type = global::Data.Classes.CelestialObjectType.Planet
             };
 
-            result.Add(new TestCaseData(sourceWithOrbit, expectedWithOrbit));
+            result.Add(new TestCaseData(CelestialObjectWithOrbit, expectedWithOrbit));
 
             return result;
         }
+
+        private static CelestialObject CelestialObjectWithoutOrbit => new CelestialObject()
+        {
+            Id = 1,
+            Name = "Sol",
+            SolarSystemId = 1,
+            Mass = 1.98855E+30,
+            Radius = 695700,
+            TextureGroup = SampleTextureGroup,
+            CelestialObjectType = new CelestialObjectType()
+            {
+                Name = "Star"
+            },
+            PrimaryId = null,
+            SemiMajorAxis = null,
+            Eccentricity = null,
+            Inclination = null,
+            ArgumentOfPeriapsis = null,
+            LongitudeOfAscendingNode = null,
+            MeanAnomalyZero = null
+        };
+
+        private static CelestialObject CelestialObjectWithOrbit => new CelestialObject()
+        {
+            Id = 4,
+            Name = "Earth",
+            SolarSystemId = 1,
+            Mass = 5.9736E+24,
+            Radius = 6371,
+            TextureGroup = SampleTextureGroup,
+            CelestialObjectType = new CelestialObjectType()
+            {
+                Name = "Planet"
+            },
+            PrimaryId = 1,
+            SemiMajorAxis = 149597870.691,
+            Eccentricity = 0.016709,
+            Inclination = 0,
+            ArgumentOfPeriapsis = 282.9404,
+            LongitudeOfAscendingNode = 0,
+            MeanAnomalyZero = 356.047
+        };
     }
 }
