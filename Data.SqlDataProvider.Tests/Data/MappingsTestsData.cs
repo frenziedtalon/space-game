@@ -8,33 +8,45 @@ namespace Data.SqlDataProvider.Tests.Data
     {
         public static List<TestCaseData> TextureGroup_MapTo_Textures_Data()
         {
-            TextureGroup source = new TextureGroup { Id = 1, Name = "Group" };
-
-            TexturePath lowPath = new TexturePath() { Path = "low/path/" };
-            TexturePath mediumPath = new TexturePath() { Path = "medium/path/" };
-            TexturePath highPath = new TexturePath() { Path = "high/path" };
-
-            TextureType lowTextureType = new TextureType() { Type = "Low" };
-            TextureType mediumTextureType = new TextureType() { Type = "Medium" };
-            TextureType highTextureType = new TextureType() { Type = "High" };
-
-            Texture lowTexture = new Texture() { Name = "/Low.jpg", TexturePath = lowPath, TextureType = lowTextureType };
-            Texture mediumTexture = new Texture() { Name = "Medium.jpg", TexturePath = mediumPath, TextureType = mediumTextureType };
-            Texture highTexture = new Texture() { Name = "/High.jpg", TexturePath = highPath, TextureType = highTextureType };
-
-            TextureGroupToTexture lowTextureGroupToTexture = new TextureGroupToTexture() { Texture = lowTexture, TextureGroup = source };
-            TextureGroupToTexture mediumTextureGroupToTexture = new TextureGroupToTexture() { Texture = mediumTexture, TextureGroup = source };
-            TextureGroupToTexture highTextureGroupToTexture = new TextureGroupToTexture() { Texture = highTexture, TextureGroup = source };
-
-
-            source.TextureGroupToTextures.Add(lowTextureGroupToTexture);
-            source.TextureGroupToTextures.Add(mediumTextureGroupToTexture);
-            source.TextureGroupToTextures.Add(highTextureGroupToTexture);
-
-            Textures expected = new Textures { Low = "low/path/Low.jpg", Medium = "medium/path/Medium.jpg", High = "high/path/High.jpg" };
-
-            return new List<TestCaseData> { new TestCaseData(source, expected) };
+            return new List<TestCaseData> { new TestCaseData(SampleTextureGroup, SampleTextures) };
         }
+
+        private static TextureGroup SampleTextureGroup
+        {
+            get
+            {
+                TextureGroup source = new TextureGroup { Id = 1, Name = "Group" };
+
+                TexturePath lowPath = new TexturePath() { Path = "low/path/" };
+                TexturePath mediumPath = new TexturePath() { Path = "medium/path/" };
+                TexturePath highPath = new TexturePath() { Path = "high/path" };
+
+                TextureType lowTextureType = new TextureType() { Type = "Low" };
+                TextureType mediumTextureType = new TextureType() { Type = "Medium" };
+                TextureType highTextureType = new TextureType() { Type = "High" };
+
+                Texture lowTexture = new Texture() { Name = "/Low.jpg", TexturePath = lowPath, TextureType = lowTextureType };
+                Texture mediumTexture = new Texture() { Name = "Medium.jpg", TexturePath = mediumPath, TextureType = mediumTextureType };
+                Texture highTexture = new Texture() { Name = "/High.jpg", TexturePath = highPath, TextureType = highTextureType };
+
+                TextureGroupToTexture lowTextureGroupToTexture = new TextureGroupToTexture() { Texture = lowTexture, TextureGroup = source };
+                TextureGroupToTexture mediumTextureGroupToTexture = new TextureGroupToTexture() { Texture = mediumTexture, TextureGroup = source };
+                TextureGroupToTexture highTextureGroupToTexture = new TextureGroupToTexture() { Texture = highTexture, TextureGroup = source };
+
+                source.TextureGroupToTextures.Add(lowTextureGroupToTexture);
+                source.TextureGroupToTextures.Add(mediumTextureGroupToTexture);
+                source.TextureGroupToTextures.Add(highTextureGroupToTexture);
+
+                return source;
+            }
+        }
+
+        private static Textures SampleTextures => new Textures
+        {
+            Low = "low/path/Low.jpg",
+            Medium = "medium/path/Medium.jpg",
+            High = "high/path/High.jpg"
+        };
 
         public static List<TestCaseData> SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType_Data()
         {
