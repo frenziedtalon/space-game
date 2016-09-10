@@ -1,4 +1,5 @@
 ﻿using Core.Classes;
+using Data.Data;
 using Data.SqlDataProvider.Tests.Data;
 using Mapster;
 using NUnit.Framework;
@@ -13,8 +14,9 @@ namespace Data.SqlDataProvider.Tests
         [OneTimeSetUp]
         public void SetupMappings()
         {
-            var mappings = new Mappings();
-            mappings.Register(TypeAdapterConfig.GlobalSettings);
+            new global::Data.SqlDataProvider.Mappings().Register(TypeAdapterConfig.GlobalSettings);
+            new Core.Mappings().Register(TypeAdapterConfig.GlobalSettings);
+
             TypeAdapterConfig.GlobalSettings.RequireExplicitMapping = true;
         }
 
@@ -45,5 +47,24 @@ namespace Data.SqlDataProvider.Tests
             Assert.AreEqual(expected, result);
         }
 
+        [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.SqlDataProviderCelestialObject_MapTo_DataPhysicalData_Data))]
+        public void SqlDataProviderCelestialObject_MapTo_DataPhysicalData(CelestialObject source, PhysicalData expected)
+        {
+            var result = source.Adapt<PhysicalData>();
+
+            Assert.AreEqual(expected.Texture.Low, result.Texture.Low);
+            Assert.AreEqual(expected.Texture.Medium, result.Texture.Medium);
+            Assert.AreEqual(expected.Texture.High, result.Texture.High);
+
+            Assert.AreEqual(expected.Mass.Kilograms, result.Mass.Kilograms);
+            Assert.AreEqual(expected.Mass.EarthMasses, result.Mass.EarthMasses);
+            Assert.AreEqual(expected.Mass.SolarMasses, result.Mass.SolarMasses);
+
+            Assert.AreEqual(expected.Radius.Kilometers, result.Radius.Kilometers);
+            Assert.AreEqual(expected.Radius.AstronomicalUnits, result.Radius.AstronomicalUnits);
+
+            Assert.AreEqual(expected.Name, result.Name);
+            Assert.AreEqual(expected.Type, result.Type);
+        }
     }
 }

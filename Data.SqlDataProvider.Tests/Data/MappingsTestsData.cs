@@ -1,4 +1,5 @@
 ﻿using Core.Classes;
+using Data.Data;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -59,6 +60,78 @@ namespace Data.SqlDataProvider.Tests.Data
                 new TestCaseData(new CelestialObjectType() {Name = "Star"},
                     global::Data.Classes.CelestialObjectType.Star)
             };
+            return result;
+        }
+
+        public static List<TestCaseData> SqlDataProviderCelestialObject_MapTo_DataPhysicalData_Data()
+
+        {
+            var result = new List<TestCaseData>();
+
+            var sourceWithoutOrbit = new CelestialObject()
+            {
+                Id = 1,
+                Name = "Sol",
+                SolarSystemId = 1,
+                Mass = 1.98855E+30,
+                Radius = 695700,
+                TextureGroup = SampleTextureGroup,
+                CelestialObjectType = new CelestialObjectType()
+                {
+                    Name = "Star"
+                },
+                PrimaryId = null,
+                SemiMajorAxis = null,
+                Eccentricity = null,
+                Inclination = null,
+                ArgumentOfPeriapsis = null,
+                LongitudeOfAscendingNode = null,
+                MeanAnomalyZero = null
+            };
+
+            var expectedWithoutOrbit = new PhysicalData()
+            {
+                Name = "Sol",
+                Mass = Mass.FromKilograms(1.98855E+30),
+                Radius = Distance.FromKilometers(695700),
+                Texture = SampleTextures,
+                Type = global::Data.Classes.CelestialObjectType.Star
+            };
+
+            result.Add(new TestCaseData(sourceWithoutOrbit, expectedWithoutOrbit));
+
+            var sourceWithOrbit = new CelestialObject()
+            {
+                Id = 4,
+                Name = "Earth",
+                SolarSystemId = 1,
+                Mass = 5.9736E+24,
+                Radius = 6371,
+                TextureGroup = SampleTextureGroup,
+                CelestialObjectType = new CelestialObjectType()
+                {
+                    Name = "Planet"
+                },
+                PrimaryId = 1,
+                SemiMajorAxis = 149597870.691,
+                Eccentricity = 0.016709,
+                Inclination = 0,
+                ArgumentOfPeriapsis = 282.9404,
+                LongitudeOfAscendingNode = 0,
+                MeanAnomalyZero = 356.047
+            };
+
+            var expectedWithOrbit = new PhysicalData()
+            {
+                Name = "Earth",
+                Mass = Mass.FromKilograms(5.9736E+24),
+                Radius = Distance.FromKilometers(6371),
+                Texture = SampleTextures,
+                Type = global::Data.Classes.CelestialObjectType.Planet
+            };
+
+            result.Add(new TestCaseData(sourceWithOrbit, expectedWithOrbit));
+
             return result;
         }
     }

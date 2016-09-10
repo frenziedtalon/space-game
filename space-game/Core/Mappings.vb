@@ -10,5 +10,7 @@ Public Class Mappings
 
         config.ForType(Of Integer, Distance).MapWith(Function(src) Distance.FromKilometers(src))
         config.ForType(Of Double, Distance).MapWith(Function(src) Distance.FromKilometers(src))
+
+        config.ForType(Of Textures, Textures)
     End Sub
 End Class
