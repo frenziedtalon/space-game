@@ -38,9 +38,9 @@ namespace Data.SqlDataProvider.Tests
         }
 
         [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType_Data))]
-        public void SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType(SqlDataProvider.CelestialObjectType input, global::Data.Classes.CelestialObjectType expected)
+        public void SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType(SqlDataProvider.CelestialObjectType source, global::Data.Classes.CelestialObjectType expected)
         {
-            var result = input.Adapt<global::Data.Classes.CelestialObjectType>();
+            var result = source.Adapt<global::Data.Classes.CelestialObjectType>();
 
             Assert.AreEqual(expected, result);
         }
