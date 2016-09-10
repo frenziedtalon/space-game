@@ -9,8 +9,6 @@ namespace Data.SqlDataProvider.Tests
     [TestFixture]
     class MappingsTest
     {
-        private TypeAdapterConfig _config;
-
         [OneTimeSetUp]
         public void SetupMappings()
         {
@@ -27,7 +25,6 @@ namespace Data.SqlDataProvider.Tests
             TypeAdapterConfig.GlobalSettings.Rules.Clear();
             TypeAdapterConfig.GlobalSettings.RuleMap.Clear();
         }
-
 
         [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.TextureGroup_MapTo_Textures_Data))]
         public void TextureGroup_MapTo_Textures(TextureGroup source, Textures expected)
