@@ -9,6 +9,7 @@ Public Class MappingsTests
         Dim mappings = New Mappings
         mappings.Register(TypeAdapterConfig.GlobalSettings)
         TypeAdapterConfig.GlobalSettings.RequireExplicitMapping = True
+        TypeAdapterConfig.GlobalSettings.Compile()
     End Sub
 
     <OneTimeTearDown>

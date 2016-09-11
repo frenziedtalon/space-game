@@ -16,6 +16,7 @@ namespace Data.SqlDataProvider.Tests
             new Core.Mappings().Register(TypeAdapterConfig.GlobalSettings);
 
             TypeAdapterConfig.GlobalSettings.RequireExplicitMapping = true;
+            TypeAdapterConfig.GlobalSettings.Compile();
         }
 
         [OneTimeTearDown]
