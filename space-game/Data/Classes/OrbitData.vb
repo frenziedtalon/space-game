@@ -10,7 +10,7 @@ Namespace Classes
         Public Property MeanAnomalyZero As Angle
 
         ''' <summary>
-        ''' Distances and angles must be in the correct units, astronomical units and radians
+        ''' Distances and angles must be in the correct units, kilometers and degrees
         ''' </summary>
         Public Sub New(semiMajorAxis As Distance,
                         eccentricity As Double,
