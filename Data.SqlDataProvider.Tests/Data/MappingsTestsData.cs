@@ -1,4 +1,5 @@
 ﻿using Core.Classes;
+using Data.Classes;
 using Data.Data;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -129,10 +130,28 @@ namespace Data.SqlDataProvider.Tests.Data
             PrimaryId = 1,
             SemiMajorAxis = 149597870.691,
             Eccentricity = 0.016709,
-            Inclination = 0,
+            Inclination = 12.1234,
             ArgumentOfPeriapsis = 282.9404,
-            LongitudeOfAscendingNode = 0,
+            LongitudeOfAscendingNode = 123.45,
             MeanAnomalyZero = 356.047
         };
+
+        public static List<TestCaseData> SqlDataProviderCelestialObject_MapTo_DataOrbitData_Data()
+        {
+            var nullOrbit = new OrbitData(null, 0.00, null, null, null, null);
+
+            var validOrbit = new OrbitData(semiMajorAxis: Distance.FromKilometers(149597870.691),
+                                            eccentricity: 0.016709,
+                                            inclination: Angle.FromDegrees(12.1234),
+                                            argumentOfPeriapsis: Angle.FromDegrees(282.9404),
+                                            longitudeOfAscendingNode: Angle.FromDegrees(123.45),
+                                            meanAnomalyZero: Angle.FromDegrees(356.047));
+
+            return new List<TestCaseData>
+            {
+                new TestCaseData(CelestialObjectWithoutOrbit, nullOrbit),
+                new TestCaseData(CelestialObjectWithOrbit, validOrbit)
+            };
+        }
     }
 }

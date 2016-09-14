@@ -1,4 +1,5 @@
 ﻿using Core.Classes;
+using Data.Classes;
 using Data.Data;
 using Data.SqlDataProvider.Tests.Data;
 using Mapster;
@@ -60,6 +61,19 @@ namespace Data.SqlDataProvider.Tests
 
             Assert.AreEqual(expected.Name, result.Name);
             Assert.AreEqual(expected.Type, result.Type);
+        }
+
+        [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.SqlDataProviderCelestialObject_MapTo_DataOrbitData_Data))]
+        public void SqlDataProviderCelestialObject_MapTo_DataOrbitData(CelestialObject source, OrbitData expected)
+        {
+            var result = source.Adapt<OrbitData>();
+
+            Assert.AreEqual(expected.ArgumentOfPeriapsis.Degrees, result.ArgumentOfPeriapsis.Degrees);
+            Assert.AreEqual(expected.Eccentricity, result.Eccentricity);
+            Assert.AreEqual(expected.Inclination.Degrees, result.Inclination.Degrees);
+            Assert.AreEqual(expected.LongitudeOfAscendingNode.Degrees, result.LongitudeOfAscendingNode.Degrees);
+            Assert.AreEqual(expected.MeanAnomalyZero.Degrees, result.MeanAnomalyZero.Degrees);
+            Assert.AreEqual(expected.SemiMajorAxis.Kilometers, result.SemiMajorAxis.Kilometers);
         }
     }
 }

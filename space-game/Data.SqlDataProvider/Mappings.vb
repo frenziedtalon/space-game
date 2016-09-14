@@ -1,6 +1,7 @@
 ﻿Imports Core.Classes
 Imports Core.Extensions
 Imports Core.Helpers
+Imports Data.Classes
 Imports Data.Data
 Imports Mapster
 
@@ -8,6 +9,14 @@ Public Class Mappings
     Implements IRegister
 
     Public Sub Register(config As TypeAdapterConfig) Implements IRegister.Register
+
+        config.ForType(Of CelestialObject, OrbitData).
+            Map(Function(dest) dest.SemiMajorAxis, Function(src) src.SemiMajorAxis.Adapt(Of Distance)()).
+            Map(Function(dest) dest.Eccentricity, Function(src) src.Eccentricity).
+            Map(Function(dest) dest.Inclination, Function(src) src.Inclination.Adapt(Of Angle)()).
+            Map(Function(dest) dest.ArgumentOfPeriapsis, Function(src) src.ArgumentOfPeriapsis.Adapt(Of Angle)()).
+            Map(Function(dest) dest.LongitudeOfAscendingNode, Function(src) src.LongitudeOfAscendingNode.Adapt(Of Angle)()).
+            Map(Function(dest) dest.MeanAnomalyZero, Function(src) src.MeanAnomalyZero.Adapt(Of Angle)())
 
 
         config.ForType(Of CelestialObject, PhysicalData).
