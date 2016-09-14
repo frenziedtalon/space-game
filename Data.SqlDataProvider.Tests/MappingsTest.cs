@@ -55,11 +55,8 @@ namespace Data.SqlDataProvider.Tests
             Assert.AreEqual(expected.Texture.High, result.Texture.High);
 
             Assert.AreEqual(expected.Mass.Kilograms, result.Mass.Kilograms);
-            Assert.AreEqual(expected.Mass.EarthMasses, result.Mass.EarthMasses);
-            Assert.AreEqual(expected.Mass.SolarMasses, result.Mass.SolarMasses);
 
             Assert.AreEqual(expected.Radius.Kilometers, result.Radius.Kilometers);
-            Assert.AreEqual(expected.Radius.AstronomicalUnits, result.Radius.AstronomicalUnits);
 
             Assert.AreEqual(expected.Name, result.Name);
             Assert.AreEqual(expected.Type, result.Type);
