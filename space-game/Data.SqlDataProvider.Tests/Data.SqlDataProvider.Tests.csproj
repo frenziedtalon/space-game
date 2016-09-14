@@ -60,15 +60,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\space-game\Core\Core.vbproj">
+    <ProjectReference Include="..\Core\Core.vbproj">
       <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\space-game\Data.SqlDataProvider\Data.SqlDataProvider.vbproj">
+    <ProjectReference Include="..\Data.SqlDataProvider\Data.SqlDataProvider.vbproj">
       <Project>{56b17816-2820-401b-9f41-dfcec79cc4cf}</Project>
       <Name>Data.SqlDataProvider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\space-game\Data\Data.vbproj">
+    <ProjectReference Include="..\Data\Data.vbproj">
       <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
       <Name>Data</Name>
     </ProjectReference>
@@ -82,4 +82,3 @@
   </Target>
   -->
 </Project>
-
