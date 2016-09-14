@@ -9,7 +9,9 @@ Public Class Mappings
         config.ForType(Of Double, Mass).MapWith(Function(src) Mass.FromKilograms(src))
 
         config.ForType(Of Integer, Distance).MapWith(Function(src) Distance.FromKilometers(src))
+        config.ForType(Of Integer?, Distance).MapWith(Function(src) If(src.HasValue, Distance.FromKilometers(src.Value), Nothing))
         config.ForType(Of Double, Distance).MapWith(Function(src) Distance.FromKilometers(src))
+        config.ForType(Of Double?, Distance).MapWith(Function(src) If(src.HasValue, Distance.FromKilometers(src.Value), Nothing))
 
         config.ForType(Of Textures, Textures)
     End Sub

@@ -55,6 +55,26 @@ Public Class MappingsTests
     End Sub
 
     <Test>
+    Public Sub NullableInteger_WithoutValue_MapTo_Distance()
+        Dim source As Integer?
+        Dim expected = Nothing
+
+        Dim result = source.Adapt(Of Distance)()
+
+        Assert.AreEqual(expected, result)
+    End Sub
+
+    <Test>
+    Public Sub NullableInteger_WithValue_MapTo_Distance()
+        Dim source As Integer? = 45
+        Dim expected = Distance.FromKilometers(45)
+
+        Dim result = source.Adapt(Of Distance)()
+
+        Assert.AreEqual(expected.Kilometers, result.Kilometers)
+    End Sub
+
+    <Test>
     Public Sub Double_MapTo_Distance()
         Dim source = 1234567890.12
         Dim expected = Distance.FromKilometers(source)
@@ -63,5 +83,25 @@ Public Class MappingsTests
 
         Assert.AreEqual(expected.Kilometers, result.Kilometers)
         Assert.AreEqual(expected.AstronomicalUnits, result.AstronomicalUnits)
+    End Sub
+
+    <Test>
+    Public Sub NullableDouble_WithoutValue_MapTo_Distance()
+        Dim source As Double?
+        Dim expected = Nothing
+
+        Dim result = source.Adapt(Of Distance)()
+
+        Assert.AreEqual(expected, result)
+    End Sub
+
+    <Test>
+    Public Sub NullableDouble_WithValue_MapTo_Distance()
+        Dim source As Double? = 1.11
+        Dim expected = Distance.FromKilometers(1.11)
+
+        Dim result = source.Adapt(Of Distance)()
+
+        Assert.AreEqual(expected.Kilometers, result.Kilometers)
     End Sub
 End Class
