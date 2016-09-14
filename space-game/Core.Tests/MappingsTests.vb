@@ -104,4 +104,64 @@ Public Class MappingsTests
 
         Assert.AreEqual(expected.Kilometers, result.Kilometers)
     End Sub
+
+    <Test>
+    Public Sub NullableInteger_WithoutValue_MapTo_Angle()
+        Dim source As Integer?
+        Dim expected = Nothing
+
+        Dim result = source.Adapt(Of Angle)()
+
+        Assert.AreEqual(expected, result)
+    End Sub
+
+    <Test>
+    Public Sub NullableInteger_WithValue_MapTo_Angle()
+        Dim source As Integer? = 45
+        Dim expected = Angle.FromDegrees(45)
+
+        Dim result = source.Adapt(Of Angle)()
+
+        Assert.AreEqual(expected.Degrees, result.Degrees)
+    End Sub
+
+    <Test>
+    Public Sub Integer_MapTo_Angle()
+        Dim source = 90
+        Dim expected = Angle.FromDegrees(source)
+
+        Dim result = source.Adapt(Of Angle)()
+
+        Assert.AreEqual(expected.Degrees, result.Degrees)
+    End Sub
+
+    <Test>
+    Public Sub Double_MapTo_Angle()
+        Dim source = 90.11
+        Dim expected = Angle.FromDegrees(source)
+
+        Dim result = source.Adapt(Of Angle)()
+
+        Assert.AreEqual(expected.Degrees, result.Degrees)
+    End Sub
+
+    <Test>
+    Public Sub NullableDouble_WithoutValue_MapTo_Angle()
+        Dim source As Double?
+        Dim expected = Nothing
+
+        Dim result = source.Adapt(Of Angle)()
+
+        Assert.AreEqual(expected, result)
+    End Sub
+
+    <Test>
+    Public Sub NullableDouble_WithValue_MapTo_Angle()
+        Dim source As Double? = 45.11
+        Dim expected = Angle.FromDegrees(45.11)
+
+        Dim result = source.Adapt(Of Angle)()
+
+        Assert.AreEqual(expected.Degrees, result.Degrees)
+    End Sub
 End Class

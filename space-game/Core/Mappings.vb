@@ -13,6 +13,10 @@ Public Class Mappings
         config.ForType(Of Double, Distance).MapWith(Function(src) Distance.FromKilometers(src))
         config.ForType(Of Double?, Distance).MapWith(Function(src) If(src.HasValue, Distance.FromKilometers(src.Value), Nothing))
 
+        config.ForType(Of Integer, Angle).MapWith(Function(src) Angle.FromDegrees(src))
+        config.ForType(Of Integer?, Angle).MapWith(Function(src) If(src.HasValue, Angle.FromDegrees(src.Value), Nothing))
         config.ForType(Of Textures, Textures)
+        config.ForType(Of Double, Angle).MapWith(Function(src) Angle.FromDegrees(src))
+        config.ForType(Of Double?, Angle).MapWith(Function(src) If(src.HasValue, Angle.FromDegrees(src.Value), Nothing))
     End Sub
 End Class
