@@ -77,6 +77,7 @@
     <Compile Include="Classes\MassTests.vb" />
     <Compile Include="Classes\RangeTests.vb" />
     <Compile Include="Data\AngleTestsData.vb" />
+    <Compile Include="Data\DistanceTestData.vb" />
     <Compile Include="Extensions\EnumerableExtensionsTests.vb" />
     <Compile Include="Extensions\GuidExtensionsTests.vb" />
     <Compile Include="Extensions\StringExtensionsTests.vb" />

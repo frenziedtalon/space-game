@@ -1,4 +1,5 @@
 ﻿Imports Core.Classes
+Imports Core.Tests.Data
 Imports NUnit.Framework
 
 Namespace Classes
@@ -29,6 +30,13 @@ Namespace Classes
             Dim result = d.AstronomicalUnits
 
             Assert.AreEqual(aus, result)
+        End Sub
+
+        <TestCaseSource(GetType(DistanceTestData), NameOf(DistanceTestData.Equals_WhenComparing_ReturnsExpected_Data))>
+        Public Sub Equals_WhenComparing_ReturnsExpected(this As Distance, that As Distance, expected As Boolean)
+            Dim result = this.Equals(that)
+
+            Assert.AreEqual(expected, result)
         End Sub
 
     End Class
