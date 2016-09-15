@@ -79,6 +79,7 @@
     <Compile Include="Classes\TexturesTests.vb" />
     <Compile Include="Data\AngleTestsData.vb" />
     <Compile Include="Data\DistanceTestData.vb" />
+    <Compile Include="Data\MassTestsData.vb" />
     <Compile Include="Data\TexturesTestsData.vb" />
     <Compile Include="Extensions\EnumerableExtensionsTests.vb" />
     <Compile Include="Extensions\GuidExtensionsTests.vb" />
