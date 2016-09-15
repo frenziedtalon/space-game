@@ -1,7 +1,16 @@
 ﻿Namespace Classes
     Public Class Textures
-        public High as String
-        public Medium As String
-        public Low As String
+        Implements IEquatable(Of Textures)
+
+        Public High As String
+        Public Medium As String
+        Public Low As String
+
+        Public Shadows Function Equals(other As Textures) As Boolean Implements IEquatable(Of Textures).Equals
+            If other IsNot Nothing Then
+                Return High.Equals(other.High) AndAlso Medium.Equals(other.Medium) AndAlso Low.Equals(other.Low)
+            End If
+            Return False
+        End Function
     End Class
-End NameSpace
+End Namespace
