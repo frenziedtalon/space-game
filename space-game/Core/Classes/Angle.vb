@@ -9,6 +9,8 @@ Namespace Classes
     ''' Using degrees as the internal value. Found that this results in fewer rounding errors than operating with Pi repeatedly.
     ''' </remarks>
     Public Class Angle
+        Implements IEquatable(Of Angle)
+
         Private ReadOnly _degrees As Double
         Private ReadOnly _decimalPlaces As Integer
 
@@ -77,5 +79,12 @@ Namespace Classes
                 Return _decimalPlaces
             End Get
         End Property
+
+        Public Shadows Function Equals(other As Angle) As Boolean Implements IEquatable(Of Angle).Equals
+            If other IsNot Nothing Then
+                Return Degrees.Equals(other.Degrees)
+            End If
+            Return False
+        End Function
     End Class
 End Namespace
