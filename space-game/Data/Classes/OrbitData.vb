@@ -26,5 +26,8 @@ Namespace Classes
             Me.MeanAnomalyZero = meanAnomalyZero
         End Sub
 
+        Private Sub New ()
+            ' For Mapster
+        End Sub
     End Class
 End Namespace
