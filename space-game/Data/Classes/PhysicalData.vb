@@ -9,7 +9,7 @@ Namespace Data
         Sub New(name As String,
                 radius As Distance,
                 mass As Mass,
-                texture As String,
+                texture As Textures,
                 type As CelestialObjectType)
             Me.Radius = radius
             Me.Name = name
