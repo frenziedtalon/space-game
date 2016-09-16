@@ -18,7 +18,6 @@ Public Class Mappings
             Map(Function(dest) dest.LongitudeOfAscendingNode, Function(src) src.LongitudeOfAscendingNode.Adapt(Of Angle)()).
             Map(Function(dest) dest.MeanAnomalyZero, Function(src) src.MeanAnomalyZero.Adapt(Of Angle)())
 
-
         config.ForType(Of CelestialObject, PhysicalData).
             Map(Function(dest) dest.Name, Function(src) src.Name).
             Map(Function(dest) dest.Radius, Function(src) src.Radius.Adapt(Of Distance)()).
