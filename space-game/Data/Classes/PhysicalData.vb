@@ -18,6 +18,10 @@ Namespace Data
             Me.Type = type
         End Sub
 
+        Private Sub New ()
+            ' For Mapster
+        End Sub
+
         Public Property Name As String Implements IPhysicalData.Name
         Public Property Mass As Mass Implements IPhysicalData.Mass
         Public Property Texture As Textures Implements IPhysicalData.Texture
