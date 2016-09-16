@@ -1,8 +1,7 @@
 ﻿Imports Core.Classes
-Imports Data.Classes
 Imports Data.Interfaces
 
-Namespace Data
+Namespace Classes
     Public Class PhysicalData
         Implements IPhysicalData
 

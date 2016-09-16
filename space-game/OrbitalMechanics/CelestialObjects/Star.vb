@@ -1,6 +1,6 @@
 ﻿Imports Core
 Imports Core.Classes
-Imports Data.Data
+Imports Data.Classes
 Imports Entities
 Imports Newtonsoft.Json
 

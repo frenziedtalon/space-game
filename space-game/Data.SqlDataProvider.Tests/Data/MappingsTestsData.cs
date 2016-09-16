@@ -1,6 +1,5 @@
 ﻿using Core.Classes;
 using Data.Classes;
-using Data.Data;
 using NUnit.Framework;
 using System.Collections.Generic;
 

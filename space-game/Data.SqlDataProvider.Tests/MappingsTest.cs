@@ -1,6 +1,5 @@
 ﻿using Core.Classes;
 using Data.Classes;
-using Data.Data;
 using Data.SqlDataProvider.Tests.Data;
 using Mapster;
 using NUnit.Framework;

@@ -1,6 +1,5 @@
 ﻿Imports Core.Classes
 Imports Data.Classes
-Imports Data.Data
 
 Public Class SolarSystemData
 
