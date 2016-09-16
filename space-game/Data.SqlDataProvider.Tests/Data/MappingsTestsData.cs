@@ -69,25 +69,23 @@ namespace Data.SqlDataProvider.Tests.Data
         {
             var result = new List<TestCaseData>();
 
-            var expectedWithoutOrbit = new PhysicalData()
-            {
-                Name = "Sol",
-                Mass = Mass.FromKilograms(1.98855E+30),
-                Radius = Distance.FromKilometers(695700),
-                Texture = SampleTextures,
-                Type = global::Data.Classes.CelestialObjectType.Star
-            };
+            var expectedWithoutOrbit = new PhysicalData(
+                name: "Sol",
+                mass: Mass.FromKilograms(1.98855E+30),
+                radius: Distance.FromKilometers(695700),
+                texture: SampleTextures,
+                type: global::Data.Classes.CelestialObjectType.Star
+            );
 
             result.Add(new TestCaseData(CelestialObjectWithoutOrbit, expectedWithoutOrbit));
 
-            var expectedWithOrbit = new PhysicalData()
-            {
-                Name = "Earth",
-                Mass = Mass.FromKilograms(5.9736E+24),
-                Radius = Distance.FromKilometers(6371),
-                Texture = SampleTextures,
-                Type = global::Data.Classes.CelestialObjectType.Planet
-            };
+            var expectedWithOrbit = new PhysicalData(
+                name: "Earth",
+                mass: Mass.FromKilograms(5.9736E+24),
+                radius: Distance.FromKilometers(6371),
+                texture: SampleTextures,
+                type: global::Data.Classes.CelestialObjectType.Planet
+            );
 
             result.Add(new TestCaseData(CelestialObjectWithOrbit, expectedWithOrbit));
 
