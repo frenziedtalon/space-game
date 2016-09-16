@@ -33,7 +33,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Sol",
                                     Distance.FromKilometers(695700),
                                     Mass.FromSolarMasses(1),
-                                    "sun.jpg",
+                                    New Textures() With {.Low = "sun.jpg"},
                                     CelestialObjectType.Star)
 
             Return New CelestialObjectData(Nothing, physicalData)
@@ -52,7 +52,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Mercury",
                                     Distance.FromKilometers(2440),
                                     Mass.FromEarthMasses(0.06),
-                                    "mercury.jpg",
+                                    New Textures() With {.Low = "mercury.jpg"},
                                     CelestialObjectType.Planet)
 
             Return New CelestialObjectData(orbit, physicalData)
@@ -71,7 +71,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Venus",
                                     Distance.FromKilometers(6052),
                                     Mass.FromEarthMasses(0.82),
-                                    "venus.jpg",
+                                    New Textures() With {.Low = "venus.jpg"},
                                     CelestialObjectType.Planet)
 
             Return New CelestialObjectData(orbit, physicalData)
@@ -90,7 +90,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Earth",
                                     Distance.FromKilometers(6371),
                                     Mass.FromEarthMasses(1),
-                                    "earth.jpg",
+                                    New Textures() With {.Low = "earth.jpg"},
                                     CelestialObjectType.Planet)
 
             Return New CelestialObjectData(orbit, physicalData)
@@ -109,7 +109,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Moon",
                                     Distance.FromKilometers(1737),
                                     Mass.FromEarthMasses(0.0123),
-                                    "moon.png",
+                                    New Textures() With {.Low = "moon.png"},
                                     CelestialObjectType.Moon)
 
             Return New CelestialObjectData(orbit, physicalData)
@@ -128,7 +128,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Mars",
                                     Distance.FromKilometers(3390),
                                     Mass.FromEarthMasses(0.11),
-                                    "mars.jpg",
+                                    New Textures() With {.Low = "mars.jpg"},
                                     CelestialObjectType.Planet)
 
             Return New CelestialObjectData(orbit, physicalData)
@@ -147,7 +147,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Jupiter",
                                     Distance.FromKilometers(69911),
                                     Mass.FromEarthMasses(317.8),
-                                    "jupiter.jpg",
+                                    New Textures() With {.Low = "jupiter.jpg"},
                                     CelestialObjectType.Planet)
 
             Return New CelestialObjectData(orbit, physicalData)
@@ -166,7 +166,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Saturn",
                                     Distance.FromKilometers(58232),
                                     Mass.FromEarthMasses(95.2),
-                                    "saturn.jpg",
+                                    New Textures() With {.Low = "saturn.jpg"},
                                     CelestialObjectType.Planet)
 
             Return New CelestialObjectData(orbit, physicalData)
@@ -185,7 +185,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Uranus",
                                     Distance.FromKilometers(25362),
                                     Mass.FromEarthMasses(14.6),
-                                    "uranus.jpg",
+                                    New Textures() With {.Low = "uranus.jpg"},
                                     CelestialObjectType.Planet)
 
             Return New CelestialObjectData(orbit, physicalData)
@@ -204,7 +204,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Neptune",
                                     Distance.FromKilometers(24622),
                                     Mass.FromEarthMasses(17.2),
-                                    "neptune.jpg",
+                                    New Textures() With {.Low = "neptune.jpg"},
                                     CelestialObjectType.Planet)
 
             Return New CelestialObjectData(orbit, physicalData)
@@ -223,7 +223,7 @@ Public Class SolarSystemData
             Dim physicalData = New PhysicalData("Pluto",
                                     Distance.FromKilometers(1186),
                                     Mass.FromEarthMasses(0.0022),
-                                    "pluto.jpg",
+                                    New Textures() With {.Low = "pluto.jpg"},
                                     CelestialObjectType.Planet)
 
             Return New CelestialObjectData(orbit, physicalData)
