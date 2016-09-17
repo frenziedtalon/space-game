@@ -34,7 +34,8 @@ Public Class Mappings
 
         config.ForType(Of CelestialObjectType, CelestialObjectType)()
 
-        config.ForType(Of CelestialObject, CelestialObject)()
+        config.ForType(Of CelestialObject, CelestialObject)().
+            ShallowCopyForSameType(True)
 
         config.ForType(Of SolarSystem, SolarSystem)()
 
