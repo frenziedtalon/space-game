@@ -10,19 +10,19 @@ Public Class Mappings
     Public Sub Register(config As TypeAdapterConfig) Implements IRegister.Register
 
         config.ForType(Of CelestialObject, OrbitData).
-            Map(Function(dest) dest.SemiMajorAxis, Function(src) src.SemiMajorAxis.Adapt(Of Distance)()).
+            Map(Function(dest) dest.SemiMajorAxis, Function(src) src.SemiMajorAxis).
             Map(Function(dest) dest.Eccentricity, Function(src) src.Eccentricity).
-            Map(Function(dest) dest.Inclination, Function(src) src.Inclination.Adapt(Of Angle)()).
-            Map(Function(dest) dest.ArgumentOfPeriapsis, Function(src) src.ArgumentOfPeriapsis.Adapt(Of Angle)()).
-            Map(Function(dest) dest.LongitudeOfAscendingNode, Function(src) src.LongitudeOfAscendingNode.Adapt(Of Angle)()).
-            Map(Function(dest) dest.MeanAnomalyZero, Function(src) src.MeanAnomalyZero.Adapt(Of Angle)())
+            Map(Function(dest) dest.Inclination, Function(src) src.Inclination).
+            Map(Function(dest) dest.ArgumentOfPeriapsis, Function(src) src.ArgumentOfPeriapsis).
+            Map(Function(dest) dest.LongitudeOfAscendingNode, Function(src) src.LongitudeOfAscendingNode).
+            Map(Function(dest) dest.MeanAnomalyZero, Function(src) src.MeanAnomalyZero)
 
         config.ForType(Of CelestialObject, PhysicalData).
             Map(Function(dest) dest.Name, Function(src) src.Name).
-            Map(Function(dest) dest.Radius, Function(src) src.Radius.Adapt(Of Distance)()).
-            Map(Function(dest) dest.Mass, Function(src) src.Mass.Adapt(Of Mass)()).
-            Map(Function(dest) dest.Type, Function(src) src.CelestialObjectType.Adapt(Of CelestialObjectType)()).
-            Map(Function(dest) dest.Texture, Function(src) src.TextureGroup.Adapt(Of Textures)())
+            Map(Function(dest) dest.Radius, Function(src) src.Radius).
+            Map(Function(dest) dest.Mass, Function(src) src.Mass).
+            Map(Function(dest) dest.Type, Function(src) src.CelestialObjectType).
+            Map(Function(dest) dest.Texture, Function(src) src.TextureGroup)
 
         config.ForType(Of Global.Data.SqlDataProvider.CelestialObjectType, Global.Data.Classes.CelestialObjectType).
             MapWith(Function(src) src.Name.ToEnum(Of Global.Data.Classes.CelestialObjectType).Value)
