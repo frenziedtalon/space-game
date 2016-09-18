@@ -7,7 +7,7 @@ Namespace CelestialObjects
 
         ReadOnly Property Name As String
 
-        ReadOnly Property Texture As Textures
+        ReadOnly Property Texture As String
 
     End Interface
 End Namespace

@@ -1,7 +1,6 @@
 ﻿Imports Core.Classes
 Imports Core.Extensions
 Imports Entities
-Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
 
@@ -16,7 +15,7 @@ Namespace CelestialObjects
             MyBase.New(entityManager)
             _name = name
             _mass = mass
-            _texture = texture
+            _textures = textures
         End Sub
 
         Private ReadOnly _mass As Mass
@@ -33,10 +32,10 @@ Namespace CelestialObjects
             End Get
         End Property
 
-        Private ReadOnly _texture As Textures
-        Public ReadOnly Property Texture As Textures Implements ICelestialObject.Texture
+        Private ReadOnly _textures As Textures
+        Public ReadOnly Property Texture As String Implements ICelestialObject.Texture
             Get
-                Return _texture
+                Return _textures.GetHighestAvailableResolution()
             End Get
         End Property
 
