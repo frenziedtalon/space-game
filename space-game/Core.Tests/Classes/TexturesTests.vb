@@ -11,5 +11,12 @@ Namespace Classes
 
             Assert.AreEqual(expected, result)
         End Sub
+
+        <TestCaseSource(GetType(TexturesTestsData), NameOf(TexturesTestsData.GetHighestAvailableResolution_WhenCalled_ReturnsExpected_Data))>
+        Public Sub GetHighestAvailableResolution_WhenCalled_ReturnsExpected(textures As Textures, expected As String)
+            Dim result = textures.GetHighestAvailableResolution()
+
+            Assert.AreEqual(expected, result)
+        End Sub
     End Class
 End NameSpace

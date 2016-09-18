@@ -26,5 +26,21 @@ Namespace Data
                 }
         End Function
 
+        Public Shared Function GetHighestAvailableResolution_WhenCalled_ReturnsExpected_Data() As List(Of TestCaseData)
+
+            Dim empty = New Textures() With {.High = "", .Medium = "", .Low = ""}
+            Dim allValues = New Textures() With {.High = "high", .Medium = "medium", .Low = "low"}
+            Dim medium = New Textures() With {.High = "", .Medium = "medium", .Low = "low"}
+            Dim low = New Textures() With {.High = "", .Medium = "", .Low = "low"}
+            Dim whitespace = New Textures() With {.High = "  ", .Medium = "medium", .Low = "low"}
+
+            Return New List(Of TestCaseData) From {
+                New TestCaseData(empty, ""),
+                New TestCaseData(allValues, "high"),
+                New TestCaseData(medium, "medium"),
+                New TestCaseData(low, "low"),
+                New TestCaseData(whitespace, "medium")
+            }
+        End Function
     End Class
 End Namespace
