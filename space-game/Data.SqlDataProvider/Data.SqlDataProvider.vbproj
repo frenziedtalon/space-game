@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\DataProvider.vb" />
+    <Compile Include="Extensions\IQueryableExtensions.vb" />
     <Compile Include="Mappings.vb" />
     <Compile Include="Model\CelestialObject.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>

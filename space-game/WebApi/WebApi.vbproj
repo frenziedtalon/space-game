@@ -273,6 +273,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\jespers\Jespers.Mappings\Jespers.Mappings.csproj">
+      <Project>{078d62a7-76d5-45db-ab04-e9adc0cdc2d3}</Project>
+      <Name>Jespers.Mappings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Camera.InMemoryCamera\Camera.InMemoryCamera.vbproj">
       <Project>{e9c8d057-371a-4b7c-b2bb-4b5b07db02ac}</Project>
       <Name>Camera.InMemoryCamera</Name>
