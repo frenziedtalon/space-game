@@ -1,4 +1,5 @@
 ﻿Imports Core.Classes
+Imports Core.Tests.Data
 Imports NUnit.Framework
 
 Namespace Classes
@@ -43,5 +44,13 @@ Namespace Classes
 
             Assert.AreEqual(earthMasses, result, acceptableDelta)
         End Sub
+
+        <TestCaseSource(GetType(MassTestsData), NameOf(MassTestsData.Equals_WhenComparing_ReturnsExpected_Data))>
+        Public Sub Equals_WhenComparing_ReturnsExpected(this As Mass, that As Mass, expected As Boolean)
+            Dim result = this.Equals(that)
+
+            Assert.AreEqual(expected, result)
+        End Sub
+
     End Class
 End Namespace

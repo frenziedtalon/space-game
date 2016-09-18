@@ -10,6 +10,7 @@ Public Class WebApiApplication
         FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters)
         RouteConfig.RegisterRoutes(RouteTable.Routes)
         BundleConfig.RegisterBundles(BundleTable.Bundles)
+        Jespers.Mappings.RegisterMappings.Register()
     End Sub
 
 End Class

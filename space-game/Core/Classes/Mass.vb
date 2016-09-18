@@ -1,5 +1,7 @@
 ﻿Namespace Classes
     Public Class Mass
+        Implements IEquatable(Of Mass)
+
         Private ReadOnly _kilograms As Double
 
         Const KilogramsInSolarMass As Double = 1.98855 * 10 ^ 30
@@ -37,6 +39,13 @@
 
         Public Shared Function FromEarthMasses(earthMasses As Double) As Mass
             Return New Mass(earthMasses * KilogramsInEarthMass)
+        End Function
+
+        Public Shadows Function Equals(other As Mass) As Boolean Implements IEquatable(Of Mass).Equals
+            If other IsNot Nothing Then
+                Return Kilograms.Equals(other.Kilograms)
+            End If
+            Return False
         End Function
     End Class
 End Namespace

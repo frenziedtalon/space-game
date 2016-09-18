@@ -27,5 +27,10 @@ Partial Public Class SolarSystemEntities
     Public Overridable Property Users() As DbSet(Of User)
     Public Overridable Property CelestialObjectTypes() As DbSet(Of CelestialObjectType)
     Public Overridable Property CelestialObjects() As DbSet(Of CelestialObject)
+    Public Overridable Property Textures() As DbSet(Of Texture)
+    Public Overridable Property TextureGroups() As DbSet(Of TextureGroup)
+    Public Overridable Property TextureGroupToTextures() As DbSet(Of TextureGroupToTexture)
+    Public Overridable Property TexturePaths() As DbSet(Of TexturePath)
+    Public Overridable Property TextureTypes() As DbSet(Of TextureType)
 
 End Class

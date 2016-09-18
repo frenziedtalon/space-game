@@ -1,4 +1,4 @@
-﻿Imports Data.Data
+﻿
 
 Namespace Classes
     Public Class CelestialObjectData
