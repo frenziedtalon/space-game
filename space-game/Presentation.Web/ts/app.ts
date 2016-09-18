@@ -263,8 +263,12 @@ var runGame = () => {
     }
 
     function createDiffuseMaterial(name: string, texture: string): BABYLON.StandardMaterial {
-        var m = new BABYLON.StandardMaterial(name, scene);
-        m.diffuseTexture = new BABYLON.Texture(texture, scene);
+        const t = new BABYLON.Texture(texture, scene);
+        t.uAng = Math.PI; // Invert on vertical axis
+        t.vAng = Math.PI; // Invert on horizontal axis
+
+        const m = new BABYLON.StandardMaterial(name, scene);
+        m.diffuseTexture = t;
         m.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
         return m;
     }
