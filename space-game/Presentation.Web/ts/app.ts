@@ -199,7 +199,7 @@ var runGame = () => {
 
     function renderStar(info: Star): void {
         var star = renderOrbitingSphericalCelestialObject(info,
-            "Assets/Images/Star/" + info.Texture,
+            info.Texture,
             info.Radius,
             null);
 
@@ -217,7 +217,7 @@ var runGame = () => {
 
     function renderPlanet(info: Planet, parent: BABYLON.Mesh): void {
         const planet = renderOrbitingSphericalCelestialObject(info,
-            "Assets/Images/Planet/" + info.Texture,
+            info.Texture,
             info.Radius,
             parent);
 
@@ -226,7 +226,7 @@ var runGame = () => {
 
     function renderMoon(info: Moon, parent: BABYLON.Mesh): void {
         renderOrbitingSphericalCelestialObject(info,
-            "Assets/Images/Moon/" + info.Texture,
+            info.Texture,
             info.Radius,
             parent);
     }
@@ -247,7 +247,7 @@ var runGame = () => {
         mesh.id = info.Id;
         mesh.position = createPositionFromOrbit(info.Orbit);
 
-        const material = createDiffuseMaterial(info.Name + "Material", texture);
+        const material = createDiffuseMaterial(info.Name + "Material", "Assets/Images/" + texture);
         material.specularColor = zeroColor();
         mesh.material = material;
 
