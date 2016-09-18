@@ -5,7 +5,7 @@ Imports NUnit.Framework
 Namespace Classes
     Public Class TexturesTests
 
-         <TestCaseSource(GetType(TexturesTestsData), NameOf(TexturesTestsData.Equals_WhenComparing_ReturnsExpected_Data))>
+        <TestCaseSource(GetType(TexturesTestsData), NameOf(TexturesTestsData.Equals_WhenComparing_ReturnsExpected_Data))>
         Public Sub Equals_WhenComparing_ReturnsExpected(this As Textures, that As Textures, expected As Boolean)
             Dim result = this.Equals(that)
 
@@ -19,4 +19,4 @@ Namespace Classes
             Assert.AreEqual(expected, result)
         End Sub
     End Class
-End NameSpace
+End Namespace
