@@ -1,6 +1,6 @@
 ﻿"use strict";
 var runGame = () => {
-    var targetObjectName = 'Mars'; //Todo: remove SG-114
+    var targetObjectName = 'Saturn'; //Todo: remove SG-114
 
     var canvas = getCanvas();
     var engine = loadBabylonEngine(canvas);
@@ -236,9 +236,7 @@ var runGame = () => {
         radius: Distance,
         parent: BABYLON.Mesh): BABYLON.Mesh {
 
-        if (info.Name === targetObjectName) {
-            cameraHelper.updateCameraTarget(info.Id);
-        }
+        
 
         const scaledRadius = scaleRadius(radius);
 
@@ -259,9 +257,79 @@ var runGame = () => {
 
         renderSatellites(info, mesh);
 
+        if (info.Name === targetObjectName) {
+            cameraHelper.updateCameraTarget(info.Id);
+
+            renderRings(mesh);
+        }
+        
         return mesh;
     }
 
+    function renderRings(mesh: BABYLON.Mesh) {
+
+        var torus = BABYLON.MeshBuilder.CreateTorus("torus", {
+                thickness: 10,
+                diameter: 25,
+                tessellation: 200,
+                sideOrientation: BABYLON.Mesh.DOUBLESIDE
+            },
+            scene);
+        
+        torus.isPickable = false;
+        torus.scaling = new BABYLON.Vector3(1, 0.001, 1);
+
+        torus.rotation.x = -30;
+        torus.rotation.z = -12;
+
+        torus.parent = mesh;
+
+        const t = new BABYLON.Texture("Assets/Images/" + "Rings/High/saturn-ring.png", scene);
+        t.hasAlpha = true;
+
+
+        //t.uAng = - Math.PI / 2; // Invert on x axis
+        //t.vAng = Math.PI / 2; // Invert on y axis
+        t.wAng = Math.PI / 2;
+        
+        //t.wrapV = 1;
+        //t.wrapU = 1;
+
+        t.uOffset = 0;
+        t.vOffset = 0;
+        t.uScale = 2;
+        t.vScale = 2;
+        
+
+        //t.coordinatesMode = BABYLON.Texture.BILINEAR_SAMPLINGMODE;
+        //t.coordinatesMode = BABYLON.Texture.CLAMP_ADDRESSMODE;
+        //t.coordinatesMode = BABYLON.Texture.CUBIC_MODE;
+        //t.coordinatesMode = BABYLON.Texture.EQUIRECTANGULAR_MODE;
+        //t.coordinatesMode = BABYLON.Texture.EXPLICIT_MODE;
+        //t.coordinatesMode = BABYLON.Texture.FIXED_EQUIRECTANGULAR_MODE;
+        //t.coordinatesMode = BABYLON.Texture.INVCUBIC_MODE;
+        //t.coordinatesMode = BABYLON.Texture.MIRROR_ADDRESSMODE;
+        //t.coordinatesMode = BABYLON.Texture.NEAREST_SAMPLINGMODE;
+        //t.coordinatesMode = BABYLON.Texture.PLANAR_MODE;
+        //t.coordinatesMode = BABYLON.Texture.PROJECTION_MODE;
+        //t.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+        //t.coordinatesMode = BABYLON.Texture.SPHERICAL_MODE;
+        //t.coordinatesMode = BABYLON.Texture.TRILINEAR_SAMPLINGMODE;
+        //t.coordinatesMode = BABYLON.Texture.WRAP_ADDRESSMODE;
+
+        
+
+        const m = new BABYLON.StandardMaterial(name, scene);
+        m.diffuseTexture = t;
+        m.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+        //m.backFaceCulling = false;
+        torus.material = m;
+        //torus.material.sideOrientation = BABYLON.Material.CounterClockWiseSideOrientation;
+
+
+
+    }
+    
     function createDiffuseMaterial(name: string, texture: string): BABYLON.StandardMaterial {
         const t = new BABYLON.Texture(texture, scene);
         t.uAng = Math.PI; // Invert on vertical axis

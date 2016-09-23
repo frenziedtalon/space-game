@@ -29,7 +29,7 @@
     <Content Include="Assets\Images\Planet\High\mars.jpg" />
     <Content Include="Assets\Images\Moon\High\moon.jpg" />
     <Content Include="Assets\Images\Planet\High\mercury.jpg" />
-    <Content Include="Assets\Images\Planet\High\saturn-ring.png" />
+    <Content Include="Assets\Images\Rings\High\saturn-ring.png" />
     <Content Include="Assets\Images\Planet\High\venus.jpg" />
     <Content Include="Assets\Images\Planet\Low\earth.jpg" />
     <Content Include="Assets\Images\Planet\Low\jupiter.jpg" />
@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="sass\index.scss" />
+    <Content Include="Assets\Images\Web.config" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

@@ -98,7 +98,7 @@ class CameraHelper {
 
     setCameraTarget(mesh: BABYLON.AbstractMesh, scene: BABYLON.Scene): void {
         if (!(mesh === null)) {
-            let limit = this.meshHelper.getMeshBoundingSphereRadius(mesh) * 1.5;
+            let limit = this.meshHelper.getMeshBoundingSphereRadius(mesh) * 3;
 
             if (limit < 1) {
                 limit = 1;
