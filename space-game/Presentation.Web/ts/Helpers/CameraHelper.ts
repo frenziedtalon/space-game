@@ -46,8 +46,12 @@ class CameraHelper {
 
     // Moves the main scene camera to be last in the activeCameras list which is the only way I've found so far to make the god rays work
     setMainSceneCameraActive(cameras: Array<BABYLON.Camera>): void {
+        this.setTargetCameraActive(cameras, this.MainSceneCameraName);
+    }
+
+    setTargetCameraActive(cameras: Array<BABYLON.Camera>, name: string): void {
         for (let i = 0; i < cameras.length; i++) {
-            if (cameras[i].name === this.MainSceneCameraName) {
+            if (cameras[i].name === name) {
                 const c = cameras[i];
                 cameras.splice(i, 1);
                 cameras.push(c);
