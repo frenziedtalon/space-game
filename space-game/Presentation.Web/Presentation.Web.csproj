@@ -90,6 +90,7 @@
     <TypeScriptCompile Include="ts\Classes\Motion\Distance.ts" />
     <TypeScriptCompile Include="ts\Classes\Motion\DistanceRange.ts" />
     <TypeScriptCompile Include="ts\Helpers\AngleHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\AnimationHelper.ts" />
     <TypeScriptCompile Include="ts\Interfaces\I3DObject.ts" />
     <TypeScriptCompile Include="ts\Interfaces\ICelestialObject.ts" />
     <TypeScriptCompile Include="ts\Interfaces\IOrbitingObject.ts" />
