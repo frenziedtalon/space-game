@@ -91,12 +91,12 @@ class CameraHelper {
         return false;
     }
 
-    setCameraTargetFromId(id: string, scene: BABYLON.Scene): void {
+    setCameraTargetFromId(id: string, scene: BABYLON.Scene, userInitiated: boolean): void {
         const mesh = scene.getMeshByID(id);
-        this.setCameraTarget(mesh, scene);
+        this.setCameraTarget(mesh, scene, userInitiated);
     }
 
-    setCameraTarget(mesh: BABYLON.AbstractMesh, scene: BABYLON.Scene): void {
+    setCameraTarget(mesh: BABYLON.AbstractMesh, scene: BABYLON.Scene, userInitiated: boolean): void {
         if (!(mesh === null)) {
             let limit = this.meshHelper.getMeshBoundingSphereRadius(mesh) * 1.5;
 
@@ -108,6 +108,9 @@ class CameraHelper {
 
             mainSceneCamera.lowerRadiusLimit = limit;
             mainSceneCamera.parent = mesh;
+
+            if (userInitiated) {
+            }
         }
     }
 
