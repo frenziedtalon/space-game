@@ -4,6 +4,7 @@
   "description": "My game",
   "repository" : "https://bitbucket.org/frenziedtalon/space-game.git" ,
   "devDependencies": {
-    "babylonjs": "2.4.1"
+    "babylonjs": "2.4.1",
+    "jquery": "2.1.4"
   }
 }

@@ -56,8 +56,8 @@
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
     <Content Include="index.html" />
     <Content Include="node_modules\babylonjs\babylon.max.js" />
+    <Content Include="node_modules\jquery\dist\jquery.min.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="textures\xStrip.jpg" />
     <Content Include="textures\yStrip.jpg" />
     <Content Include="textures\zStrip.jpg" />
