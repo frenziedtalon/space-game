@@ -1,4 +1,4 @@
-﻿/// <reference path="ts/d.ts/jquery.d.ts" />
+﻿/// <reference path="tools/typings/jquery/jquery.d.ts" />
 /// <reference path="node_modules/babylonjs/babylon.d.ts" />
 /// <reference path="ts/app.ts"/>
 /// <reference path="ts/Interfaces/ICelestialObject.ts"/>

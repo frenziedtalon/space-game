@@ -61,6 +61,7 @@
     <Content Include="textures\xStrip.jpg" />
     <Content Include="textures\yStrip.jpg" />
     <Content Include="textures\zStrip.jpg" />
+    <Content Include="tools\typings\jquery\jquery.d.ts" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +109,6 @@
     <TypeScriptCompile Include="ts\Classes\SceneState.ts" />
     <TypeScriptCompile Include="ts\Classes\TurnResult.ts" />
     <TypeScriptCompile Include="ts\Classes\CelestialObjects\Star.ts" />
-    <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
     <TypeScriptCompile Include="ts\Helpers\MeshHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\CameraHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\VectorHelper.ts" />
