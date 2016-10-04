@@ -1,0 +1,9 @@
+{
+  "name": "space-game",
+  "version": "0.2.0",
+  "description": "My game",
+  "repository" : "https://bitbucket.org/frenziedtalon/space-game.git" ,
+  "devDependencies": {
+    "babylonjs": "2.4.1"
+  }
+}
