@@ -298,7 +298,7 @@ var runGame = () => {
         if (!(orbit === null || orbit === undefined)) {
             const path: BABYLON.Vector3[] = new OrbitalMechanics(scaleSemiMajorAxisKilometers, orbit).generateOrbitPath();
             const colour = new BABYLON.Color3(0.54, 0.54, 0.54);
-            const orbitalPath = drawPath(meshName, path, colour);
+            const orbitalPath = meshHelper.drawPath(meshName, path, colour, scene);
 
             // set layer mask so that orbit is only visible to main scene camera
             orbitalPath.layerMask = 1; // 001 in binary;
@@ -309,12 +309,6 @@ var runGame = () => {
                 orbitalPath.parent = parent;
             }
         }
-    }
-
-    function drawPath(meshName: string, path: Array<BABYLON.Vector3>, colour: BABYLON.Color3): BABYLON.LinesMesh {
-        const mesh: BABYLON.LinesMesh = BABYLON.Mesh.CreateLines(meshName, path, scene);
-        mesh.color = colour;
-        return mesh;
     }
 
     function createCamera() {

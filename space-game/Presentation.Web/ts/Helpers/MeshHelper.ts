@@ -22,4 +22,10 @@ class MeshHelper {
             this.cameraHelper.updateCameraTarget(pickResult.pickedMesh.id);
         }
     }
+
+    drawPath(meshName: string, path: Array<BABYLON.Vector3>, colour: BABYLON.Color3, scene: BABYLON.Scene): BABYLON.LinesMesh {
+        const mesh: BABYLON.LinesMesh = BABYLON.Mesh.CreateLines(meshName, path, scene);
+        mesh.color = colour;
+        return mesh;
+    }
 }
