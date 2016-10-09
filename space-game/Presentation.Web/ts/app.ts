@@ -1,6 +1,22 @@
 ﻿"use strict";
+import { CameraHelper } from "./Helpers/CameraHelper";
+import { MeshHelper } from "./Helpers/MeshHelper";
+import { AngleHelper } from "./Helpers/AngleHelper";
+import { Moon } from "./Classes/CelestialObjects/Moon";
+import { Distance } from "./Classes/Motion/Distance";
+import { BaseGameEntity } from "./Classes/Base/BaseGameEntity";
+import { BaseCelestialObject } from "./Classes/Base/BaseCelestialObject";
+import { OrbitingCelestialObjectBase } from "./Classes/Base/OrbitingCelestialObjectBase";
+import { Orbit } from "./Classes/Motion/Orbit";
+import { Scaling } from "./Classes/Scaling/Scaling";
+import { TurnResult } from "./Classes/TurnResult";
+import { SceneScaling } from "./Classes/Scaling/SceneScaling";
+import { Star } from "./Classes/CelestialObjects/Star";
+import { OrbitalMechanics } from "./Classes/Motion/OrbitalMechanics";
+import { Planet } from "./Classes/CelestialObjects/Planet";
+
 var runGame = () => {
-    var targetObjectName = 'Mars'; //Todo: remove SG-114
+    var targetObjectName = "Mars"; // Todo: remove SG-114
 
     var canvas = getCanvas();
     var engine = loadBabylonEngine(canvas);
@@ -52,7 +68,6 @@ var runGame = () => {
 
         skysphere.material = skysphereMaterial;
         skysphere.isPickable = false;
-
         return skysphere;
     }
 
@@ -98,7 +113,7 @@ var runGame = () => {
         setSceneScaling(turnData.Scene.Scaling);
         renderSceneObjects();
         createSkySpheres();
-        //makePlanes();
+        // makePlanes();
         cameraHelper.setCameraTargetFromId(turnData.Camera.CurrentTarget, scene);
         cameraHelper.updateNavigationCameras(scene.activeCameras);
         cameraHelper.setMainSceneCameraActive(scene.activeCameras);
@@ -207,7 +222,7 @@ var runGame = () => {
         (<BABYLON.StandardMaterial>star.material).emissiveTexture = (<BABYLON.StandardMaterial>star.material).diffuseTexture;
 
         // create god rays effect
-        var vls = new BABYLON.VolumetricLightScatteringPostProcess(info.Name + "Vls", 1.0, scene.getCameraByName(cameraHelper.MainSceneCameraName), star, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
+        var vls = new BABYLON.VolumetricLightScatteringPostProcess(info.Name + "Vls", 1.0, scene.activeCamera, star, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
         vls.exposure = 0.12;
 
         // create a light to represent the star shining on other objects
@@ -221,7 +236,7 @@ var runGame = () => {
             info.Radius,
             parent);
 
-        const c = new NavigationCamera(planet, scene, cameraHelper);
+        // const c = new NavigationCamera(planet, scene, cameraHelper);
     }
 
     function renderMoon(info: Moon, parent: BABYLON.Mesh): void {
@@ -318,7 +333,7 @@ var runGame = () => {
     }
 
     function createCamera() {
-        createArcRotateCamera();
+        createWebVrFreeCamera();
     }
 
     function createArcRotateCamera() {
@@ -342,11 +357,62 @@ var runGame = () => {
         camera.attachControl(canvas, false);
     }
 
+    function createWebVrFreeCamera() {
+
+
+        var camera = new BABYLON.WebVRFreeCamera("WVR", new BABYLON.Vector3(1000, 1000, 1000), scene, true, { trackPosition: true });
+
+        // let the user move the camera
+        // camera.attachControl(canvas, false);
+        camera.viewport = new BABYLON.Viewport(0, 0.2, 1, 0.8);
+
+        // use the new camera
+        scene.activeCamera = camera;
+
+        console.log(camera._vrDevice);
+        console.log(camera.fovMode);
+        console.log(camera.inputs);
+        console.log(camera.rotationQuaternion);
+
+        // camera.inputs.attached.VRDeviceOrientation.detachControl(canvas);
+        var onOrientationEvent = function(evt) {
+            this._alpha = (+evt.alpha | 0) + 45;
+            this._beta = (+evt.beta | 0) + 45;
+            this._gamma = +evt.gamma | 0;
+            this._dirty = true;
+        };
+
+        // camera.inputs.attached.._deviceOrientationHandler = onOrientationEvent.bind(camera.inputs.attached.VRDeviceOrientation);
+        // camera.inputs.attached.VRDeviceOrientation.attachControl(canvas);
+
+
+    }
+
     function attachUiControlEvents() {
         $("#end-turn").click(() => {
-            endTurn();
+            // endTurn();
+            var metrics = BABYLON.VRCameraMetrics.GetDefault();
+            // console.log(metrics);
+
+            dumpit(metrics);
+
+            var c = scene.activeCamera as BABYLON.WebVRFreeCamera;
+
+            c.requestVRFullscreen(true);
+            $("#end-turn").text("Exit VR");
+
         });
     }
+
+    function dumpit(metrics) {
+        var output = "";
+        for (var property in metrics) {
+            output += property + " = " + metrics[property] + ";\n";
+        }
+        console.log(output);
+    }
+
+
 
     function attachWindowEvents() {
 

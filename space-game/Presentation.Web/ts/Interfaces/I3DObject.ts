@@ -1,3 +1,3 @@
-interface I3DObject {
+export interface I3DObject {
     Volume: number;
 }

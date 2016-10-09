@@ -1,5 +1,6 @@
 ﻿"use strict";
-class AngleHelper {
+
+export class AngleHelper {
     static randomRadians(): number {
         return Math.random() * Math.PI * 2;
     }

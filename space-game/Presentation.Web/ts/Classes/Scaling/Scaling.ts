@@ -1,4 +1,6 @@
-﻿class Scaling {
+﻿import { SceneScaling } from "./SceneScaling";
+
+export class Scaling {
     RadiusKilometerScaleFactor: number = 1;
     SemiMajorAxisKilometerScaleFactor: number = 1;
     Bounds: SceneScaling;
@@ -16,7 +18,7 @@
     get maxDistance(): number {
         return this.SemiMajorAxisKilometerScaleFactor * this.Bounds.SemiMajorAxis.UpperBound.Kilometers;
     }
-    
+
     get innerSkySphereDiameter(): number {
         return this.maxDistance * 3;
     }

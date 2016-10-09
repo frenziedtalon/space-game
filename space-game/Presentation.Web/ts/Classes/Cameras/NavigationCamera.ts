@@ -1,4 +1,6 @@
 ﻿"use strict";
+import { CameraHelper } from "../../Helpers/CameraHelper";
+
 class NavigationCamera {
     constructor(target: BABYLON.Mesh, scene: BABYLON.Scene, cameraHelper: CameraHelper) {
         const camera = new BABYLON.TargetCamera(target.name + cameraHelper.NavCameraNameEnd, BABYLON.Vector3.Zero(), scene);

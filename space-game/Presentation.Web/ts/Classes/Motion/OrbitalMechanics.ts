@@ -1,5 +1,11 @@
 ﻿"use strict";
-class OrbitalMechanics {
+import { Orbit } from "./Orbit";
+import { Distance } from "./Distance";
+import { AstronomicalUnit } from "./AstronomicalUnit";
+import { Kilometer } from "./Kilometer";
+import { Angle } from "../Angle";
+
+export class OrbitalMechanics {
 
     constructor(public ScaleSemiMajorAxisCallback: (kilometers: number) => number, public Orbit: Orbit) {
         this.ScaleSemiMajorAxisCallback = ScaleSemiMajorAxisCallback;
@@ -63,8 +69,8 @@ class OrbitalMechanics {
         const z = this.calculateZ(distance, trueAnomaly);
 
         return new BABYLON.Vector3(this.ScaleSemiMajorAxisCallback(y.Kilometers),
-                                    this.ScaleSemiMajorAxisCallback(z.Kilometers),
-                                    this.ScaleSemiMajorAxisCallback(x.Kilometers));
+            this.ScaleSemiMajorAxisCallback(z.Kilometers),
+            this.ScaleSemiMajorAxisCallback(x.Kilometers));
     }
 
     private _meanAngularMotion: Angle;

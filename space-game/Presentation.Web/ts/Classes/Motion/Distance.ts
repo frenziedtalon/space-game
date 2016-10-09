@@ -1,6 +1,9 @@
-﻿class Distance {
+﻿import { Kilometer } from "./Kilometer";
+import { AstronomicalUnit } from "./AstronomicalUnit";
+
+export class Distance {
     private _kilometers: number;
-    
+
     // not typesafe but currently typescript can't do proper overloading
     constructor(distance: Kilometer | AstronomicalUnit) {
         if (distance.hasOwnProperty("Kilometers")) {
@@ -13,7 +16,7 @@
     private get kilometersInAstronomicalUnit(): number {
         return 149597870.691;
     }
-    
+
     get AstronomicalUnits(): number {
         return this._kilometers / this.kilometersInAstronomicalUnit;
     }

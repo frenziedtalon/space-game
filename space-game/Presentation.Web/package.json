@@ -2,9 +2,11 @@
   "name": "space-game",
   "version": "0.2.0",
   "description": "My game",
-  "repository" : "https://bitbucket.org/frenziedtalon/space-game.git" ,
+  "repository": "https://bitbucket.org/frenziedtalon/space-game.git",
   "devDependencies": {
-    "babylonjs": "2.4.1",
-    "jquery": "2.1.4"
+    "jquery": "2.1.4",
+    "gulp": "3.9.1",
+    "del": "2.2.2",
+    "lodash": "4.16.3"
   }
 }

@@ -1,0 +1,17 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "target": "es6",
+    "outDir": "scripts/",
+    "outFile": "scripts/app.js",
+    "module": "system",
+    "declaration": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

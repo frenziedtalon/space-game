@@ -1,5 +1,8 @@
 ﻿"use strict";
-class CameraHelper {
+import { MeshHelper } from "./MeshHelper";
+import { VectorHelper } from "./VectorHelper";
+
+export class CameraHelper {
     MainSceneCameraName = "mainSceneCamera";
     NavCameraNameEnd = "NavCamera";
     private navBarWidth = 0.6;
@@ -104,10 +107,10 @@ class CameraHelper {
                 limit = 1;
             }
 
-            const mainSceneCamera = scene.getCameraByName(this.MainSceneCameraName) as BABYLON.ArcRotateCamera;
+            //const mainSceneCamera = scene.getCameraByName(this.MainSceneCameraName) as BABYLON.ArcRotateCamera;
 
-            mainSceneCamera.lowerRadiusLimit = limit;
-            mainSceneCamera.parent = mesh;
+            //mainSceneCamera.lowerRadiusLimit = limit;
+            //mainSceneCamera.parent = mesh;
         }
     }
 

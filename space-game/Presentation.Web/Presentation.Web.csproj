@@ -10,7 +10,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -54,10 +54,13 @@
     <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
+    <Content Include="gulpfile.js" />
     <Content Include="index.html" />
-    <Content Include="node_modules\babylonjs\babylon.max.js" />
-    <Content Include="node_modules\jquery\dist\jquery.min.js" />
-    <Content Include="Scripts\hand.minified-1.2.js" />
+    <Content Include="external\scripts\babylon-2.5-preview.max.js" />
+    <Content Include="external\scripts\hand.minified-1.2.js" />
+    <Content Include="scripts\babylon-2.5-preview.max.js" />
+    <Content Include="scripts\hand.minified-1.2.js" />
+    <Content Include="scripts\jquery.min.js" />
     <Content Include="textures\xStrip.jpg" />
     <Content Include="textures\yStrip.jpg" />
     <Content Include="textures\zStrip.jpg" />
@@ -71,6 +74,8 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="package.json" />
+    <Content Include="tsd.json" />
+    <Content Include="tsconfig.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -80,10 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Images\Star\High\" />
-    <Folder Include="css\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="node_modules\babylonjs\babylon.d.ts" />
+    <TypeScriptCompile Include="tools\typings\babylonjs\babylon-2.5-preview.d.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\Classes\Angle.ts" />
     <TypeScriptCompile Include="ts\Classes\Motion\AstronomicalUnit.ts" />

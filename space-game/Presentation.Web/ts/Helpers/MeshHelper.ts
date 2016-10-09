@@ -1,5 +1,7 @@
 ﻿"use strict";
-class MeshHelper {
+import { CameraHelper } from "./CameraHelper";
+
+export class MeshHelper {
     constructor(private cameraHelper: CameraHelper) {
     }
 
@@ -15,7 +17,7 @@ class MeshHelper {
             null,
             false,
             this.cameraHelper.getViewportCamera(clientPoint, scene.activeCameras));
-        
+
         // if there is a hit and we can select the object then set it as the camera target
         if (pickResult.hit) {
             this.cameraHelper.setCameraTarget(pickResult.pickedMesh, scene);

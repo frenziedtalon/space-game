@@ -1,5 +1,6 @@
 ﻿"use strict";
-class VectorHelper {
+
+export class VectorHelper {
     static calculateUnitVector(pointA: BABYLON.Vector3, pointB: BABYLON.Vector3): BABYLON.Vector3 {
         const vector = pointB.subtract(pointA);
         const length = this.calculateVectorLength(vector);
