@@ -12,8 +12,7 @@ var runGame = () => {
 
     endTurn();
     createCamera();
-    attachUiControlEvents();
-    attachWindowEvents();
+    attachAllEvents();
     beginRenderLoop();
 
     function getCanvas(): HTMLCanvasElement {
@@ -336,32 +335,42 @@ var runGame = () => {
         camera.attachControl(canvas, false);
     }
 
-    function attachUiControlEvents() {
+    function attachAllEvents() {
+	    attachMouseEvents();
+	    attachKeyboardEvents();
+	    attachWindowEvents();
+		attachUiControlEvents();
+    }
+
+	function attachWindowEvents() {
+		// watch for browser/canvas resize events
+        window.addEventListener("resize", (ev: UIEvent) => {
+            engine.resize();
+        });
+	}
+
+	function attachUiControlEvents() {
         $("#end-turn").click(() => {
             endTurn();
         });
     }
 
-    function attachWindowEvents() {
-
-        // watch for browser/canvas resize events
-        window.addEventListener("resize", (ev: UIEvent) => {
-            engine.resize();
-        });
-
-        // listen for click events
+	function attachMouseEvents() {
+		// listen for click events
         canvas.addEventListener("click", (evt: MouseEvent) => {
             meshHelper.pickMesh(evt, scene);
         });
+	}
 
-        // listen for key presses
+	function attachKeyboardEvents() {
+		// listen for key presses
         window.addEventListener("keypress", (evt: KeyboardEvent) => {
             if (evt.keyCode === 32) {
                 // spacebar
                 toggleDebugLayer();
             }
         });
-    }
+	}
 
     function setSceneScaling(bounds: SceneScaling): void {
         scaling = new Scaling(bounds);
