@@ -5,3 +5,4 @@
 /// <reference path="ts/Classes/Base/BaseGameEntity.ts"/>
 /// <reference path="ts/Classes/Base/BaseCelestialObject.ts"/>
 /// <reference path="ts/Classes/Base/OrbitingCelestialObjectBase.ts"/>
+/// <reference path="ts/Helpers/MouseHelper.ts"/>

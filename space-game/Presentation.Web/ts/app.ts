@@ -9,6 +9,7 @@ var runGame = () => {
 
     var cameraHelper = new CameraHelper(engine);
     var meshHelper = new MeshHelper(cameraHelper);
+	var mouseHelper = new MouseHelper();
 
     endTurn();
     createCamera();
@@ -355,10 +356,18 @@ var runGame = () => {
         });
     }
 
+	var mouseStartPosition: Array<number> = [];
+
 	function attachMouseEvents() {
-		// listen for click events
-        canvas.addEventListener("click", (evt: MouseEvent) => {
-            meshHelper.pickMesh(evt, scene);
+		canvas.addEventListener("mousedown", (evt: MouseEvent) => {
+			mouseStartPosition = [evt.pageX, evt.pageY];
+        });
+
+		canvas.addEventListener("mouseup", (evt: MouseEvent) => {
+			var newPos = [evt.pageX, evt.pageY];
+            if (mouseHelper.isClick(mouseStartPosition, newPos)) {
+	            meshHelper.pickMesh(evt, scene);
+            }
         });
 	}
 

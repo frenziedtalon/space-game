@@ -61,6 +61,7 @@
     <Content Include="textures\xStrip.jpg" />
     <Content Include="textures\yStrip.jpg" />
     <Content Include="textures\zStrip.jpg" />
+    <Content Include="ts\Helpers\MouseHelper.ts" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
