@@ -195,10 +195,10 @@ class CameraHelper {
         // remove ghostCam from camera list, we're not going to actually use it.
         scene.cameras.pop();
 
-        const targetAnimation = new BABYLON.Animation("camTarget", "target", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-        const radiusAnimation = new BABYLON.Animation("camRadius", "radius", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-        const alphaAnimation = new BABYLON.Animation("camAlpha", "alpha", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-        const betaAnimation = new BABYLON.Animation("camBeta", "beta", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const targetAnimation = new BABYLON.Animation("camTarget", "target", 60, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const radiusAnimation = new BABYLON.Animation("camRadius", "radius", 60, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const alphaAnimation = new BABYLON.Animation("camAlpha", "alpha", 60, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const betaAnimation = new BABYLON.Animation("camBeta", "beta", 60, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
 
         // remove any full rotations
         const currentAlpha = camera.alpha % (Math.PI * 2);
@@ -211,7 +211,7 @@ class CameraHelper {
             frame: 0,
             value: camera.target
         }, {
-                frame: 100,
+                frame: 300,
                 value: ghostCam.target
             }];
 
@@ -219,7 +219,7 @@ class CameraHelper {
             frame: 0,
             value: camera.radius
         }, {
-                frame: 100,
+                frame: 300,
                 value: ghostCam.radius
             }];
 
@@ -227,7 +227,7 @@ class CameraHelper {
             frame: 0,
             value: currentAlpha
         }, {
-                frame: 80,
+                frame: 200,
                 value: alpha
             }];
 
@@ -235,7 +235,7 @@ class CameraHelper {
             frame: 0,
             value: currentBeta
         }, {
-                frame: 80,
+                frame: 200,
                 value: beta
             }];
 
@@ -251,6 +251,6 @@ class CameraHelper {
 
         camera.parent = null;
 
-        scene.beginAnimation(camera, 0, 100, false, 1);
+        scene.beginAnimation(camera, 0, 300, false, 1);
     }
 }
