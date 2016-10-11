@@ -244,6 +244,13 @@ class CameraHelper {
         alphaAnimation.setKeys(keysAlpha);
         betaAnimation.setKeys(keysBeta);
 
+        const easingFunction = new BABYLON.BezierCurveEase(.47, .24, .27, .70);;
+
+        targetAnimation.setEasingFunction(easingFunction);
+        radiusAnimation.setEasingFunction(easingFunction);
+        alphaAnimation.setEasingFunction(easingFunction);
+        betaAnimation.setEasingFunction(easingFunction);
+
         camera.animations.push(targetAnimation);
         camera.animations.push(radiusAnimation);
         camera.animations.push(alphaAnimation);
