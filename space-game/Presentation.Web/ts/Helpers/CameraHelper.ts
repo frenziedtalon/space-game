@@ -9,6 +9,8 @@ class CameraHelper {
     private canvas: HTMLCanvasElement;
     private meshHelper: MeshHelper;
 
+    private currentTargetId: string;
+
     constructor(private engine: BABYLON.Engine) {
         this.canvas = engine.getRenderingCanvas();
         this.meshHelper = new MeshHelper(this);
@@ -100,8 +102,13 @@ class CameraHelper {
         this.setCameraTarget(mesh, scene, userInitiated);
     }
 
+    userSelectedTarget(mesh: BABYLON.AbstractMesh, scene: BABYLON.Scene): void {
+        this.setCameraTarget(mesh, scene, true);
+        this.updateCameraTarget(mesh.id);
+    }
+
     setCameraTarget(mesh: BABYLON.AbstractMesh, scene: BABYLON.Scene, userInitiated: boolean): void {
-        if (!(mesh === null)) {
+        if (!(mesh === null) && !(mesh.id === this.currentTargetId)) {
             let limit = this.meshHelper.getMeshBoundingSphereRadius(mesh) * 1.5;
 
             if (limit < 1) {
@@ -112,6 +119,7 @@ class CameraHelper {
 
             mainSceneCamera.lowerRadiusLimit = limit;
             mainSceneCamera.parent = mesh;
+            this.currentTargetId = mesh.id;
 
             if (userInitiated) {
             }

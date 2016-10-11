@@ -18,8 +18,7 @@ class MeshHelper {
         
         // if there is a hit and we can select the object then set it as the camera target
         if (pickResult.hit) {
-            this.cameraHelper.setCameraTarget(pickResult.pickedMesh, scene, true);
-            this.cameraHelper.updateCameraTarget(pickResult.pickedMesh.id);
+	        this.cameraHelper.userSelectedTarget(pickResult.pickedMesh, scene);
         }
     }
 
