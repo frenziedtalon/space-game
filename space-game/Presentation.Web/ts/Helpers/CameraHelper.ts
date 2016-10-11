@@ -115,13 +115,15 @@ class CameraHelper {
                 limit = 1;
             }
 
-            const mainSceneCamera = scene.getCameraByName(this.MainSceneCameraName) as BABYLON.ArcRotateCamera;
+            const msc = this.getMainSceneCamera(scene);
+            msc.lowerRadiusLimit = limit;
 
-            mainSceneCamera.lowerRadiusLimit = limit;
-            mainSceneCamera.parent = mesh;
             this.currentTargetId = mesh.id;
 
             if (userInitiated) {
+                this.flyCameraToPointAtTarget(msc, mesh);
+            } else {
+                msc.parent = mesh;
             }
         }
     }
@@ -143,5 +145,112 @@ class CameraHelper {
             .always(() => {
                 // happens after done/fail on every call
             });
+    }
+
+    getMainSceneCamera(scene: BABYLON.Scene): BABYLON.ArcRotateCamera {
+        return scene.getCameraByName(this.MainSceneCameraName) as BABYLON.ArcRotateCamera;
+    }
+
+    private removeFromActiveCameras(camera: BABYLON.Camera): void {
+        const scene = camera.getScene();
+        for (let i = scene.activeCameras.length - 1; i >= 0; i--) {
+            const c = scene.activeCameras[i];
+
+            if (c.name === camera.name) {
+                scene.activeCameras.splice(i, 1);
+            }
+        }
+    }
+
+    private switchActiveCameras(oldCamera: BABYLON.Camera, newCamera: BABYLON.Camera): void {
+        const scene = oldCamera.getScene();
+
+        newCamera.viewport = oldCamera.viewport;
+        scene.activeCameras.push(newCamera);
+        scene.activeCamera = newCamera;
+
+        this.removeFromActiveCameras(oldCamera);
+        this.setTargetCameraActive(scene.activeCameras, newCamera.name);
+    }
+
+    private flyCameraToPointAtTarget(camera: BABYLON.ArcRotateCamera, target: BABYLON.AbstractMesh): void {
+        const newPosition = this.calculateMainCameraFlyToPositionOnTargetChange(camera, target.position);
+        this.flyCameraToPosition(camera, newPosition, target.position);
+    }
+
+    private calculateMainCameraFlyToPositionOnTargetChange(camera: BABYLON.ArcRotateCamera, target: BABYLON.Vector3): BABYLON.Vector3 {
+        const radius = - camera.lowerRadiusLimit;
+        const unitVector = VectorHelper.calculateUnitVector(camera.globalPosition, target);
+        return target.add(new BABYLON.Vector3(radius * unitVector.x, radius * unitVector.y, radius * unitVector.z));
+    }
+
+    private flyCameraToPosition(camera: BABYLON.ArcRotateCamera, position: BABYLON.Vector3, target: BABYLON.Vector3) {
+        const scene = camera.getScene();
+        AnimationHelper.removeAllAnimations(camera);
+
+        // create a new camera in the target location. This will auto-calculate most of the parameters for us.
+        const ghostCam = new BABYLON.ArcRotateCamera("ghostCam", 0, 0, 0, target, scene);
+        ghostCam.setPosition(position);
+
+        // remove ghostCam from camera list, we're not going to actually use it.
+        scene.cameras.pop();
+
+        const targetAnimation = new BABYLON.Animation("camTarget", "target", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const radiusAnimation = new BABYLON.Animation("camRadius", "radius", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const alphaAnimation = new BABYLON.Animation("camAlpha", "alpha", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+        const betaAnimation = new BABYLON.Animation("camBeta", "beta", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+
+        // remove any full rotations
+        const currentAlpha = camera.alpha % (Math.PI * 2);
+        const currentBeta = camera.beta % (Math.PI * 2);
+        
+        const alpha = ghostCam.alpha % (Math.PI * 2);
+        const beta = ghostCam.beta % (Math.PI * 2);
+        
+        const keysTarget = [{
+            frame: 0,
+            value: camera.target
+        }, {
+                frame: 100,
+                value: ghostCam.target
+            }];
+
+        const keysRadius = [{
+            frame: 0,
+            value: camera.radius
+        }, {
+                frame: 100,
+                value: ghostCam.radius
+            }];
+
+        const keysAlpha = [{
+            frame: 0,
+            value: currentAlpha
+        }, {
+                frame: 80,
+                value: alpha
+            }];
+
+        const keysBeta = [{
+            frame: 0,
+            value: currentBeta
+        }, {
+                frame: 80,
+                value: beta
+            }];
+
+        targetAnimation.setKeys(keysTarget);
+        radiusAnimation.setKeys(keysRadius);
+        alphaAnimation.setKeys(keysAlpha);
+        betaAnimation.setKeys(keysBeta);
+
+        camera.animations.push(targetAnimation);
+        camera.animations.push(radiusAnimation);
+        camera.animations.push(alphaAnimation);
+        camera.animations.push(betaAnimation);
+
+        camera.parent = null;
+
+        scene.beginAnimation(camera, 0, 100, false, 1);
     }
 }
