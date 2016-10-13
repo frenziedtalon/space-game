@@ -6,6 +6,7 @@ var runGame = () => {
     var engine = loadBabylonEngine(canvas);
     var scene = createScene(engine);
     var scaling: Scaling;
+    var createdSkySpheres = false;
 
     var cameraHelper = new CameraHelper(engine);
     var meshHelper = new MeshHelper(cameraHelper);
@@ -31,14 +32,18 @@ var runGame = () => {
     }
 
     function createSkySpheres(): void {
-        const texture = "skysphere-8192x4096.png";
-        scene.clearColor = zeroColor(); // set background to black
+        if (!createdSkySpheres) {
+            createdSkySpheres = true;
 
-        const innerSphere = createSkySphere(scaling.innerSkySphereDiameter, "inner", texture);
-        innerSphere.material.alpha = 0.5; // make it semi-transparent so we can see the outer skysphere
+            const texture = "skysphere-8192x4096.png";
+            scene.clearColor = zeroColor(); // set background to black
 
-        const outerSphere = createSkySphere(scaling.outerSkySphereDiameter, "outer", texture);
-        outerSphere.rotation = AngleHelper.randomRotationVector();
+            const innerSphere = createSkySphere(scaling.innerSkySphereDiameter, "inner", texture);
+            innerSphere.material.alpha = 0.5; // make it semi-transparent so we can see the outer skysphere
+
+            const outerSphere = createSkySphere(scaling.outerSkySphereDiameter, "outer", texture);
+            outerSphere.rotation = AngleHelper.randomRotationVector();
+        }
     }
 
     function createSkySphere(diameter: number, name: string, texture: string): BABYLON.Mesh {
