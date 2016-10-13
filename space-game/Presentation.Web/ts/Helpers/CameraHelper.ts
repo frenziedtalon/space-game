@@ -211,41 +211,41 @@ class CameraHelper {
         // remove any full rotations
         const currentAlpha = camera.alpha % (Math.PI * 2);
         const currentBeta = camera.beta % (Math.PI * 2);
-        
+
         const alpha = ghostCam.alpha % (Math.PI * 2);
         const beta = ghostCam.beta % (Math.PI * 2);
-        
+
         const keysTarget = [{
             frame: 0,
             value: camera.target
         }, {
-                frame: 300,
-                value: ghostCam.target
-            }];
+            frame: 300,
+            value: ghostCam.target
+        }];
 
         const keysRadius = [{
             frame: 0,
             value: camera.radius
         }, {
-                frame: 300,
-                value: ghostCam.radius
-            }];
+            frame: 300,
+            value: ghostCam.radius
+        }];
 
         const keysAlpha = [{
             frame: 0,
             value: currentAlpha
         }, {
-                frame: 200,
-                value: alpha
-            }];
+            frame: 200,
+            value: alpha
+        }];
 
         const keysBeta = [{
             frame: 0,
             value: currentBeta
         }, {
-                frame: 200,
-                value: beta
-            }];
+            frame: 200,
+            value: beta
+        }];
 
         targetAnimation.setKeys(keysTarget);
         radiusAnimation.setKeys(keysRadius);
