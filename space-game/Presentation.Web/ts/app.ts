@@ -121,7 +121,7 @@ var runGame = () => {
             sceneObjectsLookup[item.Id] = item;
             renderSceneObject(item, parent);
         } else {
-            updateSceneObject(item, mesh as BABYLON.Mesh);
+            updateSceneObject(item, mesh as BABYLON.Mesh, parent);
         }
     }
 
@@ -147,19 +147,19 @@ var runGame = () => {
         }
     }
 
-    function updateSceneObject(item: BaseCelestialObject, mesh: BABYLON.Mesh): void {
+    function updateSceneObject(item: BaseCelestialObject, mesh: BABYLON.Mesh, parent: BABYLON.Mesh): void {
         if (item !== undefined && item !== null) {
             switch (item.Type) {
                 case "OrbitalMechanics.CelestialObjects.Star":
-                    mesh.position = createPositionFromOrbit((<OrbitingCelestialObjectBase>item).Orbit);
+                    mesh.position = calculateOrbitingObjectPosition((<OrbitingCelestialObjectBase>item).Orbit, parent);
                     break;
 
                 case "OrbitalMechanics.CelestialObjects.Planet":
-                    mesh.position = createPositionFromOrbit((<OrbitingCelestialObjectBase>item).Orbit);
+                    mesh.position = calculateOrbitingObjectPosition((<OrbitingCelestialObjectBase>item).Orbit, parent);
                     break;
 
                 case "OrbitalMechanics.CelestialObjects.Moon":
-                    mesh.position = createPositionFromOrbit((<OrbitingCelestialObjectBase>item).Orbit);
+                    mesh.position = calculateOrbitingObjectPosition((<OrbitingCelestialObjectBase>item).Orbit, parent);
                     break;
 
                 default:
@@ -170,6 +170,14 @@ var runGame = () => {
 
         // check for satellites
         renderSatellites(item, mesh);
+    }
+
+    function calculateOrbitingObjectPosition(orbit: Orbit, parent: BABYLON.Mesh): BABYLON.Vector3 {
+        let position = createPositionFromOrbit(orbit);
+        if (parent !== undefined && parent !== null) {
+            position.add(parent.position);
+        }
+        return position;
     }
 
     function zeroColor(): BABYLON.Color3 {
@@ -245,15 +253,11 @@ var runGame = () => {
         const mesh = BABYLON.Mesh.CreateSphere(info.Name, 16, scaledRadius * 2, scene);
         mesh.isPickable = info.CameraTarget;
         mesh.id = info.Id;
-        mesh.position = createPositionFromOrbit(info.Orbit);
+        mesh.position = calculateOrbitingObjectPosition(info.Orbit, parent);
 
         const material = createDiffuseMaterial(info.Name + "Material", "Assets/Images/" + texture);
         material.specularColor = zeroColor();
         mesh.material = material;
-
-        if (parent !== undefined) {
-            mesh.parent = parent;
-        }
 
         drawOrbit(info.Orbit, info.Name + "Orbit", parent);
 
@@ -305,8 +309,7 @@ var runGame = () => {
             orbitalPath.isPickable = false;
 
             if (parent !== undefined) {
-                // positions applied are in addition to those of the parent
-                orbitalPath.parent = parent;
+                orbitalPath.position.add(parent.position);
             }
         }
     }
