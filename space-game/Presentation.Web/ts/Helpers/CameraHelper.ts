@@ -123,7 +123,13 @@ class CameraHelper {
             if (userInitiated) {
                 this.flyCameraToPointAtTarget(msc, mesh);
             } else {
+                // use parenting to calculate the wanted camera position
                 msc.parent = mesh;
+
+                let pos = msc.globalPosition;
+                msc.parent = null;
+                msc.position = pos;
+                msc.target = mesh.position;
             }
         }
     }
