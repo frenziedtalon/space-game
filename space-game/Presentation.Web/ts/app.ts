@@ -180,7 +180,7 @@ var runGame = () => {
     function calculateOrbitingObjectPosition(orbit: Orbit, parent: BABYLON.Mesh): BABYLON.Vector3 {
         let position = createPositionFromOrbit(orbit);
         if (parent !== undefined && parent !== null) {
-            position.add(parent.position);
+            position = position.add(parent.position);
         }
         return position;
     }
@@ -313,8 +313,8 @@ var runGame = () => {
             orbitalPath.layerMask = 1; // 001 in binary;
             orbitalPath.isPickable = false;
 
-            if (parent !== undefined) {
-                orbitalPath.position.add(parent.position);
+            if (parent !== undefined && parent !== null) {
+                orbitalPath.position = parent.position;
             }
         }
     }
