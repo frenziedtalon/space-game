@@ -105,7 +105,7 @@ var runGame = () => {
         createSkySpheres();
         //makePlanes();
         cameraHelper.setCameraTargetFromId(turnData.Camera.CurrentTarget, scene, false);
-        cameraHelper.updateNavigationCameras(scene.activeCameras);
+        cameraHelper.updateNavigationCameras(scene.activeCameras, scene);
         cameraHelper.setMainSceneCameraActive(scene.activeCameras);
     }
 

@@ -16,14 +16,14 @@ class CameraHelper {
         this.meshHelper = new MeshHelper(this);
     }
 
-    updateNavigationCameras(cameras: Array<BABYLON.Camera>): void {
+    updateNavigationCameras(cameras: Array<BABYLON.Camera>, scene: BABYLON.Scene): void {
         const navCameraWidth = 0.2 * this.navBarWidth * 0.6;
         let navCamCount = 0;
 
         for (let i = 0; i < cameras.length; i++) {
             if (cameras[i].name.endsWith(this.NavCameraNameEnd)) {
                 const c = cameras[i] as BABYLON.TargetCamera;
-                const parent = c.parent as BABYLON.Mesh;
+                const parent = scene.getMeshesByTags(c.id)[0];
                 const x = navCamCount * navCameraWidth;
                 c.viewport = new BABYLON.Viewport(x, this.y, navCameraWidth, this.height);
                 c.position = this.calculateNavigationCameraPosition(parent);
@@ -43,7 +43,9 @@ class CameraHelper {
         }
 
         const unitVector = VectorHelper.calculateUnitVector(pointA, target.position);
-        return new BABYLON.Vector3(radius * unitVector.x, radius * unitVector.y, radius * unitVector.z);
+        const offset = new BABYLON.Vector3(radius * unitVector.x, radius * unitVector.y, radius * unitVector.z);
+
+        return target.position.add(offset);
     }
 
     // Moves the main scene camera to be last in the activeCameras list which is the only way I've found so far to make the god rays work
