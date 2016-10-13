@@ -271,6 +271,16 @@ var runGame = () => {
 
         renderSatellites(info, mesh);
 
+        // apply a small rotation. Extend this appropriately when adding object rotation about an axis SG-3, SG-4
+        BABYLON.Animation.CreateAndStartAnimation(info.Name + "Rotation",
+            mesh,
+            "rotation.y",
+            30,
+            20000,
+            0,
+            10,
+            BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
+
         return mesh;
     }
 
