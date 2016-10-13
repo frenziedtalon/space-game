@@ -157,14 +157,17 @@ var runGame = () => {
             switch (item.Type) {
                 case "OrbitalMechanics.CelestialObjects.Star":
                     mesh.position = calculateOrbitingObjectPosition((<OrbitingCelestialObjectBase>item).Orbit, parent);
+                    updateOrbitPathPosition(item.Name + "Orbit", parent);
                     break;
 
                 case "OrbitalMechanics.CelestialObjects.Planet":
                     mesh.position = calculateOrbitingObjectPosition((<OrbitingCelestialObjectBase>item).Orbit, parent);
+                    updateOrbitPathPosition(item.Name + "Orbit", parent);
                     break;
 
                 case "OrbitalMechanics.CelestialObjects.Moon":
                     mesh.position = calculateOrbitingObjectPosition((<OrbitingCelestialObjectBase>item).Orbit, parent);
+                    updateOrbitPathPosition(item.Name + "Orbit", parent);
                     break;
 
                 default:
@@ -301,6 +304,13 @@ var runGame = () => {
         engine.runRenderLoop(() => {
             scene.render();
         });
+    }
+
+    function updateOrbitPathPosition(meshName: string, parent: BABYLON.Mesh) {
+        const mesh = scene.getMeshByName(meshName);
+        if (!(mesh === null || mesh === undefined) && !(parent === null || parent === undefined)) {
+            mesh.position = parent.position;
+        }
     }
 
     function drawOrbit(orbit: Orbit, meshName: string, parent: BABYLON.Mesh) {
