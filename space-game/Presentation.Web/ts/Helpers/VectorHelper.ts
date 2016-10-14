@@ -12,4 +12,12 @@ class VectorHelper {
     static calculateVectorLength(vector: BABYLON.Vector3): number {
         return Math.sqrt((vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z));
     }
+
+    static calculateDistance(pointA: BABYLON.Vector3, pointB: BABYLON.Vector3): number {
+        return this.calculateVectorLength(pointB.subtract(pointA));
+    }
+
+    static calculateDirection(from: BABYLON.Vector3, to: BABYLON.Vector3): BABYLON.Vector3 {
+        return to.subtract(from);
+    }
 }

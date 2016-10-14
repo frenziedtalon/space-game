@@ -10,7 +10,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -61,6 +61,7 @@
     <Content Include="textures\xStrip.jpg" />
     <Content Include="textures\yStrip.jpg" />
     <Content Include="textures\zStrip.jpg" />
+    <Content Include="ts\Helpers\MouseHelper.ts" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,7 @@
     <TypeScriptCompile Include="ts\Classes\Motion\Distance.ts" />
     <TypeScriptCompile Include="ts\Classes\Motion\DistanceRange.ts" />
     <TypeScriptCompile Include="ts\Helpers\AngleHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\AnimationHelper.ts" />
     <TypeScriptCompile Include="ts\Interfaces\I3DObject.ts" />
     <TypeScriptCompile Include="ts\Interfaces\ICelestialObject.ts" />
     <TypeScriptCompile Include="ts\Interfaces\IOrbitingObject.ts" />

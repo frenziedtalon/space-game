@@ -18,8 +18,13 @@ class MeshHelper {
         
         // if there is a hit and we can select the object then set it as the camera target
         if (pickResult.hit) {
-            this.cameraHelper.setCameraTarget(pickResult.pickedMesh, scene);
-            this.cameraHelper.updateCameraTarget(pickResult.pickedMesh.id);
+	        this.cameraHelper.userSelectedTarget(pickResult.pickedMesh, scene);
         }
+    }
+
+    drawPath(meshName: string, path: Array<BABYLON.Vector3>, colour: BABYLON.Color3, scene: BABYLON.Scene): BABYLON.LinesMesh {
+        const mesh: BABYLON.LinesMesh = BABYLON.Mesh.CreateLines(meshName, path, scene);
+        mesh.color = colour;
+        return mesh;
     }
 }

@@ -6,14 +6,15 @@ var runGame = () => {
     var engine = loadBabylonEngine(canvas);
     var scene = createScene(engine);
     var scaling: Scaling;
+    var createdSkySpheres = false;
 
     var cameraHelper = new CameraHelper(engine);
     var meshHelper = new MeshHelper(cameraHelper);
+	var mouseHelper = new MouseHelper();
 
     endTurn();
     createCamera();
-    attachUiControlEvents();
-    attachWindowEvents();
+    attachAllEvents();
     beginRenderLoop();
 
     function getCanvas(): HTMLCanvasElement {
@@ -31,14 +32,18 @@ var runGame = () => {
     }
 
     function createSkySpheres(): void {
-        const texture = "skysphere-8192x4096.png";
-        scene.clearColor = zeroColor(); // set background to black
+        if (!createdSkySpheres) {
+            createdSkySpheres = true;
 
-        const innerSphere = createSkySphere(scaling.innerSkySphereDiameter, "inner", texture);
-        innerSphere.material.alpha = 0.5; // make it semi-transparent so we can see the outer skysphere
+            const texture = "skysphere-8192x4096.png";
+            scene.clearColor = zeroColor(); // set background to black
 
-        const outerSphere = createSkySphere(scaling.outerSkySphereDiameter, "outer", texture);
-        outerSphere.rotation = AngleHelper.randomRotationVector();
+            const innerSphere = createSkySphere(scaling.innerSkySphereDiameter, "inner", texture);
+            innerSphere.material.alpha = 0.5; // make it semi-transparent so we can see the outer skysphere
+
+            const outerSphere = createSkySphere(scaling.outerSkySphereDiameter, "outer", texture);
+            outerSphere.rotation = AngleHelper.randomRotationVector();
+        }
     }
 
     function createSkySphere(diameter: number, name: string, texture: string): BABYLON.Mesh {
@@ -99,8 +104,8 @@ var runGame = () => {
         renderSceneObjects();
         createSkySpheres();
         //makePlanes();
-        cameraHelper.setCameraTargetFromId(turnData.Camera.CurrentTarget, scene);
-        cameraHelper.updateNavigationCameras(scene.activeCameras);
+        cameraHelper.setCameraTargetFromId(turnData.Camera.CurrentTarget, scene, false);
+        cameraHelper.updateNavigationCameras(scene.activeCameras, scene);
         cameraHelper.setMainSceneCameraActive(scene.activeCameras);
     }
 
@@ -121,7 +126,7 @@ var runGame = () => {
             sceneObjectsLookup[item.Id] = item;
             renderSceneObject(item, parent);
         } else {
-            updateSceneObject(item, mesh as BABYLON.Mesh);
+            updateSceneObject(item, mesh as BABYLON.Mesh, parent);
         }
     }
 
@@ -147,19 +152,22 @@ var runGame = () => {
         }
     }
 
-    function updateSceneObject(item: BaseCelestialObject, mesh: BABYLON.Mesh): void {
+    function updateSceneObject(item: BaseCelestialObject, mesh: BABYLON.Mesh, parent: BABYLON.Mesh): void {
         if (item !== undefined && item !== null) {
             switch (item.Type) {
                 case "OrbitalMechanics.CelestialObjects.Star":
-                    mesh.position = createPositionFromOrbit((<OrbitingCelestialObjectBase>item).Orbit);
+                    mesh.position = calculateOrbitingObjectPosition((<OrbitingCelestialObjectBase>item).Orbit, parent);
+                    updateOrbitPathPosition(item.Name + "Orbit", parent);
                     break;
 
                 case "OrbitalMechanics.CelestialObjects.Planet":
-                    mesh.position = createPositionFromOrbit((<OrbitingCelestialObjectBase>item).Orbit);
+                    mesh.position = calculateOrbitingObjectPosition((<OrbitingCelestialObjectBase>item).Orbit, parent);
+                    updateOrbitPathPosition(item.Name + "Orbit", parent);
                     break;
 
                 case "OrbitalMechanics.CelestialObjects.Moon":
-                    mesh.position = createPositionFromOrbit((<OrbitingCelestialObjectBase>item).Orbit);
+                    mesh.position = calculateOrbitingObjectPosition((<OrbitingCelestialObjectBase>item).Orbit, parent);
+                    updateOrbitPathPosition(item.Name + "Orbit", parent);
                     break;
 
                 default:
@@ -170,6 +178,14 @@ var runGame = () => {
 
         // check for satellites
         renderSatellites(item, mesh);
+    }
+
+    function calculateOrbitingObjectPosition(orbit: Orbit, parent: BABYLON.Mesh): BABYLON.Vector3 {
+        let position = createPositionFromOrbit(orbit);
+        if (parent !== undefined && parent !== null) {
+            position = position.add(parent.position);
+        }
+        return position;
     }
 
     function zeroColor(): BABYLON.Color3 {
@@ -245,19 +261,25 @@ var runGame = () => {
         const mesh = BABYLON.Mesh.CreateSphere(info.Name, 16, scaledRadius * 2, scene);
         mesh.isPickable = info.CameraTarget;
         mesh.id = info.Id;
-        mesh.position = createPositionFromOrbit(info.Orbit);
+        mesh.position = calculateOrbitingObjectPosition(info.Orbit, parent);
 
         const material = createDiffuseMaterial(info.Name + "Material", "Assets/Images/" + texture);
         material.specularColor = zeroColor();
         mesh.material = material;
 
-        if (parent !== undefined) {
-            mesh.parent = parent;
-        }
-
         drawOrbit(info.Orbit, info.Name + "Orbit", parent);
 
         renderSatellites(info, mesh);
+
+        // apply a small rotation. Extend this appropriately when adding object rotation about an axis SG-3, SG-4
+        BABYLON.Animation.CreateAndStartAnimation(info.Name + "Rotation",
+            mesh,
+            "rotation.y",
+            30,
+            20000,
+            0,
+            10,
+            BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
 
         return mesh;
     }
@@ -294,27 +316,27 @@ var runGame = () => {
         });
     }
 
+    function updateOrbitPathPosition(meshName: string, parent: BABYLON.Mesh) {
+        const mesh = scene.getMeshByName(meshName);
+        if (!(mesh === null || mesh === undefined) && !(parent === null || parent === undefined)) {
+            mesh.position = parent.position;
+        }
+    }
+
     function drawOrbit(orbit: Orbit, meshName: string, parent: BABYLON.Mesh) {
         if (!(orbit === null || orbit === undefined)) {
             const path: BABYLON.Vector3[] = new OrbitalMechanics(scaleSemiMajorAxisKilometers, orbit).generateOrbitPath();
             const colour = new BABYLON.Color3(0.54, 0.54, 0.54);
-            const orbitalPath = drawPath(meshName, path, colour);
+            const orbitalPath = meshHelper.drawPath(meshName, path, colour, scene);
 
             // set layer mask so that orbit is only visible to main scene camera
             orbitalPath.layerMask = 1; // 001 in binary;
             orbitalPath.isPickable = false;
 
-            if (parent !== undefined) {
-                // positions applied are in addition to those of the parent
-                orbitalPath.parent = parent;
+            if (parent !== undefined && parent !== null) {
+                orbitalPath.position = parent.position;
             }
         }
-    }
-
-    function drawPath(meshName: string, path: Array<BABYLON.Vector3>, colour: BABYLON.Color3): BABYLON.LinesMesh {
-        const mesh: BABYLON.LinesMesh = BABYLON.Mesh.CreateLines(meshName, path, scene);
-        mesh.color = colour;
-        return mesh;
     }
 
     function createCamera() {
@@ -342,32 +364,50 @@ var runGame = () => {
         camera.attachControl(canvas, false);
     }
 
-    function attachUiControlEvents() {
+    function attachAllEvents() {
+	    attachMouseEvents();
+	    attachKeyboardEvents();
+	    attachWindowEvents();
+		attachUiControlEvents();
+    }
+
+	function attachWindowEvents() {
+		// watch for browser/canvas resize events
+        window.addEventListener("resize", (ev: UIEvent) => {
+            engine.resize();
+        });
+	}
+
+	function attachUiControlEvents() {
         $("#end-turn").click(() => {
             endTurn();
         });
     }
 
-    function attachWindowEvents() {
+	var mouseStartPosition: Array<number> = [];
 
-        // watch for browser/canvas resize events
-        window.addEventListener("resize", (ev: UIEvent) => {
-            engine.resize();
+	function attachMouseEvents() {
+		canvas.addEventListener("mousedown", (evt: MouseEvent) => {
+			mouseStartPosition = [evt.pageX, evt.pageY];
         });
 
-        // listen for click events
-        canvas.addEventListener("click", (evt: MouseEvent) => {
-            meshHelper.pickMesh(evt, scene);
+		canvas.addEventListener("mouseup", (evt: MouseEvent) => {
+			var newPos = [evt.pageX, evt.pageY];
+            if (mouseHelper.isClick(mouseStartPosition, newPos)) {
+	            meshHelper.pickMesh(evt, scene);
+            }
         });
+	}
 
-        // listen for key presses
+	function attachKeyboardEvents() {
+		// listen for key presses
         window.addEventListener("keypress", (evt: KeyboardEvent) => {
             if (evt.keyCode === 32) {
                 // spacebar
                 toggleDebugLayer();
             }
         });
-    }
+	}
 
     function setSceneScaling(bounds: SceneScaling): void {
         scaling = new Scaling(bounds);

@@ -13,6 +13,13 @@
                     "")))
         End Function
 
+        Public Function GetLowestAvailableResolution() As String
+            Return If(HasLowResolution(), Low,
+                    If(HasMediumResolution(), Medium,
+                    If(HasHighResolution(), High,
+                    "")))
+        End Function
+
         Private Function HasHighResolution() As Boolean
             Return Not String.IsNullOrWhiteSpace(High)
         End Function
