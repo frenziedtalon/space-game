@@ -8,11 +8,11 @@
     constructor(bounds: SceneScaling) {
         this.Bounds = bounds;
 
-        const ratio = bounds.SemiMajorAxis.LowerBound.Kilometers / (bounds.CelestialObjectRadius.UpperBound.Kilometers * 5);
+        const ratio = 10 * bounds.SemiMajorAxis.LowerBound.Kilometers / bounds.CelestialObjectRadius.UpperBound.Kilometers;
 
         this.RadiusKilometerScaleFactor = (this.smallestRadius / bounds.CelestialObjectRadius.LowerBound.Kilometers);
 
-        this.SemiMajorAxisKilometerScaleFactor = (0.1 / bounds.SemiMajorAxis.LowerBound.Kilometers) / ratio;
+        this.SemiMajorAxisKilometerScaleFactor = ratio / bounds.SemiMajorAxis.LowerBound.Kilometers;
     }
 
     get maxDistance(): number {
