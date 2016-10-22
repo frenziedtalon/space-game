@@ -258,6 +258,13 @@ var runGame = () => {
 
         const scaledRadius = scaleRadius(radius);
 
+        //let scaledSma = 0;
+        //if (!(info.Orbit === null || info.Orbit === undefined)) {
+        //    scaledSma = scaleSemiMajorAxisKilometers(info.Orbit.SemiMajorAxis.AstronomicalUnits);
+        //}
+
+        //console.log(info.Name + " radius: " + scaledRadius + ", sma: " + scaledSma);
+
         const mesh = BABYLON.Mesh.CreateSphere(info.Name, 16, scaledRadius * 2, scene);
         mesh.isPickable = info.CameraTarget;
         mesh.id = info.Id;
