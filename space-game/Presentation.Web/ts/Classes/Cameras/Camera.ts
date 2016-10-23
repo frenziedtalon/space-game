@@ -1,0 +1,3 @@
+﻿class Camera {
+    CurrentTarget: string;
+}

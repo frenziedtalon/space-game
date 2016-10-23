@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{AF354C7F-0929-4630-98FA-6B455ED0134B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Images\Moon\Low\moon.png" />
+    <Content Include="Assets\Images\Moon\Medium\moon.jpg" />
+    <Content Include="Assets\Images\Planet\High\earth_day.jpg" />
+    <Content Include="Assets\Images\Planet\High\earth_night.jpg" />
+    <Content Include="Assets\Images\Planet\High\mars.jpg" />
+    <Content Include="Assets\Images\Moon\High\moon.jpg" />
+    <Content Include="Assets\Images\Planet\High\mercury.jpg" />
+    <Content Include="Assets\Images\Planet\High\saturn-ring.png" />
+    <Content Include="Assets\Images\Planet\High\venus.jpg" />
+    <Content Include="Assets\Images\Planet\Low\earth.jpg" />
+    <Content Include="Assets\Images\Planet\Low\jupiter.jpg" />
+    <Content Include="Assets\Images\Planet\Low\mars.jpg" />
+    <Content Include="Assets\Images\Planet\Low\mercury.jpg" />
+    <Content Include="Assets\Images\Planet\Low\neptune.jpg" />
+    <Content Include="Assets\Images\Planet\Low\pluto.jpg" />
+    <Content Include="Assets\Images\Planet\Low\sand.jpg" />
+    <Content Include="Assets\Images\Planet\Low\saturn.jpg" />
+    <Content Include="Assets\Images\Planet\Low\uranus.jpg" />
+    <Content Include="Assets\Images\Planet\Low\venus.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\earth_day.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\earth_night.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\jupiter.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\mars.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\mercury.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\neptune.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\saturn.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\saturn_ring.png" />
+    <Content Include="Assets\Images\Planet\Medium\uranus.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\venus.jpg" />
+    <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
+    <Content Include="Assets\Images\Star\Low\sun.jpg" />
+    <Content Include="Assets\Images\Star\Medium\sun.jpg" />
+    <Content Include="index.html" />
+    <Content Include="Scripts\babylon-2.4.max.js" />
+    <Content Include="Scripts\hand.minified-1.2.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="textures\xStrip.jpg" />
+    <Content Include="textures\yStrip.jpg" />
+    <Content Include="textures\zStrip.jpg" />
+    <Content Include="ts\Helpers\MouseHelper.ts" />
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sass\index.scss" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Images\Star\High\" />
+    <Folder Include="css\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="ts\app.ts" />
+    <TypeScriptCompile Include="ts\Classes\Angle.ts" />
+    <TypeScriptCompile Include="ts\Classes\Motion\AstronomicalUnit.ts" />
+    <TypeScriptCompile Include="ts\Classes\Base\BaseCelestialObject.ts" />
+    <TypeScriptCompile Include="ts\Classes\Base\BaseGameEntity.ts" />
+    <TypeScriptCompile Include="ts\Classes\Cameras\Camera.ts" />
+    <TypeScriptCompile Include="ts\Classes\Motion\Distance.ts" />
+    <TypeScriptCompile Include="ts\Classes\Motion\DistanceRange.ts" />
+    <TypeScriptCompile Include="ts\Helpers\AngleHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\AnimationHelper.ts" />
+    <TypeScriptCompile Include="ts\Interfaces\I3DObject.ts" />
+    <TypeScriptCompile Include="ts\Interfaces\ICelestialObject.ts" />
+    <TypeScriptCompile Include="ts\Interfaces\IOrbitingObject.ts" />
+    <TypeScriptCompile Include="ts\Interfaces\ISphere.ts" />
+    <TypeScriptCompile Include="ts\Classes\Motion\Kilometer.ts" />
+    <TypeScriptCompile Include="ts\Classes\CelestialObjects\Moon.ts" />
+    <TypeScriptCompile Include="ts\Classes\Cameras\NavigationCamera.ts" />
+    <TypeScriptCompile Include="ts\Classes\Motion\Orbit.ts" />
+    <TypeScriptCompile Include="ts\Classes\Motion\OrbitalMechanics.ts" />
+    <TypeScriptCompile Include="ts\Classes\Base\OrbitingCelestialObjectBase.ts" />
+    <TypeScriptCompile Include="ts\Classes\CelestialObjects\Planet.ts" />
+    <TypeScriptCompile Include="ts\Classes\Scaling\Scaling.ts" />
+    <TypeScriptCompile Include="ts\Classes\Scaling\SceneScaling.ts" />
+    <TypeScriptCompile Include="ts\Classes\SceneState.ts" />
+    <TypeScriptCompile Include="ts\Classes\TurnResult.ts" />
+    <TypeScriptCompile Include="ts\Classes\CelestialObjects\Star.ts" />
+    <TypeScriptCompile Include="ts\d.ts\babylon-2.4.d.ts" />
+    <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
+    <TypeScriptCompile Include="ts\Helpers\MeshHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\CameraHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\VectorHelper.ts" />
+    <TypeScriptCompile Include="_references.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Presentation.Web</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56771</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/SpaceGameWeb</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <NoWarn>CS2008</NoWarn>
+    <TypeScriptTarget>ES6</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>None</TypeScriptModuleKind>
+    <TypeScriptOutFile>Scripts/app.js</TypeScriptOutFile>
+    <TypeScriptOutDir>Scripts/</TypeScriptOutDir>
+    <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptMapRoot>
+    </TypeScriptMapRoot>
+    <TypeScriptSourceRoot>
+    </TypeScriptSourceRoot>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <NoWarn>CS2008</NoWarn>
+    <TypeScriptTarget>ES6</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>None</TypeScriptModuleKind>
+    <TypeScriptOutFile>Scripts/app.js</TypeScriptOutFile>
+    <TypeScriptOutDir>Scripts/</TypeScriptOutDir>
+    <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>
