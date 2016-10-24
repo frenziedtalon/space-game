@@ -9,28 +9,14 @@ namespace Data.SqlDataProvider.Tests
     [TestFixture]
     class MappingsTest
     {
-        [OneTimeSetUp]
-        public void SetupMappings()
-        {
-            new global::Data.SqlDataProvider.Mappings().Register(TypeAdapterConfig.GlobalSettings);
-            new Core.Mappings().Register(TypeAdapterConfig.GlobalSettings);
-
-            TypeAdapterConfig.GlobalSettings.RequireExplicitMapping = true;
-            TypeAdapterConfig.GlobalSettings.Compile();
-        }
-
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            TypeAdapterConfig.GlobalSettings.RequireExplicitMapping = false;
-            TypeAdapterConfig.GlobalSettings.Rules.Clear();
-            TypeAdapterConfig.GlobalSettings.RuleMap.Clear();
-        }
-
         [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.TextureGroup_MapTo_Textures_Data))]
         public void TextureGroup_MapTo_Textures(TextureGroup source, Textures expected)
         {
-            Textures result = source.Adapt<Textures>();
+            TypeAdapterConfig config = new TypeAdapterConfig { RequireExplicitMapping = true };
+            new global::Data.SqlDataProvider.Mappings().Register(config);
+            config.Compile();
+
+            Textures result = source.Adapt<Textures>(config);
 
             Assert.AreEqual(expected, result);
         }
@@ -38,7 +24,11 @@ namespace Data.SqlDataProvider.Tests
         [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType_Data))]
         public void SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType(SqlDataProvider.CelestialObjectType source, global::Data.Classes.CelestialObjectType expected)
         {
-            var result = source.Adapt<global::Data.Classes.CelestialObjectType>();
+            TypeAdapterConfig config = new TypeAdapterConfig { RequireExplicitMapping = true };
+            new global::Data.SqlDataProvider.Mappings().Register(config);
+            config.Compile();
+
+            var result = source.Adapt<global::Data.Classes.CelestialObjectType>(config);
 
             Assert.AreEqual(expected, result);
         }
@@ -46,7 +36,12 @@ namespace Data.SqlDataProvider.Tests
         [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.SqlDataProviderCelestialObject_MapTo_DataPhysicalData_Data))]
         public void SqlDataProviderCelestialObject_MapTo_DataPhysicalData(CelestialObject source, PhysicalData expected)
         {
-            var result = source.Adapt<PhysicalData>();
+            TypeAdapterConfig config = new TypeAdapterConfig { RequireExplicitMapping = true };
+            new global::Data.SqlDataProvider.Mappings().Register(config);
+            new Core.Mappings().Register(config);
+            config.Compile();
+
+            var result = source.Adapt<PhysicalData>(config);
 
             Assert.AreEqual(expected.Texture, result.Texture);
             Assert.AreEqual(expected.Mass, result.Mass);
@@ -58,7 +53,12 @@ namespace Data.SqlDataProvider.Tests
         [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.SqlDataProviderCelestialObject_MapTo_DataOrbitData_Data))]
         public void SqlDataProviderCelestialObject_MapTo_DataOrbitData(CelestialObject source, OrbitData expected)
         {
-            var result = source.Adapt<OrbitData>();
+            TypeAdapterConfig config = new TypeAdapterConfig { RequireExplicitMapping = true };
+            new global::Data.SqlDataProvider.Mappings().Register(config);
+            new Core.Mappings().Register(config);
+            config.Compile();
+
+            var result = source.Adapt<OrbitData>(config);
 
             Assert.AreEqual(expected.ArgumentOfPeriapsis, result.ArgumentOfPeriapsis);
             Assert.AreEqual(expected.Eccentricity, result.Eccentricity);
