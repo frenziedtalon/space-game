@@ -83,6 +83,7 @@
     <Compile Include="Data\EnumerableExtensionsTestsData.vb" />
     <Compile Include="Data\MassTestsData.vb" />
     <Compile Include="Data\TexturesTestsData.vb" />
+    <Compile Include="Data\SampleTextures.vb" />
     <Compile Include="Data\TextureTestsData.vb" />
     <Compile Include="Extensions\EnumerableExtensionsTests.vb" />
     <Compile Include="Extensions\GuidExtensionsTests.vb" />
