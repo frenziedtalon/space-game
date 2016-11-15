@@ -51,7 +51,7 @@ Namespace Data
         Private Shared ReadOnly AllWithHighalue As New List(Of Texture) From {Samples.EmptyLow,
                                                                                 Samples.EmptyMedium,
                                                                                 Samples.High}
-        
+
         Public Shared Function GetHighestAvailableResolution_WhenGivenAList_ReturnsExpected_Data() As List(Of TestCaseData)
             Return New List(Of TestCaseData) From {
                 New TestCaseData(All, Samples.Type, Samples.High.Path),
