@@ -11,7 +11,7 @@ Namespace Classes
         Public Shadows Function Equals(other As Texture) As Boolean Implements IEquatable(Of Texture).Equals
             If other IsNot Nothing Then
                 Return Type.Equals(other.Type) AndAlso 
-                        Path.Equals(other.Path) AndAlso 
+                        Path.Equals(other.Path, StringComparison.OrdinalIgnoreCase) AndAlso 
                         Quality.Equals(other.Quality)
             End If
             Return False
