@@ -21,7 +21,7 @@ Namespace Data
         Private Shared ReadOnly Property Samples As SampleTextures
             Get
                 If _samples Is Nothing Then
-                    _samples = New SampleTextures()
+                    _samples = New SampleTextures(TextureType.Diffuse)
                 End If
                 Return _samples
             End Get

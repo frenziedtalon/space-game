@@ -9,9 +9,11 @@ Namespace Data
         Public ReadOnly EmptyHigh As Texture
         Public ReadOnly EmptyMedium As Texture
         Public ReadOnly EmptyLow As Texture
-        Public ReadOnly Type As TextureType = TextureType.Diffuse
+        Public ReadOnly Type As TextureType
 
-        Public Sub New()
+        Public Sub New(type As TextureType)
+            Type = type
+
             Low = New Texture() With {.Quality = TextureQuality.Low,
                                             .Type = Type,
                                             .Path = "low texture path"}
