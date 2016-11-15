@@ -27,5 +27,16 @@ Namespace Extensions
 
             Assert.AreEqual(expected, result)
         End Sub
+
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolutionForEachType_High))>
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolutionForEachType_Medium))>
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolutionForEachType_Low))>
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolutionForEachType_Mix))>
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolutionForEachType_Empty))>
+        Public Sub GetHighestAvailableResolutionForEachType_WhenGivenAList_ReturnsExpected(textures As List(Of Texture), expected As List(Of Texture))
+            Dim result = textures.GetHighestAvailableResolutionForEachType()
+
+            Assert.AreEqual(expected, result)
+        End Sub
     End Class
 End Namespace

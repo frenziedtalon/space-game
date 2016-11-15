@@ -26,6 +26,24 @@ Namespace Extensions
         End Function
 
         <Extension>
+        Public Function GetHighestAvailableResolutionForEachType(this As IEnumerable(Of Texture)) As List(Of Texture)
+            Dim result As New Dictionary(Of TextureType, Texture)
+
+            Dim textures = this.
+                            OrderByDescending(Function(t) t.Quality).
+                            ToList()
+
+            For i = 0 To textures.Count - 1 Step 1
+                Dim t = textures(i)
+                If Not String.IsNullOrWhiteSpace(t.Path) AndAlso Not result.ContainsKey(t.Type) Then
+                    result.Add(t.Type, t)
+                End If
+            Next
+
+            Return result.Values.ToList()
+        End Function
+
+        <Extension>
         Public Function GetLowestAvailableResolution(this As IEnumerable(Of Texture), type As TextureType) As String
             Dim result = ""
 

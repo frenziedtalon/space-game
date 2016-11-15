@@ -79,5 +79,113 @@ Namespace Data
                 New TestCaseData(AllWithHighalue, Samples.Type, Samples.High.Path)
             }
         End Function
+
+        Public Shared Function GetHighestAvailableResolutionForEachType_High() As List(Of TestCaseData)
+            Dim diffuseSamples = New SampleTextures(TextureType.Diffuse)
+            Dim bumpSamples = New SampleTextures(TextureType.Bump)
+            Dim emissiveSamples = New SampleTextures(TextureType.Emissive)
+
+            Dim textures As New List(Of Texture)
+            textures.AddRange({diffuseSamples.Low, diffuseSamples.Medium, diffuseSamples.High})
+            textures.AddRange({bumpSamples.Low, bumpSamples.Medium, bumpSamples.High})
+            textures.AddRange({emissiveSamples.Low, emissiveSamples.Medium, emissiveSamples.High})
+
+            Dim expected As New List(Of Texture) From {
+                    diffuseSamples.High,
+                    bumpSamples.High,
+                    emissiveSamples.High
+                }
+
+            Return New List(Of TestCaseData) From {
+                    New TestCaseData(textures, expected)
+                }
+        End Function
+
+        Public Shared Function GetHighestAvailableResolutionForEachType_Medium() As List(Of TestCaseData)
+            Dim diffuseSamples = New SampleTextures(TextureType.Diffuse)
+            Dim bumpSamples = New SampleTextures(TextureType.Bump)
+            Dim emissiveSamples = New SampleTextures(TextureType.Emissive)
+
+            Dim textures As New List(Of Texture)
+            textures.AddRange({diffuseSamples.Low, diffuseSamples.Medium})
+            textures.AddRange({bumpSamples.Low, bumpSamples.Medium})
+            textures.AddRange({emissiveSamples.Low, emissiveSamples.Medium})
+
+            Dim expected As New List(Of Texture) From {
+                    diffuseSamples.Medium,
+                    bumpSamples.Medium,
+                    emissiveSamples.Medium
+                }
+
+            Return New List(Of TestCaseData) From {
+                    New TestCaseData(textures, expected)
+                }
+        End Function
+
+        Public Shared Function GetHighestAvailableResolutionForEachType_Low() As List(Of TestCaseData)
+            Dim diffuseSamples = New SampleTextures(TextureType.Diffuse)
+            Dim bumpSamples = New SampleTextures(TextureType.Bump)
+            Dim emissiveSamples = New SampleTextures(TextureType.Emissive)
+
+            Dim textures As New List(Of Texture)
+            textures.AddRange({diffuseSamples.Low})
+            textures.AddRange({bumpSamples.Low})
+            textures.AddRange({emissiveSamples.Low})
+
+            Dim expected As New List(Of Texture) From {
+                    diffuseSamples.Low,
+                    bumpSamples.Low,
+                    emissiveSamples.Low
+                }
+
+            Return New List(Of TestCaseData) From {
+                    New TestCaseData(textures, expected)
+                }
+        End Function
+
+        Public Shared Function GetHighestAvailableResolutionForEachType_Mix() As List(Of TestCaseData)
+            Dim diffuseSamples = New SampleTextures(TextureType.Diffuse)
+            Dim bumpSamples = New SampleTextures(TextureType.Bump)
+            Dim emissiveSamples = New SampleTextures(TextureType.Emissive)
+
+            Dim textures As New List(Of Texture)
+            textures.AddRange({diffuseSamples.Low, diffuseSamples.Medium, diffuseSamples.High})
+            textures.AddRange({bumpSamples.Low, bumpSamples.Medium})
+            textures.AddRange({emissiveSamples.Low})
+
+            Dim expected As New List(Of Texture) From {
+                    diffuseSamples.High,
+                    bumpSamples.Medium,
+                    emissiveSamples.Low
+                }
+
+            Return New List(Of TestCaseData) From {
+                    New TestCaseData(textures, expected)
+                }
+        End Function
+
+        Public Shared Function GetHighestAvailableResolutionForEachType_Empty() As List(Of TestCaseData)
+            Dim diffuseSamples = New SampleTextures(TextureType.Diffuse)
+            Dim bumpSamples = New SampleTextures(TextureType.Bump)
+            Dim emissiveSamples = New SampleTextures(TextureType.Emissive)
+
+            Dim textures As New List(Of Texture)
+            diffuseSamples.High.Path = ""
+            bumpSamples.Medium.Path = ""
+            emissiveSamples.Low.Path = ""
+
+            textures.AddRange({diffuseSamples.Low, diffuseSamples.Medium, diffuseSamples.High})
+            textures.AddRange({bumpSamples.Low, bumpSamples.Medium})
+            textures.AddRange({emissiveSamples.Low})
+
+            Dim expected As New List(Of Texture) From {
+                    diffuseSamples.Medium,
+                    bumpSamples.Low
+                }
+
+            Return New List(Of TestCaseData) From {
+                    New TestCaseData(textures, expected)
+                }
+        End Function
     End Class
 End Namespace
