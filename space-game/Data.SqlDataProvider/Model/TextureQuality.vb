@@ -10,16 +10,10 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class Texture
+Partial Public Class TextureQuality
     Public Property Id As Integer
-    Public Property Name As String
-    Public Property PathId As Integer
-    Public Property TypeId As Integer
-    Public Property QualityId As Integer
+    Public Property Quality As String
 
-    Public Overridable Property TexturePath As TexturePath
-    Public Overridable Property TextureQuality As TextureQuality
-    Public Overridable Property TextureType As TextureType
-    Public Overridable Property TextureGroupToTextures As ICollection(Of TextureGroupToTexture) = New HashSet(Of TextureGroupToTexture)
+    Public Overridable Property Textures As ICollection(Of Texture) = New HashSet(Of Texture)
 
 End Class

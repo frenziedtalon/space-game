@@ -10,7 +10,7 @@ Namespace CelestialObjects
 
         Protected Sub New(name As String,
                         mass As Mass,
-                        textures As Textures,
+                        textures As List(Of Texture),
                         entityManager As IEntityManager)
             MyBase.New(entityManager)
             _name = name
@@ -32,10 +32,10 @@ Namespace CelestialObjects
             End Get
         End Property
 
-        Private ReadOnly _textures As Textures
-        Public ReadOnly Property Texture As String Implements ICelestialObject.Texture
+        Private ReadOnly _textures As List(Of Texture)
+        Public ReadOnly Property Textures As List(Of Texture) Implements ICelestialObject.Textures
             Get
-                Return _textures.GetHighestAvailableResolution()
+                Return _textures.GetHighestAvailableResolutionForEachType()
             End Get
         End Property
 

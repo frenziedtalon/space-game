@@ -7,9 +7,9 @@ namespace Data.SqlDataProvider.Tests.Data
 {
     public class MappingsTestsData
     {
-        public static List<TestCaseData> TextureGroup_MapTo_Textures_Data()
+        public static List<TestCaseData> TextureGroup_MapTo_ListOfTexture_Data()
         {
-            return new List<TestCaseData> { new TestCaseData(SampleTextureGroup, SampleTextures) };
+            return new List<TestCaseData> { new TestCaseData(SampleTextureGroup, SampleListOfTexture) };
         }
 
         private static TextureGroup SampleTextureGroup
@@ -22,13 +22,17 @@ namespace Data.SqlDataProvider.Tests.Data
                 TexturePath mediumPath = new TexturePath() { Path = "medium/path/" };
                 TexturePath highPath = new TexturePath() { Path = "high/path" };
 
-                TextureType lowTextureType = new TextureType() { Type = "Low" };
-                TextureType mediumTextureType = new TextureType() { Type = "Medium" };
-                TextureType highTextureType = new TextureType() { Type = "High" };
+                TextureQuality lowTextureType = new TextureQuality() { Quality = "Low" };
+                TextureQuality mediumTextureType = new TextureQuality() { Quality = "Medium" };
+                TextureQuality highTextureType = new TextureQuality() { Quality = "High" };
 
-                Texture lowTexture = new Texture() { Name = "/Low.jpg", TexturePath = lowPath, TextureType = lowTextureType };
-                Texture mediumTexture = new Texture() { Name = "Medium.jpg", TexturePath = mediumPath, TextureType = mediumTextureType };
-                Texture highTexture = new Texture() { Name = "/High.jpg", TexturePath = highPath, TextureType = highTextureType };
+                TextureType diffuseTextureType = new TextureType() {Type = "Diffuse"};
+                TextureType emissiveTextureType = new TextureType() { Type = "Emissive" };
+                TextureType bumpTextureType = new TextureType() { Type = "Bump" };
+
+                Texture lowTexture = new Texture() { Name = "/Low.jpg", TexturePath = lowPath, TextureQuality = lowTextureType, TextureType = diffuseTextureType };
+                Texture mediumTexture = new Texture() { Name = "Medium.jpg", TexturePath = mediumPath, TextureQuality = mediumTextureType, TextureType = emissiveTextureType };
+                Texture highTexture = new Texture() { Name = "/High.jpg", TexturePath = highPath, TextureQuality = highTextureType, TextureType = bumpTextureType };
 
                 TextureGroupToTexture lowTextureGroupToTexture = new TextureGroupToTexture() { Texture = lowTexture, TextureGroup = source };
                 TextureGroupToTexture mediumTextureGroupToTexture = new TextureGroupToTexture() { Texture = mediumTexture, TextureGroup = source };
@@ -42,11 +46,11 @@ namespace Data.SqlDataProvider.Tests.Data
             }
         }
 
-        private static Textures SampleTextures => new Textures
+        private static List<Core.Classes.Texture> SampleListOfTexture => new List<Core.Classes.Texture>
         {
-            Low = "low/path/Low.jpg",
-            Medium = "medium/path/Medium.jpg",
-            High = "high/path/High.jpg"
+            new Core.Classes.Texture() {Path = "low/path/Low.jpg", QualityEnum = Core.Enums.TextureQuality.Low, TypeEnum = Core.Enums.TextureType.Diffuse},
+            new Core.Classes.Texture() {Path = "medium/path/Medium.jpg", QualityEnum = Core.Enums.TextureQuality.Medium, TypeEnum = Core.Enums.TextureType.Emissive},
+            new Core.Classes.Texture() {Path = "high/path/High.jpg", QualityEnum = Core.Enums.TextureQuality.High, TypeEnum = Core.Enums.TextureType.Bump}
         };
 
         public static List<TestCaseData> SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType_Data()
@@ -72,7 +76,7 @@ namespace Data.SqlDataProvider.Tests.Data
                 name: "Sol",
                 mass: Mass.FromKilograms(1.98855E+30),
                 radius: Distance.FromKilometers(695700),
-                texture: SampleTextures,
+                textures: SampleListOfTexture,
                 type: global::Data.Classes.CelestialObjectType.Star
             );
 
@@ -82,7 +86,7 @@ namespace Data.SqlDataProvider.Tests.Data
                 name: "Earth",
                 mass: Mass.FromKilograms(5.9736E+24),
                 radius: Distance.FromKilometers(6371),
-                texture: SampleTextures,
+                textures: SampleListOfTexture,
                 type: global::Data.Classes.CelestialObjectType.Planet
             );
 

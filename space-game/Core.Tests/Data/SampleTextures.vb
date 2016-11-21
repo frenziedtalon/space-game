@@ -14,29 +14,29 @@ Namespace Data
         Public Sub New(type As TextureType)
             Type = type
 
-            Low = New Texture() With {.Quality = TextureQuality.Low,
-                                            .Type = Type,
+            Low = New Texture() With {.QualityEnum = TextureQuality.Low,
+                                            .TypeEnum = Type,
                                             .Path = "low texture path"}
 
-            Medium = New Texture() With {.Quality = TextureQuality.Medium,
-                                            .Type = Type,
+            Medium = New Texture() With {.QualityEnum = TextureQuality.Medium,
+                                            .TypeEnum = Type,
                                             .Path = "medium texture path"}
 
-            High = New Texture() With {.Quality = TextureQuality.High,
-                                            .Type = Type,
+            High = New Texture() With {.QualityEnum = TextureQuality.High,
+                                            .TypeEnum = Type,
                                             .Path = "high texture path"}
 
 
-            EmptyLow = New Texture() With {.Quality = TextureQuality.Low,
-                                            .Type = Type,
+            EmptyLow = New Texture() With {.QualityEnum = TextureQuality.Low,
+                                            .TypeEnum = Type,
                                             .Path = " "}
 
-            EmptyMedium = New Texture() With {.Quality = TextureQuality.Medium,
-                                            .Type = Type,
+            EmptyMedium = New Texture() With {.QualityEnum = TextureQuality.Medium,
+                                            .TypeEnum = Type,
                                             .Path = " "}
 
-            EmptyHigh = New Texture() With {.Quality = TextureQuality.High,
-                                            .Type = Type,
+            EmptyHigh = New Texture() With {.QualityEnum = TextureQuality.High,
+                                            .TypeEnum = Type,
                                             .Path = " "}
         End Sub
     End Class

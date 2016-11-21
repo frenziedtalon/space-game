@@ -1,4 +1,5 @@
 ﻿Imports Core.Classes
+Imports Core.Enums
 Imports Entities
 Imports NSubstitute
 Imports NUnit.Framework
@@ -18,7 +19,14 @@ Public Class StarTests
 
         Dim entityManager As IEntityManager = Substitute.For(Of IEntityManager)
 
-        Dim star As New Star("test", Mass.FromSolarMasses(1), temperature, new Textures() With {.Low = "none"}, Distance.FromKilometers(1), entityManager)
+        Dim textures = New List(Of Texture) From {
+            New Texture() With {.QualityEnum = TextureQuality.Low,
+                                            .TypeEnum = TextureType.Diffuse,
+                                            .Path = "low texture path"}
+            }
+
+
+        Dim star As New Star("test", Mass.FromSolarMasses(1), temperature, textures, Distance.FromKilometers(1), entityManager)
 
         Assert.AreEqual(expected, star.Classification)
 

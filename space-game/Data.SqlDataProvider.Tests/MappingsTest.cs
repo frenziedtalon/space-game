@@ -1,22 +1,22 @@
-﻿using Core.Classes;
-using Data.Classes;
+﻿using Data.Classes;
 using Data.SqlDataProvider.Tests.Data;
 using Mapster;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Data.SqlDataProvider.Tests
 {
     [TestFixture]
     class MappingsTest
     {
-        [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.TextureGroup_MapTo_Textures_Data))]
-        public void TextureGroup_MapTo_Textures(TextureGroup source, Textures expected)
+        [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.TextureGroup_MapTo_ListOfTexture_Data))]
+        public void TextureGroup_MapTo_ListOfTexture(TextureGroup source, List<Core.Classes.Texture> expected)
         {
             TypeAdapterConfig config = new TypeAdapterConfig { RequireExplicitMapping = true };
             new global::Data.SqlDataProvider.Mappings().Register(config);
             config.Compile();
 
-            Textures result = source.Adapt<Textures>(config);
+            List<Core.Classes.Texture> result = source.Adapt<List<Core.Classes.Texture>>(config);
 
             Assert.AreEqual(expected, result);
         }
@@ -43,11 +43,7 @@ namespace Data.SqlDataProvider.Tests
 
             var result = source.Adapt<PhysicalData>(config);
 
-            Assert.AreEqual(expected.Texture, result.Texture);
-            Assert.AreEqual(expected.Mass, result.Mass);
-            Assert.AreEqual(expected.Radius, result.Radius);
-            Assert.AreEqual(expected.Name, result.Name);
-            Assert.AreEqual(expected.Type, result.Type);
+            Assert.AreEqual(expected, result);
         }
 
         [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.SqlDataProviderCelestialObject_MapTo_DataOrbitData_Data))]

@@ -106,7 +106,6 @@
     <Compile Include="Classes\Mass.vb" />
     <Compile Include="Classes\Range.vb" />
     <Compile Include="Classes\Texture.vb" />
-    <Compile Include="Classes\Textures.vb" />
     <Compile Include="Enums\TextureQuality.vb" />
     <Compile Include="Enums\TextureType.vb" />
     <Compile Include="Extensions\EnumerableExtensions.vb" />

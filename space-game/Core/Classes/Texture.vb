@@ -1,18 +1,33 @@
 ﻿Imports Core.Enums
+Imports Newtonsoft.Json
 
 Namespace Classes
     Public Class Texture
         Implements IEquatable(Of Texture)
 
-        Public Type As TextureType
+        <JsonIgnore>
+        Public TypeEnum As TextureType
         Public Path As String
-        Public Quality As TextureQuality
+        <JsonIgnore>
+        Public QualityEnum As TextureQuality
+
+        Public ReadOnly Property Type As String
+            Get
+                Return TypeEnum.ToString
+            End Get
+        End Property
+
+        Public ReadOnly Property Quality As String
+            Get
+                Return QualityEnum.ToString
+            End Get
+        End Property
 
         Public Shadows Function Equals(other As Texture) As Boolean Implements IEquatable(Of Texture).Equals
             If other IsNot Nothing Then
-                Return Type.Equals(other.Type) AndAlso 
-                        Path.Equals(other.Path, StringComparison.OrdinalIgnoreCase) AndAlso 
-                        Quality.Equals(other.Quality)
+                Return TypeEnum.Equals(other.TypeEnum) AndAlso
+                        Path.Equals(other.Path, StringComparison.OrdinalIgnoreCase) AndAlso
+                        QualityEnum.Equals(other.QualityEnum)
             End If
             Return False
         End Function

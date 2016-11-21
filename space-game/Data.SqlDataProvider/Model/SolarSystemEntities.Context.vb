@@ -31,6 +31,7 @@ Partial Public Class SolarSystemEntities
     Public Overridable Property TextureGroups() As DbSet(Of TextureGroup)
     Public Overridable Property TextureGroupToTextures() As DbSet(Of TextureGroupToTexture)
     Public Overridable Property TexturePaths() As DbSet(Of TexturePath)
+    Public Overridable Property TextureQualities() As DbSet(Of TextureQuality)
     Public Overridable Property TextureTypes() As DbSet(Of TextureType)
 
 End Class

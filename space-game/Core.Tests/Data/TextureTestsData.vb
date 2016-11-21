@@ -6,31 +6,31 @@ Namespace Data
     Public Class TextureTestsData
 
         Public Shared Function Equals_WhenComparing_ReturnsExpected_Data() As List(Of TestCaseData)
-            Dim standard = New Texture() With {.Type = TextureType.Bump,
+            Dim standard = New Texture() With {.TypeEnum = TextureType.Bump,
                                             .Path = "path\to\texture",
-                                            .Quality = TextureQuality.High
+                                            .QualityEnum = TextureQuality.High
                                         }
 
             Dim copyOfStandard = standard
 
-            Dim capitalisedPath = New Texture() With {.Type = TextureType.Bump,
+            Dim capitalisedPath = New Texture() With {.TypeEnum = TextureType.Bump,
                                             .Path = "PATH\TO\TEXTURE",
-                                            .Quality = TextureQuality.High
+                                            .QualityEnum = TextureQuality.High
                                         }
 
-            Dim emptyPath = New Texture() With {.Type = TextureType.Bump,
+            Dim emptyPath = New Texture() With {.TypeEnum = TextureType.Bump,
                                             .Path = "",
-                                            .Quality = TextureQuality.High
+                                            .QualityEnum = TextureQuality.High
                                         }
 
-            Dim differentType = New Texture() With {.Type = TextureType.Diffuse,
+            Dim differentType = New Texture() With {.TypeEnum = TextureType.Diffuse,
                                             .Path = "path\to\texture",
-                                            .Quality = TextureQuality.High
+                                            .QualityEnum = TextureQuality.High
                                         }
 
-            Dim differentQuality = New Texture() With {.Type = TextureType.Bump,
+            Dim differentQuality = New Texture() With {.TypeEnum = TextureType.Bump,
                                             .Path = "path\to\texture",
-                                            .Quality = TextureQuality.Low
+                                            .QualityEnum = TextureQuality.Low
                                         }
 
             Return New List(Of TestCaseData) From {

@@ -117,6 +117,9 @@
     <Compile Include="Model\TexturePath.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\TextureQuality.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TextureType.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>
