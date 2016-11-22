@@ -5,5 +5,6 @@
         Bump
         Specular
         Opacity
+        Clouds
     End Enum
 End NameSpace

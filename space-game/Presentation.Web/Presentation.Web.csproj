@@ -32,6 +32,7 @@
     <Content Include="Assets\Images\Planet\High\saturn-ring.png" />
     <Content Include="Assets\Images\Planet\High\venus.jpg" />
     <Content Include="Assets\Images\Planet\Low\earth.jpg" />
+    <Content Include="Assets\Images\Planet\Low\earth_specular.jpg" />
     <Content Include="Assets\Images\Planet\Low\jupiter.jpg" />
     <Content Include="Assets\Images\Planet\Low\mars.jpg" />
     <Content Include="Assets\Images\Planet\Low\mercury.jpg" />
@@ -41,6 +42,8 @@
     <Content Include="Assets\Images\Planet\Low\saturn.jpg" />
     <Content Include="Assets\Images\Planet\Low\uranus.jpg" />
     <Content Include="Assets\Images\Planet\Low\venus.jpg" />
+    <Content Include="Assets\Images\Planet\Medium\earth_bump.png" />
+    <Content Include="Assets\Images\Planet\Medium\earth_clouds.jpg" />
     <Content Include="Assets\Images\Planet\Medium\earth_day.jpg" />
     <Content Include="Assets\Images\Planet\Medium\earth_night.jpg" />
     <Content Include="Assets\Images\Planet\Medium\jupiter.jpg" />
