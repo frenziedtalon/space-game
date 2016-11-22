@@ -17,19 +17,21 @@
         <AssociationConnector Association="SolarSystemModel.FK_Users_ModifiedBy" />
         <EntityTypeShape EntityType="SolarSystemModel.CelestialObjectType" Width="1.5" PointX="5.25" PointY="0.75" />
         <EntityTypeShape EntityType="SolarSystemModel.CelestialObject" Width="1.5" PointX="7.75" PointY="1.75" />
-        <EntityTypeShape EntityType="SolarSystemModel.Texture" Width="1.5" PointX="14.625" PointY="3.75" />
         <EntityTypeShape EntityType="SolarSystemModel.TextureGroup" Width="1.5" PointX="9.875" PointY="3.75" />
         <EntityTypeShape EntityType="SolarSystemModel.TextureGroupToTexture" Width="1.5" PointX="12.125" PointY="3.75" />
-        <EntityTypeShape EntityType="SolarSystemModel.TexturePath" Width="1.5" PointX="17" PointY="5.375" />
-        <EntityTypeShape EntityType="SolarSystemModel.TextureType" Width="1.5" PointX="17" PointY="3.125" />
+        <EntityTypeShape EntityType="SolarSystemModel.TexturePath" Width="1.5" PointX="17" PointY="5.875" />
         <AssociationConnector Association="SolarSystemModel.FK_CelestialObject_CelestialObjectType" />
         <AssociationConnector Association="SolarSystemModel.FK_CelestialObject_Primary" />
         <AssociationConnector Association="SolarSystemModel.FK_CelestialObject_SolarSystem" />
         <AssociationConnector Association="SolarSystemModel.FK_CelestialObject_TextureGroup" />
+        <AssociationConnector Association="SolarSystemModel.FK_TextureGroupToTexture_TextureGroup" />
+        <EntityTypeShape EntityType="SolarSystemModel.TextureQuality" Width="1.5" PointX="17" PointY="3.75" />
+        <EntityTypeShape EntityType="SolarSystemModel.TextureType" Width="1.5" PointX="17" PointY="1.75" />
+        <EntityTypeShape EntityType="SolarSystemModel.Texture" Width="1.5" PointX="14.625" PointY="3.25" />
         <AssociationConnector Association="SolarSystemModel.FK_Texture_TexturePath" />
+        <AssociationConnector Association="SolarSystemModel.FK_Texture_TextureQuality" />
         <AssociationConnector Association="SolarSystemModel.FK_Texture_TextureType" />
         <AssociationConnector Association="SolarSystemModel.FK_TextureGroupToTexture_Texture" />
-        <AssociationConnector Association="SolarSystemModel.FK_TextureGroupToTexture_TextureGroup" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

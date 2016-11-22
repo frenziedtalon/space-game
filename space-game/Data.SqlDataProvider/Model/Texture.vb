@@ -15,8 +15,10 @@ Partial Public Class Texture
     Public Property Name As String
     Public Property PathId As Integer
     Public Property TypeId As Integer
+    Public Property QualityId As Integer
 
     Public Overridable Property TexturePath As TexturePath
+    Public Overridable Property TextureQuality As TextureQuality
     Public Overridable Property TextureType As TextureType
     Public Overridable Property TextureGroupToTextures As ICollection(Of TextureGroupToTexture) = New HashSet(Of TextureGroupToTexture)
 

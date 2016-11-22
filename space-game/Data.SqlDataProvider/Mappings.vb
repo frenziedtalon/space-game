@@ -3,6 +3,7 @@ Imports Core.Extensions
 Imports Core.Helpers
 Imports Data.Classes
 Imports Mapster
+Imports CelestialObjectType = Data.SqlDataProvider.CelestialObjectType
 
 Public Class Mappings
     Implements IRegister
@@ -22,15 +23,19 @@ Public Class Mappings
             Map(Function(dest) dest.Radius, Function(src) src.Radius).
             Map(Function(dest) dest.Mass, Function(src) src.Mass).
             Map(Function(dest) dest.Type, Function(src) src.CelestialObjectType).
-            Map(Function(dest) dest.Texture, Function(src) src.TextureGroup)
+            Map(Function(dest) dest.Textures, Function(src) src.TextureGroup)
 
-        config.ForType(Of Global.Data.SqlDataProvider.CelestialObjectType, Global.Data.Classes.CelestialObjectType).
+        config.ForType(Of CelestialObjectType, Global.Data.Classes.CelestialObjectType).
             MapWith(Function(src) src.Name.ToEnum(Of Global.Data.Classes.CelestialObjectType).Value)
 
-        config.ForType(Of TextureGroup, Textures).
-            Map(Function(dest) dest.Low, Function(src) CreateTexturePath("Low", src.TextureGroupToTextures)).
-            Map(Function(dest) dest.Medium, Function(src) CreateTexturePath("Medium", src.TextureGroupToTextures)).
-            Map(Function(dest) dest.High, Function(src) CreateTexturePath("High", src.TextureGroupToTextures))
+        config.ForType(Of TextureGroup, List(Of Core.Classes.Texture)).
+            MapWith(Function(src) MapTextureGroupToListOfTexture(src, config))
+
+        config.ForType(Of TextureQuality, Core.Enums.TextureQuality).
+            MapWith(Function(src) src.Quality.ToEnum(Of Core.Enums.TextureQuality).Value)
+
+        config.ForType(Of TextureType, Core.Enums.TextureType).
+            MapWith(Function(src) src.Type.ToEnum(Of Core.Enums.TextureType).Value)
 
         config.ForType(Of CelestialObjectType, CelestialObjectType)()
 
@@ -52,17 +57,21 @@ Public Class Mappings
         config.ForType(Of TexturePath, TexturePath)()
 
         config.ForType(Of TextureType, TextureType)()
+
+        config.ForType(Of TextureQuality, TextureQuality)()
     End Sub
 
-    Private Function CreateTexturePath(typeName As String, group As ICollection(Of TextureGroupToTexture)) As String
-
-        Dim result As String = String.Empty
-        Dim target = group.FirstOrDefault(Function(t) t.Texture.TextureType.Type.Equals(typeName, StringComparison.OrdinalIgnoreCase))
-
-        If target IsNot Nothing Then
-            result = PathHelper.SitePathCombine(target.Texture.TexturePath.Path, target.Texture.Name)
+    Private Function MapTextureGroupToListOfTexture(input As TextureGroup, config As TypeAdapterConfig) As List(Of Core.Classes.Texture)
+        Dim result As New List(Of Core.Classes.Texture)
+        If input IsNot Nothing Then
+            For Each t As TextureGroupToTexture In input.TextureGroupToTextures
+                Dim texture As New Core.Classes.Texture
+                texture.Path = PathHelper.SitePathCombine(t.Texture.TexturePath.Path, t.Texture.Name)
+                texture.QualityEnum = t.Texture.TextureQuality.Adapt(Of Core.Enums.TextureQuality)(config)
+                texture.TypeEnum = t.Texture.TextureType.Adapt(Of Core.Enums.TextureType)(config)
+                result.Add(texture)
+            Next
         End If
         Return result
     End Function
-
 End Class

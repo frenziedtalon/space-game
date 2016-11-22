@@ -16,7 +16,8 @@ Namespace Extensions
             Return this.Include(Function(s) s.TextureGroup).
                                 Include(Function(s) s.TextureGroup).
                                 Include(Function(s) s.TextureGroup.TextureGroupToTextures.Select(Function(t) t.Texture.TextureType)).
-                                Include(Function(s) s.TextureGroup.TextureGroupToTextures.Select(Function(t) t.Texture.TexturePath))
+                                Include(Function(s) s.TextureGroup.TextureGroupToTextures.Select(Function(t) t.Texture.TexturePath)).
+                                Include(Function(s) s.TextureGroup.TextureGroupToTextures.Select(Function(t) t.Texture.TextureQuality))
         End Function
 
         <Extension>

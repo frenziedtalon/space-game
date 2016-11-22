@@ -10,18 +10,18 @@ Namespace CelestialObjects
 
         Public Sub New(name As String,
                        mass As Mass,
-                       texture As Textures,
+                       textures As List(Of Texture),
                        radius As Distance,
                        entityManager As IEntityManager)
 
-            MyBase.New(name, mass, texture, entityManager)
+            MyBase.New(name, mass, textures, entityManager)
             _radius = radius
         End Sub
 
         Public Sub New(physicalData As PhysicalData,
                        entityManager As IEntityManager)
 
-            MyBase.New(physicalData.Name, physicalData.Mass, physicalData.Texture, entityManager)
+            MyBase.New(physicalData.Name, physicalData.Mass, physicalData.Textures, entityManager)
             _radius = physicalData.Radius
         End Sub
 

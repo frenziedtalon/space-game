@@ -1,38 +1,42 @@
-﻿Imports Core.Extensions
+﻿Imports Core.Classes
+Imports Core.Enums
+Imports Core.Extensions
+Imports Core.Tests.Data
 Imports NUnit.Framework
 
 Namespace Extensions
     <TestFixture>
     Public Class EnumerableExtensionsTests
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.HasAny_WhenGivenAList_ReturnsExpected_Data))>
+        Public Sub HasAny_WhenGivenAList_ReturnsExpected(list As List(Of String), expected As Boolean)
+            Dim result = list.HasAny()
 
-        <Test()>
-        Public Sub HasAny_WhenListIsNull_ReturnsFalse()
-            Dim testList As List(Of String) = Nothing
-
-            Dim result = testList.HasAny()
-
-            Assert.AreEqual(False, result)
+            Assert.AreEqual(expected, result)
         End Sub
 
-        <Test()>
-        Public Sub HasAny_WhenListIsEmpty_ReturnsFalse()
-            Dim testList As New List(Of String)
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolution_WhenGivenAList_ReturnsExpected_Data))>
+        Public Sub GetHighestAvailableResolution_WhenGivenAList_ReturnsExpected(textures As List(Of Texture), type As TextureType, expected As String)
+            Dim result = textures.GetHighestAvailableResolution(type)
 
-            Dim result = testList.HasAny()
-
-            Assert.AreEqual(False, result)
+            Assert.AreEqual(expected, result)
         End Sub
 
-        <Test()>
-        Public Sub HasAny_WhenListHasMembers_ReturnsTrue()
-            Dim testList As New List(Of String)
-            testList.Add("a")
-            testList.Add("b")
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetLowestAvailableResolution_WhenGivenAList_ReturnsExpected_Data))>
+        Public Sub GetLowestAvailableResolution_WhenGivenAList_ReturnsExpected(textures As List(Of Texture), type As TextureType, expected As String)
+            Dim result = textures.GetLowestAvailableResolution(type)
 
-            Dim result = testList.HasAny()
-
-            Assert.AreEqual(True, result)
+            Assert.AreEqual(expected, result)
         End Sub
 
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolutionForEachType_High))>
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolutionForEachType_Medium))>
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolutionForEachType_Low))>
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolutionForEachType_Mix))>
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.GetHighestAvailableResolutionForEachType_Empty))>
+        Public Sub GetHighestAvailableResolutionForEachType_WhenGivenAList_ReturnsExpected(textures As List(Of Texture), expected As List(Of Texture))
+            Dim result = textures.GetHighestAvailableResolutionForEachType()
+
+            Assert.AreEqual(expected, result)
+        End Sub
     End Class
 End Namespace
