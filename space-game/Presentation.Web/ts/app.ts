@@ -219,6 +219,8 @@ var runGame = () => {
             info.Radius,
             null);
 
+        BABYLON.Tags.AddTagsTo(star, "star");
+
         // stars shine, other objects don't
         (<BABYLON.StandardMaterial>star.material).emissiveTexture = (<BABYLON.StandardMaterial>star.material).diffuseTexture;
 
@@ -237,14 +239,17 @@ var runGame = () => {
             info.Radius,
             parent);
 
+        BABYLON.Tags.AddTagsTo(planet, "planet");
         const c = new NavigationCamera(planet, scene, cameraHelper);
     }
 
     function renderMoon(info: Moon, parent: BABYLON.Mesh): void {
-        renderOrbitingSphericalCelestialObject(info,
+        const moon = renderOrbitingSphericalCelestialObject(info,
             info.Textures,
             info.Radius,
             parent);
+
+        BABYLON.Tags.AddTagsTo(moon, "moon");
     }
 
     function renderOrbitingSphericalCelestialObject(info: OrbitingCelestialObjectBase,
