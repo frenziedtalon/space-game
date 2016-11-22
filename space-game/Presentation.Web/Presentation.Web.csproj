@@ -58,6 +58,8 @@
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
     <Content Include="index.html" />
+    <Content Include="node_modules\linq\linq.js" />
+    <Content Include="node_modules\linq\linq.min.js" />
     <Content Include="Scripts\babylon-2.4.max.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -73,6 +75,7 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="package.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
