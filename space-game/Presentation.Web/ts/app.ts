@@ -256,7 +256,7 @@ var runGame = () => {
             cameraHelper.updateCameraTarget(info.Id);
         }
 
-        const scaledRadius = scaleRadius(radius);
+        const scaledDiameter = scaleRadius(radius) * 2;
 
         //let scaledSma = 0;
         //if (!(info.Orbit === null || info.Orbit === undefined)) {
@@ -265,15 +265,16 @@ var runGame = () => {
 
         //console.log(info.Name + " radius: " + scaledRadius + ", sma: " + scaledSma);
 
-        const mesh = BABYLON.Mesh.CreateSphere(info.Name, 16, scaledRadius * 2, scene);
+        const mesh = BABYLON.Mesh.CreateSphere(info.Name, 16, scaledDiameter, scene);
         mesh.isPickable = info.CameraTarget;
         mesh.id = info.Id;
         mesh.position = calculateOrbitingObjectPosition(info.Orbit, parent);
 
         mesh.material = createMaterial(info.Name, info.Textures);
 
+        // render optional attributes
+        createCloudLayer(info.Name, textures, scaledDiameter, mesh.position);
         drawOrbit(info.Orbit, info.Name + "Orbit", parent);
-
         renderSatellites(info, mesh);
 
         // apply a small rotation. Extend this appropriately when adding object rotation about an axis SG-3, SG-4
@@ -339,6 +340,40 @@ var runGame = () => {
         t.uAng = Math.PI; // Invert on vertical axis 
         t.vAng = Math.PI; // Invert on horizontal axis 
         return t;
+    }
+
+    function createCloudLayer(name: string, textures: Array<Texture>, parentDiameter: number, position: BABYLON.Vector3): void {
+        // if we have a texture for a cloud layer then create a mesh in the same position, but a little larger
+        const cloudTexture = TextureHelper.getType(textures, TextureType.Clouds);
+
+        if (cloudTexture) {
+            const cloudDiameter = parentDiameter * 1.03;
+
+            const clouds = BABYLON.Mesh.CreateSphere(name + "Clouds", 16, cloudDiameter, scene);
+            const cloudMaterial = new BABYLON.StandardMaterial(name + "CloudMaterial", scene);
+
+            // attempts to make clouds on unlit side invisible. Fix in #85.
+            cloudMaterial.ambientColor = new BABYLON.Color3(0, 0, 0);
+            cloudMaterial.diffuseColor = new BABYLON.Color3(1, 1, 1);
+            cloudMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);
+            cloudMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+            cloudMaterial.backFaceCulling = false;
+            cloudMaterial.opacityTexture = createTexture(name + "CloudTransparencyTexture", "Assets/Images/" + cloudTexture.Path);
+            cloudMaterial.opacityTexture.getAlphaFromRGB = true;
+            clouds.material = cloudMaterial;
+
+            clouds.position = position;
+
+            // apply a small rotation. Extend this appropriately when adding object rotation about an axis SG-3, SG-4
+            BABYLON.Animation.CreateAndStartAnimation(clouds.name + "Rotation",
+                clouds,
+                "rotation.y",
+                30,
+                31000,
+                0,
+                10,
+                BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
+        }
     }
 
     function renderSatellites(primary: BaseCelestialObject, mesh: BABYLON.Mesh): void {
