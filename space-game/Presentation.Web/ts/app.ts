@@ -294,41 +294,44 @@ var runGame = () => {
         material.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
         material.specularColor = zeroColor();
 
-        if (!(textures === null || textures === undefined))
-        {
+        if (!(textures === null || textures === undefined)) {
             for (let i = 0; i < textures.length; i++) {
-                const path = "Assets/Images/" + textures[i].Path;
-                const type = TextureType[textures[i].Type];
-
-                switch (type) {
-                    case TextureType.Bump:
-                        material.bumpTexture = createTexture(name + "BumpTexure", path);
-                        break;
-
-                    case TextureType.Diffuse:
-                        material.diffuseTexture = createTexture(name + "DiffuseTexure", path);
-                        break;
-
-                    case TextureType.Emissive:
-                        material.emissiveTexture = createTexture(name + "EmissiveTexure", path);
-                        break;
-
-                    case TextureType.Specular:
-                        material.specularTexture = createTexture(name + "sphereSpecularTexure", path);
-                        material.specularPower = 1000;
-                        break;
-
-                    case TextureType.Opacity:
-                        material.opacityTexture = createTexture(name + "OpacityTexture", path);
-                        material.opacityTexture.getAlphaFromRGB = true;
-                        break;
-
-                    default:
-                        break;
-                }
+                addTextureFromType(material, textures[i]);
             }
         }
         return material;
+    }
+
+    function addTextureFromType(material: BABYLON.StandardMaterial, texture: Texture): void {
+        const path = "Assets/Images/" + texture.Path;
+        const type = TextureType[texture.Type];
+
+        switch (type) {
+            case TextureType.Bump:
+                material.bumpTexture = createTexture(name + "BumpTexure", path);
+                break;
+
+            case TextureType.Diffuse:
+                material.diffuseTexture = createTexture(name + "DiffuseTexure", path);
+                break;
+
+            case TextureType.Emissive:
+                material.emissiveTexture = createTexture(name + "EmissiveTexure", path);
+                break;
+
+            case TextureType.Specular:
+                material.specularTexture = createTexture(name + "sphereSpecularTexure", path);
+                material.specularPower = 1000;
+                break;
+
+            case TextureType.Opacity:
+                material.opacityTexture = createTexture(name + "OpacityTexture", path);
+                material.opacityTexture.getAlphaFromRGB = true;
+                break;
+
+            default:
+                break;
+        }
     }
 
     function createTexture(name: string, texture: string): BABYLON.Texture {
