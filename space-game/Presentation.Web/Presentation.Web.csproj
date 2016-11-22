@@ -93,6 +93,9 @@
     <TypeScriptCompile Include="ts\Classes\Cameras\Camera.ts" />
     <TypeScriptCompile Include="ts\Classes\Motion\Distance.ts" />
     <TypeScriptCompile Include="ts\Classes\Motion\DistanceRange.ts" />
+    <TypeScriptCompile Include="ts\Classes\Textures\Texture.ts" />
+    <TypeScriptCompile Include="ts\Classes\Textures\TextureQuality.ts" />
+    <TypeScriptCompile Include="ts\Classes\Textures\TextureType.ts" />
     <TypeScriptCompile Include="ts\Helpers\AngleHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\AnimationHelper.ts" />
     <TypeScriptCompile Include="ts\Interfaces\I3DObject.ts" />

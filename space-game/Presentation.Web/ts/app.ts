@@ -215,7 +215,7 @@ var runGame = () => {
 
     function renderStar(info: Star): void {
         var star = renderOrbitingSphericalCelestialObject(info,
-            info.Texture,
+            info.Textures,
             info.Radius,
             null);
 
@@ -233,7 +233,7 @@ var runGame = () => {
 
     function renderPlanet(info: Planet, parent: BABYLON.Mesh): void {
         const planet = renderOrbitingSphericalCelestialObject(info,
-            info.Texture,
+            info.Textures,
             info.Radius,
             parent);
 
@@ -242,13 +242,13 @@ var runGame = () => {
 
     function renderMoon(info: Moon, parent: BABYLON.Mesh): void {
         renderOrbitingSphericalCelestialObject(info,
-            info.Texture,
+            info.Textures,
             info.Radius,
             parent);
     }
 
     function renderOrbitingSphericalCelestialObject(info: OrbitingCelestialObjectBase,
-        texture: string,
+        textures: Array<Texture>,
         radius: Distance,
         parent: BABYLON.Mesh): BABYLON.Mesh {
 
@@ -270,9 +270,7 @@ var runGame = () => {
         mesh.id = info.Id;
         mesh.position = calculateOrbitingObjectPosition(info.Orbit, parent);
 
-        const material = createDiffuseMaterial(info.Name + "Material", "Assets/Images/" + texture);
-        material.specularColor = zeroColor();
-        mesh.material = material;
+        mesh.material = createMaterial(info.Name, info.Textures);
 
         drawOrbit(info.Orbit, info.Name + "Orbit", parent);
 
@@ -291,15 +289,53 @@ var runGame = () => {
         return mesh;
     }
 
-    function createDiffuseMaterial(name: string, texture: string): BABYLON.StandardMaterial {
-        const t = new BABYLON.Texture(texture, scene);
-        t.uAng = Math.PI; // Invert on vertical axis
-        t.vAng = Math.PI; // Invert on horizontal axis
+    function createMaterial(name: string, textures: Array<Texture>): BABYLON.StandardMaterial {
+        const material = new BABYLON.StandardMaterial(name, scene);
+        material.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+        material.specularColor = zeroColor();
 
-        const m = new BABYLON.StandardMaterial(name, scene);
-        m.diffuseTexture = t;
-        m.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
-        return m;
+        if (!(textures === null || textures === undefined))
+        {
+            for (let i = 0; i < textures.length; i++) {
+                const path = "Assets/Images/" + textures[i].Path;
+                const type = TextureType[textures[i].Type];
+
+                switch (type) {
+                    case TextureType.Bump:
+                        material.bumpTexture = createTexture(name + "BumpTexure", path);
+                        break;
+
+                    case TextureType.Diffuse:
+                        material.diffuseTexture = createTexture(name + "DiffuseTexure", path);
+                        break;
+
+                    case TextureType.Emissive:
+                        material.emissiveTexture = createTexture(name + "EmissiveTexure", path);
+                        break;
+
+                    case TextureType.Specular:
+                        material.specularTexture = createTexture(name + "sphereSpecularTexure", path);
+                        material.specularPower = 1000;
+                        break;
+
+                    case TextureType.Opacity:
+                        material.opacityTexture = createTexture(name + "OpacityTexture", path);
+                        material.opacityTexture.getAlphaFromRGB = true;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+        return material;
+    }
+
+    function createTexture(name: string, texture: string): BABYLON.Texture {
+        const t = new BABYLON.Texture(texture, scene);
+        t.uAng = Math.PI; // Invert on vertical axis 
+        t.vAng = Math.PI; // Invert on horizontal axis 
+        return t;
     }
 
     function renderSatellites(primary: BaseCelestialObject, mesh: BABYLON.Mesh): void {
