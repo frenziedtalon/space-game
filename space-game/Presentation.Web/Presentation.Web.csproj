@@ -58,7 +58,6 @@
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
     <Content Include="index.html" />
-    <Content Include="Scripts\babylon-2.4.max.js" />
     <Content Include="node_modules\babylonjs\babylon.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -118,7 +117,6 @@
     <TypeScriptCompile Include="ts\Classes\SceneState.ts" />
     <TypeScriptCompile Include="ts\Classes\TurnResult.ts" />
     <TypeScriptCompile Include="ts\Classes\CelestialObjects\Star.ts" />
-    <TypeScriptCompile Include="ts\d.ts\babylon-2.4.d.ts" />
     <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
     <TypeScriptCompile Include="ts\Helpers\MeshHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\CameraHelper.ts" />
