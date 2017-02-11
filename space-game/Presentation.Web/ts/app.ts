@@ -435,7 +435,7 @@ var runGame = () => {
         camera.lowerRadiusLimit = 1;
         camera.upperRadiusLimit = 500;
         scene.activeCameras.push(camera);
-        camera.attachControl(canvas, false);
+        camera.attachControl(canvas, true);
         camera.viewport = new BABYLON.Viewport(0, 0.2, 1, 0.8);
     }
 
