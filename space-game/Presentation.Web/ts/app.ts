@@ -281,6 +281,7 @@ var runGame = () => {
         createCloudLayer(info.Name, textures, scaledDiameter, mesh.position);
         drawOrbit(info.Orbit, info.Name + "Orbit", parent);
         renderSatellites(info, mesh);
+        renderRings(info, mesh);
 
         // apply a small rotation. Extend this appropriately when adding object rotation about an axis SG-3, SG-4
         BABYLON.Animation.CreateAndStartAnimation(info.Name + "Rotation",
@@ -573,5 +574,55 @@ var runGame = () => {
             return sceneObjectsLookup[target];
         }
         return null;
+    }
+
+    function renderRings(info: BaseCelestialObject, parent: BABYLON.Mesh): void {
+
+        const diffuse = new Texture();
+        diffuse.Type = "Diffuse";
+        diffuse.Quality = "Low";
+        diffuse.Path = "Rings/Low/saturn-rings-backscattered.png";
+
+        const opacity = new Texture();
+        opacity.Type = "Opacity";
+        opacity.Quality = "Low";
+        opacity.Path = "Rings/Low/saturn-rings-backscattered.png";
+
+        const textures: Array<Texture> = new Array<Texture>();
+        textures.push(diffuse);
+        textures.push(opacity);
+
+        const ringProperties = {
+            InnerRadius: new Distance(new Kilometer((74500))),
+            OuterRadius: new Distance(new Kilometer((140220))),
+            Textures: textures
+        };
+
+        const innerPath = PathHelper.generateCircularPath(scaleRadius(ringProperties.InnerRadius));
+        const outerPath = PathHelper.generateCircularPath(scaleRadius(ringProperties.OuterRadius));
+
+        const paths = [];
+        paths.push(innerPath);
+        paths.push(outerPath);
+
+        const options = {
+            pathArray: paths,
+            closeArray: false,
+            closePath: true,
+            sideOrientation: BABYLON.Mesh.DOUBLESIDE,
+            invertUV: true
+        }
+
+        const ribbon = BABYLON.MeshBuilder.CreateRibbon(info.Name + "Rings", options, scene);
+        ribbon.isPickable = false;
+        
+        const material = createMaterial(info.Name + "Rings", ringProperties.Textures);
+
+        if (material.opacityTexture == null) {
+            material.diffuseTexture.hasAlpha = true;
+        }
+
+        ribbon.material = material;
+        ribbon.parent = parent;
     }
 };

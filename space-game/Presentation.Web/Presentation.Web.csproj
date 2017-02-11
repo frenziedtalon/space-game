@@ -82,6 +82,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Images\Rings\High\" />
+    <Folder Include="Assets\Images\Rings\Low\" />
+    <Folder Include="Assets\Images\Rings\Medium\" />
     <Folder Include="Assets\Images\Star\High\" />
     <Folder Include="css\" />
   </ItemGroup>
@@ -100,6 +103,8 @@
     <TypeScriptCompile Include="ts\Classes\Textures\TextureType.ts" />
     <TypeScriptCompile Include="ts\Helpers\AngleHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\AnimationHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\CoordinateHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\PathHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\TextureHelper.ts" />
     <TypeScriptCompile Include="ts\Interfaces\I3DObject.ts" />
     <TypeScriptCompile Include="ts\Interfaces\ICelestialObject.ts" />
