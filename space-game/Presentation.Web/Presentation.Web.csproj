@@ -58,7 +58,7 @@
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
     <Content Include="index.html" />
-    <Content Include="Scripts\babylon-2.4.max.js" />
+    <Content Include="node_modules\babylonjs\babylon.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="textures\xStrip.jpg" />
@@ -73,6 +73,7 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="package.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -85,6 +86,7 @@
     <Folder Include="css\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="node_modules\babylonjs\babylon.d.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\Classes\Angle.ts" />
     <TypeScriptCompile Include="ts\Classes\Motion\AstronomicalUnit.ts" />
@@ -115,7 +117,6 @@
     <TypeScriptCompile Include="ts\Classes\SceneState.ts" />
     <TypeScriptCompile Include="ts\Classes\TurnResult.ts" />
     <TypeScriptCompile Include="ts\Classes\CelestialObjects\Star.ts" />
-    <TypeScriptCompile Include="ts\d.ts\babylon-2.4.d.ts" />
     <TypeScriptCompile Include="ts\d.ts\jquery.d.ts" />
     <TypeScriptCompile Include="ts\Helpers\MeshHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\CameraHelper.ts" />
