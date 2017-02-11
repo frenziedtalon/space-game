@@ -1,0 +1,10 @@
+{
+	"version": "0.3.0",
+	"name": "space-game",
+	"private": true,
+	"devDependencies": {
+	},
+	"dependencies": {
+		"babylonjs": "2.5.0" 
+	}
+}
