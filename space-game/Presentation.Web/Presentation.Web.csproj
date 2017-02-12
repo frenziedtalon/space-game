@@ -54,6 +54,7 @@
     <Content Include="Assets\Images\Planet\Medium\saturn_ring.png" />
     <Content Include="Assets\Images\Planet\Medium\uranus.jpg" />
     <Content Include="Assets\Images\Planet\Medium\venus.jpg" />
+    <Content Include="Assets\Images\Rings\Low\saturn-rings-backscattered.png" />
     <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
@@ -83,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Images\Rings\High\" />
-    <Folder Include="Assets\Images\Rings\Low\" />
     <Folder Include="Assets\Images\Rings\Medium\" />
     <Folder Include="Assets\Images\Star\High\" />
     <Folder Include="css\" />
