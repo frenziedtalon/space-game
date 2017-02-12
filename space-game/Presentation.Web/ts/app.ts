@@ -577,52 +577,34 @@ var runGame = () => {
     }
 
     function renderRings(info: BaseCelestialObject, parent: BABYLON.Mesh): void {
+        if (info.hasOwnProperty("Rings")) {
+            
+            const innerPath = PathHelper.generateCircularPath(scaleRadius(info.Rings.InnerRadius));
+            const outerPath = PathHelper.generateCircularPath(scaleRadius(info.Rings.OuterRadius));
 
-        const diffuse = new Texture();
-        diffuse.Type = "Diffuse";
-        diffuse.Quality = "Low";
-        diffuse.Path = "Rings/Low/saturn-rings-backscattered.png";
+            const paths = [];
+            paths.push(innerPath);
+            paths.push(outerPath);
 
-        const opacity = new Texture();
-        opacity.Type = "Opacity";
-        opacity.Quality = "Low";
-        opacity.Path = "Rings/Low/saturn-rings-backscattered.png";
+            const options = {
+                pathArray: paths,
+                closeArray: false,
+                closePath: true,
+                sideOrientation: BABYLON.Mesh.DOUBLESIDE,
+                invertUV: true
+            }
 
-        const textures: Array<Texture> = new Array<Texture>();
-        textures.push(diffuse);
-        textures.push(opacity);
+            const ribbon = BABYLON.MeshBuilder.CreateRibbon(info.Name + "Rings", options, scene);
+            ribbon.isPickable = false;
 
-        const ringProperties = {
-            InnerRadius: new Distance(new Kilometer((74500))),
-            OuterRadius: new Distance(new Kilometer((140220))),
-            Textures: textures
-        };
+            const material = createMaterial(info.Name + "Rings", info.Rings.Textures);
 
-        const innerPath = PathHelper.generateCircularPath(scaleRadius(ringProperties.InnerRadius));
-        const outerPath = PathHelper.generateCircularPath(scaleRadius(ringProperties.OuterRadius));
+            if (material.opacityTexture == null) {
+                material.diffuseTexture.hasAlpha = true;
+            }
 
-        const paths = [];
-        paths.push(innerPath);
-        paths.push(outerPath);
-
-        const options = {
-            pathArray: paths,
-            closeArray: false,
-            closePath: true,
-            sideOrientation: BABYLON.Mesh.DOUBLESIDE,
-            invertUV: true
+            ribbon.material = material;
+            ribbon.parent = parent;
         }
-
-        const ribbon = BABYLON.MeshBuilder.CreateRibbon(info.Name + "Rings", options, scene);
-        ribbon.isPickable = false;
-        
-        const material = createMaterial(info.Name + "Rings", ringProperties.Textures);
-
-        if (material.opacityTexture == null) {
-            material.diffuseTexture.hasAlpha = true;
-        }
-
-        ribbon.material = material;
-        ribbon.parent = parent;
     }
 };

@@ -92,6 +92,7 @@
     <TypeScriptCompile Include="node_modules\babylonjs\babylon.d.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\Classes\Angle.ts" />
+    <TypeScriptCompile Include="ts\Classes\CelestialObjects\Properties\RingSystem.ts" />
     <TypeScriptCompile Include="ts\Classes\Motion\AstronomicalUnit.ts" />
     <TypeScriptCompile Include="ts\Classes\Base\BaseCelestialObject.ts" />
     <TypeScriptCompile Include="ts\Classes\Base\BaseGameEntity.ts" />
