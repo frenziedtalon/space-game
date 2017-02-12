@@ -61,5 +61,25 @@ Namespace Extensions
         Private Function GetTexture(textures As IEnumerable(Of Texture), type As TextureType) As IEnumerable(Of Texture)
             Return textures.Where(Function(t) t.TypeEnum.Equals(type) AndAlso Not String.IsNullOrWhiteSpace(t.Path))
         End Function
+
+        <Extension>
+        Public Function IsEquivalent(this As IEnumerable(Of Texture), other As IEnumerable(Of Texture)) As Boolean
+            If (this Is Nothing And other Is Nothing) OrElse (this IsNot Nothing And other IsNot Nothing) Then
+                If this.Count.Equals(other.Count) Then
+
+                    Dim sortedThis = this.OrderBy(Function(l) l.Path).
+                                                ThenBy(Function(l) l.Quality).
+                                                ThenBy(Function(l) l.Type)
+
+                    Dim sortedOther = other.OrderBy(Function(l) l.Path).
+                                            ThenBy(Function(l) l.Quality).
+                                            ThenBy(Function(l) l.Type)
+
+                    Return sortedThis.SequenceEqual(sortedOther)
+                End If
+            End If
+
+            Return False
+        End Function
     End Module
 End Namespace

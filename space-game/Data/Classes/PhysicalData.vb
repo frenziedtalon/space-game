@@ -1,5 +1,6 @@
 ﻿Imports Core.Classes
 Imports Data.Interfaces
+Imports Core.Extensions.EnumerableExtensions
 
 Namespace Classes
     Public Class PhysicalData
@@ -34,27 +35,9 @@ Namespace Classes
                     Mass.Equals(other.Mass) AndAlso
                     Type.Equals(other.Type) AndAlso
                     Radius.Equals(other.Radius) AndAlso
-                    TexturesEqual(other.Textures)
+                    Textures.IsEquivalent(other.Textures) AndAlso 
+                    Rings.Equals(other.Rings)
             End If
-            Return False
-        End Function
-
-        Private Function TexturesEqual(other As List(Of Texture)) As Boolean
-            If (Textures Is Nothing And other Is Nothing) OrElse (Textures IsNot Nothing And other IsNot Nothing) Then
-                If Textures.Count.Equals(other.Count) Then
-
-                    Dim sortedTextures = Textures.OrderBy(Function(l) l.Path).
-                                                ThenBy(Function(l) l.Quality).
-                                                ThenBy(Function(l) l.Type)
-
-                    Dim sortedOther = other.OrderBy(Function(l) l.Path).
-                                            ThenBy(Function(l) l.Quality).
-                                            ThenBy(Function(l) l.Type)
-
-                    Return sortedTextures.SequenceEqual(sortedOther)
-                End If
-            End If
-
             Return False
         End Function
     End Class
