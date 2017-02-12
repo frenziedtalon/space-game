@@ -1,6 +1,4 @@
-﻿
-
-Namespace Classes
+﻿Namespace Classes
     Public Class CelestialObjectData
         Private ReadOnly _physical As PhysicalData
         Private ReadOnly _orbit As OrbitData
