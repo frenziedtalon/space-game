@@ -87,6 +87,9 @@
     <Compile Include="Model\CelestialObjectType.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RingSystem.vb">
+      <DependentUpon>SolarSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SolarSystem.vb">
       <DependentUpon>SolarSystemEntities.tt</DependentUpon>
     </Compile>

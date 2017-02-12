@@ -1,6 +1,7 @@
 ﻿Imports Core.Classes
 Imports Entities
 Imports Core.Extensions
+Imports Data.Classes
 
 Namespace CelestialObjects
     Public Class OrbitingCelestialObjectBase
@@ -10,8 +11,9 @@ Namespace CelestialObjects
         Protected Sub New(name As String,
                           mass As Mass,
                           textures As List(Of Texture),
-                          entityManager As IEntityManager)
-            MyBase.New(name, mass, textures, entityManager)
+                          entityManager As IEntityManager,
+                          rings As RingData)
+            MyBase.New(name, mass, textures, entityManager, rings)
         End Sub
 
         Private _orbit As IOrbit

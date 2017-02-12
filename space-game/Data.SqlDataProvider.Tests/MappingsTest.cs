@@ -74,5 +74,23 @@ namespace Data.SqlDataProvider.Tests
                 Assert.AreEqual(expected.SemiMajorAxis, result.SemiMajorAxis);
             });
         }
+
+        [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.RingSystem_MapTo_RingData_Data))]
+        public void RingSystem_MapTo_RingData(RingSystem source, RingData expected)
+        {
+            TypeAdapterConfig config = new TypeAdapterConfig { RequireExplicitMapping = true };
+            new global::Data.SqlDataProvider.Mappings().Register(config);
+            new Core.Mappings().Register(config);
+            config.Compile();
+
+            var result = source.Adapt<RingData>(config);
+
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(expected.InnerRadius, result.InnerRadius);
+                Assert.AreEqual(expected.OuterRadius, result.OuterRadius);
+                Assert.AreEqual(expected.Textures, result.Textures);
+            });
+        }
     }
 }

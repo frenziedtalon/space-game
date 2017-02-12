@@ -25,10 +25,12 @@ Partial Public Class CelestialObject
     Public Property ArgumentOfPeriapsis As Nullable(Of Double)
     Public Property LongitudeOfAscendingNode As Nullable(Of Double)
     Public Property MeanAnomalyZero As Nullable(Of Double)
+    Public Property RingSystemId As Nullable(Of Integer)
 
     Public Overridable Property CelestialObjectType As CelestialObjectType
     Public Overridable Property CelestialObject1 As ICollection(Of CelestialObject) = New HashSet(Of CelestialObject)
     Public Overridable Property CelestialObject2 As CelestialObject
+    Public Overridable Property RingSystem As RingSystem
     Public Overridable Property SolarSystem As SolarSystem
     Public Overridable Property TextureGroup As TextureGroup
 

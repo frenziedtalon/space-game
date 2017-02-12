@@ -26,7 +26,7 @@ Public Class StarTests
             }
 
 
-        Dim star As New Star("test", Mass.FromSolarMasses(1), temperature, textures, Distance.FromKilometers(1), entityManager)
+        Dim star As New Star("test", Mass.FromSolarMasses(1), temperature, textures, Distance.FromKilometers(1), entityManager, Nothing)
 
         Assert.AreEqual(expected, star.Classification)
 

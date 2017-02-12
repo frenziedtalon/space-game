@@ -50,11 +50,13 @@ Namespace Classes
                     con.Configuration.LazyLoadingEnabled = False
                     con.Configuration.ProxyCreationEnabled = False
 
-                    Return con.CelestialObjects.
+                    Dim result = con.CelestialObjects.
                                 Where(Function(o) o.SolarSystem.Name = name).
                                 IncludeAllTables().
                                 OrderBy(Function(p) p.PrimaryId).
                                 ToList()
+
+                    Return result
                 End Using
             End If
             Return Nothing

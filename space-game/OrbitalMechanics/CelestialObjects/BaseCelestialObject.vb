@@ -1,6 +1,8 @@
 ﻿Imports Core.Classes
 Imports Core.Extensions
+Imports Data.Classes
 Imports Entities
+Imports OrbitalMechanics.Classes
 
 Namespace CelestialObjects
 
@@ -11,11 +13,13 @@ Namespace CelestialObjects
         Protected Sub New(name As String,
                         mass As Mass,
                         textures As List(Of Texture),
-                        entityManager As IEntityManager)
+                        entityManager As IEntityManager,
+                        rings As RingData)
             MyBase.New(entityManager)
             _name = name
             _mass = mass
             _textures = textures
+            _rings = If(rings IsNot Nothing, New RingSystem(rings.InnerRadius, rings.OuterRadius, rings.Textures), Nothing)
         End Sub
 
         Private ReadOnly _mass As Mass
@@ -61,5 +65,17 @@ Namespace CelestialObjects
             s.SetOrbit(Me, o)
             _satellites.Add(s)
         End Sub
+
+        Private ReadOnly _rings As RingSystem
+        Public ReadOnly Property Rings As RingSystem
+            Get
+                Return _rings
+            End Get
+        End Property
+
+        Public Function ShouldSerializeRings() As Boolean
+            Return _rings IsNot Nothing
+        End Function
+
     End Class
 End Namespace

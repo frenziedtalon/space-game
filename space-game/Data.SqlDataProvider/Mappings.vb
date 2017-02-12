@@ -23,7 +23,8 @@ Public Class Mappings
             Map(Function(dest) dest.Radius, Function(src) src.Radius).
             Map(Function(dest) dest.Mass, Function(src) src.Mass).
             Map(Function(dest) dest.Type, Function(src) src.CelestialObjectType).
-            Map(Function(dest) dest.Textures, Function(src) src.TextureGroup)
+            Map(Function(dest) dest.Textures, Function(src) src.TextureGroup).
+            Map(Function(dest) dest.Rings, function(src) src.RingSystem)
 
         config.ForType(Of CelestialObjectType, Global.Data.Classes.CelestialObjectType).
             MapWith(Function(src) src.Name.ToEnum(Of Global.Data.Classes.CelestialObjectType).Value)
@@ -59,6 +60,13 @@ Public Class Mappings
         config.ForType(Of TextureType, TextureType)()
 
         config.ForType(Of TextureQuality, TextureQuality)()
+
+        config.ForType(Of RingSystem, RingData).
+            Map(Function(dest) dest.InnerRadius, function(src) src.InnerRadius).
+            Map(Function(dest) dest.OuterRadius, function(src) src.OuterRadius).
+            Map(Function(dest) dest.Textures, function(src) src.TextureGroup)
+
+        config.ForType(Of RingSystem, RingSystem)
     End Sub
 
     Private Function MapTextureGroupToListOfTexture(input As TextureGroup, config As TypeAdapterConfig) As List(Of Core.Classes.Texture)

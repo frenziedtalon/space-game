@@ -10,12 +10,13 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class TextureGroup
+Partial Public Class RingSystem
     Public Property Id As Integer
-    Public Property Name As String
+    Public Property InnerRadius As Double
+    Public Property OuterRadius As Double
+    Public Property TextureGroupId As Integer
 
     Public Overridable Property CelestialObjects As ICollection(Of CelestialObject) = New HashSet(Of CelestialObject)
-    Public Overridable Property TextureGroupToTextures As ICollection(Of TextureGroupToTexture) = New HashSet(Of TextureGroupToTexture)
-    Public Overridable Property RingSystems As ICollection(Of RingSystem) = New HashSet(Of RingSystem)
+    Public Overridable Property TextureGroup As TextureGroup
 
 End Class
