@@ -369,6 +369,7 @@ var runGame = () => {
             clouds.material = cloudMaterial;
 
             clouds.position = position;
+            clouds.isPickable = false;
 
             // apply a small rotation. Extend this appropriately when adding object rotation about an axis SG-3, SG-4
             BABYLON.Animation.CreateAndStartAnimation(clouds.name + "Rotation",
