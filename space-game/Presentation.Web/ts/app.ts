@@ -10,7 +10,7 @@ var runGame = () => {
 
     var cameraHelper = new CameraHelper(engine);
     var meshHelper = new MeshHelper(cameraHelper);
-	var mouseHelper = new MouseHelper();
+    var mouseHelper = new MouseHelper();
 
     endTurn();
     createCamera();
@@ -453,49 +453,49 @@ var runGame = () => {
     }
 
     function attachAllEvents() {
-	    attachMouseEvents();
-	    attachKeyboardEvents();
-	    attachWindowEvents();
-		attachUiControlEvents();
+        attachMouseEvents();
+        attachKeyboardEvents();
+        attachWindowEvents();
+        attachUiControlEvents();
     }
 
-	function attachWindowEvents() {
-		// watch for browser/canvas resize events
+    function attachWindowEvents() {
+        // watch for browser/canvas resize events
         window.addEventListener("resize", (ev: UIEvent) => {
             engine.resize();
         });
-	}
+    }
 
-	function attachUiControlEvents() {
+    function attachUiControlEvents() {
         $("#end-turn").click(() => {
             endTurn();
         });
     }
 
-	var mouseStartPosition: Array<number> = [];
+    var mouseStartPosition: Array<number> = [];
 
-	function attachMouseEvents() {
-		canvas.addEventListener("mousedown", (evt: MouseEvent) => {
-			mouseStartPosition = [evt.pageX, evt.pageY];
+    function attachMouseEvents() {
+        canvas.addEventListener("mousedown", (evt: MouseEvent) => {
+            mouseStartPosition = [evt.pageX, evt.pageY];
         });
 
-		canvas.addEventListener("mouseup", (evt: MouseEvent) => {
-			var newPos = [evt.pageX, evt.pageY];
+        canvas.addEventListener("mouseup", (evt: MouseEvent) => {
+            var newPos = [evt.pageX, evt.pageY];
             if (mouseHelper.isClick(mouseStartPosition, newPos)) {
-	            meshHelper.pickMesh(evt, scene);
+                meshHelper.pickMesh(evt, scene);
             }
         });
-	}
+    }
 
-	function attachKeyboardEvents() {
-		// listen for key presses
+    function attachKeyboardEvents() {
+        // listen for key presses
         window.addEventListener("keypress", (evt: KeyboardEvent) => {
             if (evt.keyCode === 32) {
                 // spacebar
                 toggleDebugLayer();
             }
         });
-	}
+    }
 
     function setSceneScaling(bounds: SceneScaling): void {
         scaling = new Scaling(bounds);
