@@ -601,7 +601,8 @@ var runGame = () => {
             const material = createMaterial(info.Name + "Rings", info.Rings.Textures);
 
             if (material.opacityTexture == null) {
-                material.diffuseTexture.hasAlpha = true;
+                material.opacityTexture = material.diffuseTexture;
+                material.opacityTexture.getAlphaFromRGB = true;
             }
 
             ribbon.material = material;
