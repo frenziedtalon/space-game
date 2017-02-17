@@ -54,6 +54,7 @@
     <Content Include="Assets\Images\Planet\Medium\saturn_ring.png" />
     <Content Include="Assets\Images\Planet\Medium\uranus.jpg" />
     <Content Include="Assets\Images\Planet\Medium\venus.jpg" />
+    <Content Include="Assets\Images\Rings\Low\jupiter-rings-diffuse.png" />
     <Content Include="Assets\Images\Rings\Low\saturn-rings-backscattered.png" />
     <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
