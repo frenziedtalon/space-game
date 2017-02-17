@@ -10,4 +10,15 @@ class PathHelper {
 
         return result;
     }
+
+    static generatePlanetaryRingsPaths(scaledInnerRadius: number, scaledOuterRadius: number): Array<Array<BABYLON.Vector3>> {
+        const innerPath = this.generateCircularPath(scaledInnerRadius);
+        const outerPath = this.generateCircularPath(scaledOuterRadius);
+
+        const paths = [];
+        paths.push(innerPath);
+        paths.push(outerPath);
+
+        return paths;
+    }
 }

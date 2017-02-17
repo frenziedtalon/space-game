@@ -579,13 +579,11 @@ var runGame = () => {
 
     function renderRings(info: BaseCelestialObject, parent: BABYLON.Mesh): void {
         if (info.hasOwnProperty("Rings")) {
-            
-            const innerPath = PathHelper.generateCircularPath(scaleRadius(info.Rings.InnerRadius));
-            const outerPath = PathHelper.generateCircularPath(scaleRadius(info.Rings.OuterRadius));
 
-            const paths = [];
-            paths.push(innerPath);
-            paths.push(outerPath);
+            const scaledInnerRadius = scaleRadius(info.Rings.InnerRadius);
+            const scaledOuterRadius = scaleRadius(info.Rings.OuterRadius);
+
+            const paths = PathHelper.generatePlanetaryRingsPaths(scaledInnerRadius, scaledOuterRadius);
 
             const options = {
                 pathArray: paths,
