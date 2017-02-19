@@ -273,6 +273,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Camera\Camera.csproj">
+      <Project>{57d88227-20ad-4e0f-882e-2966ab9b2c7b}</Project>
+      <Name>Camera</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\jespers\Jespers.Mappings\Jespers.Mappings.csproj">
       <Project>{078d62a7-76d5-45db-ab04-e9adc0cdc2d3}</Project>
       <Name>Jespers.Mappings</Name>
@@ -280,10 +284,6 @@
     <ProjectReference Include="..\Camera.InMemoryCamera\Camera.InMemoryCamera.vbproj">
       <Project>{e9c8d057-371a-4b7c-b2bb-4b5b07db02ac}</Project>
       <Name>Camera.InMemoryCamera</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Camera\Camera.vbproj">
-      <Project>{10644977-96c4-4144-aa73-78043e86fb29}</Project>
-      <Name>Camera</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core\Core.vbproj">
       <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
