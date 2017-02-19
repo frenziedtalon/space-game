@@ -375,9 +375,9 @@ var runGame = () => {
                 clouds,
                 "rotation.y",
                 30,
-                31000,
-                0,
+                40000,
                 10,
+                0,
                 BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
             clouds.parent = parent;
 
