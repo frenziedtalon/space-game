@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25008.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0E976BD5-CE22-4D60-80EB-E87BBABB24CE}"
 	ProjectSection(SolutionItems) = preProject
@@ -51,7 +51,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jespers.Mappings", "jespers
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.SqlDataProvider.Tests", "space-game\Data.SqlDataProvider.Tests\Data.SqlDataProvider.Tests.csproj", "{50066FA9-7698-4218-9DFB-EE774E845BF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camera", "Camera\Camera.csproj", "{57D88227-20AD-4E0F-882E-2966AB9B2C7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camera", "space-game\Camera\Camera.csproj", "{57D88227-20AD-4E0F-882E-2966AB9B2C7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
