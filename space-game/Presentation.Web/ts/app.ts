@@ -10,7 +10,7 @@ var runGame = () => {
 
     var cameraHelper = new CameraHelper(engine);
     var meshHelper = new MeshHelper(cameraHelper);
-	var mouseHelper = new MouseHelper();
+    var mouseHelper = new MouseHelper();
 
     endTurn();
     createCamera();
@@ -281,6 +281,7 @@ var runGame = () => {
         createCloudLayer(info.Name, textures, scaledDiameter, mesh.position);
         drawOrbit(info.Orbit, info.Name + "Orbit", parent);
         renderSatellites(info, mesh);
+        renderRings(info, mesh);
 
         // apply a small rotation. Extend this appropriately when adding object rotation about an axis SG-3, SG-4
         BABYLON.Animation.CreateAndStartAnimation(info.Name + "Rotation",
@@ -368,6 +369,7 @@ var runGame = () => {
             clouds.material = cloudMaterial;
 
             clouds.position = position;
+            clouds.isPickable = false;
 
             // apply a small rotation. Extend this appropriately when adding object rotation about an axis SG-3, SG-4
             BABYLON.Animation.CreateAndStartAnimation(clouds.name + "Rotation",
@@ -451,49 +453,49 @@ var runGame = () => {
     }
 
     function attachAllEvents() {
-	    attachMouseEvents();
-	    attachKeyboardEvents();
-	    attachWindowEvents();
-		attachUiControlEvents();
+        attachMouseEvents();
+        attachKeyboardEvents();
+        attachWindowEvents();
+        attachUiControlEvents();
     }
 
-	function attachWindowEvents() {
-		// watch for browser/canvas resize events
+    function attachWindowEvents() {
+        // watch for browser/canvas resize events
         window.addEventListener("resize", (ev: UIEvent) => {
             engine.resize();
         });
-	}
+    }
 
-	function attachUiControlEvents() {
+    function attachUiControlEvents() {
         $("#end-turn").click(() => {
             endTurn();
         });
     }
 
-	var mouseStartPosition: Array<number> = [];
+    var mouseStartPosition: Array<number> = [];
 
-	function attachMouseEvents() {
-		canvas.addEventListener("mousedown", (evt: MouseEvent) => {
-			mouseStartPosition = [evt.pageX, evt.pageY];
+    function attachMouseEvents() {
+        canvas.addEventListener("mousedown", (evt: MouseEvent) => {
+            mouseStartPosition = [evt.pageX, evt.pageY];
         });
 
-		canvas.addEventListener("mouseup", (evt: MouseEvent) => {
-			var newPos = [evt.pageX, evt.pageY];
+        canvas.addEventListener("mouseup", (evt: MouseEvent) => {
+            var newPos = [evt.pageX, evt.pageY];
             if (mouseHelper.isClick(mouseStartPosition, newPos)) {
-	            meshHelper.pickMesh(evt, scene);
+                meshHelper.pickMesh(evt, scene);
             }
         });
-	}
+    }
 
-	function attachKeyboardEvents() {
-		// listen for key presses
+    function attachKeyboardEvents() {
+        // listen for key presses
         window.addEventListener("keypress", (evt: KeyboardEvent) => {
             if (evt.keyCode === 32) {
                 // spacebar
                 toggleDebugLayer();
             }
         });
-	}
+    }
 
     function setSceneScaling(bounds: SceneScaling): void {
         scaling = new Scaling(bounds);
@@ -573,5 +575,36 @@ var runGame = () => {
             return sceneObjectsLookup[target];
         }
         return null;
+    }
+
+    function renderRings(info: BaseCelestialObject, parent: BABYLON.Mesh): void {
+        if (info.hasOwnProperty("Rings")) {
+
+            const scaledInnerRadius = scaleRadius(info.Rings.InnerRadius);
+            const scaledOuterRadius = scaleRadius(info.Rings.OuterRadius);
+
+            const paths = PathHelper.generatePlanetaryRingsPaths(scaledInnerRadius, scaledOuterRadius);
+
+            const options = {
+                pathArray: paths,
+                closeArray: false,
+                closePath: true,
+                sideOrientation: BABYLON.Mesh.DOUBLESIDE,
+                invertUV: true
+            }
+
+            const ribbon = BABYLON.MeshBuilder.CreateRibbon(info.Name + "Rings", options, scene);
+            ribbon.isPickable = false;
+
+            const material = createMaterial(info.Name + "Rings", info.Rings.Textures);
+
+            if (material.opacityTexture == null) {
+                material.opacityTexture = material.diffuseTexture;
+                material.opacityTexture.getAlphaFromRGB = true;
+            }
+
+            ribbon.material = material;
+            ribbon.parent = parent;
+        }
     }
 };

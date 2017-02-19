@@ -42,8 +42,16 @@ namespace Data.SqlDataProvider.Tests
             config.Compile();
 
             var result = source.Adapt<PhysicalData>(config);
-
-            Assert.AreEqual(expected, result);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(expected.Textures, result.Textures);
+                Assert.AreEqual(expected.Rings, result.Rings);
+                Assert.AreEqual(expected.Mass, result.Mass);
+                Assert.AreEqual(expected.Name, result.Name);
+                Assert.AreEqual(expected.Radius, result.Radius);
+                Assert.AreEqual(expected.Type, result.Type);
+            });
         }
 
         [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.SqlDataProviderCelestialObject_MapTo_DataOrbitData_Data))]
@@ -56,12 +64,33 @@ namespace Data.SqlDataProvider.Tests
 
             var result = source.Adapt<OrbitData>(config);
 
-            Assert.AreEqual(expected.ArgumentOfPeriapsis, result.ArgumentOfPeriapsis);
-            Assert.AreEqual(expected.Eccentricity, result.Eccentricity);
-            Assert.AreEqual(expected.Inclination, result.Inclination);
-            Assert.AreEqual(expected.LongitudeOfAscendingNode, result.LongitudeOfAscendingNode);
-            Assert.AreEqual(expected.MeanAnomalyZero, result.MeanAnomalyZero);
-            Assert.AreEqual(expected.SemiMajorAxis, result.SemiMajorAxis);
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(expected.ArgumentOfPeriapsis, result.ArgumentOfPeriapsis);
+                Assert.AreEqual(expected.Eccentricity, result.Eccentricity);
+                Assert.AreEqual(expected.Inclination, result.Inclination);
+                Assert.AreEqual(expected.LongitudeOfAscendingNode, result.LongitudeOfAscendingNode);
+                Assert.AreEqual(expected.MeanAnomalyZero, result.MeanAnomalyZero);
+                Assert.AreEqual(expected.SemiMajorAxis, result.SemiMajorAxis);
+            });
+        }
+
+        [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.RingSystem_MapTo_RingData_Data))]
+        public void RingSystem_MapTo_RingData(RingSystem source, RingData expected)
+        {
+            TypeAdapterConfig config = new TypeAdapterConfig { RequireExplicitMapping = true };
+            new global::Data.SqlDataProvider.Mappings().Register(config);
+            new Core.Mappings().Register(config);
+            config.Compile();
+
+            var result = source.Adapt<RingData>(config);
+
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(expected.InnerRadius, result.InnerRadius);
+                Assert.AreEqual(expected.OuterRadius, result.OuterRadius);
+                Assert.AreEqual(expected.Textures, result.Textures);
+            });
         }
     }
 }

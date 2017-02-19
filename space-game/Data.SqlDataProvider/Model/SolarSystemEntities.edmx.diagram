@@ -16,18 +16,22 @@
         <AssociationConnector Association="SolarSystemModel.FK_Users_CreatedBy" />
         <AssociationConnector Association="SolarSystemModel.FK_Users_ModifiedBy" />
         <EntityTypeShape EntityType="SolarSystemModel.CelestialObjectType" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="SolarSystemModel.CelestialObject" Width="1.5" PointX="7.75" PointY="1.75" />
         <EntityTypeShape EntityType="SolarSystemModel.TextureGroup" Width="1.5" PointX="9.875" PointY="3.75" />
         <EntityTypeShape EntityType="SolarSystemModel.TextureGroupToTexture" Width="1.5" PointX="12.125" PointY="3.75" />
-        <EntityTypeShape EntityType="SolarSystemModel.TexturePath" Width="1.5" PointX="17" PointY="5.875" />
+        <AssociationConnector Association="SolarSystemModel.FK_TextureGroupToTexture_TextureGroup" />
+        <EntityTypeShape EntityType="SolarSystemModel.CelestialObject" Width="1.5" PointX="7.5" PointY="1.5" />
+        <EntityTypeShape EntityType="SolarSystemModel.RingSystem" Width="1.5" PointX="9.875" PointY="0.625" />
         <AssociationConnector Association="SolarSystemModel.FK_CelestialObject_CelestialObjectType" />
         <AssociationConnector Association="SolarSystemModel.FK_CelestialObject_Primary" />
+        <AssociationConnector Association="SolarSystemModel.FK_CelestialObject_RingSystem" />
         <AssociationConnector Association="SolarSystemModel.FK_CelestialObject_SolarSystem" />
         <AssociationConnector Association="SolarSystemModel.FK_CelestialObject_TextureGroup" />
-        <AssociationConnector Association="SolarSystemModel.FK_TextureGroupToTexture_TextureGroup" />
-        <EntityTypeShape EntityType="SolarSystemModel.TextureQuality" Width="1.5" PointX="17" PointY="3.75" />
-        <EntityTypeShape EntityType="SolarSystemModel.TextureType" Width="1.5" PointX="17" PointY="1.75" />
-        <EntityTypeShape EntityType="SolarSystemModel.Texture" Width="1.5" PointX="14.625" PointY="3.25" />
+        <AssociationConnector Association="SolarSystemModel.FK_RingSystem_TextureGroup" ManuallyRouted="false" >
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SolarSystemModel.Texture" Width="1.5" PointX="14.5" PointY="3.5" />
+        <EntityTypeShape EntityType="SolarSystemModel.TexturePath" Width="1.5" PointX="17.25" PointY="4.375" />
+        <EntityTypeShape EntityType="SolarSystemModel.TextureQuality" Width="1.5" PointX="17.125" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SolarSystemModel.TextureType" Width="1.5" PointX="17" PointY="2.125" />
         <AssociationConnector Association="SolarSystemModel.FK_Texture_TexturePath" />
         <AssociationConnector Association="SolarSystemModel.FK_Texture_TextureQuality" />
         <AssociationConnector Association="SolarSystemModel.FK_Texture_TextureType" />

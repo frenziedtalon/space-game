@@ -3,4 +3,5 @@ class BaseCelestialObject extends BaseGameEntity implements ICelestialObject {
     Name: string;
     Textures: Array<Texture>;
     Satellites: Array<OrbitingCelestialObjectBase>;
+    Rings: RingSystem;
 }

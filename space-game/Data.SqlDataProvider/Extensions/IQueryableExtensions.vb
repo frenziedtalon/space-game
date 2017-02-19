@@ -7,8 +7,10 @@ Namespace Extensions
         <Extension>
         Public Function IncludeAllTables(this As IQueryable(Of CelestialObject)) As IQueryable(Of CelestialObject)
             Return this.
-                IncludeTextures().
-                IncludeType()
+                IncludeType().
+                IncludeRingSystem().
+                IncludeTextures()
+
         End Function
 
         <Extension>
@@ -23,6 +25,15 @@ Namespace Extensions
         <Extension>
         Private Function IncludeType(this As IQueryable(Of CelestialObject)) As IQueryable(Of CelestialObject)
             Return this.Include(Function(s) s.CelestialObjectType)
+        End Function
+
+        <Extension>
+        Private Function IncludeRingSystem(this As IQueryable(Of CelestialObject)) As IQueryable(Of CelestialObject)
+            Return this.Include(Function(s) s.RingSystem).
+                                Include(Function(s) s.RingSystem.TextureGroup).
+                                Include(Function(s) s.RingSystem.TextureGroup.TextureGroupToTextures.Select(Function(t) t.Texture.TextureType)).
+                                Include(Function(s) s.RingSystem.TextureGroup.TextureGroupToTextures.Select(Function(t) t.Texture.TexturePath)).
+                                Include(Function(s) s.RingSystem.TextureGroup.TextureGroupToTextures.Select(Function(t) t.Texture.TextureQuality))
         End Function
 
     End Module

@@ -16,9 +16,10 @@ Namespace CelestialObjects
                        surfaceTemperature As Integer,
                        textures As List(Of Texture),
                        radius As Distance,
-                       entityManager As IEntityManager)
+                       entityManager As IEntityManager,
+                       rings As RingData)
 
-            MyBase.New(name, mass, textures, entityManager)
+            MyBase.New(name, mass, textures, entityManager, rings)
             _surfaceTemperature = surfaceTemperature
             _radius = radius
         End Sub
@@ -27,7 +28,7 @@ Namespace CelestialObjects
                        physicalData As PhysicalData,
                        entityManager As IEntityManager)
 
-            MyBase.New(physicalData.Name, physicalData.Mass, physicalData.Textures, entityManager)
+            MyBase.New(physicalData.Name, physicalData.Mass, physicalData.Textures, entityManager, physicalData.Rings)
             _surfaceTemperature = surfaceTemperature
             _radius = physicalData.Radius
         End Sub

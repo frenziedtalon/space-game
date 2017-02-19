@@ -38,5 +38,13 @@ Namespace Extensions
 
             Assert.AreEqual(expected, result)
         End Sub
+
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.IsEquivalent_WhenGivenAList_ReturnsExpected_NullAndEmpty))>
+        <TestCaseSource(GetType(EnumerableExtensionsTestsData), NameOf(EnumerableExtensionsTestsData.IsEquivalent_WhenGivenAList_ReturnsExpected_Contents))>
+        Public Sub IsEquivalent_WhenGivenAList_ReturnsExpected(one As List(Of Texture), two As List(Of Texture), expected As Boolean)
+            Dim result = one.IsEquivalent(two)
+
+            Assert.AreEqual(expected, result)
+        End Sub
     End Class
 End Namespace

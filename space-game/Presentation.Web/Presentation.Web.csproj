@@ -54,6 +54,10 @@
     <Content Include="Assets\Images\Planet\Medium\saturn_ring.png" />
     <Content Include="Assets\Images\Planet\Medium\uranus.jpg" />
     <Content Include="Assets\Images\Planet\Medium\venus.jpg" />
+    <Content Include="Assets\Images\Rings\Low\jupiter-rings-diffuse.png" />
+    <Content Include="Assets\Images\Rings\Low\neptune-rings.png" />
+    <Content Include="Assets\Images\Rings\Low\saturn-rings-backscattered.png" />
+    <Content Include="Assets\Images\Rings\Low\uranus-rings.png" />
     <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
@@ -82,6 +86,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Images\Rings\High\" />
+    <Folder Include="Assets\Images\Rings\Medium\" />
     <Folder Include="Assets\Images\Star\High\" />
     <Folder Include="css\" />
   </ItemGroup>
@@ -89,6 +95,7 @@
     <TypeScriptCompile Include="node_modules\babylonjs\babylon.d.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\Classes\Angle.ts" />
+    <TypeScriptCompile Include="ts\Classes\CelestialObjects\Properties\RingSystem.ts" />
     <TypeScriptCompile Include="ts\Classes\Motion\AstronomicalUnit.ts" />
     <TypeScriptCompile Include="ts\Classes\Base\BaseCelestialObject.ts" />
     <TypeScriptCompile Include="ts\Classes\Base\BaseGameEntity.ts" />
@@ -100,6 +107,8 @@
     <TypeScriptCompile Include="ts\Classes\Textures\TextureType.ts" />
     <TypeScriptCompile Include="ts\Helpers\AngleHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\AnimationHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\CoordinateHelper.ts" />
+    <TypeScriptCompile Include="ts\Helpers\PathHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\TextureHelper.ts" />
     <TypeScriptCompile Include="ts\Interfaces\I3DObject.ts" />
     <TypeScriptCompile Include="ts\Interfaces\ICelestialObject.ts" />

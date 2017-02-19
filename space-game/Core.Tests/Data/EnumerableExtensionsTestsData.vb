@@ -187,5 +187,31 @@ Namespace Data
                     New TestCaseData(textures, expected)
                 }
         End Function
+
+        Public Shared Function IsEquivalent_WhenGivenAList_ReturnsExpected_NullAndEmpty() As List(Of TestCaseData)
+            Return New List(Of TestCaseData) From {
+                    New TestCaseData(New List(Of Texture), Nothing, False)
+                  }
+        End Function
+
+        Public Shared Function IsEquivalent_WhenGivenAList_ReturnsExpected_Contents() As List(Of TestCaseData)
+
+            Dim allCopy = New List(Of Texture)(All)
+            Dim allWithExtra = New List(Of Texture)(All)
+
+            allWithExtra.Add(New Texture() With {.QualityEnum = TextureQuality.Medium,
+                                            .TypeEnum = TextureType.Opacity,
+                                            .Path = "extra texture"})
+
+            All.Reverse()
+
+            Return New List(Of TestCaseData) From {
+                    New TestCaseData(All, All, True),
+                    New TestCaseData(allCopy, allCopy, True),
+                    New TestCaseData(allCopy, All, True),
+                    New TestCaseData(All, OnlyLow, False),
+                    New TestCaseData(All, allWithExtra, False)
+                  }
+        End Function
     End Class
 End Namespace

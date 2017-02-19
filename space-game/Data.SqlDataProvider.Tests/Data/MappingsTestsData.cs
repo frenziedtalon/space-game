@@ -77,7 +77,8 @@ namespace Data.SqlDataProvider.Tests.Data
                 mass: Mass.FromKilograms(1.98855E+30),
                 radius: Distance.FromKilometers(695700),
                 textures: SampleListOfTexture,
-                type: global::Data.Classes.CelestialObjectType.Star
+                type: global::Data.Classes.CelestialObjectType.Star,
+                rings: null
             );
 
             result.Add(new TestCaseData(CelestialObjectWithoutOrbit, expectedWithoutOrbit));
@@ -87,10 +88,22 @@ namespace Data.SqlDataProvider.Tests.Data
                 mass: Mass.FromKilograms(5.9736E+24),
                 radius: Distance.FromKilometers(6371),
                 textures: SampleListOfTexture,
-                type: global::Data.Classes.CelestialObjectType.Planet
+                type: global::Data.Classes.CelestialObjectType.Planet,
+                rings: null
             );
 
             result.Add(new TestCaseData(CelestialObjectWithOrbit, expectedWithOrbit));
+
+            var expectedWithRingSystem = new PhysicalData(
+                name: "Sol",
+                mass: Mass.FromKilograms(1.98855E+30),
+                radius: Distance.FromKilometers(695700),
+                textures: SampleListOfTexture,
+                type: global::Data.Classes.CelestialObjectType.Star,
+                rings: SampleRingData
+            );
+
+            result.Add(new TestCaseData(CelestialObjectWithRingSystem, expectedWithRingSystem));
 
             return result;
         }
@@ -113,7 +126,30 @@ namespace Data.SqlDataProvider.Tests.Data
             Inclination = null,
             ArgumentOfPeriapsis = null,
             LongitudeOfAscendingNode = null,
-            MeanAnomalyZero = null
+            MeanAnomalyZero = null,
+            RingSystem = null
+        };
+
+        private static CelestialObject CelestialObjectWithRingSystem => new CelestialObject()
+        {
+            Id = 1,
+            Name = "Sol",
+            SolarSystemId = 1,
+            Mass = 1.98855E+30,
+            Radius = 695700,
+            TextureGroup = SampleTextureGroup,
+            CelestialObjectType = new CelestialObjectType()
+            {
+                Name = "Star"
+            },
+            PrimaryId = null,
+            SemiMajorAxis = null,
+            Eccentricity = null,
+            Inclination = null,
+            ArgumentOfPeriapsis = null,
+            LongitudeOfAscendingNode = null,
+            MeanAnomalyZero = null,
+            RingSystem = SampleRingSystem
         };
 
         private static CelestialObject CelestialObjectWithOrbit => new CelestialObject()
@@ -134,7 +170,8 @@ namespace Data.SqlDataProvider.Tests.Data
             Inclination = 12.1234,
             ArgumentOfPeriapsis = 282.9404,
             LongitudeOfAscendingNode = 123.45,
-            MeanAnomalyZero = 356.047
+            MeanAnomalyZero = 356.047,
+            RingSystem = null
         };
 
         public static List<TestCaseData> SqlDataProviderCelestialObject_MapTo_DataOrbitData_Data()
@@ -152,6 +189,32 @@ namespace Data.SqlDataProvider.Tests.Data
             {
                 new TestCaseData(CelestialObjectWithoutOrbit, nullOrbit),
                 new TestCaseData(CelestialObjectWithOrbit, validOrbit)
+            };
+        }
+
+
+        private const int RingSystemInnerRadiusKilometers = 10000;
+        private const int RingSystemOuterRadiusKilometers = 100000;
+
+        private static RingSystem SampleRingSystem => new RingSystem()
+        {
+            InnerRadius = RingSystemInnerRadiusKilometers,
+            OuterRadius = RingSystemOuterRadiusKilometers,
+            TextureGroup = SampleTextureGroup
+        };
+
+        private static RingData SampleRingData => new RingData()
+        {
+            InnerRadius = Distance.FromKilometers(RingSystemInnerRadiusKilometers),
+            OuterRadius = Distance.FromKilometers(RingSystemOuterRadiusKilometers),
+            Textures = SampleListOfTexture
+        };
+
+        public static List<TestCaseData> RingSystem_MapTo_RingData_Data()
+        {
+            return new List<TestCaseData>
+            {
+                new TestCaseData(SampleRingSystem, SampleRingData)
             };
         }
     }
