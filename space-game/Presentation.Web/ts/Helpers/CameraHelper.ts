@@ -101,7 +101,10 @@ class CameraHelper {
 
     setCameraTargetFromId(id: string, scene: BABYLON.Scene, userInitiated: boolean): void {
         const mesh = scene.getMeshByID(id);
-        this.setCameraTarget(mesh, scene, userInitiated);
+
+        if (!(mesh === null || mesh === undefined)) {
+            this.setCameraTarget(mesh, scene, userInitiated);
+        }
     }
 
     userSelectedTarget(mesh: BABYLON.AbstractMesh, scene: BABYLON.Scene): void {
