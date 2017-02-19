@@ -278,7 +278,7 @@ var runGame = () => {
         mesh.material = createMaterial(info.Name, info.Textures);
 
         // render optional attributes
-        createCloudLayer(info.Name, textures, scaledDiameter, mesh.position);
+        createCloudLayer(info.Name, textures, scaledDiameter, mesh);
         drawOrbit(info.Orbit, info.Name + "Orbit", parent);
         renderSatellites(info, mesh);
         renderRings(info, mesh);
@@ -348,7 +348,7 @@ var runGame = () => {
         return t;
     }
 
-    function createCloudLayer(name: string, textures: Array<Texture>, parentDiameter: number, position: BABYLON.Vector3): void {
+    function createCloudLayer(name: string, textures: Array<Texture>, parentDiameter: number, parent: BABYLON.Mesh): void {
         // if we have a texture for a cloud layer then create a mesh in the same position, but a little larger
         const cloudTexture = TextureHelper.getType(textures, TextureType.Clouds);
 
@@ -368,7 +368,6 @@ var runGame = () => {
             cloudMaterial.opacityTexture.getAlphaFromRGB = true;
             clouds.material = cloudMaterial;
 
-            clouds.position = position;
             clouds.isPickable = false;
 
             // apply a small rotation. Extend this appropriately when adding object rotation about an axis SG-3, SG-4
@@ -376,10 +375,13 @@ var runGame = () => {
                 clouds,
                 "rotation.y",
                 30,
-                31000,
-                0,
+                40000,
                 10,
+                0,
                 BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
+            clouds.parent = parent;
+
+            BABYLON.Tags.AddTagsTo(clouds, "clouds");
         }
     }
 
