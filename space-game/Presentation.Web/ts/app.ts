@@ -380,6 +380,8 @@ var runGame = () => {
                 10,
                 BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
             clouds.parent = parent;
+
+            BABYLON.Tags.AddTagsTo(clouds, "clouds");
         }
     }
 
