@@ -285,10 +285,6 @@
       <Project>{57d88227-20ad-4e0f-882e-2966ab9b2c7b}</Project>
       <Name>Camera</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Core.vbproj">
-      <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Data.SqlDataProvider\Data.SqlDataProvider.vbproj">
       <Project>{56b17816-2820-401b-9f41-dfcec79cc4cf}</Project>
       <Name>Data.SqlDataProvider</Name>
@@ -368,5 +364,3 @@
   <Target Name="AfterBuild">
   </Target> -->
 </Project>
-
-

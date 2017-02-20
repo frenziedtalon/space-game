@@ -48,8 +48,8 @@
       <Project>{57d88227-20ad-4e0f-882e-2966ab9b2c7b}</Project>
       <Name>Camera</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Core.vbproj">
-      <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{e0ed42ab-656a-4dcf-84b8-3ec80fbe9a9b}</Project>
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
