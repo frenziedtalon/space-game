@@ -113,8 +113,8 @@
       <Project>{e0ed42ab-656a-4dcf-84b8-3ec80fbe9a9b}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Entities\Entities.vbproj">
-      <Project>{b62b331d-c212-4f81-8df7-43f44d605b30}</Project>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{f6b83752-0d0d-4166-b05d-efffe4c3f0c1}</Project>
       <Name>Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.vbproj">
