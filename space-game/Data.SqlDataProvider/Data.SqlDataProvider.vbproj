@@ -189,13 +189,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\Data.csproj">
+      <Project>{b3dc3f3a-1900-4b31-8504-3bfe76e1026f}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{e0ed42ab-656a-4dcf-84b8-3ec80fbe9a9b}</Project>
       <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Data\Data.vbproj">
-      <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
-      <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -211,4 +211,3 @@
   </Target>
   -->
 </Project>
-
