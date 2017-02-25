@@ -12,7 +12,7 @@ namespace Data.Classes
         public Distance OuterRadius { get; set; }
         public List<Texture> Textures { get; set; }
 
-        public new bool Equals(RingData other)
+        public bool Equals(RingData other)
         {
             if (other != null)
             {
