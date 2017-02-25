@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F6B83752-0D0D-4166-B05D-EFFFE4C3F0C1}</ProjectGuid>
+    <ProjectGuid>{C6EB2FDE-B87D-44ED-A7E9-C478B861DDB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Entities</RootNamespace>
-    <AssemblyName>Entities</AssemblyName>
+    <RootNamespace>Messaging</RootNamespace>
+    <AssemblyName>Messaging</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,16 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseGameEntity.cs" />
-    <Compile Include="EntityManager.cs" />
-    <Compile Include="IEntityManager.cs" />
+    <Compile Include="MessageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Messaging\Messaging.csproj">
-      <Project>{c6eb2fde-b87d-44ed-a7e9-c478b861ddb7}</Project>
-      <Name>Messaging</Name>
-    </ProjectReference>
+    <Compile Include="Telegram.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

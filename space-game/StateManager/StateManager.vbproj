@@ -100,8 +100,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Messaging\Messaging.vbproj">
-      <Project>{1c0dda45-b79a-468a-95d9-08ed9ec3ec4f}</Project>
+    <ProjectReference Include="..\Messaging\Messaging.csproj">
+      <Project>{c6eb2fde-b87d-44ed-a7e9-c478b861ddb7}</Project>
       <Name>Messaging</Name>
     </ProjectReference>
   </ItemGroup>
