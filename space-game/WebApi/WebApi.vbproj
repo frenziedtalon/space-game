@@ -273,10 +273,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\Data.csproj">
-      <Project>{b3dc3f3a-1900-4b31-8504-3bfe76e1026f}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\jespers\Jespers.Mappings\Jespers.Mappings.csproj">
       <Project>{078d62a7-76d5-45db-ab04-e9adc0cdc2d3}</Project>
       <Name>Jespers.Mappings</Name>
@@ -292,6 +288,10 @@
     <ProjectReference Include="..\Data.SqlDataProvider\Data.SqlDataProvider.vbproj">
       <Project>{56b17816-2820-401b-9f41-dfcec79cc4cf}</Project>
       <Name>Data.SqlDataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{b3dc3f3a-1900-4b31-8504-3bfe76e1026f}</Project>
+      <Name>Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{f6b83752-0d0d-4166-b05d-efffe4c3f0c1}</Project>

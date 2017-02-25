@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\space-game\Core\Core.csproj">
+    <ProjectReference Include="..\Core\Core.csproj">
       <Project>{e0ed42ab-656a-4dcf-84b8-3ec80fbe9a9b}</Project>
       <Name>Core</Name>
     </ProjectReference>

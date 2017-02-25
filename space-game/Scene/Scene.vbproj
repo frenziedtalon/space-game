@@ -105,13 +105,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\Data.csproj">
-      <Project>{b3dc3f3a-1900-4b31-8504-3bfe76e1026f}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{e0ed42ab-656a-4dcf-84b8-3ec80fbe9a9b}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{b3dc3f3a-1900-4b31-8504-3bfe76e1026f}</Project>
+      <Name>Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{f6b83752-0d0d-4166-b05d-efffe4c3f0c1}</Project>

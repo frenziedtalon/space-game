@@ -62,10 +62,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\Data.csproj">
-      <Project>{b3dc3f3a-1900-4b31-8504-3bfe76e1026f}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{e0ed42ab-656a-4dcf-84b8-3ec80fbe9a9b}</Project>
       <Name>Core</Name>
@@ -73,6 +69,10 @@
     <ProjectReference Include="..\Data.SqlDataProvider\Data.SqlDataProvider.vbproj">
       <Project>{56b17816-2820-401b-9f41-dfcec79cc4cf}</Project>
       <Name>Data.SqlDataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{b3dc3f3a-1900-4b31-8504-3bfe76e1026f}</Project>
+      <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
