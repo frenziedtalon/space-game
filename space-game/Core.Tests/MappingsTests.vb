@@ -1,5 +1,4 @@
 ﻿Imports Core.Classes
-Imports Core.Classes.Classes
 Imports Mapster
 Imports NUnit.Framework
 
