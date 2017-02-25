@@ -25,8 +25,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Web", "space-g
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Scene", "space-game\Scene\Scene.vbproj", "{0C3F75E6-608F-4FC5-8F2A-1C74C01807CE}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TurnTracker", "space-game\TurnTracker\TurnTracker.vbproj", "{5A34BF92-2AC1-43DC-AF9D-5880FCBEC581}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TurnTracker.InMemoryTurnTracker", "space-game\TurnTracker.InMemoryTurnTracker\TurnTracker.InMemoryTurnTracker.vbproj", "{DC91D260-31A7-4DD0-97FC-BD6DBCAC0396}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TurnTracker.Tests", "space-game\TurnTracker.Tests\TurnTracker.Tests.vbproj", "{87F6BF8F-4C73-4A68-B8D8-A34DC8FA002D}"
@@ -52,6 +50,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging", "space-game\Messaging\Messaging.csproj", "{C6EB2FDE-B87D-44ED-A7E9-C478B861DDB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateManager", "space-game\StateManager\StateManager.csproj", "{15B3844E-D749-46E6-8AA2-0BFD685FEDC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnTracker", "space-game\TurnTracker\TurnTracker.csproj", "{4054BF2B-67A6-47FF-9732-8C33584112FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,14 +125,6 @@ Global
 		{0C3F75E6-608F-4FC5-8F2A-1C74C01807CE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0C3F75E6-608F-4FC5-8F2A-1C74C01807CE}.Release|x64.ActiveCfg = Release|Any CPU
 		{0C3F75E6-608F-4FC5-8F2A-1C74C01807CE}.Release|x64.Build.0 = Release|Any CPU
-		{5A34BF92-2AC1-43DC-AF9D-5880FCBEC581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A34BF92-2AC1-43DC-AF9D-5880FCBEC581}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A34BF92-2AC1-43DC-AF9D-5880FCBEC581}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{5A34BF92-2AC1-43DC-AF9D-5880FCBEC581}.Debug|x64.Build.0 = Debug|Any CPU
-		{5A34BF92-2AC1-43DC-AF9D-5880FCBEC581}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A34BF92-2AC1-43DC-AF9D-5880FCBEC581}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A34BF92-2AC1-43DC-AF9D-5880FCBEC581}.Release|x64.ActiveCfg = Release|Any CPU
-		{5A34BF92-2AC1-43DC-AF9D-5880FCBEC581}.Release|x64.Build.0 = Release|Any CPU
 		{DC91D260-31A7-4DD0-97FC-BD6DBCAC0396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC91D260-31A7-4DD0-97FC-BD6DBCAC0396}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC91D260-31A7-4DD0-97FC-BD6DBCAC0396}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -229,6 +221,14 @@ Global
 		{15B3844E-D749-46E6-8AA2-0BFD685FEDC4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15B3844E-D749-46E6-8AA2-0BFD685FEDC4}.Release|x64.ActiveCfg = Release|Any CPU
 		{15B3844E-D749-46E6-8AA2-0BFD685FEDC4}.Release|x64.Build.0 = Release|Any CPU
+		{4054BF2B-67A6-47FF-9732-8C33584112FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4054BF2B-67A6-47FF-9732-8C33584112FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4054BF2B-67A6-47FF-9732-8C33584112FC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4054BF2B-67A6-47FF-9732-8C33584112FC}.Debug|x64.Build.0 = Debug|Any CPU
+		{4054BF2B-67A6-47FF-9732-8C33584112FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4054BF2B-67A6-47FF-9732-8C33584112FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4054BF2B-67A6-47FF-9732-8C33584112FC}.Release|x64.ActiveCfg = Release|Any CPU
+		{4054BF2B-67A6-47FF-9732-8C33584112FC}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -100,8 +100,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
-      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
+    <ProjectReference Include="..\TurnTracker\TurnTracker.csproj">
+      <Project>{4054bf2b-67a6-47ff-9732-8c33584112fc}</Project>
       <Name>TurnTracker</Name>
     </ProjectReference>
   </ItemGroup>

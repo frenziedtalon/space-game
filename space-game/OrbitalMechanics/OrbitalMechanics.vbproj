@@ -157,8 +157,8 @@
       <Project>{f6b83752-0d0d-4166-b05d-efffe4c3f0c1}</Project>
       <Name>Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
-      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
+    <ProjectReference Include="..\TurnTracker\TurnTracker.csproj">
+      <Project>{4054bf2b-67a6-47ff-9732-8c33584112fc}</Project>
       <Name>TurnTracker</Name>
     </ProjectReference>
   </ItemGroup>

@@ -121,8 +121,8 @@
       <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
       <Name>OrbitalMechanics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TurnTracker\TurnTracker.vbproj">
-      <Project>{5a34bf92-2ac1-43dc-af9d-5880fcbec581}</Project>
+    <ProjectReference Include="..\TurnTracker\TurnTracker.csproj">
+      <Project>{4054bf2b-67a6-47ff-9732-8c33584112fc}</Project>
       <Name>TurnTracker</Name>
     </ProjectReference>
   </ItemGroup>
