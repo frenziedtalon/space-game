@@ -305,8 +305,8 @@
       <Project>{0c3f75e6-608f-4fc5-8f2a-1c74c01807ce}</Project>
       <Name>Scene</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TurnTracker.InMemoryTurnTracker\TurnTracker.InMemoryTurnTracker.vbproj">
-      <Project>{dc91d260-31a7-4dd0-97fc-bd6dbcac0396}</Project>
+    <ProjectReference Include="..\TurnTracker.InMemoryTurnTracker\TurnTracker.InMemoryTurnTracker.csproj">
+      <Project>{fc7a217a-042b-420f-b73e-ce0d655d28da}</Project>
       <Name>TurnTracker.InMemoryTurnTracker</Name>
     </ProjectReference>
     <ProjectReference Include="..\TurnTracker\TurnTracker.csproj">
