@@ -15,8 +15,6 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Core.Tests", "space-game\Co
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Data.SqlDataProvider", "space-game\Data.SqlDataProvider\Data.SqlDataProvider.vbproj", "{56B17816-2820-401B-9F41-DFCEC79CC4CF}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Entities.Tests", "space-game\Entities.Tests\Entities.Tests.vbproj", "{68E76602-845B-4D9D-A928-3CD9A5BD081A}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "OrbitalMechanics", "space-game\OrbitalMechanics\OrbitalMechanics.vbproj", "{EA0CD7F9-922C-48FF-B8FC-092419A8A4D6}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "OrbitalMechanics.Tests", "space-game\OrbitalMechanics.Tests\OrbitalMechanics.Tests.vbproj", "{4F704AA4-7F50-4E4B-A3EC-7CA8C2E2F216}"
@@ -53,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnTracker", "space-game\T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnTracker.InMemoryTurnTracker", "space-game\TurnTracker.InMemoryTurnTracker\TurnTracker.InMemoryTurnTracker.csproj", "{FC7A217A-042B-420F-B73E-CE0D655D28DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities.Tests", "space-game\Entities.Tests\Entities.Tests.csproj", "{297BD890-0953-4B26-96C6-6861E7363BA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,14 +85,6 @@ Global
 		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Release|x64.ActiveCfg = Release|Any CPU
 		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Release|x64.Build.0 = Release|Any CPU
-		{68E76602-845B-4D9D-A928-3CD9A5BD081A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68E76602-845B-4D9D-A928-3CD9A5BD081A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68E76602-845B-4D9D-A928-3CD9A5BD081A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{68E76602-845B-4D9D-A928-3CD9A5BD081A}.Debug|x64.Build.0 = Debug|Any CPU
-		{68E76602-845B-4D9D-A928-3CD9A5BD081A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68E76602-845B-4D9D-A928-3CD9A5BD081A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68E76602-845B-4D9D-A928-3CD9A5BD081A}.Release|x64.ActiveCfg = Release|Any CPU
-		{68E76602-845B-4D9D-A928-3CD9A5BD081A}.Release|x64.Build.0 = Release|Any CPU
 		{EA0CD7F9-922C-48FF-B8FC-092419A8A4D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EA0CD7F9-922C-48FF-B8FC-092419A8A4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA0CD7F9-922C-48FF-B8FC-092419A8A4D6}.Debug|x64.ActiveCfg = Debug|x64
@@ -229,6 +221,14 @@ Global
 		{FC7A217A-042B-420F-B73E-CE0D655D28DA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FC7A217A-042B-420F-B73E-CE0D655D28DA}.Release|x64.ActiveCfg = Release|Any CPU
 		{FC7A217A-042B-420F-B73E-CE0D655D28DA}.Release|x64.Build.0 = Release|Any CPU
+		{297BD890-0953-4B26-96C6-6861E7363BA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{297BD890-0953-4B26-96C6-6861E7363BA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{297BD890-0953-4B26-96C6-6861E7363BA7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{297BD890-0953-4B26-96C6-6861E7363BA7}.Debug|x64.Build.0 = Debug|Any CPU
+		{297BD890-0953-4B26-96C6-6861E7363BA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{297BD890-0953-4B26-96C6-6861E7363BA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{297BD890-0953-4B26-96C6-6861E7363BA7}.Release|x64.ActiveCfg = Release|Any CPU
+		{297BD890-0953-4B26-96C6-6861E7363BA7}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
