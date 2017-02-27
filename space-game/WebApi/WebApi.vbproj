@@ -301,8 +301,8 @@
       <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
       <Name>OrbitalMechanics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Scene\Scene.vbproj">
-      <Project>{0c3f75e6-608f-4fc5-8f2a-1c74c01807ce}</Project>
+    <ProjectReference Include="..\Scene\Scene.csproj">
+      <Project>{ca50b121-4774-4a1e-bef4-4bb789bb01bb}</Project>
       <Name>Scene</Name>
     </ProjectReference>
     <ProjectReference Include="..\TurnTracker.InMemoryTurnTracker\TurnTracker.InMemoryTurnTracker.csproj">
