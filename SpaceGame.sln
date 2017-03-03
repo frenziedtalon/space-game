@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WebApi", "space-game\WebApi\WebApi.vbproj", "{1D5AD580-3923-4342-8B05-665EE670C08D}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Core.Tests", "space-game\Core.Tests\Core.Tests.vbproj", "{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Data.SqlDataProvider", "space-game\Data.SqlDataProvider\Data.SqlDataProvider.vbproj", "{56B17816-2820-401B-9F41-DFCEC79CC4CF}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "OrbitalMechanics", "space-game\OrbitalMechanics\OrbitalMechanics.vbproj", "{EA0CD7F9-922C-48FF-B8FC-092419A8A4D6}"
@@ -53,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnTracker.Tests", "space-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scene", "space-game\Scene\Scene.csproj", "{CA50B121-4774-4A1E-BEF4-4BB789BB01BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "space-game\Core.Tests\Core.Tests.csproj", "{86F851EE-E8F9-4143-A73D-9C03946053D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,14 +69,6 @@ Global
 		{1D5AD580-3923-4342-8B05-665EE670C08D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1D5AD580-3923-4342-8B05-665EE670C08D}.Release|x64.ActiveCfg = Release|Any CPU
 		{1D5AD580-3923-4342-8B05-665EE670C08D}.Release|x64.Build.0 = Release|Any CPU
-		{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}.Debug|x64.Build.0 = Debug|Any CPU
-		{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}.Release|x64.ActiveCfg = Release|Any CPU
-		{BF5560F7-66CF-4E53-ACC6-AC30A13D079C}.Release|x64.Build.0 = Release|Any CPU
 		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -229,6 +221,14 @@ Global
 		{CA50B121-4774-4A1E-BEF4-4BB789BB01BB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CA50B121-4774-4A1E-BEF4-4BB789BB01BB}.Release|x64.ActiveCfg = Release|Any CPU
 		{CA50B121-4774-4A1E-BEF4-4BB789BB01BB}.Release|x64.Build.0 = Release|Any CPU
+		{86F851EE-E8F9-4143-A73D-9C03946053D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F851EE-E8F9-4143-A73D-9C03946053D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F851EE-E8F9-4143-A73D-9C03946053D6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{86F851EE-E8F9-4143-A73D-9C03946053D6}.Debug|x64.Build.0 = Debug|Any CPU
+		{86F851EE-E8F9-4143-A73D-9C03946053D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F851EE-E8F9-4143-A73D-9C03946053D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F851EE-E8F9-4143-A73D-9C03946053D6}.Release|x64.ActiveCfg = Release|Any CPU
+		{86F851EE-E8F9-4143-A73D-9C03946053D6}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
