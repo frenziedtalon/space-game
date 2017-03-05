@@ -1,8 +1,7 @@
 ﻿using Core.Classes;
 using Core.Extensions;
 using Entities;
-using OrbitalMechanics;
-using OrbitalMechanics.CelestialObjects;
+using OrbitalMechanics.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

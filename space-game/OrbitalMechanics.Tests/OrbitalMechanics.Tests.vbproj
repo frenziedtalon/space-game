@@ -124,8 +124,8 @@
       <Project>{f6b83752-0d0d-4166-b05d-efffe4c3f0c1}</Project>
       <Name>Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.vbproj">
-      <Project>{ea0cd7f9-922c-48ff-b8fc-092419a8a4d6}</Project>
+    <ProjectReference Include="..\OrbitalMechanics\OrbitalMechanics.csproj">
+      <Project>{d888d1aa-fad3-409d-a973-227ac238afaa}</Project>
       <Name>OrbitalMechanics</Name>
     </ProjectReference>
     <ProjectReference Include="..\TurnTracker\TurnTracker.csproj">

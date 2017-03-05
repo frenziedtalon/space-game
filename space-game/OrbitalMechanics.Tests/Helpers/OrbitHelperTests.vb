@@ -2,6 +2,7 @@
 Imports Core.Classes
 Imports NSubstitute
 Imports NUnit.Framework
+Imports OrbitalMechanics.Helpers
 
 Namespace Helpers
     <TestFixture>
