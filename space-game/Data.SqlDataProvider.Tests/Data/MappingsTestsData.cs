@@ -1,7 +1,10 @@
 ﻿using Core.Classes;
 using Data.Classes;
+using Data.SqlDataProvider.Model;
 using NUnit.Framework;
 using System.Collections.Generic;
+using CelestialObjectType = Data.SqlDataProvider.Model.CelestialObjectType;
+using Texture = Data.SqlDataProvider.Model.Texture;
 
 namespace Data.SqlDataProvider.Tests.Data
 {

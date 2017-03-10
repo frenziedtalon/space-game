@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WebApi", "space-game\WebApi\WebApi.vbproj", "{1D5AD580-3923-4342-8B05-665EE670C08D}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Data.SqlDataProvider", "space-game\Data.SqlDataProvider\Data.SqlDataProvider.vbproj", "{56B17816-2820-401B-9F41-DFCEC79CC4CF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Web", "space-game\Presentation.Web\Presentation.Web.csproj", "{AF354C7F-0929-4630-98FA-6B455ED0134B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jespers", "Jespers", "{3754234A-D138-4289-8F28-A2DB67E81AF2}"
@@ -53,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrbitalMechanics", "space-g
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrbitalMechanics.Tests", "space-game\OrbitalMechanics.Tests\OrbitalMechanics.Tests.csproj", "{C9C5BF70-AEB8-4398-AC99-0415EC4A5B0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.SqlDataProvider", "space-game\Data.SqlDataProvider\Data.SqlDataProvider.csproj", "{5014DD40-6DA4-463F-8535-3D50F66D56FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,22 +61,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1D5AD580-3923-4342-8B05-665EE670C08D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D5AD580-3923-4342-8B05-665EE670C08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D5AD580-3923-4342-8B05-665EE670C08D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{1D5AD580-3923-4342-8B05-665EE670C08D}.Debug|x64.Build.0 = Debug|Any CPU
-		{1D5AD580-3923-4342-8B05-665EE670C08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D5AD580-3923-4342-8B05-665EE670C08D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D5AD580-3923-4342-8B05-665EE670C08D}.Release|x64.ActiveCfg = Release|Any CPU
-		{1D5AD580-3923-4342-8B05-665EE670C08D}.Release|x64.Build.0 = Release|Any CPU
-		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Debug|x64.Build.0 = Debug|Any CPU
-		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Release|x64.ActiveCfg = Release|Any CPU
-		{56B17816-2820-401B-9F41-DFCEC79CC4CF}.Release|x64.Build.0 = Release|Any CPU
 		{AF354C7F-0929-4630-98FA-6B455ED0134B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF354C7F-0929-4630-98FA-6B455ED0134B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF354C7F-0929-4630-98FA-6B455ED0134B}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -229,6 +213,14 @@ Global
 		{C9C5BF70-AEB8-4398-AC99-0415EC4A5B0F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C9C5BF70-AEB8-4398-AC99-0415EC4A5B0F}.Release|x64.ActiveCfg = Release|Any CPU
 		{C9C5BF70-AEB8-4398-AC99-0415EC4A5B0F}.Release|x64.Build.0 = Release|Any CPU
+		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Debug|x64.Build.0 = Debug|Any CPU
+		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Release|x64.ActiveCfg = Release|Any CPU
+		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
