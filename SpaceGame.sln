@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WebApi", "space-game\WebApi\WebApi.vbproj", "{1D5AD580-3923-4342-8B05-665EE670C08D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Web", "space-game\Presentation.Web\Presentation.Web.csproj", "{AF354C7F-0929-4630-98FA-6B455ED0134B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jespers", "Jespers", "{3754234A-D138-4289-8F28-A2DB67E81AF2}"
@@ -52,6 +50,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrbitalMechanics.Tests", "space-game\OrbitalMechanics.Tests\OrbitalMechanics.Tests.csproj", "{C9C5BF70-AEB8-4398-AC99-0415EC4A5B0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.SqlDataProvider", "space-game\Data.SqlDataProvider\Data.SqlDataProvider.csproj", "{5014DD40-6DA4-463F-8535-3D50F66D56FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "space-game\WebApi\WebApi.csproj", "{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -221,6 +221,14 @@ Global
 		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Release|x64.ActiveCfg = Release|Any CPU
 		{5014DD40-6DA4-463F-8535-3D50F66D56FE}.Release|x64.Build.0 = Release|Any CPU
+		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Debug|x64.Build.0 = Debug|Any CPU
+		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Release|x64.ActiveCfg = Release|Any CPU
+		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
