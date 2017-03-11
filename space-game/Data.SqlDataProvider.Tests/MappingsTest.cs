@@ -1,13 +1,15 @@
 ﻿using Data.Classes;
+using Data.SqlDataProvider.Model;
 using Data.SqlDataProvider.Tests.Data;
 using Mapster;
 using NUnit.Framework;
 using System.Collections.Generic;
+using CelestialObjectType = Data.SqlDataProvider.Model.CelestialObjectType;
 
 namespace Data.SqlDataProvider.Tests
 {
     [TestFixture]
-    class MappingsTest
+    public class MappingsTest
     {
         [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.TextureGroup_MapTo_ListOfTexture_Data))]
         public void TextureGroup_MapTo_ListOfTexture(TextureGroup source, List<Core.Classes.Texture> expected)
@@ -22,13 +24,13 @@ namespace Data.SqlDataProvider.Tests
         }
 
         [TestCaseSource(typeof(MappingsTestsData), nameof(MappingsTestsData.SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType_Data))]
-        public void SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType(SqlDataProvider.CelestialObjectType source, global::Data.Classes.CelestialObjectType expected)
+        public void SqlDataProviderCelestialObjectType_MapTo_ClassesCelestialObjectType(CelestialObjectType source, global::Data.Classes.CelestialObjectType expected)
         {
             TypeAdapterConfig config = new TypeAdapterConfig { RequireExplicitMapping = true };
             new global::Data.SqlDataProvider.Mappings().Register(config);
             config.Compile();
 
-            var result = source.Adapt<global::Data.Classes.CelestialObjectType>(config);
+            global::Data.Classes.CelestialObjectType result = source.Adapt<global::Data.Classes.CelestialObjectType>(config);
 
             Assert.AreEqual(expected, result);
         }
@@ -41,7 +43,7 @@ namespace Data.SqlDataProvider.Tests
             new Core.Mappings().Register(config);
             config.Compile();
 
-            var result = source.Adapt<PhysicalData>(config);
+            PhysicalData result = source.Adapt<PhysicalData>(config);
             
             Assert.Multiple(() =>
             {
@@ -58,11 +60,11 @@ namespace Data.SqlDataProvider.Tests
         public void SqlDataProviderCelestialObject_MapTo_DataOrbitData(CelestialObject source, OrbitData expected)
         {
             TypeAdapterConfig config = new TypeAdapterConfig { RequireExplicitMapping = true };
-            new global::Data.SqlDataProvider.Mappings().Register(config);
+            new Mappings().Register(config);
             new Core.Mappings().Register(config);
             config.Compile();
 
-            var result = source.Adapt<OrbitData>(config);
+            OrbitData result = source.Adapt<OrbitData>(config);
 
             Assert.Multiple(() =>
             {
@@ -83,7 +85,7 @@ namespace Data.SqlDataProvider.Tests
             new Core.Mappings().Register(config);
             config.Compile();
 
-            var result = source.Adapt<RingData>(config);
+            RingData result = source.Adapt<RingData>(config);
 
             Assert.Multiple(() =>
             {

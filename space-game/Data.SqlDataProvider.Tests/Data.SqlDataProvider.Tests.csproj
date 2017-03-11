@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mapster, Version=2.5.0.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Mapster.2.5.0\lib\net45\Mapster.dll</HintPath>
+    <Reference Include="Mapster, Version=2.6.1.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)packages\Mapster.2.6.1\lib\net45\Mapster.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NSubstitute, Version=1.9.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
@@ -57,19 +57,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.vbproj">
-      <Project>{847e5b29-49b3-4c2d-a9fd-5ca302bb6f50}</Project>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{e0ed42ab-656a-4dcf-84b8-3ec80fbe9a9b}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Data.SqlDataProvider\Data.SqlDataProvider.vbproj">
-      <Project>{56b17816-2820-401b-9f41-dfcec79cc4cf}</Project>
+    <ProjectReference Include="..\Data.SqlDataProvider\Data.SqlDataProvider.csproj">
+      <Project>{5014dd40-6da4-463f-8535-3d50f66d56fe}</Project>
       <Name>Data.SqlDataProvider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Data\Data.vbproj">
-      <Project>{3fa5a201-1645-4aad-aed1-7f2171aca4de}</Project>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{b3dc3f3a-1900-4b31-8504-3bfe76e1026f}</Project>
       <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
