@@ -61,6 +61,7 @@
     <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
+    <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="node_modules\babylonjs\babylon.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
