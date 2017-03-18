@@ -1,4 +1,4 @@
-﻿/// <binding AfterBuild='sass-compile' ProjectOpened='sass-compile' />
+﻿/// <binding BeforeBuild='sass-compile' ProjectOpened='watch' />
 /*
 This file in the main entry point for defining Gulp tasks and using Gulp plugins.
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
@@ -21,8 +21,10 @@ var paths = {
     mainSassFile: "./sass/index.scss"
 }
 
-gulp.task("default", ["sass-compile"], function () {
-    // place code for your default task here
+gulp.task("default", ["sass-compile"], function () { });
+
+gulp.task("watch", ["default"], function () {
+    gulp.watch("./sass/**/*.scss", ["sass-compile"]);
 });
 
 gulp.task("sass-clean", function () {
