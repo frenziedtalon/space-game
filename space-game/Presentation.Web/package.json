@@ -1,10 +1,19 @@
 {
-	"version": "0.3.0",
-	"name": "space-game",
-	"private": true,
-	"devDependencies": {
-	},
-	"dependencies": {
-		"babylonjs": "2.5.0" 
-	}
+  "version": "0.3.0",
+  "name": "space-game",
+  "private": true,
+  "devDependencies": {
+    "del": "2.2.2",
+    "gulp": "3.9.1",
+    "gulp-autoprefixer": "3.1.0",
+    "gulp-clean-css": "2.2.2",
+    "gulp-ext-replace": "0.3.0",
+    "gulp-sass": "3.1.0",
+    "gulp-sourcemaps": "2.2.2"
+
+  },
+  "dependencies": {
+    "babylonjs": "2.5.0"
+  },
+  "-vs-binding": { "ProjectOpened": [ "install" ] }
 }

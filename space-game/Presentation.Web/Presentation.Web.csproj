@@ -61,6 +61,7 @@
     <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
+    <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="node_modules\babylonjs\babylon.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
@@ -73,10 +74,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="sass\index.scss" />
-    <None Include="compilerconfig.json" />
-    <None Include="compilerconfig.json.defaults">
-      <DependentUpon>compilerconfig.json</DependentUpon>
-    </None>
     <Content Include="package.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
