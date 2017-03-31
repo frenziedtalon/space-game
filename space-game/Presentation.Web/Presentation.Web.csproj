@@ -63,6 +63,8 @@
     <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
+    <Content Include="css\index.css" />
+    <Content Include="css\index.min.css" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="node_modules\babylonjs\babylon.js" />
@@ -78,6 +80,7 @@
     <Content Include="sass\index.scss" />
     <Content Include="package.json" />
     <Content Include="packages.config" />
+    <Content Include="css\index.css.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -89,7 +92,6 @@
     <Folder Include="Assets\Images\Rings\High\" />
     <Folder Include="Assets\Images\Rings\Medium\" />
     <Folder Include="Assets\Images\Star\High\" />
-    <Folder Include="css\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="node_modules\babylonjs\babylon.d.ts" />
