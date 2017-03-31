@@ -76,13 +76,12 @@
     <Content Include="textures\zStrip.jpg" />
     <Content Include="ts\Helpers\MouseHelper.ts" />
     <Content Include="web.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="sass\index.scss" />
     <Content Include="package.json" />
     <Content Include="packages.config" />
     <Content Include="release\css\index.css.map" />
     <Content Include="release\js\app.js.map" />
+    <Content Include="release\js\app.d.ts" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -97,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="node_modules\babylonjs\babylon.d.ts" />
-    <TypeScriptCompile Include="release\js\app.d.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\Classes\Angle.ts" />
     <TypeScriptCompile Include="ts\Classes\CelestialObjects\Properties\RingSystem.ts" />
