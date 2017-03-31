@@ -75,7 +75,7 @@ var runGame = () => {
     function endTurn() {
 
         $.ajax({
-            url: "../SpaceGameApi/api/Turn/EndTurn",
+            url: Configuration.apiUrl() + "/Turn/EndTurn",
             cache: false,
             type: "GET",
             dataType: "json"
