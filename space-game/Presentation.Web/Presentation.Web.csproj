@@ -189,8 +189,8 @@
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
-    <TypeScriptOutFile>Scripts/app.js</TypeScriptOutFile>
-    <TypeScriptOutDir>Scripts/</TypeScriptOutDir>
+    <TypeScriptOutFile>release/js/app.js</TypeScriptOutFile>
+    <TypeScriptOutDir>release/js</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot />
