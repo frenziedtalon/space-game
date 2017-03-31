@@ -63,11 +63,12 @@
     <Content Include="Assets\Images\Skysphere\skysphere-8192x4096.png" />
     <Content Include="Assets\Images\Star\Low\sun.jpg" />
     <Content Include="Assets\Images\Star\Medium\sun.jpg" />
-    <Content Include="css\index.css" />
-    <Content Include="css\index.min.css" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="node_modules\babylonjs\babylon.js" />
+    <Content Include="release\css\index.css" />
+    <Content Include="release\css\index.min.css" />
+    <Content Include="release\js\app.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="textures\xStrip.jpg" />
@@ -80,7 +81,8 @@
     <Content Include="sass\index.scss" />
     <Content Include="package.json" />
     <Content Include="packages.config" />
-    <Content Include="css\index.css.map" />
+    <Content Include="release\css\index.css.map" />
+    <Content Include="release\js\app.js.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -95,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="node_modules\babylonjs\babylon.d.ts" />
+    <TypeScriptCompile Include="release\js\app.d.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\Classes\Angle.ts" />
     <TypeScriptCompile Include="ts\Classes\CelestialObjects\Properties\RingSystem.ts" />
@@ -170,8 +173,8 @@
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
-    <TypeScriptOutFile>Scripts/app.js</TypeScriptOutFile>
-    <TypeScriptOutDir>Scripts/</TypeScriptOutDir>
+    <TypeScriptOutFile>release/js/app.js</TypeScriptOutFile>
+    <TypeScriptOutDir>release/js</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot>
