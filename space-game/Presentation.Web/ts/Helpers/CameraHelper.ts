@@ -21,16 +21,19 @@ class CameraHelper {
 
         for (let i = 0; i < cameras.length; i++) {
             if (this.isNavCamera(cameras[i])) {
-                const c = cameras[i] as NavigationCamera;
-                const x = navCamCount * this.navCameraWidth;
-                c.viewport = this.createNavigationCameraViewport(x, this.y, this.navCameraWidth, this.height);
-
-                const parent = scene.getMeshesByTags(c.createTagForTarget())[0];
-                c.position = this.calculateNavigationCameraPosition(parent);
-                c.setTarget(parent.position);
+                this.updateNavigationCamera(cameras[i] as NavigationCamera, scene, navCamCount);
                 navCamCount += 1;
             }
         }
+    }
+
+    private updateNavigationCamera(camera: NavigationCamera, scene: BABYLON.Scene, cameraCount: number): void {
+        const x = cameraCount * this.navCameraWidth;
+        camera.viewport = this.createNavigationCameraViewport(x, this.y, this.navCameraWidth, this.height);
+
+        const parent = scene.getMeshesByTags(camera.createTagForTarget())[0];
+        camera.position = this.calculateNavigationCameraPosition(parent);
+        camera.setTarget(parent.position);
     }
 
     private createNavigationCameraViewport(x: number, y: number, width: number, height: number) {
