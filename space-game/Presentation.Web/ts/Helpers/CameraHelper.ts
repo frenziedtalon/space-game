@@ -1,7 +1,6 @@
 ﻿"use strict";
 class CameraHelper {
     MainSceneCameraName = "mainSceneCamera";
-    NavCameraNameEnd = "NavCamera";
     private navBarWidth = 0.6;
     private y = 0;
     private height = 0.2;
@@ -21,9 +20,9 @@ class CameraHelper {
         let navCamCount = 0;
 
         for (let i = 0; i < cameras.length; i++) {
-            if (cameras[i].name.endsWith(this.NavCameraNameEnd)) {
-                const c = cameras[i] as BABYLON.TargetCamera;
-                const parent = scene.getMeshesByTags(c.id)[0];
+            if (this.isNavCamera(cameras[i])) {
+                const c = cameras[i] as NavigationCamera;
+                const parent = scene.getMeshesByTags(c.createTagForTarget())[0];
                 const x = navCamCount * navCameraWidth;
                 c.viewport = new BABYLON.Viewport(x, this.y, navCameraWidth, this.height);
                 c.position = this.calculateNavigationCameraPosition(parent);
@@ -270,5 +269,9 @@ class CameraHelper {
         camera.parent = null;
 
         scene.beginAnimation(camera, 0, 300, false, 1);
+    }
+
+    isNavCamera(camera: BABYLON.Camera): boolean {
+        return camera.getTypeName() === NavigationCamera.name;
     }
 }
