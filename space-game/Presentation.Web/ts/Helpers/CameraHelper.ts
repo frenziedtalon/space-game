@@ -34,10 +34,38 @@ class CameraHelper {
         const parent = scene.getMeshesByTags(camera.createTagForTarget())[0];
         camera.position = this.calculateNavigationCameraPosition(parent);
         camera.setTarget(parent.position);
+
+        this.addInfoToNavigationCameraViewport(camera.viewport, parent);
     }
 
     private createNavigationCameraViewport(x: number, y: number, width: number, height: number) {
         return new BABYLON.Viewport(x, y, width, height);
+    }
+
+    private addInfoToNavigationCameraViewport(viewport: BABYLON.Viewport, target: BABYLON.Mesh): void {
+        const canvas2DWidth = viewport.width * this.canvas.width;
+        const canvas2DHeight = viewport.height * this.canvas.height;
+
+        const nameLabel = new BABYLON.Text2D(target.name,
+            {
+                id: "text",
+                fontName: "10pt Arial",
+                isPickable: false,
+                marginAlignment: "h: center, v: bottom"
+            });
+        
+        const settings = {
+            id: "Test",
+            size: new BABYLON.Size(canvas2DWidth, canvas2DHeight),
+            children: [
+                nameLabel
+            ],
+            x: this.canvas.width * viewport.x,
+            y: 10,
+            backgroundFill: "#ffffff"
+        };
+
+        const canvas2D = new BABYLON.ScreenSpaceCanvas2D(target.getScene(), settings);
     }
 
     private calculateNavigationCameraPosition(target: BABYLON.Mesh): BABYLON.Vector3 {
