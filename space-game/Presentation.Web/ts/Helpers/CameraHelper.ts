@@ -1,8 +1,8 @@
 ﻿"use strict";
 class CameraHelper {
     MainSceneCameraName = "mainSceneCamera";
-    NavCameraNameEnd = "NavCamera";
     private navBarWidth = 0.6;
+    private navCameraWidth = 0.2 * this.navBarWidth * 0.6;
     private y = 0;
     private height = 0.2;
 
@@ -17,20 +17,55 @@ class CameraHelper {
     }
 
     updateNavigationCameras(cameras: Array<BABYLON.Camera>, scene: BABYLON.Scene): void {
-        const navCameraWidth = 0.2 * this.navBarWidth * 0.6;
         let navCamCount = 0;
 
         for (let i = 0; i < cameras.length; i++) {
-            if (cameras[i].name.endsWith(this.NavCameraNameEnd)) {
-                const c = cameras[i] as BABYLON.TargetCamera;
-                const parent = scene.getMeshesByTags(c.id)[0];
-                const x = navCamCount * navCameraWidth;
-                c.viewport = new BABYLON.Viewport(x, this.y, navCameraWidth, this.height);
-                c.position = this.calculateNavigationCameraPosition(parent);
-                c.setTarget(parent.position);
+            if (this.isNavCamera(cameras[i])) {
+                this.updateNavigationCamera(cameras[i] as NavigationCamera, scene, navCamCount);
                 navCamCount += 1;
             }
         }
+    }
+
+    private updateNavigationCamera(camera: NavigationCamera, scene: BABYLON.Scene, cameraCount: number): void {
+        const x = cameraCount * this.navCameraWidth;
+        camera.viewport = this.createNavigationCameraViewport(x, this.y, this.navCameraWidth, this.height);
+
+        const parent = scene.getMeshesByTags(camera.createTagForTarget())[0];
+        camera.position = this.calculateNavigationCameraPosition(parent);
+        camera.setTarget(parent.position);
+
+        this.addInfoToNavigationCameraViewport(camera.viewport, parent);
+    }
+
+    private createNavigationCameraViewport(x: number, y: number, width: number, height: number) {
+        return new BABYLON.Viewport(x, y, width, height);
+    }
+
+    private addInfoToNavigationCameraViewport(viewport: BABYLON.Viewport, target: BABYLON.Mesh): void {
+        const canvas2DWidth = viewport.width * this.canvas.width;
+        const canvas2DHeight = viewport.height * this.canvas.height;
+
+        const nameLabel = new BABYLON.Text2D(target.name,
+            {
+                id: "text",
+                fontName: "10pt Arial",
+                isPickable: false,
+                marginAlignment: "h: center, v: bottom"
+            });
+        
+        const settings = {
+            id: "Test",
+            size: new BABYLON.Size(canvas2DWidth, canvas2DHeight),
+            children: [
+                nameLabel
+            ],
+            x: this.canvas.width * viewport.x,
+            y: 10,
+            backgroundFill: "#ffffff"
+        };
+
+        const canvas2D = new BABYLON.ScreenSpaceCanvas2D(target.getScene(), settings);
     }
 
     private calculateNavigationCameraPosition(target: BABYLON.Mesh): BABYLON.Vector3 {
@@ -270,5 +305,9 @@ class CameraHelper {
         camera.parent = null;
 
         scene.beginAnimation(camera, 0, 300, false, 1);
+    }
+
+    isNavCamera(camera: BABYLON.Camera): boolean {
+        return camera.getTypeName() === NavigationCamera.name;
     }
 }

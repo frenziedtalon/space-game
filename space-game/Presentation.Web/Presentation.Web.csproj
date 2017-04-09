@@ -64,6 +64,7 @@
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="node_modules\babylonjs\babylon.js" />
+    <Content Include="Scripts\babylon.2.5.canvas2d.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="textures\xStrip.jpg" />
@@ -102,6 +103,7 @@
     <TypeScriptCompile Include="ts\Classes\Textures\Texture.ts" />
     <TypeScriptCompile Include="ts\Classes\Textures\TextureQuality.ts" />
     <TypeScriptCompile Include="ts\Classes\Textures\TextureType.ts" />
+    <TypeScriptCompile Include="ts\d.ts\babylon.2.5.canvas2d.d.ts" />
     <TypeScriptCompile Include="ts\Helpers\AngleHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\AnimationHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\CoordinateHelper.ts" />
