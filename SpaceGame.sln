@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.SqlDataProvider", "spa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "space-game\WebApi\WebApi.csproj", "{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.ConfigDataProvider", "Data.ConfigDataProvider\Data.ConfigDataProvider.csproj", "{BE60E75C-AC19-418F-80F4-DD3CE4719600}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -229,6 +231,14 @@ Global
 		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Release|x64.ActiveCfg = Release|Any CPU
 		{59E5B3C6-C609-457D-8E65-01EDAE3F3FD9}.Release|x64.Build.0 = Release|Any CPU
+		{BE60E75C-AC19-418F-80F4-DD3CE4719600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE60E75C-AC19-418F-80F4-DD3CE4719600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE60E75C-AC19-418F-80F4-DD3CE4719600}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BE60E75C-AC19-418F-80F4-DD3CE4719600}.Debug|x64.Build.0 = Debug|Any CPU
+		{BE60E75C-AC19-418F-80F4-DD3CE4719600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE60E75C-AC19-418F-80F4-DD3CE4719600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE60E75C-AC19-418F-80F4-DD3CE4719600}.Release|x64.ActiveCfg = Release|Any CPU
+		{BE60E75C-AC19-418F-80F4-DD3CE4719600}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
