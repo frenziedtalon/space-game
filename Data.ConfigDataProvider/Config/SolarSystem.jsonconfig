@@ -1,0 +1,10 @@
+﻿{
+  "connectionStrings": {
+    "MyDb": "server=localhost;database=mydb;integrated security=true"
+  },
+  "apiSettings": {
+    "url": "http://localhost/api",
+    "apiKey": "sk_1234566",
+    "useCache":  true
+  }
+}

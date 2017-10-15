@@ -178,6 +178,14 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Data.ConfigDataProvider\Data.ConfigDataProvider.csproj">
+      <Project>{be60e75c-ac19-418f-80f4-dd3ce4719600}</Project>
+      <Name>Data.ConfigDataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\jespers\Jespers.Config\Jespers.Config.csproj">
+      <Project>{6003decb-5029-4a3f-a315-d854193b5e7f}</Project>
+      <Name>Jespers.Config</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\jespers\Jespers.Mappings\Jespers.Mappings.csproj">
       <Project>{078d62a7-76d5-45db-ab04-e9adc0cdc2d3}</Project>
       <Name>Jespers.Mappings</Name>
@@ -254,3 +262,4 @@
   </Target>
   -->
 </Project>
+
