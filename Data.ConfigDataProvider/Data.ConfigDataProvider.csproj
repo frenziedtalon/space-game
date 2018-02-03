@@ -99,7 +99,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Angle.cs" />
+    <Compile Include="Classes\CelestialObject.cs" />
+    <Compile Include="Classes\DataProvider.cs" />
+    <Compile Include="Classes\Distance.cs" />
+    <Compile Include="Classes\Mass.cs" />
+    <Compile Include="Classes\Orbit.cs" />
+    <Compile Include="Classes\Physical.cs" />
+    <Compile Include="Classes\Rings.cs" />
     <Compile Include="Classes\SolarSystem.cs" />
+    <Compile Include="Classes\Texture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterConfig.cs" />
   </ItemGroup>
