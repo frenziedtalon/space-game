@@ -4,39 +4,26 @@ namespace Data.Classes
 {
     public class CelestialObjectData
     {
-        private readonly PhysicalData _physical;
-
-        private readonly OrbitData _orbit;
         public CelestialObjectData(OrbitData orbit, PhysicalData physical)
         {
-            _orbit = orbit;
-            _physical = physical;
+            Orbit = orbit;
+            Physical = physical;
         }
 
-        public PhysicalData Physical
-        {
-            get { return _physical; }
-        }
+        public PhysicalData Physical { get; }
 
-        public OrbitData Orbit
-        {
-            get { return _orbit; }
-        }
+        public OrbitData Orbit { get; }
 
-        private readonly List<CelestialObjectData> _satellites = new List<CelestialObjectData>();
-        public List<CelestialObjectData> Satellites
-        {
-            get { return _satellites; }
-        }
+        public List<CelestialObjectData> Satellites { get; } = new List<CelestialObjectData>();
 
         public void AddSatellite(CelestialObjectData s)
         {
-            _satellites.Add(s);
+            Satellites.Add(s);
         }
 
         public void AddSatellite(OrbitData o, PhysicalData p)
         {
-            _satellites.Add(new CelestialObjectData(o, p));
+            Satellites.Add(new CelestialObjectData(o, p));
         }
 
     }
