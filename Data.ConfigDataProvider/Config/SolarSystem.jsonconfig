@@ -1,13 +1,13 @@
 ﻿{
-  "solarSystem": [
+  "Name": "Solar System",
+  "System": [
     {
       "Physical": {
         "Name": "Sol",
         "Mass": {
-          "Kilograms": 1.98855E+30,
-          "SolarMasses": 1.0,
-          "EarthMasses": 332889.71474487742
+          "SolarMasses": 1.0
         },
+        "Type": "Star",
         "Textures": [
           {
             "Path": "Star/Low/sun.jpg",
@@ -20,21 +20,15 @@
             "Quality": "Medium"
           }
         ],
-        "Type": "Star",
-        "Rings": null,
         "Radius": {
-          "AstronomicalUnits": 0.0046504672612419353,
           "Kilometers": 695700.0
         }
       },
-      "Orbit": null,
       "Satellites": [
         {
           "Physical": {
             "Name": "Mercury",
             "Mass": {
-              "Kilograms": 3.58416E+23,
-              "SolarMasses": 1.8023987327449651E-07,
               "EarthMasses": 0.06
             },
             "Textures": [
@@ -55,15 +49,12 @@
               }
             ],
             "Type": "Planet",
-            "Rings": null,
             "Radius": {
-              "AstronomicalUnits": 1.6310392579316258E-05,
               "Kilometers": 2440.0
             }
           },
           "Orbit": {
             "SemiMajorAxis": {
-              "AstronomicalUnits": 0.38709892996815154,
               "Kilometers": 57909175.67
             },
             "Eccentricity": 0.205635,
@@ -79,15 +70,12 @@
             "MeanAnomalyZero": {
               "Radians": 2.94360599390206
             }
-          },
-          "Satellites": [ ]
+          }
         },
         {
           "Physical": {
             "Name": "Venus",
             "Mass": {
-              "Kilograms": 4.898352E+24,
-              "SolarMasses": 2.4632782680847852E-06,
               "EarthMasses": 0.81999999999999984
             },
             "Textures": [
@@ -108,15 +96,12 @@
               }
             ],
             "Type": "Planet",
-            "Rings": null,
             "Radius": {
-              "AstronomicalUnits": 4.0455121266402462E-05,
               "Kilometers": 6052.0
             }
           },
           "Orbit": {
             "SemiMajorAxis": {
-              "AstronomicalUnits": 0.72333199000000192,
               "Kilometers": 108208925.506684
             },
             "Eccentricity": 0.006773,
@@ -132,16 +117,13 @@
             "MeanAnomalyZero": {
               "Radians": 0.83784879807838
             }
-          },
-          "Satellites": [ ]
+          }
         },
         {
           "Physical": {
             "Name": "Earth",
             "Mass": {
-              "Kilograms": 5.9736E+24,
-              "SolarMasses": 3.0039978879082747E-06,
-              "EarthMasses": 0.99999999999999978
+              "EarthMasses": 1.0
             },
             "Textures": [
               {
@@ -181,16 +163,13 @@
               }
             ],
             "Type": "Planet",
-            "Rings": null,
             "Radius": {
-              "AstronomicalUnits": 4.2587504558534382E-05,
               "Kilometers": 6371.0
             }
           },
           "Orbit": {
             "SemiMajorAxis": {
-              "AstronomicalUnits": 1.0,
-              "Kilometers": 149597870.691
+              "AstronomicalUnits": 1.0
             },
             "Eccentricity": 0.016709,
             "Inclination": {
@@ -211,8 +190,6 @@
               "Physical": {
                 "Name": "Moon",
                 "Mass": {
-                  "Kilograms": 7.347528E+22,
-                  "SolarMasses": 3.6949174021271781E-08,
                   "EarthMasses": 0.0123
                 },
                 "Textures": [
@@ -233,15 +210,12 @@
                   }
                 ],
                 "Type": "Moon",
-                "Rings": null,
                 "Radius": {
-                  "AstronomicalUnits": 1.161112783207883E-05,
                   "Kilometers": 1737.0
                 }
               },
               "Orbit": {
                 "SemiMajorAxis": {
-                  "AstronomicalUnits": 0.0025718815200000029,
                   "Kilometers": 384747.999061533
                 },
                 "Eccentricity": 0.0549,
@@ -257,8 +231,7 @@
                 "MeanAnomalyZero": {
                   "Radians": 2.01350607288027
                 }
-              },
-              "Satellites": [ ]
+              }
             }
           ]
         },
@@ -266,8 +239,6 @@
           "Physical": {
             "Name": "Mars",
             "Mass": {
-              "Kilograms": 6.57096E+23,
-              "SolarMasses": 3.3043976766991025E-07,
               "EarthMasses": 0.11
             },
             "Textures": [
@@ -288,15 +259,12 @@
               }
             ],
             "Type": "Planet",
-            "Rings": null,
             "Radius": {
-              "AstronomicalUnits": 2.2660750345853329E-05,
               "Kilometers": 3390.0
             }
           },
           "Orbit": {
             "SemiMajorAxis": {
-              "AstronomicalUnits": 1.5236623099999975,
               "Kilometers": 227936637.22813
             },
             "Eccentricity": 0.093405,
@@ -312,15 +280,12 @@
             "MeanAnomalyZero": {
               "Radians": 0.32466789278524
             }
-          },
-          "Satellites": [ ]
+          }
         },
         {
           "Physical": {
             "Name": "Jupiter",
             "Mass": {
-              "Kilograms": 1.89841008E+27,
-              "SolarMasses": 0.00095467052877724976,
               "EarthMasses": 317.79999999999995
             },
             "Textures": [
@@ -338,11 +303,9 @@
             "Type": "Planet",
             "Rings": {
               "InnerRadius": {
-                "AstronomicalUnits": 0.000614982015285695,
                 "Kilometers": 92000.0
               },
               "OuterRadius": {
-                "AstronomicalUnits": 0.0015107166897235552,
                 "Kilometers": 226000.0
               },
               "Textures": [
@@ -354,13 +317,11 @@
               ]
             },
             "Radius": {
-              "AstronomicalUnits": 0.00046732617033302417,
               "Kilometers": 69911.0
             }
           },
           "Orbit": {
             "SemiMajorAxis": {
-              "AstronomicalUnits": 5.2033630100000021,
               "Kilometers": 778412026.728313
             },
             "Eccentricity": 0.048498,
@@ -376,15 +337,12 @@
             "MeanAnomalyZero": {
               "Radians": 0.34723325468427
             }
-          },
-          "Satellites": [ ]
+          }
         },
         {
           "Physical": {
             "Name": "Saturn",
             "Mass": {
-              "Kilograms": 5.6868672E+26,
-              "SolarMasses": 0.00028598059892886779,
               "EarthMasses": 95.199999999999989
             },
             "Textures": [
@@ -402,11 +360,9 @@
             "Type": "Planet",
             "Rings": {
               "InnerRadius": {
-                "AstronomicalUnits": 0.00049800174063895954,
                 "Kilometers": 74500.0
               },
               "OuterRadius": {
-                "AstronomicalUnits": 0.00093731280634087128,
                 "Kilometers": 140220.0
               },
               "Textures": [
@@ -418,13 +374,11 @@
               ]
             },
             "Radius": {
-              "AstronomicalUnits": 0.00038925687732735425,
               "Kilometers": 58232.0
             }
           },
           "Orbit": {
             "SemiMajorAxis": {
-              "AstronomicalUnits": 9.5370703199999731,
               "Kilometers": 1426725412.50233
             },
             "Eccentricity": 0.055546,
@@ -440,15 +394,12 @@
             "MeanAnomalyZero": {
               "Radians": 5.53211777016887
             }
-          },
-          "Satellites": [ ]
+          }
         },
         {
           "Physical": {
             "Name": "Uranus",
             "Mass": {
-              "Kilograms": 8.721456E+25,
-              "SolarMasses": 4.3858369163460813E-05,
               "EarthMasses": 14.599999999999998
             },
             "Textures": [
@@ -466,11 +417,9 @@
             "Type": "Planet",
             "Rings": {
               "InnerRadius": {
-                "AstronomicalUnits": 0.00024732972353881216,
                 "Kilometers": 37000.0
               },
               "OuterRadius": {
-                "AstronomicalUnits": 0.00068851247363507166,
                 "Kilometers": 103000.0
               },
               "Textures": [
@@ -482,13 +431,11 @@
               ]
             },
             "Radius": {
-              "AstronomicalUnits": 0.00016953449860517171,
               "Kilometers": 25362.0
             }
           },
           "Orbit": {
             "SemiMajorAxis": {
-              "AstronomicalUnits": 19.19126392999998,
               "Kilometers": 2870972219.79699
             },
             "Eccentricity": 0.047318,
@@ -504,15 +451,12 @@
             "MeanAnomalyZero": {
               "Radians": 2.48867370706497
             }
-          },
-          "Satellites": [ ]
+          }
         },
         {
           "Physical": {
             "Name": "Neptune",
             "Mass": {
-              "Kilograms": 1.0274592E+26,
-              "SolarMasses": 5.1668763672022328E-05,
               "EarthMasses": 17.2
             },
             "Textures": [
@@ -530,11 +474,9 @@
             "Type": "Planet",
             "Rings": {
               "InnerRadius": {
-                "AstronomicalUnits": 0.00027339961331722748,
                 "Kilometers": 40900.0
               },
               "OuterRadius": {
-                "AstronomicalUnits": 0.00042067443680390609,
                 "Kilometers": 62932.0
               },
               "Textures": [
@@ -546,13 +488,11 @@
               ]
             },
             "Radius": {
-              "AstronomicalUnits": 0.00016458790413439547,
               "Kilometers": 24622.0
             }
           },
           "Orbit": {
             "SemiMajorAxis": {
-              "AstronomicalUnits": 30.068963479999987,
               "Kilometers": 4498252910.49344
             },
             "Eccentricity": 0.008606,
@@ -568,15 +508,12 @@
             "MeanAnomalyZero": {
               "Radians": 4.54216876376693
             }
-          },
-          "Satellites": [ ]
+          }
         },
         {
           "Physical": {
             "Name": "Pluto",
             "Mass": {
-              "Kilograms": 1.314192E+22,
-              "SolarMasses": 6.6087953533982043E-09,
               "EarthMasses": 0.0021999999999999997
             },
             "Textures": [
@@ -587,15 +524,12 @@
               }
             ],
             "Type": "Planet",
-            "Rings": null,
             "Radius": {
-              "AstronomicalUnits": 7.9279203274873291E-06,
               "Kilometers": 1186.0
             }
           },
           "Orbit": {
             "SemiMajorAxis": {
-              "AstronomicalUnits": 39.481686770000024,
               "Kilometers": 5906376272.08103
             },
             "Eccentricity": 0.24905,
@@ -611,8 +545,7 @@
             "MeanAnomalyZero": {
               "Radians": 0.25359634031478
             }
-          },
-          "Satellites": [ ]
+          }
         }
       ]
     }
