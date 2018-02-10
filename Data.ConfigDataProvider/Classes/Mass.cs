@@ -2,8 +2,8 @@
 {
     public class Mass
     {
-        public float Kilograms { get; set; }
-        public float SolarMasses { get; set; }
-        public float EarthMasses { get; set; }
+        public double Kilograms { get; set; }
+        public double SolarMasses { get; set; }
+        public double EarthMasses { get; set; }
     }
 }

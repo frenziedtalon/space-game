@@ -1,7 +1,6 @@
 using Camera;
 using Camera.InMemoryCamera;
 using Data;
-using Data.SqlDataProvider.Classes;
 using Entities;
 using Scene;
 using TurnTracker;
@@ -11,6 +10,7 @@ using TurnTracker;
 
 namespace WebApi.App_Start
 {
+    using Data.ConfigDataProvider.Classes;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Common;

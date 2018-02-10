@@ -2,6 +2,6 @@
 {
     public class Angle
     {
-        public float Radians { get; set; }
+        public double Radians { get; set; }
     }
 }

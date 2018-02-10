@@ -2,7 +2,7 @@
 {
     public class Distance
     {
-        public float AstronomicalUnits { get; set; }
-        public float Kilometers { get; set; }
+        public double AstronomicalUnits { get; set; }
+        public double Kilometers { get; set; }
     }
 }

@@ -52,10 +52,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\MappingsTestsData.cs" />
+    <Compile Include="MappingsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data.ConfigDataProvider\Data.ConfigDataProvider.csproj">
+      <Project>{be60e75c-ac19-418f-80f4-dd3ce4719600}</Project>
+      <Name>Data.ConfigDataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\space-game\Core\Core.csproj">
+      <Project>{e0ed42ab-656a-4dcf-84b8-3ec80fbe9a9b}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -66,4 +78,3 @@
   </Target>
   -->
 </Project>
-

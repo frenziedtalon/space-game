@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mapster, Version=2.6.1.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)packages\Mapster.2.6.1\lib\net45\Mapster.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Configuration, Version=1.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)packages\Microsoft.Extensions.Configuration.1.1.2\lib\netstandard1.1\Microsoft.Extensions.Configuration.dll</HintPath>
       <Private>True</Private>
@@ -109,6 +113,7 @@
     <Compile Include="Classes\Rings.cs" />
     <Compile Include="Classes\SolarSystem.cs" />
     <Compile Include="Classes\Texture.cs" />
+    <Compile Include="Mappings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterConfig.cs" />
   </ItemGroup>
@@ -125,6 +130,14 @@
       <Project>{6003decb-5029-4a3f-a315-d854193b5e7f}</Project>
       <Name>Jespers.Config</Name>
     </ProjectReference>
+    <ProjectReference Include="..\space-game\Core\Core.csproj">
+      <Project>{e0ed42ab-656a-4dcf-84b8-3ec80fbe9a9b}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\space-game\Data\Data.csproj">
+      <Project>{b3dc3f3a-1900-4b31-8504-3bfe76e1026f}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -135,3 +148,4 @@
   </Target>
   -->
 </Project>
+
