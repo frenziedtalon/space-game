@@ -1,13 +1,23 @@
 ﻿"use strict";
-class NavigationCamera {
-    constructor(target: BABYLON.Mesh, scene: BABYLON.Scene, cameraHelper: CameraHelper) {
-        const camera = new BABYLON.TargetCamera(target.name + cameraHelper.NavCameraNameEnd, BABYLON.Vector3.Zero(), scene);
-        camera.setTarget(target.position);
-        camera.layerMask = 2; // 010 in binary
+class NavigationCamera extends BABYLON.TargetCamera {
+    constructor(target: BABYLON.Mesh, scene: BABYLON.Scene) {
+        super(target.name + NavigationCamera.name, BABYLON.Vector3.Zero(), scene);
+        
+        this.setTarget(target.position);
+        this.layerMask = 2; // 010 in binary
 
         // tag the target with this camera's id, for later retrieval
-        BABYLON.Tags.AddTagsTo(target, camera.id);
+        BABYLON.Tags.AddTagsTo(target, this.createTagForTarget());
+        BABYLON.Tags.AddTagsTo(target, this.getTypeName());
 
-        scene.activeCameras.push(camera);
+        scene.activeCameras.push(this);
+    }
+
+    getTypeName(): string {
+        return NavigationCamera.name;
+    }
+
+    createTagForTarget(): string {
+        return this.getTypeName() + this.id;
     }
 }

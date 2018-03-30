@@ -240,7 +240,7 @@ var runGame = () => {
             parent);
 
         BABYLON.Tags.AddTagsTo(planet, "planet");
-        const c = new NavigationCamera(planet, scene, cameraHelper);
+        const c = new NavigationCamera(planet, scene);
     }
 
     function renderMoon(info: Moon, parent: BABYLON.Mesh): void {
