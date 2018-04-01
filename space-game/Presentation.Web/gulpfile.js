@@ -17,7 +17,7 @@ var minifyCss = require("gulp-clean-css");
 var sass = require("gulp-sass");
 
 var paths = {
-    styleOut: "./css/",
+    styleOut: "./release/css/",
     mainSassFile: "./sass/index.scss"
 }
 

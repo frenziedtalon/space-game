@@ -1,4 +1,5 @@
 ﻿"use strict";
+
 class CameraHelper {
     MainSceneCameraName = "mainSceneCamera";
     private navBarWidth = 0.6;
@@ -178,7 +179,7 @@ class CameraHelper {
         const data = "target=" + targetId;
 
         $.ajax({
-            url: "../SpaceGameApi/api/Camera/SetTarget?" + data,
+            url: Configuration.apiUrl() + "/Camera/SetTarget?" + data,
             cache: false,
             type: "GET"
         })

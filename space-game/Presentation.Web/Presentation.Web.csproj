@@ -17,6 +17,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -65,6 +67,9 @@
     <Content Include="index.html" />
     <Content Include="node_modules\babylonjs\babylon.js" />
     <Content Include="Scripts\babylon.2.5.canvas2d.js" />
+    <Content Include="release\css\index.css" />
+    <Content Include="release\css\index.min.css" />
+    <Content Include="release\js\app.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="textures\xStrip.jpg" />
@@ -72,10 +77,12 @@
     <Content Include="textures\zStrip.jpg" />
     <Content Include="ts\Helpers\MouseHelper.ts" />
     <Content Include="web.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="sass\index.scss" />
     <Content Include="package.json" />
+    <Content Include="packages.config" />
+    <Content Include="release\css\index.css.map" />
+    <Content Include="release\js\app.js.map" />
+    <Content Include="release\js\app.d.ts" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -87,7 +94,6 @@
     <Folder Include="Assets\Images\Rings\High\" />
     <Folder Include="Assets\Images\Rings\Medium\" />
     <Folder Include="Assets\Images\Star\High\" />
-    <Folder Include="css\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="node_modules\babylonjs\babylon.d.ts" />
@@ -104,6 +110,7 @@
     <TypeScriptCompile Include="ts\Classes\Textures\TextureQuality.ts" />
     <TypeScriptCompile Include="ts\Classes\Textures\TextureType.ts" />
     <TypeScriptCompile Include="ts\d.ts\babylon.2.5.canvas2d.d.ts" />
+    <TypeScriptCompile Include="ts\Configuration.ts" />
     <TypeScriptCompile Include="ts\Helpers\AngleHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\AnimationHelper.ts" />
     <TypeScriptCompile Include="ts\Helpers\CoordinateHelper.ts" />
@@ -166,8 +173,8 @@
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
-    <TypeScriptOutFile>Scripts/app.js</TypeScriptOutFile>
-    <TypeScriptOutDir>Scripts/</TypeScriptOutDir>
+    <TypeScriptOutFile>release/js/app.js</TypeScriptOutFile>
+    <TypeScriptOutDir>release/js</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot>
@@ -184,12 +191,19 @@
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
-    <TypeScriptOutFile>Scripts/app.js</TypeScriptOutFile>
-    <TypeScriptOutDir>Scripts/</TypeScriptOutDir>
+    <TypeScriptOutFile>release/js/app.js</TypeScriptOutFile>
+    <TypeScriptOutDir>release/js</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot />
     <TypeScriptSourceRoot />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="..\..\packages\OctoPack.3.5.2\build\OctoPack.targets" Condition="Exists('..\..\packages\OctoPack.3.5.2\build\OctoPack.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\OctoPack.3.5.2\build\OctoPack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\OctoPack.3.5.2\build\OctoPack.targets'))" />
+  </Target>
 </Project>
